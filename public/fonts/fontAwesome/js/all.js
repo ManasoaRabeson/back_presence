@@ -1,0 +1,5172 @@
+(function () {
+  'use strict';
+
+  let _WINDOW = {};
+  let _DOCUMENT = {};
+  try {
+    if (typeof window !== 'undefined') _WINDOW = window;
+    if (typeof document !== 'undefined') _DOCUMENT = document;
+  } catch (e) {}
+  const {
+    userAgent = ''
+  } = _WINDOW.navigator || {};
+  const WINDOW = _WINDOW;
+  const DOCUMENT = _DOCUMENT;
+  const IS_BROWSER = !!WINDOW.document;
+  const IS_DOM = !!DOCUMENT.documentElement && !!DOCUMENT.head && typeof DOCUMENT.addEventListener === 'function' && typeof DOCUMENT.createElement === 'function';
+  const IS_IE = ~userAgent.indexOf('MSIE') || ~userAgent.indexOf('Trident/');
+
+  function _defineProperty(e, r, t) {
+    return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+      value: t,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }) : e[r] = t, e;
+  }
+  function ownKeys(e, r) {
+    var t = Object.keys(e);
+    if (Object.getOwnPropertySymbols) {
+      var o = Object.getOwnPropertySymbols(e);
+      r && (o = o.filter(function (r) {
+        return Object.getOwnPropertyDescriptor(e, r).enumerable;
+      })), t.push.apply(t, o);
+    }
+    return t;
+  }
+  function _objectSpread2(e) {
+    for (var r = 1; r < arguments.length; r++) {
+      var t = null != arguments[r] ? arguments[r] : {};
+      r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+        _defineProperty(e, r, t[r]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+        Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+      });
+    }
+    return e;
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+
+  var S = {
+      classic: {
+        fa: "solid",
+        fas: "solid",
+        "fa-solid": "solid",
+        far: "regular",
+        "fa-regular": "regular",
+        fal: "light",
+        "fa-light": "light",
+        fat: "thin",
+        "fa-thin": "thin",
+        fab: "brands",
+        "fa-brands": "brands"
+      },
+      duotone: {
+        fa: "solid",
+        fad: "solid",
+        "fa-solid": "solid",
+        "fa-duotone": "solid",
+        fadr: "regular",
+        "fa-regular": "regular",
+        fadl: "light",
+        "fa-light": "light",
+        fadt: "thin",
+        "fa-thin": "thin"
+      },
+      sharp: {
+        fa: "solid",
+        fass: "solid",
+        "fa-solid": "solid",
+        fasr: "regular",
+        "fa-regular": "regular",
+        fasl: "light",
+        "fa-light": "light",
+        fast: "thin",
+        "fa-thin": "thin"
+      },
+      "sharp-duotone": {
+        fa: "solid",
+        fasds: "solid",
+        "fa-solid": "solid",
+        fasdr: "regular",
+        "fa-regular": "regular",
+        fasdl: "light",
+        "fa-light": "light",
+        fasdt: "thin",
+        "fa-thin": "thin"
+      }
+    };
+  var s = "classic";
+  var G = {
+      classic: {
+        900: "fas",
+        400: "far",
+        normal: "far",
+        300: "fal",
+        100: "fat"
+      },
+      duotone: {
+        900: "fad",
+        400: "fadr",
+        300: "fadl",
+        100: "fadt"
+      },
+      sharp: {
+        900: "fass",
+        400: "fasr",
+        300: "fasl",
+        100: "fast"
+      },
+      "sharp-duotone": {
+        900: "fasds",
+        400: "fasdr",
+        300: "fasdl",
+        100: "fasdt"
+      }
+    };
+  var xt = {
+      classic: {
+        solid: "fas",
+        regular: "far",
+        light: "fal",
+        thin: "fat",
+        brands: "fab"
+      },
+      duotone: {
+        solid: "fad",
+        regular: "fadr",
+        light: "fadl",
+        thin: "fadt"
+      },
+      sharp: {
+        solid: "fass",
+        regular: "fasr",
+        light: "fasl",
+        thin: "fast"
+      },
+      "sharp-duotone": {
+        solid: "fasds",
+        regular: "fasdr",
+        light: "fasdl",
+        thin: "fasdt"
+      }
+    };
+  var St = {
+      kit: {
+        fak: "kit",
+        "fa-kit": "kit"
+      },
+      "kit-duotone": {
+        fakd: "kit-duotone",
+        "fa-kit-duotone": "kit-duotone"
+      }
+    };
+  var Ct = {
+    kit: {
+      "fa-kit": "fak"
+    },
+    "kit-duotone": {
+      "fa-kit-duotone": "fakd"
+    }
+  };
+  var Wt = {
+      kit: {
+        fak: "fa-kit"
+      },
+      "kit-duotone": {
+        fakd: "fa-kit-duotone"
+      }
+    };
+  var Et = {
+      kit: {
+        kit: "fak"
+      },
+      "kit-duotone": {
+        "kit-duotone": "fakd"
+      }
+    };
+
+  var ua = {
+      classic: {
+        "fa-brands": "fab",
+        "fa-duotone": "fad",
+        "fa-light": "fal",
+        "fa-regular": "far",
+        "fa-solid": "fas",
+        "fa-thin": "fat"
+      },
+      duotone: {
+        "fa-regular": "fadr",
+        "fa-light": "fadl",
+        "fa-thin": "fadt"
+      },
+      sharp: {
+        "fa-solid": "fass",
+        "fa-regular": "fasr",
+        "fa-light": "fasl",
+        "fa-thin": "fast"
+      },
+      "sharp-duotone": {
+        "fa-solid": "fasds",
+        "fa-regular": "fasdr",
+        "fa-light": "fasdl",
+        "fa-thin": "fasdt"
+      }
+    },
+    ga = {
+      classic: {
+        fab: "fa-brands",
+        fad: "fa-duotone",
+        fal: "fa-light",
+        far: "fa-regular",
+        fas: "fa-solid",
+        fat: "fa-thin"
+      },
+      duotone: {
+        fadr: "fa-regular",
+        fadl: "fa-light",
+        fadt: "fa-thin"
+      },
+      sharp: {
+        fass: "fa-solid",
+        fasr: "fa-regular",
+        fasl: "fa-light",
+        fast: "fa-thin"
+      },
+      "sharp-duotone": {
+        fasds: "fa-solid",
+        fasdr: "fa-regular",
+        fasdl: "fa-light",
+        fasdt: "fa-thin"
+      }
+    };
+
+  const NAMESPACE_IDENTIFIER = '___FONT_AWESOME___';
+  const PRODUCTION = (() => {
+    try {
+      return "production" === 'production';
+    } catch (e$$1) {
+      return false;
+    }
+  })();
+  function familyProxy(obj) {
+    // Defaults to the classic family if family is not available
+    return new Proxy(obj, {
+      get(target, prop) {
+        return prop in target ? target[prop] : target[s];
+      }
+    });
+  }
+  const _PREFIX_TO_STYLE = _objectSpread2({}, S);
+
+  // We changed FACSSClassesToStyleId in the icons repo to be canonical and as such, "classic" family does not have any
+  // duotone styles.  But we do still need duotone in _PREFIX_TO_STYLE below, so we are manually adding
+  // {'fa-duotone': 'duotone'}
+  _PREFIX_TO_STYLE[s] = _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, {
+    'fa-duotone': 'duotone'
+  }), S[s]), St['kit']), St['kit-duotone']);
+  const PREFIX_TO_STYLE = familyProxy(_PREFIX_TO_STYLE);
+  const _STYLE_TO_PREFIX = _objectSpread2({}, xt);
+
+  // We changed FAStyleIdToShortPrefixId in the icons repo to be canonical and as such, "classic" family does not have any
+  // duotone styles.  But we do still need duotone in _STYLE_TO_PREFIX below, so we are manually adding {duotone: 'fad'}
+  _STYLE_TO_PREFIX[s] = _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, {
+    duotone: 'fad'
+  }), _STYLE_TO_PREFIX[s]), Et['kit']), Et['kit-duotone']);
+  const STYLE_TO_PREFIX = familyProxy(_STYLE_TO_PREFIX);
+  const _PREFIX_TO_LONG_STYLE = _objectSpread2({}, ga);
+  _PREFIX_TO_LONG_STYLE[s] = _objectSpread2(_objectSpread2({}, _PREFIX_TO_LONG_STYLE[s]), Wt['kit']);
+  const PREFIX_TO_LONG_STYLE = familyProxy(_PREFIX_TO_LONG_STYLE);
+  const _LONG_STYLE_TO_PREFIX = _objectSpread2({}, ua);
+  _LONG_STYLE_TO_PREFIX[s] = _objectSpread2(_objectSpread2({}, _LONG_STYLE_TO_PREFIX[s]), Ct['kit']);
+  const LONG_STYLE_TO_PREFIX = familyProxy(_LONG_STYLE_TO_PREFIX);
+  const _FONT_WEIGHT_TO_PREFIX = _objectSpread2({}, G);
+  const FONT_WEIGHT_TO_PREFIX = familyProxy(_FONT_WEIGHT_TO_PREFIX);
+
+  function bunker(fn) {
+    try {
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+      fn(...args);
+    } catch (e) {
+      if (!PRODUCTION) {
+        throw e;
+      }
+    }
+  }
+
+  const w = WINDOW || {};
+  if (!w[NAMESPACE_IDENTIFIER]) w[NAMESPACE_IDENTIFIER] = {};
+  if (!w[NAMESPACE_IDENTIFIER].styles) w[NAMESPACE_IDENTIFIER].styles = {};
+  if (!w[NAMESPACE_IDENTIFIER].hooks) w[NAMESPACE_IDENTIFIER].hooks = {};
+  if (!w[NAMESPACE_IDENTIFIER].shims) w[NAMESPACE_IDENTIFIER].shims = [];
+  var namespace = w[NAMESPACE_IDENTIFIER];
+
+  function normalizeIcons(icons) {
+    return Object.keys(icons).reduce((acc, iconName) => {
+      const icon = icons[iconName];
+      const expanded = !!icon.icon;
+      if (expanded) {
+        acc[icon.iconName] = icon.icon;
+      } else {
+        acc[iconName] = icon;
+      }
+      return acc;
+    }, {});
+  }
+  function defineIcons(prefix, icons) {
+    let params = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    const {
+      skipHooks = false
+    } = params;
+    const normalized = normalizeIcons(icons);
+    if (typeof namespace.hooks.addPack === 'function' && !skipHooks) {
+      namespace.hooks.addPack(prefix, normalizeIcons(icons));
+    } else {
+      namespace.styles[prefix] = _objectSpread2(_objectSpread2({}, namespace.styles[prefix] || {}), normalized);
+    }
+
+    /**
+     * Font Awesome 4 used the prefix of `fa` for all icons. With the introduction
+     * of new styles we needed to differentiate between them. Prefix `fa` is now an alias
+     * for `fas` so we'll ease the upgrade process for our users by automatically defining
+     * this as well.
+     */
+    if (prefix === 'fas') {
+      defineIcons('fa', icons);
+    }
+  }
+
+  var icons = {
+    
+    "formafusion": [1375,512,[],"e000","M259.6 59.3h0c0 .5-.1 1.6-.3 3.1c-.1 .9-.2 1.9-.4 3.1c0 .1 0 .2 0 .3c-2.7 19.8-12.3 76.2-15.7 92.4c0 0-16.2 2.9-36.2 8.1h0s0 0-.1 0c-13.2 3.3-45 12.3-70.1 24h0c-31.2 13.7-60.2 31.5-87.6 52.1c-3.3 2.5-6.6 4.9-11 8.2c.7-2.9 1-4.6 1.6-6.2c17.2-44.8 43.5-83.2 80-114.6c28.5-24.5 60.8-42.6 95.6-56.4c12-4.8 24.2-8.8 36.5-12.6c1-.3 1.9-.6 2.9-.9h0c.9-.3 2.9-.9 4.9-1.5c0 .2 0 .5-.1 .7zM234.3 198.5c-.2 1.1-.4 2.4-.6 3.8c0 1-.3 2-.5 3c0 0 0 0 0 0c-.1 .8-.3 1.7-.4 2.5c-.1 .8-.3 1.7-.4 2.5c0 .1 0 .3-.1 .4c-.1 .6-.2 1.3-.3 1.9c-.1 .3-.1 .7-.2 1c-.1 .4-.1 .8-.2 1.2c-.1 .6-.2 1.2-.3 1.8c-.3 2.1-.6 3.9-.8 5.4c0 .2-.1 .5-.1 .7c0 .2-.1 .4-.1 .7c-1.7 11.1-3.5 22.2-5.2 33.2c-1.6 10-3.1 20-4.7 30c-.4 2.3-.9 4.6-1.4 7.2c-2.2 .8-4.4 1.6-6.6 2.3c-24.4 7.5-48.2 16.3-70.7 28.5c-14.2 7.7-27.6 16.6-39.3 27.9c-13.6 13.1-23.6 28.2-28 46.8c-3.3 14-2.9 27.9 .3 41.7c1.7 7.6 4.6 14.9 6.9 22.3c.5 1.5 .9 2.9 1.4 4.4c-20-22.8-36.9-47.3-46.8-76c-4.8-13.9-7.5-28.1-6.8-42.9c1-20.5 8.3-38.4 20.7-54.5c8.6-11.2 19-20.7 30.3-29.1c17.8-13.3 37.2-23.7 57.4-32.8c22.7-10.2 46-18.7 69.7-26.1c3-.9 6-1.9 9-2.7c.3-.1 .5-.2 .8-.3c.5-.1 .9-.3 1.4-.4c.3-.1 .7-.2 1-.3c1.2-.4 2.5-.7 3.8-1.1c.7-.2 1.5-.4 2.2-.6c.3-.1 .6-.2 .9-.3c.3-.1 .5-.1 .8-.2c1.7-.5 3.3-1 4.9-1.5c0 0 0 0 0 0c.7-.2 1.4-.4 2-.6zm54.5 110.5l5.6-57.3c2-21.8 13-33.2 33.1-34.2l62.9 .1-2.2 22.3h-55.7c-4.7-.2-8.2 2-10.2 6.7l-.5 4.8 65.4-.1-2.2 22-65-.1-3.7 35.9h-27.5zm170.9 1.1h-43.3c-19.3 .1-27.3-15.4-24.1-46.5c3-31.4 14.7-47.2 35.1-47.4l35.5 .1c21.3-.4 30.3 14.8 26.9 45.5c-1.4 31.8-11.5 47.9-30.3 48.3zm-42.4-31.7c1.3 4.2 4 6.7 8 7.4l25.6-.1c4.3-.5 7.4-2.5 9.1-5.9c2.1-2.4 3.6-8.4 4.4-17.8s.2-15.5-2-18.1c-2-2.7-5.2-4.3-9.5-4.7h-19.7c-5.7 .4-9.7 3.2-12.1 8.3c-1.6 2.3-2.8 7.7-3.7 15.9s-1 13.3-.1 15zm83.3-60.9h63.3c19.1 3.2 28.2 13.5 27.3 31c-.3 12.8-5.4 23-15.3 30.5l12.8 30.1h-30.5l-12.4-28.8h-24.2l-2.8 28.4-27.4 .1 9.2-91.3zm23.9 38.7l33.6 .1c5.1-.1 8.1-2.6 8.8-7.4s-1.6-7.7-7-8.5H526l-1.6 15.8zm69 53l9.2-91.8 81.8 .2c18.1-.5 26.6 9.1 25.6 29l-6.3 62.5h-23.2l5.5-55.4c1.3-6.9-.7-10.2-5.9-10l-12.3 .1-6.6 65.3-23.1 .1 6.5-65.5-19.8-.1-6.5 65.7h-25.1zm117.7-.7l6.2-62.2c2.9-18.7 14.2-28.5 33.8-29.3l30.9 .1c17.9 1.2 26.3 10.9 25.2 29l-6.3 62.5h-24.3l2.8-27.8-40.6-.2-2.7 27.8h-25.2zm31.4-60.2l-1 9.7h40.5l.8-7.6c1.3-7-.7-11-6.1-11.8l-24.5 .1c-6.5 .2-9.7 3.4-9.7 9.7zm66.1 60.7l5.6-57.3c2-21.8 13-33.2 33.1-34.2l62.9 .1-2.2 22.3h-55.7c-4.7-.2-8.2 2-10.2 6.7l-.5 4.8 65.4-.1-2.2 22-65-.1-3.7 35.9h-27.5zm199.1-91.4l-9.2 91.4h-61.8c-17.9 .3-26.3-9.3-25.3-29.1l6.3-62.3h24.2l-6.1 57.1c-1.1 5.9 1.1 8.7 6.5 8.3H976l6.5-65.3 25.2-.1zm89 23.8h-50.5c-3.4 0-6.1 .2-7.9 .5s-3.5 1.7-4.9 4c.4 3 1.6 4.6 3.5 5s4.9 .6 8.9 .6h24.7c9.9 .6 16.8 3.4 20.8 8.6s5.5 12.4 4.6 21.7c-1.5 9.3-4.7 16.1-9.8 20.5s-13.4 6.7-25 6.9h-55.2l2.3-23.4h52.4c4.5 0 8-.2 10.3-.5s4-2.1 4.9-5.2c-.3-2.5-1.5-4-3.6-4.5s-5.6-.8-10.6-.8h-23.9c-10.5 0-18-2.6-22.3-7.7s-6.1-12.2-5.2-21.3c1.7-9.5 5.1-16.4 10.3-20.7s13.4-6.7 24.6-7.2h53.9l-2.3 23.7zm10.4-23.7h26.7l-9.1 91.3h-27.3l9.7-91.3zm96.5 92.5h-43.3c-19.3 .1-27.3-15.4-24.1-46.5c3-31.4 14.7-47.2 35.1-47.4l35.5 .1c21.3-.4 30.3 14.8 26.9 45.5c-1.4 31.8-11.5 47.9-30.3 48.3zm-42.4-31.7c1.3 4.2 4 6.7 8 7.4l25.6-.1c4.3-.5 7.4-2.5 9.1-5.9c2.1-2.4 3.6-8.4 4.4-17.8s.2-15.5-2-18.1c-2-2.7-5.2-4.3-9.5-4.7h-19.7c-5.7 .4-9.7 3.2-12.1 8.3c-1.6 2.3-2.8 7.7-3.7 15.9s-1 13.3-.1 15zm75.1 30.8l9.2-91.8h62c17.9-.4 26.4 9.3 25.4 29.2l-6.3 62.5h-24.3l6.1-57.3c1.1-5.9-1.1-8.7-6.6-8.3H1268l-6.5 65.7h-25.2z"]
+
+  };
+  var prefixes = [null    ,'fak',
+    ,'fa-kit'
+];
+  bunker(() => {
+    for (const prefix of prefixes) {
+      if (!prefix) continue;
+      defineIcons(prefix, icons);
+    }
+  });
+
+}());
+
+
+(function () {
+  'use strict';
+
+  let _WINDOW = {};
+  let _DOCUMENT = {};
+  try {
+    if (typeof window !== 'undefined') _WINDOW = window;
+    if (typeof document !== 'undefined') _DOCUMENT = document;
+  } catch (e) {}
+  const {
+    userAgent = ''
+  } = _WINDOW.navigator || {};
+  const WINDOW = _WINDOW;
+  const DOCUMENT = _DOCUMENT;
+  const IS_BROWSER = !!WINDOW.document;
+  const IS_DOM = !!DOCUMENT.documentElement && !!DOCUMENT.head && typeof DOCUMENT.addEventListener === 'function' && typeof DOCUMENT.createElement === 'function';
+  const IS_IE = ~userAgent.indexOf('MSIE') || ~userAgent.indexOf('Trident/');
+
+  function _defineProperty(e, r, t) {
+    return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+      value: t,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }) : e[r] = t, e;
+  }
+  function ownKeys(e, r) {
+    var t = Object.keys(e);
+    if (Object.getOwnPropertySymbols) {
+      var o = Object.getOwnPropertySymbols(e);
+      r && (o = o.filter(function (r) {
+        return Object.getOwnPropertyDescriptor(e, r).enumerable;
+      })), t.push.apply(t, o);
+    }
+    return t;
+  }
+  function _objectSpread2(e) {
+    for (var r = 1; r < arguments.length; r++) {
+      var t = null != arguments[r] ? arguments[r] : {};
+      r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+        _defineProperty(e, r, t[r]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+        Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+      });
+    }
+    return e;
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+
+  var S = {
+      classic: {
+        fa: "solid",
+        fas: "solid",
+        "fa-solid": "solid",
+        far: "regular",
+        "fa-regular": "regular",
+        fal: "light",
+        "fa-light": "light",
+        fat: "thin",
+        "fa-thin": "thin",
+        fab: "brands",
+        "fa-brands": "brands"
+      },
+      duotone: {
+        fa: "solid",
+        fad: "solid",
+        "fa-solid": "solid",
+        "fa-duotone": "solid",
+        fadr: "regular",
+        "fa-regular": "regular",
+        fadl: "light",
+        "fa-light": "light",
+        fadt: "thin",
+        "fa-thin": "thin"
+      },
+      sharp: {
+        fa: "solid",
+        fass: "solid",
+        "fa-solid": "solid",
+        fasr: "regular",
+        "fa-regular": "regular",
+        fasl: "light",
+        "fa-light": "light",
+        fast: "thin",
+        "fa-thin": "thin"
+      },
+      "sharp-duotone": {
+        fa: "solid",
+        fasds: "solid",
+        "fa-solid": "solid",
+        fasdr: "regular",
+        "fa-regular": "regular",
+        fasdl: "light",
+        "fa-light": "light",
+        fasdt: "thin",
+        "fa-thin": "thin"
+      }
+    };
+  var s = "classic";
+  var G = {
+      classic: {
+        900: "fas",
+        400: "far",
+        normal: "far",
+        300: "fal",
+        100: "fat"
+      },
+      duotone: {
+        900: "fad",
+        400: "fadr",
+        300: "fadl",
+        100: "fadt"
+      },
+      sharp: {
+        900: "fass",
+        400: "fasr",
+        300: "fasl",
+        100: "fast"
+      },
+      "sharp-duotone": {
+        900: "fasds",
+        400: "fasdr",
+        300: "fasdl",
+        100: "fasdt"
+      }
+    };
+  var xt = {
+      classic: {
+        solid: "fas",
+        regular: "far",
+        light: "fal",
+        thin: "fat",
+        brands: "fab"
+      },
+      duotone: {
+        solid: "fad",
+        regular: "fadr",
+        light: "fadl",
+        thin: "fadt"
+      },
+      sharp: {
+        solid: "fass",
+        regular: "fasr",
+        light: "fasl",
+        thin: "fast"
+      },
+      "sharp-duotone": {
+        solid: "fasds",
+        regular: "fasdr",
+        light: "fasdl",
+        thin: "fasdt"
+      }
+    };
+  var St = {
+      kit: {
+        fak: "kit",
+        "fa-kit": "kit"
+      },
+      "kit-duotone": {
+        fakd: "kit-duotone",
+        "fa-kit-duotone": "kit-duotone"
+      }
+    };
+  var Ct = {
+    kit: {
+      "fa-kit": "fak"
+    },
+    "kit-duotone": {
+      "fa-kit-duotone": "fakd"
+    }
+  };
+  var Wt = {
+      kit: {
+        fak: "fa-kit"
+      },
+      "kit-duotone": {
+        fakd: "fa-kit-duotone"
+      }
+    };
+  var Et = {
+      kit: {
+        kit: "fak"
+      },
+      "kit-duotone": {
+        "kit-duotone": "fakd"
+      }
+    };
+
+  var ua = {
+      classic: {
+        "fa-brands": "fab",
+        "fa-duotone": "fad",
+        "fa-light": "fal",
+        "fa-regular": "far",
+        "fa-solid": "fas",
+        "fa-thin": "fat"
+      },
+      duotone: {
+        "fa-regular": "fadr",
+        "fa-light": "fadl",
+        "fa-thin": "fadt"
+      },
+      sharp: {
+        "fa-solid": "fass",
+        "fa-regular": "fasr",
+        "fa-light": "fasl",
+        "fa-thin": "fast"
+      },
+      "sharp-duotone": {
+        "fa-solid": "fasds",
+        "fa-regular": "fasdr",
+        "fa-light": "fasdl",
+        "fa-thin": "fasdt"
+      }
+    },
+    ga = {
+      classic: {
+        fab: "fa-brands",
+        fad: "fa-duotone",
+        fal: "fa-light",
+        far: "fa-regular",
+        fas: "fa-solid",
+        fat: "fa-thin"
+      },
+      duotone: {
+        fadr: "fa-regular",
+        fadl: "fa-light",
+        fadt: "fa-thin"
+      },
+      sharp: {
+        fass: "fa-solid",
+        fasr: "fa-regular",
+        fasl: "fa-light",
+        fast: "fa-thin"
+      },
+      "sharp-duotone": {
+        fasds: "fa-solid",
+        fasdr: "fa-regular",
+        fasdl: "fa-light",
+        fasdt: "fa-thin"
+      }
+    };
+
+  const NAMESPACE_IDENTIFIER = '___FONT_AWESOME___';
+  const PRODUCTION = (() => {
+    try {
+      return "production" === 'production';
+    } catch (e$$1) {
+      return false;
+    }
+  })();
+  function familyProxy(obj) {
+    // Defaults to the classic family if family is not available
+    return new Proxy(obj, {
+      get(target, prop) {
+        return prop in target ? target[prop] : target[s];
+      }
+    });
+  }
+  const _PREFIX_TO_STYLE = _objectSpread2({}, S);
+
+  // We changed FACSSClassesToStyleId in the icons repo to be canonical and as such, "classic" family does not have any
+  // duotone styles.  But we do still need duotone in _PREFIX_TO_STYLE below, so we are manually adding
+  // {'fa-duotone': 'duotone'}
+  _PREFIX_TO_STYLE[s] = _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, {
+    'fa-duotone': 'duotone'
+  }), S[s]), St['kit']), St['kit-duotone']);
+  const PREFIX_TO_STYLE = familyProxy(_PREFIX_TO_STYLE);
+  const _STYLE_TO_PREFIX = _objectSpread2({}, xt);
+
+  // We changed FAStyleIdToShortPrefixId in the icons repo to be canonical and as such, "classic" family does not have any
+  // duotone styles.  But we do still need duotone in _STYLE_TO_PREFIX below, so we are manually adding {duotone: 'fad'}
+  _STYLE_TO_PREFIX[s] = _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, {
+    duotone: 'fad'
+  }), _STYLE_TO_PREFIX[s]), Et['kit']), Et['kit-duotone']);
+  const STYLE_TO_PREFIX = familyProxy(_STYLE_TO_PREFIX);
+  const _PREFIX_TO_LONG_STYLE = _objectSpread2({}, ga);
+  _PREFIX_TO_LONG_STYLE[s] = _objectSpread2(_objectSpread2({}, _PREFIX_TO_LONG_STYLE[s]), Wt['kit']);
+  const PREFIX_TO_LONG_STYLE = familyProxy(_PREFIX_TO_LONG_STYLE);
+  const _LONG_STYLE_TO_PREFIX = _objectSpread2({}, ua);
+  _LONG_STYLE_TO_PREFIX[s] = _objectSpread2(_objectSpread2({}, _LONG_STYLE_TO_PREFIX[s]), Ct['kit']);
+  const LONG_STYLE_TO_PREFIX = familyProxy(_LONG_STYLE_TO_PREFIX);
+  const _FONT_WEIGHT_TO_PREFIX = _objectSpread2({}, G);
+  const FONT_WEIGHT_TO_PREFIX = familyProxy(_FONT_WEIGHT_TO_PREFIX);
+
+  function bunker(fn) {
+    try {
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+      fn(...args);
+    } catch (e) {
+      if (!PRODUCTION) {
+        throw e;
+      }
+    }
+  }
+
+  const w = WINDOW || {};
+  if (!w[NAMESPACE_IDENTIFIER]) w[NAMESPACE_IDENTIFIER] = {};
+  if (!w[NAMESPACE_IDENTIFIER].styles) w[NAMESPACE_IDENTIFIER].styles = {};
+  if (!w[NAMESPACE_IDENTIFIER].hooks) w[NAMESPACE_IDENTIFIER].hooks = {};
+  if (!w[NAMESPACE_IDENTIFIER].shims) w[NAMESPACE_IDENTIFIER].shims = [];
+  var namespace = w[NAMESPACE_IDENTIFIER];
+
+  function normalizeIcons(icons) {
+    return Object.keys(icons).reduce((acc, iconName) => {
+      const icon = icons[iconName];
+      const expanded = !!icon.icon;
+      if (expanded) {
+        acc[icon.iconName] = icon.icon;
+      } else {
+        acc[iconName] = icon;
+      }
+      return acc;
+    }, {});
+  }
+  function defineIcons(prefix, icons) {
+    let params = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    const {
+      skipHooks = false
+    } = params;
+    const normalized = normalizeIcons(icons);
+    if (typeof namespace.hooks.addPack === 'function' && !skipHooks) {
+      namespace.hooks.addPack(prefix, normalizeIcons(icons));
+    } else {
+      namespace.styles[prefix] = _objectSpread2(_objectSpread2({}, namespace.styles[prefix] || {}), normalized);
+    }
+
+    /**
+     * Font Awesome 4 used the prefix of `fa` for all icons. With the introduction
+     * of new styles we needed to differentiate between them. Prefix `fa` is now an alias
+     * for `fas` so we'll ease the upgrade process for our users by automatically defining
+     * this as well.
+     */
+    if (prefix === 'fas') {
+      defineIcons('fa', icons);
+    }
+  }
+
+  var icons = {
+    
+    "arrow-right-to-bracket": [512,512,["sign-in"],"f090","M217 401L345 273c9.4-9.4 9.4-24.6 0-33.9L217 111c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l87 87L24 232c-13.3 0-24 10.7-24 24s10.7 24 24 24l246.1 0-87 87c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0zM344 80l80 0c22.1 0 40 17.9 40 40l0 272c0 22.1-17.9 40-40 40l-80 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l80 0c48.6 0 88-39.4 88-88l0-272c0-48.6-39.4-88-88-88l-80 0c-13.3 0-24 10.7-24 24s10.7 24 24 24z"],
+    "award": [384,512,[],"f559","M163.1 8.1c17.7-10.8 40-10.8 57.8 0l15.6 9.5c1.2 .7 2.7 1.1 4.1 1.1l18.3-.4c20.8-.5 40.1 10.7 50 28.9l8.8 16.1c.7 1.3 1.7 2.3 3 3L336.8 75c18.2 10 29.4 29.3 28.9 50l-.4 18.3c0 1.4 .3 2.9 1.1 4.1l9.5 15.6c10.8 17.7 10.8 40 0 57.8l-9.5 15.6c-.7 1.2-1.1 2.7-1.1 4.1l.4 18.3c.5 20.8-10.7 40.1-28.9 50l-16.1 8.8c-1.3 .7-2.3 1.7-3 3L309 336.8c-10 18.2-29.3 29.4-50 28.9l-18.3-.4c-1.4 0-2.9 .3-4.1 1.1l-15.6 9.5c-17.7 10.8-40 10.8-57.8 0l-15.6-9.5c-1.2-.7-2.7-1.1-4.1-1.1l-18.3 .4c-20.8 .5-40.1-10.7-50-28.9l-8.8-16.1c-.7-1.3-1.7-2.3-3-3L47.2 309c-18.2-10-29.4-29.3-28.9-50l.4-18.3c0-1.4-.3-2.9-1.1-4.1L8.1 220.9c-10.8-17.7-10.8-40 0-57.8l9.5-15.6c.7-1.2 1.1-2.7 1.1-4.1l-.4-18.3C17.8 104.3 29 85 47.2 75l16.1-8.8c1.3-.7 2.3-1.7 3-3L75 47.2c10-18.2 29.3-29.4 50-28.9l18.3 .4c1.4 0 2.9-.3 4.1-1.1l15.6-9.5zm32.8 41c-2.4-1.5-5.4-1.5-7.8 0l-15.6 9.5c-9.1 5.5-19.6 8.3-30.2 8.1l-18.3-.4c-2.8-.1-5.4 1.4-6.8 3.9l-8.8 16.1c-5.1 9.3-12.8 17-22.1 22.1l-16.1 8.8c-2.5 1.4-4 4-3.9 6.8l.4 18.3c.3 10.6-2.6 21.1-8.1 30.2l-9.5 15.6L28.6 175.6l20.5 12.5c-1.5 2.4-1.5 5.4 0 7.8l9.5 15.6c5.5 9.1 8.3 19.6 8.1 30.2l-.4 18.3c-.1 2.8 1.4 5.4 3.9 6.8l16.1 8.8c9.3 5.1 17 12.8 22.1 22.1l8.8 16.1c1.4 2.5 4 4 6.8 3.9l18.3-.4c10.6-.3 21.1 2.6 30.2 8.1l15.6 9.5c2.4 1.5 5.4 1.5 7.8 0l15.6-9.5c9.1-5.5 19.6-8.3 30.2-8.1l18.3 .4c2.8 .1 5.4-1.4 6.8-3.9l8.8-16.1c5.1-9.3 12.8-17 22.1-22.1l16.1-8.8c2.5-1.4 4-4 3.9-6.8l-.4-18.3c-.3-10.6 2.6-21.1 8.1-30.2l9.5-15.6c1.5-2.4 1.5-5.4 0-7.8l-9.5-15.6c-5.5-9.1-8.3-19.6-8.1-30.2l.4-18.3c.1-2.8-1.4-5.4-3.9-6.8l-16.1-8.8c-9.3-5.1-17-12.8-22.1-22.1l-8.8-16.1c-1.4-2.5-4-4-6.8-3.9l-18.3 .4c-10.6 .3-21.1-2.6-30.2-8.1l-15.6-9.5zM128 192a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zM1.3 441.8l41.2-97.9 4.5 8.2c15.7 28.7 46.1 46.3 78.9 45.5l11.1-.3 9.5 5.8c8 4.9 16.7 8.4 25.6 10.5l-37.3 88.5c-2.3 5.5-7.4 9.2-13.3 9.7s-11.6-2.2-14.8-7.2L74.4 455.5l-56.1 8.3c-5.7 .8-11.4-1.5-15-6s-4.3-10.7-2.1-16zm248 60.4L212 413.7c8.9-2.1 17.5-5.6 25.5-10.5l9.5-5.8 11.1 .3c32.7 .8 63.2-16.8 78.9-45.5l4.5-8.2 41.2 97.9c2.2 5.3 1.4 11.4-2.1 16s-9.3 6.9-15 6l-56.1-8.3-32.2 49.2c-3.2 5-8.9 7.7-14.8 7.2s-11-4.3-13.3-9.7z"],
+    "award-simple": [384,512,[],"e0ab","M163.1 8.1c17.7-10.8 40-10.8 57.8 0l15.6 9.5c1.2 .7 2.7 1.1 4.1 1.1l18.3-.4c20.8-.5 40.1 10.7 50 28.9l8.8 16.1c.7 1.3 1.7 2.3 3 3L336.8 75c18.2 10 29.4 29.3 28.9 50l-.4 18.3c0 1.4 .3 2.9 1.1 4.1l9.5 15.6c10.8 17.7 10.8 40 0 57.8l-9.5 15.6c-.7 1.2-1.1 2.7-1.1 4.1l.4 18.3c.5 20.8-10.7 40.1-28.9 50l-16.1 8.8c-1.3 .7-2.3 1.7-3 3L309 336.8c-10 18.2-29.3 29.4-50 28.9l-18.3-.4c-1.4 0-2.9 .3-4.1 1.1l-15.6 9.5c-17.7 10.8-40 10.8-57.8 0l-15.6-9.5c-1.2-.7-2.7-1.1-4.1-1.1l-18.3 .4c-20.8 .5-40.1-10.7-50-28.9l-8.8-16.1c-.7-1.3-1.7-2.3-3-3L47.2 309c-18.2-10-29.4-29.3-28.9-50l.4-18.3c0-1.4-.3-2.9-1.1-4.1L8.1 220.9c-10.8-17.7-10.8-40 0-57.8l9.5-15.6c.7-1.2 1.1-2.7 1.1-4.1l-.4-18.3C17.8 104.3 29 85 47.2 75l16.1-8.8c1.3-.7 2.3-1.7 3-3L75 47.2c10-18.2 29.3-29.4 50-28.9l18.3 .4c1.4 0 2.9-.3 4.1-1.1l15.6-9.5zm32.8 41c-2.4-1.5-5.4-1.5-7.8 0l-15.6 9.5c-9.1 5.5-19.6 8.3-30.2 8.1l-18.3-.4c-2.8-.1-5.4 1.4-6.8 3.9l-8.8 16.1c-5.1 9.3-12.8 17-22.1 22.1l-16.1 8.8c-2.5 1.4-4 4-3.9 6.8l.4 18.3c.3 10.6-2.6 21.1-8.1 30.2l-9.5 15.6L28.6 175.6l20.5 12.5c-1.5 2.4-1.5 5.4 0 7.8l9.5 15.6c5.5 9.1 8.3 19.6 8.1 30.2l-.4 18.3c-.1 2.8 1.4 5.4 3.9 6.8l16.1 8.8c9.3 5.1 17 12.8 22.1 22.1l8.8 16.1c1.4 2.5 4 4 6.8 3.9l18.3-.4c10.6-.3 21.1 2.6 30.2 8.1l15.6 9.5c2.4 1.5 5.4 1.5 7.8 0l15.6-9.5c9.1-5.5 19.6-8.3 30.2-8.1l18.3 .4c2.8 .1 5.4-1.4 6.8-3.9l8.8-16.1c5.1-9.3 12.8-17 22.1-22.1l16.1-8.8c2.5-1.4 4-4 3.9-6.8l-.4-18.3c-.3-10.6 2.6-21.1 8.1-30.2l9.5-15.6c1.5-2.4 1.5-5.4 0-7.8l-9.5-15.6c-5.5-9.1-8.3-19.6-8.1-30.2l.4-18.3c.1-2.8-1.4-5.4-3.9-6.8l-16.1-8.8c-9.3-5.1-17-12.8-22.1-22.1l-8.8-16.1c-1.4-2.5-4-4-6.8-3.9l-18.3 .4c-10.6 .3-21.1-2.6-30.2-8.1l-15.6-9.5zM128 192a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zM64.4 492.4L88 390.1c11.7 5.2 24.5 7.9 37.8 7.6l11.1-.3 9.5 5.8c28 17 63.1 17 91.1 0l9.5-5.8 11.1 .3c13.3 .3 26.1-2.4 37.8-7.6l23.6 102.3c1.4 5.9-.7 12-5.3 15.9s-11 4.8-16.6 2.4L192 465.4 86.3 510.7c-5.5 2.4-11.9 1.4-16.6-2.4s-6.7-10-5.3-15.9z"],
+    "book-open": [576,512,["128366","128214"],"f518","M156 32C100.6 32 48.8 46.6 27.1 53.6C10.3 59 0 74.5 0 91.1L0 403.5c0 26.1 24 44.2 48 40.2c19.8-3.3 54.8-7.7 100-7.7c54 0 97.5 25.5 112.5 35.6c7.5 5 16.8 8.4 27 8.4c11.5 0 21.6-4.2 29.3-9.9C330.2 460.3 369.1 436 428 436c47.7 0 80.5 4 99 7.2c23.9 4.1 49-13.8 49-40.6l0-311.5c0-16.5-10.3-32.1-27.1-37.5C527.2 46.6 475.4 32 420 32c-36.8 0-71.8 6.4-97.4 12.7c-12.8 3.2-23.5 6.3-30.9 8.7c-1.3 .4-2.6 .8-3.7 1.2c-1.1-.4-2.4-.8-3.7-1.2c-7.5-2.4-18.1-5.5-30.9-8.7C227.8 38.4 192.8 32 156 32zM264 97.3l0 320.6C238 404.2 196.8 388 148 388c-42.9 0-77.4 3.7-100 7.1L48 97.3C70.3 90.6 112.4 80 156 80c31.6 0 62.6 5.6 85.9 11.3c8.6 2.1 16.1 4.2 22.1 6zm48 319.2l0-319.2c6-1.8 13.5-3.9 22.1-6C357.4 85.6 388.4 80 420 80c43.6 0 85.7 10.6 108 17.3l0 297.4c-21.7-3.3-54.9-6.7-100-6.7c-51.4 0-90.8 15-116 28.6z"],
+    "buildings": [512,512,[],"e0cc","M448 48c8.8 0 16 7.2 16 16l0 384c0 8.8-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16l0-384c0-8.8 7.2-16 16-16l160 0zM288 0c-35.3 0-64 28.7-64 64l0 384c0 35.3 28.7 64 64 64l160 0c35.3 0 64-28.7 64-64l0-384c0-35.3-28.7-64-64-64L288 0zM192 128L72 128c-39.8 0-72 32.2-72 72L0 440c0 39.8 32.2 72 72 72l144.4 0c-11.8-13.2-20.1-29.7-23.1-48L72 464c-13.3 0-24-10.7-24-24l0-240c0-13.3 10.7-24 24-24l120 0 0-48zM112 320c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm224 16c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16l0 32zM112 224c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM336 112l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm16 144l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16z"],
+    "calendar": [448,512,["128198","128197"],"f133","M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L64 64C28.7 64 0 92.7 0 128l0 16 0 48L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-256 0-48 0-16c0-35.3-28.7-64-64-64l-40 0 0-40c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L152 64l0-40zM48 192l352 0 0 256c0 8.8-7.2 16-16 16L64 464c-8.8 0-16-7.2-16-16l0-256z"],
+    "calendar-clock": [576,512,["calendar-time"],"e0d2","M128 0c13.3 0 24 10.7 24 24l0 40 144 0 0-40c0-13.3 10.7-24 24-24s24 10.7 24 24l0 40 40 0c35.3 0 64 28.7 64 64l0 16 0 48-16 0-32 0-112 0L48 192l0 256c0 8.8 7.2 16 16 16l220.5 0c12.3 18.8 28 35.1 46.3 48L64 512c-35.3 0-64-28.7-64-64L0 192l0-48 0-16C0 92.7 28.7 64 64 64l40 0 0-40c0-13.3 10.7-24 24-24zM288 368a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-80c-8.8 0-16 7.2-16 16l0 64c0 8.8 7.2 16 16 16l48 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-32 0 0-48c0-8.8-7.2-16-16-16z"],
+    "calendar-days": [448,512,["calendar-alt"],"f073","M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L64 64C28.7 64 0 92.7 0 128l0 16 0 48L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-256 0-48 0-16c0-35.3-28.7-64-64-64l-40 0 0-40c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L152 64l0-40zM48 192l80 0 0 56-80 0 0-56zm0 104l80 0 0 64-80 0 0-64zm128 0l96 0 0 64-96 0 0-64zm144 0l80 0 0 64-80 0 0-64zm80-48l-80 0 0-56 80 0 0 56zm0 160l0 40c0 8.8-7.2 16-16 16l-64 0 0-56 80 0zm-128 0l0 56-96 0 0-56 96 0zm-144 0l0 56-64 0c-8.8 0-16-7.2-16-16l0-40 80 0zM272 248l-96 0 0-56 96 0 0 56z"],
+    "chevron-down": [512,512,[],"f078","M239 401c9.4 9.4 24.6 9.4 33.9 0L465 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-175 175L81 175c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9L239 401z"],
+    "chevron-left": [320,512,["9001"],"f053","M15 239c-9.4 9.4-9.4 24.6 0 33.9L207 465c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L65.9 256 241 81c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0L15 239z"],
+    "chevron-right": [320,512,["9002"],"f054","M305 239c9.4 9.4 9.4 24.6 0 33.9L113 465c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l175-175L79 81c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L305 239z"],
+    "circle-check": [512,512,["61533","check-circle"],"f058","M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"],
+    "circle-dot": [512,512,["128280","dot-circle"],"f192","M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256-96a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"],
+    "circle-info": [512,512,["info-circle"],"f05a","M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336c-13.3 0-24 10.7-24 24s10.7 24 24 24l80 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-8 0 0-88c0-13.3-10.7-24-24-24l-48 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l24 0 0 64-24 0zm40-144a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"],
+    "circle-question": [512,512,["62108","question-circle"],"f059","M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm169.8-90.7c7.9-22.3 29.1-37.3 52.8-37.3l58.3 0c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24l0-13.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1l-58.3 0c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"],
+    "circle-x": [512,512,[],"e12e","M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM186.3 136.5c-8.6-10.1-23.7-11.4-33.8-2.8s-11.4 23.7-2.8 33.8L224.6 256l-74.9 88.5c-8.6 10.1-7.3 25.3 2.8 33.8s25.3 7.3 33.8-2.8L256 293.2l69.7 82.3c8.6 10.1 23.7 11.4 33.8 2.8s11.4-23.7 2.8-33.8L287.4 256l74.9-88.5c8.6-10.1 7.3-25.3-2.8-33.8s-25.3-7.3-33.8 2.8L256 218.8l-69.7-82.3z"],
+    "clock": [512,512,["128339","clock-four"],"f017","M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"],
+    "clock-three": [512,512,[],"e356","M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120l0 136c0 13.3 10.7 24 24 24l104 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-80 0 0-112c0-13.3-10.7-24-24-24s-24 10.7-24 24z"],
+    "download": [512,512,[],"f019","M280 24c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 270.1-95-95c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9L239 369c9.4 9.4 24.6 9.4 33.9 0L409 233c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-95 95L280 24zM128.8 304L64 304c-35.3 0-64 28.7-64 64l0 80c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-80c0-35.3-28.7-64-64-64l-64.8 0-48 48L448 352c8.8 0 16 7.2 16 16l0 80c0 8.8-7.2 16-16 16L64 464c-8.8 0-16-7.2-16-16l0-80c0-8.8 7.2-16 16-16l112.8 0-48-48zM432 408a24 24 0 1 0 -48 0 24 24 0 1 0 48 0z"],
+    "eye": [576,512,["128065"],"f06e","M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z"],
+    "file": [384,512,["61462","128459","128196"],"f15b","M320 464c8.8 0 16-7.2 16-16l0-288-80 0c-17.7 0-32-14.3-32-32l0-80L64 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16l256 0zM0 64C0 28.7 28.7 0 64 0L229.5 0c17 0 33.3 6.7 45.3 18.7l90.5 90.5c12 12 18.7 28.3 18.7 45.3L384 448c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64z"],
+    "file-excel": [384,512,[],"f1c3","M48 448L48 64c0-8.8 7.2-16 16-16l160 0 0 80c0 17.7 14.3 32 32 32l80 0 0 288c0 8.8-7.2 16-16 16L64 464c-8.8 0-16-7.2-16-16zM64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-293.5c0-17-6.7-33.3-18.7-45.3L274.7 18.7C262.7 6.7 246.5 0 229.5 0L64 0zm90.9 233.3c-8.1-10.5-23.2-12.3-33.7-4.2s-12.3 23.2-4.2 33.7L161.6 320l-44.5 57.3c-8.1 10.5-6.3 25.5 4.2 33.7s25.5 6.3 33.7-4.2L192 359.1l37.1 47.6c8.1 10.5 23.2 12.3 33.7 4.2s12.3-23.2 4.2-33.7L222.4 320l44.5-57.3c8.1-10.5 6.3-25.5-4.2-33.7s-25.5-6.3-33.7 4.2L192 280.9l-37.1-47.6z"],
+    "file-pdf": [512,512,[],"f1c1","M64 464l48 0 0 48-48 0c-35.3 0-64-28.7-64-64L0 64C0 28.7 28.7 0 64 0L229.5 0c17 0 33.3 6.7 45.3 18.7l90.5 90.5c12 12 18.7 28.3 18.7 45.3L384 304l-48 0 0-144-80 0c-17.7 0-32-14.3-32-32l0-80L64 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16zM176 352l32 0c30.9 0 56 25.1 56 56s-25.1 56-56 56l-16 0 0 32c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-48 0-80c0-8.8 7.2-16 16-16zm32 80c13.3 0 24-10.7 24-24s-10.7-24-24-24l-16 0 0 48 16 0zm96-80l32 0c26.5 0 48 21.5 48 48l0 64c0 26.5-21.5 48-48 48l-32 0c-8.8 0-16-7.2-16-16l0-128c0-8.8 7.2-16 16-16zm32 128c8.8 0 16-7.2 16-16l0-64c0-8.8-7.2-16-16-16l-16 0 0 96 16 0zm80-112c0-8.8 7.2-16 16-16l48 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0 0 32 32 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0 0 48c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-64 0-64z"],
+    "file-pen": [576,512,["128221","file-edit"],"f31c","M64 464l198.6 0-5.1 20.5c-2.3 9.2-1.8 18.8 1.3 27.5L64 512c-35.3 0-64-28.7-64-64L0 64C0 28.7 28.7 0 64 0L229.5 0c17 0 33.3 6.7 45.3 18.7l90.5 90.5c12 12 18.7 28.3 18.7 45.3l0 131.1-48 48L336 160l-80 0c-17.7 0-32-14.3-32-32l0-80L64 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16zM549.8 235.7l14.4 14.4c15.6 15.6 15.6 40.9 0 56.6l-29.4 29.4-71-71 29.4-29.4c15.6-15.6 40.9-15.6 56.6 0zM311.9 417L441.1 287.8l71 71L382.9 487.9c-4.1 4.1-9.2 7-14.9 8.4l-60.1 15c-5.5 1.4-11.2-.2-15.2-4.2s-5.6-9.7-4.2-15.2l15-60.1c1.4-5.6 4.3-10.8 8.4-14.9z"],
+    "file-video": [384,512,[],"f1c8","M320 464c8.8 0 16-7.2 16-16l0-288-80 0c-17.7 0-32-14.3-32-32l0-80L64 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16l256 0zM0 64C0 28.7 28.7 0 64 0L229.5 0c17 0 33.3 6.7 45.3 18.7l90.5 90.5c12 12 18.7 28.3 18.7 45.3L384 448c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zM80 288c0-17.7 14.3-32 32-32l96 0c17.7 0 32 14.3 32 32l0 16 44.9-29.9c2-1.3 4.4-2.1 6.8-2.1c6.8 0 12.3 5.5 12.3 12.3l0 103.4c0 6.8-5.5 12.3-12.3 12.3c-2.4 0-4.8-.7-6.8-2.1L240 368l0 16c0 17.7-14.3 32-32 32l-96 0c-17.7 0-32-14.3-32-32l0-96z"],
+    "file-word": [384,512,[],"f1c2","M48 448L48 64c0-8.8 7.2-16 16-16l160 0 0 80c0 17.7 14.3 32 32 32l80 0 0 288c0 8.8-7.2 16-16 16L64 464c-8.8 0-16-7.2-16-16zM64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-293.5c0-17-6.7-33.3-18.7-45.3L274.7 18.7C262.7 6.7 246.5 0 229.5 0L64 0zm55 241.1c-3.8-12.7-17.2-19.9-29.9-16.1s-19.9 17.2-16.1 29.9l48 160c3 10.2 12.4 17.1 23 17.1s19.9-7 23-17.1l25-83.4 25 83.4c3 10.2 12.4 17.1 23 17.1s19.9-7 23-17.1l48-160c3.8-12.7-3.4-26.1-16.1-29.9s-26.1 3.4-29.9 16.1l-25 83.4-25-83.4c-3-10.2-12.4-17.1-23-17.1s-19.9 7-23 17.1l-25 83.4-25-83.4z"],
+    "filter": [512,512,[],"f0b0","M0 73.7C0 50.7 18.7 32 41.7 32l428.6 0c23 0 41.7 18.7 41.7 41.7c0 9.6-3.3 18.9-9.4 26.3L336 304.5l0 143.2c0 17.8-14.5 32.3-32.3 32.3c-7.3 0-14.4-2.5-20.1-7l-92.5-73.4c-9.6-7.6-15.1-19.1-15.1-31.3l0-63.7L9.4 100C3.3 92.6 0 83.3 0 73.7zM55 80L218.6 280.8c3.5 4.3 5.4 9.6 5.4 15.2l0 68.4 64 50.8L288 296c0-5.5 1.9-10.9 5.4-15.2L457 80 55 80z"],
+    "folder": [512,512,["61716","128447","128193","folder-blank"],"f07b","M0 96C0 60.7 28.7 32 64 32l132.1 0c19.1 0 37.4 7.6 50.9 21.1L289.9 96 448 96c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM64 80c-8.8 0-16 7.2-16 16l0 320c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-256c0-8.8-7.2-16-16-16l-161.4 0c-10.6 0-20.8-4.2-28.3-11.7L213.1 87c-4.5-4.5-10.6-7-17-7L64 80z"],
+    "folder-open": [576,512,["61717","128449","128194"],"f07c","M384 480l48 0c11.4 0 21.9-6 27.6-15.9l112-192c5.8-9.9 5.8-22.1 .1-32.1S555.5 224 544 224l-400 0c-11.4 0-21.9 6-27.6 15.9L48 357.1 48 96c0-8.8 7.2-16 16-16l117.5 0c4.2 0 8.3 1.7 11.3 4.7l26.5 26.5c21 21 49.5 32.8 79.2 32.8L416 144c8.8 0 16 7.2 16 16l0 32 48 0 0-32c0-35.3-28.7-64-64-64L298.5 96c-17 0-33.3-6.7-45.3-18.7L226.7 50.7c-12-12-28.3-18.7-45.3-18.7L64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l23.7 0L384 480z"],
+    "folder-plus": [512,512,[],"f65e","M251.7 127.6s0 0 0 0c10.5 10.5 24.7 16.4 39.6 16.4L448 144c8.8 0 16 7.2 16 16l0 256c0 8.8-7.2 16-16 16L64 432c-8.8 0-16-7.2-16-16L48 96c0-8.8 7.2-16 16-16l133.5 0c4.2 0 8.3 1.7 11.3 4.7l33.9-33.9L208.8 84.7l42.9 42.9zm33.9-33.9L242.7 50.7c-12-12-28.3-18.7-45.3-18.7L64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-256c0-35.3-28.7-64-64-64L291.3 96c-2.1 0-4.2-.8-5.7-2.3zM232 376c0 13.3 10.7 24 24 24s24-10.7 24-24l0-64 64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0 0-64c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 64-64 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0 0 64z"],
+    "folders": [576,512,[],"f660","M512 336l-352 0c-8.8 0-16-7.2-16-16l0-224c0-8.8 7.2-16 16-16l117.5 0c4.2 0 8.3 1.7 11.3 4.7l26.5 26.5c21 21 49.5 32.8 79.2 32.8L512 144c8.8 0 16 7.2 16 16l0 160c0 8.8-7.2 16-16 16zM160 384l352 0c35.3 0 64-28.7 64-64l0-160c0-35.3-28.7-64-64-64L394.5 96c-17 0-33.3-6.7-45.3-18.7L322.7 50.7c-12-12-28.3-18.7-45.3-18.7L160 32c-35.3 0-64 28.7-64 64l0 224c0 35.3 28.7 64 64 64zM48 120c0-13.3-10.7-24-24-24S0 106.7 0 120L0 344c0 75.1 60.9 136 136 136l320 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-320 0c-48.6 0-88-39.4-88-88l0-224z"],
+    "gear": [512,512,["9881","cog"],"f013","M256 0c17 0 33.6 1.7 49.8 4.8c7.9 1.5 21.8 6.1 29.4 20.1c2 3.7 3.6 7.6 4.6 11.8l9.3 38.5C350.5 81 360.3 86.7 366 85l38-11.2c4-1.2 8.1-1.8 12.2-1.9c16.1-.5 27 9.4 32.3 15.4c22.1 25.1 39.1 54.6 49.9 86.3c2.6 7.6 5.6 21.8-2.7 35.4c-2.2 3.6-4.9 7-8 10L459 246.3c-4.2 4-4.2 15.5 0 19.5l28.7 27.3c3.1 3 5.8 6.4 8 10c8.2 13.6 5.2 27.8 2.7 35.4c-10.8 31.7-27.8 61.1-49.9 86.3c-5.3 6-16.3 15.9-32.3 15.4c-4.1-.1-8.2-.8-12.2-1.9L366 427c-5.7-1.7-15.5 4-16.9 9.8l-9.3 38.5c-1 4.2-2.6 8.2-4.6 11.8c-7.7 14-21.6 18.5-29.4 20.1C289.6 510.3 273 512 256 512s-33.6-1.7-49.8-4.8c-7.9-1.5-21.8-6.1-29.4-20.1c-2-3.7-3.6-7.6-4.6-11.8l-9.3-38.5c-1.4-5.8-11.2-11.5-16.9-9.8l-38 11.2c-4 1.2-8.1 1.8-12.2 1.9c-16.1 .5-27-9.4-32.3-15.4c-22-25.1-39.1-54.6-49.9-86.3c-2.6-7.6-5.6-21.8 2.7-35.4c2.2-3.6 4.9-7 8-10L53 265.7c4.2-4 4.2-15.5 0-19.5L24.2 218.9c-3.1-3-5.8-6.4-8-10C8 195.3 11 181.1 13.6 173.6c10.8-31.7 27.8-61.1 49.9-86.3c5.3-6 16.3-15.9 32.3-15.4c4.1 .1 8.2 .8 12.2 1.9L146 85c5.7 1.7 15.5-4 16.9-9.8l9.3-38.5c1-4.2 2.6-8.2 4.6-11.8c7.7-14 21.6-18.5 29.4-20.1C222.4 1.7 239 0 256 0zM218.1 51.4l-8.5 35.1c-7.8 32.3-45.3 53.9-77.2 44.6L97.9 120.9c-16.5 19.3-29.5 41.7-38 65.7l26.2 24.9c24 22.8 24 66.2 0 89L59.9 325.4c8.5 24 21.5 46.4 38 65.7l34.6-10.2c31.8-9.4 69.4 12.3 77.2 44.6l8.5 35.1c24.6 4.5 51.3 4.5 75.9 0l8.5-35.1c7.8-32.3 45.3-53.9 77.2-44.6l34.6 10.2c16.5-19.3 29.5-41.7 38-65.7l-26.2-24.9c-24-22.8-24-66.2 0-89l26.2-24.9c-8.5-24-21.5-46.4-38-65.7l-34.6 10.2c-31.8 9.4-69.4-12.3-77.2-44.6l-8.5-35.1c-24.6-4.5-51.3-4.5-75.9 0zM208 256a48 48 0 1 0 96 0 48 48 0 1 0 -96 0zm48 96a96 96 0 1 1 0-192 96 96 0 1 1 0 192z"],
+    "globe": [512,512,["127760"],"f0ac","M256 464c7.4 0 27-7.2 47.6-48.4c8.8-17.7 16.4-39.2 22-63.6l-139.2 0c5.6 24.4 13.2 45.9 22 63.6C229 456.8 248.6 464 256 464zM178.5 304l155 0c1.6-15.3 2.5-31.4 2.5-48s-.9-32.7-2.5-48l-155 0c-1.6 15.3-2.5 31.4-2.5 48s.9 32.7 2.5 48zm7.9-144l139.2 0c-5.6-24.4-13.2-45.9-22-63.6C283 55.2 263.4 48 256 48s-27 7.2-47.6 48.4c-8.8 17.7-16.4 39.2-22 63.6zm195.3 48c1.5 15.5 2.2 31.6 2.2 48s-.8 32.5-2.2 48l76.7 0c3.6-15.4 5.6-31.5 5.6-48s-1.9-32.6-5.6-48l-76.7 0zm58.8-48c-21.4-41.1-56.1-74.1-98.4-93.4c14.1 25.6 25.3 57.5 32.6 93.4l65.9 0zm-303.3 0c7.3-35.9 18.5-67.7 32.6-93.4c-42.3 19.3-77 52.3-98.4 93.4l65.9 0zM53.6 208c-3.6 15.4-5.6 31.5-5.6 48s1.9 32.6 5.6 48l76.7 0c-1.5-15.5-2.2-31.6-2.2-48s.8-32.5 2.2-48l-76.7 0zM342.1 445.4c42.3-19.3 77-52.3 98.4-93.4l-65.9 0c-7.3 35.9-18.5 67.7-32.6 93.4zm-172.2 0c-14.1-25.6-25.3-57.5-32.6-93.4l-65.9 0c21.4 41.1 56.1 74.1 98.4 93.4zM256 512A256 256 0 1 1 256 0a256 256 0 1 1 0 512z"],
+    "graduation-cap": [640,512,["127891","mortar-board"],"f19d","M320 80c2.5 0 5 .4 7.4 1.3l218 78.7-218 78.7c-2.4 .9-4.9 1.3-7.4 1.3s-5-.4-7.4-1.3L184.9 192.6l140.8-52.8c8.3-3.1 12.5-12.3 9.4-20.6s-12.3-12.5-20.6-9.4L154.9 169.6c-5.2 2-10.3 4.2-15.3 6.6L94.7 160l218-78.7c2.4-.9 4.9-1.3 7.4-1.3zM15.8 182.6l77.4 27.9c-27.2 28.7-43.7 66.7-45.1 107.7c-.1 .6-.1 1.2-.1 1.8c0 28.4-10.8 57.8-22.3 80.8c-6.5 13-13.9 25.8-22.5 37.6C0 442.7-.9 448.3 .9 453.4s6 8.9 11.2 10.2l64 16c4.2 1.1 8.7 .3 12.4-2s6.3-6.1 7.1-10.4c8.6-42.8 4.3-81.2-2.1-108.7c-3.2-14-7.5-28.3-13.4-41.5c1.9-37 19.2-70.9 46.7-94.2l169.5 61.2c7.6 2.7 15.6 4.1 23.7 4.1s16.1-1.4 23.7-4.1L624.2 182.6c9.5-3.4 15.8-12.5 15.8-22.6s-6.3-19.1-15.8-22.6L343.7 36.1C336.1 33.4 328.1 32 320 32s-16.1 1.4-23.7 4.1L15.8 137.4C6.3 140.9 0 149.9 0 160s6.3 19.1 15.8 22.6zm480.8 80l-46.5 16.8 12.7 120.5c-4.8 3.5-12.8 8-24.6 12.6C410 423.6 368 432 320 432s-90-8.4-118.3-19.4c-11.8-4.6-19.8-9.2-24.6-12.6l12.7-120.5-46.5-16.8L128 408c0 35.3 86 72 192 72s192-36.7 192-72L496.7 262.6zM467.4 396c0 0-.1 .1-.3 .4c.2-.3 .3-.4 .3-.4zm-294.8 0c0 0 .1 .1 .3 .4c-.2-.3-.3-.4-.3-.4z"],
+    "grid-2": [512,512,[],"e196","M80 80l0 96 96 0 0-96L80 80zM32 80c0-26.5 21.5-48 48-48l96 0c26.5 0 48 21.5 48 48l0 96c0 26.5-21.5 48-48 48l-96 0c-26.5 0-48-21.5-48-48l0-96zM80 336l0 96 96 0 0-96-96 0zm-48 0c0-26.5 21.5-48 48-48l96 0c26.5 0 48 21.5 48 48l0 96c0 26.5-21.5 48-48 48l-96 0c-26.5 0-48-21.5-48-48l0-96zM432 80l-96 0 0 96 96 0 0-96zM336 32l96 0c26.5 0 48 21.5 48 48l0 96c0 26.5-21.5 48-48 48l-96 0c-26.5 0-48-21.5-48-48l0-96c0-26.5 21.5-48 48-48zm0 304l0 96 96 0 0-96-96 0zm-48 0c0-26.5 21.5-48 48-48l96 0c26.5 0 48 21.5 48 48l0 96c0 26.5-21.5 48-48 48l-96 0c-26.5 0-48-21.5-48-48l0-96z"],
+    "heart": [512,512,["61578","10084","9829","129505","129294","129293","128420","128156","128155","128154","128153"],"f004","M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8l0-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5l0 3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20-.1-.1s0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5l0 3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2l0-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"],
+    "house": [576,512,["63500","63498","127968","home","home-alt","home-lg-alt"],"f015","M303.5 5.7c-9-7.6-22.1-7.6-31.1 0l-264 224c-10.1 8.6-11.3 23.7-2.8 33.8s23.7 11.3 33.8 2.8L64 245.5 64 432c0 44.2 35.8 80 80 80l288 0c44.2 0 80-35.8 80-80l0-186.5 24.5 20.8c10.1 8.6 25.3 7.3 33.8-2.8s7.3-25.3-2.8-33.8l-264-224zM112 432l0-227.2L288 55.5 464 204.8 464 432c0 17.7-14.3 32-32 32l-48 0 0-152c0-22.1-17.9-40-40-40l-112 0c-22.1 0-40 17.9-40 40l0 152-48 0c-17.7 0-32-14.3-32-32zm128 32l0-144 96 0 0 144-96 0z"],
+    "image": [512,512,[],"f03e","M448 80c8.8 0 16 7.2 16 16l0 319.8-5-6.5-136-176c-4.5-5.9-11.6-9.3-19-9.3s-14.4 3.4-19 9.3L202 340.7l-30.5-42.7C167 291.7 159.8 288 152 288s-15 3.7-19.5 10.1l-80 112L48 416.3l0-.3L48 96c0-8.8 7.2-16 16-16l384 0zM64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm80 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"],
+    "list": [512,512,["list-squares"],"f03a","M40 48C26.7 48 16 58.7 16 72l0 48c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24l0-48c0-13.3-10.7-24-24-24L40 48zM184 72c-13.3 0-24 10.7-24 24s10.7 24 24 24l304 0c13.3 0 24-10.7 24-24s-10.7-24-24-24L184 72zm0 160c-13.3 0-24 10.7-24 24s10.7 24 24 24l304 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-304 0zm0 160c-13.3 0-24 10.7-24 24s10.7 24 24 24l304 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-304 0zM16 232l0 48c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24l0-48c0-13.3-10.7-24-24-24l-48 0c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24l0 48c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24l0-48c0-13.3-10.7-24-24-24l-48 0z"],
+    "list-check": [512,512,["tasks"],"f0ae","M153.8 72.1c8.9-9.9 8.1-25-1.8-33.9s-25-8.1-33.9 1.8L63.1 101.1 41 79C31.6 69.7 16.4 69.7 7 79s-9.4 24.6 0 33.9l40 40c4.7 4.7 11 7.2 17.6 7s12.8-3 17.2-7.9l72-80zm0 160c8.9-9.9 8.1-25-1.8-33.9s-25-8.1-33.9 1.8L63.1 261.1 41 239c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l40 40c4.7 4.7 11 7.2 17.6 7s12.8-3 17.2-7.9l72-80zM216 120l272 0c13.3 0 24-10.7 24-24s-10.7-24-24-24L216 72c-13.3 0-24 10.7-24 24s10.7 24 24 24zM192 256c0 13.3 10.7 24 24 24l272 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-272 0c-13.3 0-24 10.7-24 24zM160 416c0 13.3 10.7 24 24 24l304 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-304 0c-13.3 0-24 10.7-24 24zm-64 0a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"],
+    "location-dot": [384,512,["map-marker-alt"],"f3c5","M336 192c0-79.5-64.5-144-144-144S48 112.5 48 192c0 12.4 4.5 31.6 15.3 57.2c10.5 24.8 25.4 52.2 42.5 79.9c28.5 46.2 61.5 90.8 86.2 122.6c24.8-31.8 57.8-76.4 86.2-122.6c17.1-27.7 32-55.1 42.5-79.9C331.5 223.6 336 204.4 336 192zm48 0c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192C0 86 86 0 192 0S384 86 384 192zm-160 0a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm-112 0a80 80 0 1 1 160 0 80 80 0 1 1 -160 0z"],
+    "magnifying-glass": [512,512,["128269","search"],"f002","M368 208A160 160 0 1 0 48 208a160 160 0 1 0 320 0zM337.1 371.1C301.7 399.2 256.8 416 208 416C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208c0 48.8-16.8 93.7-44.9 129.1L505 471c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L337.1 371.1z"],
+    "medal": [512,512,["127941"],"f5a2","M4.1 38.2L106.4 191.5c11.2-11.6 23.7-21.9 37.3-30.6L68.4 48l64.5 0 54.9 91.5c15.8-5.5 32.4-9.1 49.6-10.6l-6.1-10.1L169.3 15.5C163.5 5.9 153.1 0 141.9 0L24.6 0C11 0 0 11 0 24.6c0 4.8 1.4 9.6 4.1 13.6zm276.6 80.5l-6.1 10.1c17.2 1.5 33.8 5.2 49.6 10.6L379.2 48l64.5 0L368.4 160.9c13.6 8.7 26.1 19 37.3 30.6L507.9 38.2c2.7-4 4.1-8.8 4.1-13.6C512 11 501 0 487.4 0L370.1 0c-11.2 0-21.7 5.9-27.4 15.5L280.8 118.7zM256 208a128 128 0 1 1 0 256 128 128 0 1 1 0-256zm0 304a176 176 0 1 0 0-352 176 176 0 1 0 0 352zm7.2-257.5c-2.9-5.9-11.4-5.9-14.3 0l-19.2 38.9c-1.2 2.4-3.4 4-6 4.4L180.7 304c-6.6 1-9.2 9-4.4 13.6l31 30.2c1.9 1.8 2.7 4.5 2.3 7.1l-7.3 42.7c-1.1 6.5 5.7 11.5 11.6 8.4L252.3 386c2.3-1.2 5.1-1.2 7.4 0l38.4 20.2c5.9 3.1 12.7-1.9 11.6-8.4L302.4 355c-.4-2.6 .4-5.2 2.3-7.1l31-30.2c4.7-4.6 2.1-12.7-4.4-13.6l-42.9-6.2c-2.6-.4-4.9-2-6-4.4l-19.2-38.9z"],
+    "pen-to-square": [512,512,["edit"],"f044","M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152L0 424c0 48.6 39.4 88 88 88l272 0c48.6 0 88-39.4 88-88l0-112c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 112c0 22.1-17.9 40-40 40L88 464c-22.1 0-40-17.9-40-40l0-272c0-22.1 17.9-40 40-40l112 0c13.3 0 24-10.7 24-24s-10.7-24-24-24L88 64z"],
+    "phone": [512,512,["128379","128222"],"f095","M375.8 275.2c-16.4-7-35.4-2.4-46.7 11.4l-33.2 40.6c-46-26.7-84.4-65.1-111.1-111.1L225.3 183c13.8-11.3 18.5-30.3 11.4-46.7l-48-112C181.2 6.7 162.3-3.1 143.6 .9l-112 24C13.2 28.8 0 45.1 0 64c0 0 0 0 0 0C0 295.2 175.2 485.6 400.1 509.5c9.8 1 19.6 1.8 29.6 2.2c0 0 0 0 0 0c0 0 .1 0 .1 0c6.1 .2 12.1 .4 18.2 .4c0 0 0 0 0 0c18.9 0 35.2-13.2 39.1-31.6l24-112c4-18.7-5.8-37.6-23.4-45.1l-112-48zM441.5 464C225.8 460.5 51.5 286.2 48.1 70.5l99.2-21.3 43 100.4L154.4 179c-18.2 14.9-22.9 40.8-11.1 61.2c30.9 53.3 75.3 97.7 128.6 128.6c20.4 11.8 46.3 7.1 61.2-11.1l29.4-35.9 100.4 43L441.5 464zM48 64s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0z"],
+    "plus": [448,512,["61543","10133","add"],"2b","M248 72c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 160L40 232c-13.3 0-24 10.7-24 24s10.7 24 24 24l160 0 0 160c0 13.3 10.7 24 24 24s24-10.7 24-24l0-160 160 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-160 0 0-160z"],
+    "share": [512,512,["mail-forward"],"f064","M288 240l-96 0c-66.2 0-122 44.7-138.8 105.5C49.9 333.1 48 319.3 48 304c0-70.7 57.3-128 128-128l112 0 24 0c13.3 0 24-10.7 24-24l0-24 0-28.1L456.1 208 336 316.1l0-28.1 0-24c0-13.3-10.7-24-24-24l-24 0zm0 48l0 48 0 16c0 12.6 7.4 24.1 19 29.2s25 3 34.4-5.4l160-144c6.7-6.1 10.6-14.7 10.6-23.8s-3.8-17.7-10.6-23.8l-160-144c-9.4-8.5-22.9-10.6-34.4-5.4s-19 16.6-19 29.2l0 16 0 48-48 0-64 0C78.8 128 0 206.8 0 304c0 78 38.6 126.2 68.7 152.1c4.1 3.5 8.1 6.6 11.7 9.3c3.2 2.4 6.2 4.4 8.9 6.2c4.5 3 8.3 5.1 10.8 6.5c2.5 1.4 5.3 1.9 8.1 1.9c10.9 0 19.7-8.9 19.7-19.7c0-6.8-3.6-13.2-8.3-18.1c-.5-.5-.9-.9-1.4-1.4c-2.4-2.3-5.1-5.1-7.7-8.6c-1.7-2.3-3.4-5-5-7.9c-5.3-9.7-9.5-22.9-9.5-40.2c0-53 43-96 96-96l48 0 48 0z"],
+    "share-nodes": [448,512,["share-alt"],"f1e0","M448 128c0 53-43 96-96 96c-28.9 0-54.8-12.8-72.4-33l-89.7 44.9c1.4 6.5 2.1 13.2 2.1 20.1s-.7 13.6-2.1 20.1L279.6 321c17.6-20.2 43.5-33 72.4-33c53 0 96 43 96 96s-43 96-96 96s-96-43-96-96c0-6.9 .7-13.6 2.1-20.1L168.4 319c-17.6 20.2-43.5 33-72.4 33c-53 0-96-43-96-96s43-96 96-96c28.9 0 54.8 12.8 72.4 33l89.7-44.9c-1.4-6.5-2.1-13.2-2.1-20.1c0-53 43-96 96-96s96 43 96 96zM96 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zM400 128a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM352 432a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"],
+    "sliders": [512,512,["sliders-h"],"f1de","M0 416c0 13.3 10.7 24 24 24l59.7 0c10.2 32.5 40.5 56 76.3 56s66.1-23.5 76.3-56L488 440c13.3 0 24-10.7 24-24s-10.7-24-24-24l-251.7 0c-10.2-32.5-40.5-56-76.3-56s-66.1 23.5-76.3 56L24 392c-13.3 0-24 10.7-24 24zm128 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM320 256a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm32-80c-35.8 0-66.1 23.5-76.3 56L24 232c-13.3 0-24 10.7-24 24s10.7 24 24 24l251.7 0c10.2 32.5 40.5 56 76.3 56s66.1-23.5 76.3-56l59.7 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-59.7 0c-10.2-32.5-40.5-56-76.3-56zM192 128a32 32 0 1 1 0-64 32 32 0 1 1 0 64zm76.3-56C258.1 39.5 227.8 16 192 16s-66.1 23.5-76.3 56L24 72C10.7 72 0 82.7 0 96s10.7 24 24 24l91.7 0c10.2 32.5 40.5 56 76.3 56s66.1-23.5 76.3-56L488 120c13.3 0 24-10.7 24-24s-10.7-24-24-24L268.3 72z"],
+    "star": [576,512,["61446","11088"],"f005","M287.9 0c9.2 0 17.6 5.2 21.6 13.5l68.6 141.3 153.2 22.6c9 1.3 16.5 7.6 19.3 16.3s.5 18.1-5.9 24.5L433.6 328.4l26.2 155.6c1.5 9-2.2 18.1-9.7 23.5s-17.3 6-25.3 1.7l-137-73.2L151 509.1c-8.1 4.3-17.9 3.7-25.3-1.7s-11.2-14.5-9.7-23.5l26.2-155.6L31.1 218.2c-6.5-6.4-8.7-15.9-5.9-24.5s10.3-14.9 19.3-16.3l153.2-22.6L266.3 13.5C270.4 5.2 278.7 0 287.9 0zm0 79L235.4 187.2c-3.5 7.1-10.2 12.1-18.1 13.3L99 217.9 184.9 303c5.5 5.5 8.1 13.3 6.8 21L171.4 443.7l105.2-56.2c7.1-3.8 15.6-3.8 22.6 0l105.2 56.2L384.2 324.1c-1.3-7.7 1.2-15.5 6.8-21l85.9-85.1L358.6 200.5c-7.8-1.2-14.6-6.1-18.1-13.3L287.9 79z"],
+    "trash": [448,512,[],"f1f8","M177.1 48l93.7 0c2.7 0 5.2 1.3 6.7 3.6l19 28.4-145 0 19-28.4c1.5-2.2 4-3.6 6.7-3.6zM354.2 80L317.5 24.9C307.1 9.4 289.6 0 270.9 0L177.1 0c-18.7 0-36.2 9.4-46.6 24.9L93.8 80 80.1 80 32 80l-8 0C10.7 80 0 90.7 0 104s10.7 24 24 24l11.6 0L59.6 452.7c2.5 33.4 30.3 59.3 63.8 59.3l201.1 0c33.5 0 61.3-25.9 63.8-59.3L412.4 128l11.6 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-8 0-48.1 0-13.7 0zm10.1 48L340.5 449.2c-.6 8.4-7.6 14.8-16 14.8l-201.1 0c-8.4 0-15.3-6.5-16-14.8L83.7 128l280.6 0z"],
+    "trophy": [576,512,["127942"],"f091","M248.8 309.7c-27.6-30.3-65.5-101-71.8-261.7l222.2 0c-6.4 160.7-44.3 231.4-71.8 261.7c-13.7 15.1-25.9 21.4-33.1 24.1c-2.6 1-4.7 1.5-6.1 1.9c-1.4-.3-3.5-.9-6.1-1.9c-7.2-2.7-19.4-9-33.1-24.1zM400 0L176 0c-26.5 0-48.1 21.8-47.1 48.2c.2 5.3 .4 10.6 .7 15.8L24 64C10.7 64 0 74.7 0 88C0 196.5 45.9 265.7 101.5 308.6c53.9 41.7 115.7 57.6 149.5 63.7c4.7 2.5 9.1 4.5 13.1 6.1l0 85.6-80 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l104 0 104 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-80 0 0-85.6c4-1.6 8.4-3.6 13.1-6.1c33.8-6 95.5-22 149.5-63.7C530.1 265.7 576 196.5 576 88c0-13.3-10.7-24-24-24L446.4 64c.3-5.2 .5-10.4 .7-15.8C448.1 21.8 426.5 0 400 0zm42.7 112l84.4 0c-6 78.4-41.3 127.3-81.9 158.6c-17.5 13.6-36.3 24-54.4 32c22.7-40.3 42.8-100.5 51.9-190.6zM185.2 302.6c-18.1-8-36.8-18.4-54.4-32C90.2 239.3 54.9 190.4 48.9 112l84.4 0c9.1 90.1 29.2 150.3 51.9 190.6z"],
+    "user": [448,512,["62144","128100"],"f007","M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z"],
+    "user-check": [640,512,[],"f4fc","M224 48a80 80 0 1 1 0 160 80 80 0 1 1 0-160zm0 208A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 96l91.4 0c65.7 0 120.1 48.7 129 112L49.3 464c8.9-63.3 63.3-112 129-112zm0-48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0zM625 177c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L625 177z"],
+    "user-group": [640,512,["128101","user-friends"],"f500","M1.5 458.7c6-45.5 29.2-85.6 62.8-113.6C95.3 319.4 135 304 178.3 304l45.7 0 45.7 0c43.3 0 83 15.4 113.9 41.1c33.6 28 56.8 68.1 62.8 113.6c1 7.7 1.5 15.6 1.5 23.6c0 16.4-13.3 29.7-29.7 29.7l-19.6 0L49.3 512l-19.6 0C13.3 512 0 498.7 0 482.3c0-8 .5-15.9 1.5-23.6zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zm208 0a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM178.3 352c-47.8 0-89.5 25.7-112.2 64c-8.6 14.4-14.4 30.7-16.8 48L98 464 350 464l48.8 0c-.4-2.7-.8-5.3-1.4-8c-2.9-14.3-8.2-27.8-15.5-40c-22.7-38.3-64.4-64-112.2-64l-91.4 0zm431 160l-136.9 0c4.9-8.8 7.6-18.9 7.6-29.7c0-65-29.5-123.2-75.9-161.8c4.3-.4 8.7-.5 13.2-.5l61.4 0C567.8 320 640 392.2 640 481.3c0 17-13.8 30.7-30.7 30.7zM432 256c-31 0-59-12.6-79.3-32.9C372.4 196.5 384 163.6 384 128c0-26.8-6.6-52.1-18.3-74.3C384.3 40.1 407.2 32 432 32c61.9 0 112 50.1 112 112s-50.1 112-112 112z"],
+    "user-plus": [640,512,[],"f234","M224 48a80 80 0 1 1 0 160 80 80 0 1 1 0-160zm0 208A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 96l91.4 0c65.7 0 120.1 48.7 129 112L49.3 464c8.9-63.3 63.3-112 129-112zm0-48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0zM504 312c0 13.3 10.7 24 24 24s24-10.7 24-24l0-64 64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0 0-64c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 64-64 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0 0 64z"],
+    "users": [640,512,[],"f0c0","M144 160A80 80 0 1 0 144 0a80 80 0 1 0 0 160zm368 0A80 80 0 1 0 512 0a80 80 0 1 0 0 160zM0 298.7C0 310.4 9.6 320 21.3 320l213.3 0c.2 0 .4 0 .7 0c-26.6-23.5-43.3-57.8-43.3-96c0-7.6 .7-15 1.9-22.3c-13.6-6.3-28.7-9.7-44.6-9.7l-42.7 0C47.8 192 0 239.8 0 298.7zM405.3 320l213.3 0c11.8 0 21.3-9.6 21.3-21.3C640 239.8 592.2 192 533.3 192l-42.7 0c-15.9 0-31 3.5-44.6 9.7c1.3 7.2 1.9 14.7 1.9 22.3c0 38.2-16.8 72.5-43.3 96c.2 0 .4 0 .7 0zM320 176a48 48 0 1 1 0 96 48 48 0 1 1 0-96zm0 144a96 96 0 1 0 0-192 96 96 0 1 0 0 192zm-58.7 80l117.3 0c39.8 0 73.2 27.2 82.6 64l-282.6 0c9.5-36.8 42.9-64 82.6-64zm0-48C187.7 352 128 411.7 128 485.3c0 14.7 11.9 26.7 26.7 26.7l330.7 0c14.7 0 26.7-11.9 26.7-26.7C512 411.7 452.3 352 378.7 352l-117.3 0z"]
+
+  };
+  var prefixes = [null    ,'far',
+    ,'fa-regular'
+];
+  bunker(() => {
+    for (const prefix of prefixes) {
+      if (!prefix) continue;
+      defineIcons(prefix, icons);
+    }
+  });
+
+}());
+
+(function () {
+  'use strict';
+
+  let _WINDOW = {};
+  let _DOCUMENT = {};
+  try {
+    if (typeof window !== 'undefined') _WINDOW = window;
+    if (typeof document !== 'undefined') _DOCUMENT = document;
+  } catch (e) {}
+  const {
+    userAgent = ''
+  } = _WINDOW.navigator || {};
+  const WINDOW = _WINDOW;
+  const DOCUMENT = _DOCUMENT;
+  const IS_BROWSER = !!WINDOW.document;
+  const IS_DOM = !!DOCUMENT.documentElement && !!DOCUMENT.head && typeof DOCUMENT.addEventListener === 'function' && typeof DOCUMENT.createElement === 'function';
+  const IS_IE = ~userAgent.indexOf('MSIE') || ~userAgent.indexOf('Trident/');
+
+  function _defineProperty(e, r, t) {
+    return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+      value: t,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }) : e[r] = t, e;
+  }
+  function ownKeys(e, r) {
+    var t = Object.keys(e);
+    if (Object.getOwnPropertySymbols) {
+      var o = Object.getOwnPropertySymbols(e);
+      r && (o = o.filter(function (r) {
+        return Object.getOwnPropertyDescriptor(e, r).enumerable;
+      })), t.push.apply(t, o);
+    }
+    return t;
+  }
+  function _objectSpread2(e) {
+    for (var r = 1; r < arguments.length; r++) {
+      var t = null != arguments[r] ? arguments[r] : {};
+      r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+        _defineProperty(e, r, t[r]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+        Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+      });
+    }
+    return e;
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+
+  var S = {
+      classic: {
+        fa: "solid",
+        fas: "solid",
+        "fa-solid": "solid",
+        far: "regular",
+        "fa-regular": "regular",
+        fal: "light",
+        "fa-light": "light",
+        fat: "thin",
+        "fa-thin": "thin",
+        fab: "brands",
+        "fa-brands": "brands"
+      },
+      duotone: {
+        fa: "solid",
+        fad: "solid",
+        "fa-solid": "solid",
+        "fa-duotone": "solid",
+        fadr: "regular",
+        "fa-regular": "regular",
+        fadl: "light",
+        "fa-light": "light",
+        fadt: "thin",
+        "fa-thin": "thin"
+      },
+      sharp: {
+        fa: "solid",
+        fass: "solid",
+        "fa-solid": "solid",
+        fasr: "regular",
+        "fa-regular": "regular",
+        fasl: "light",
+        "fa-light": "light",
+        fast: "thin",
+        "fa-thin": "thin"
+      },
+      "sharp-duotone": {
+        fa: "solid",
+        fasds: "solid",
+        "fa-solid": "solid",
+        fasdr: "regular",
+        "fa-regular": "regular",
+        fasdl: "light",
+        "fa-light": "light",
+        fasdt: "thin",
+        "fa-thin": "thin"
+      }
+    };
+  var s = "classic";
+  var G = {
+      classic: {
+        900: "fas",
+        400: "far",
+        normal: "far",
+        300: "fal",
+        100: "fat"
+      },
+      duotone: {
+        900: "fad",
+        400: "fadr",
+        300: "fadl",
+        100: "fadt"
+      },
+      sharp: {
+        900: "fass",
+        400: "fasr",
+        300: "fasl",
+        100: "fast"
+      },
+      "sharp-duotone": {
+        900: "fasds",
+        400: "fasdr",
+        300: "fasdl",
+        100: "fasdt"
+      }
+    };
+  var xt = {
+      classic: {
+        solid: "fas",
+        regular: "far",
+        light: "fal",
+        thin: "fat",
+        brands: "fab"
+      },
+      duotone: {
+        solid: "fad",
+        regular: "fadr",
+        light: "fadl",
+        thin: "fadt"
+      },
+      sharp: {
+        solid: "fass",
+        regular: "fasr",
+        light: "fasl",
+        thin: "fast"
+      },
+      "sharp-duotone": {
+        solid: "fasds",
+        regular: "fasdr",
+        light: "fasdl",
+        thin: "fasdt"
+      }
+    };
+  var St = {
+      kit: {
+        fak: "kit",
+        "fa-kit": "kit"
+      },
+      "kit-duotone": {
+        fakd: "kit-duotone",
+        "fa-kit-duotone": "kit-duotone"
+      }
+    };
+  var Ct = {
+    kit: {
+      "fa-kit": "fak"
+    },
+    "kit-duotone": {
+      "fa-kit-duotone": "fakd"
+    }
+  };
+  var Wt = {
+      kit: {
+        fak: "fa-kit"
+      },
+      "kit-duotone": {
+        fakd: "fa-kit-duotone"
+      }
+    };
+  var Et = {
+      kit: {
+        kit: "fak"
+      },
+      "kit-duotone": {
+        "kit-duotone": "fakd"
+      }
+    };
+
+  var ua = {
+      classic: {
+        "fa-brands": "fab",
+        "fa-duotone": "fad",
+        "fa-light": "fal",
+        "fa-regular": "far",
+        "fa-solid": "fas",
+        "fa-thin": "fat"
+      },
+      duotone: {
+        "fa-regular": "fadr",
+        "fa-light": "fadl",
+        "fa-thin": "fadt"
+      },
+      sharp: {
+        "fa-solid": "fass",
+        "fa-regular": "fasr",
+        "fa-light": "fasl",
+        "fa-thin": "fast"
+      },
+      "sharp-duotone": {
+        "fa-solid": "fasds",
+        "fa-regular": "fasdr",
+        "fa-light": "fasdl",
+        "fa-thin": "fasdt"
+      }
+    },
+    ga = {
+      classic: {
+        fab: "fa-brands",
+        fad: "fa-duotone",
+        fal: "fa-light",
+        far: "fa-regular",
+        fas: "fa-solid",
+        fat: "fa-thin"
+      },
+      duotone: {
+        fadr: "fa-regular",
+        fadl: "fa-light",
+        fadt: "fa-thin"
+      },
+      sharp: {
+        fass: "fa-solid",
+        fasr: "fa-regular",
+        fasl: "fa-light",
+        fast: "fa-thin"
+      },
+      "sharp-duotone": {
+        fasds: "fa-solid",
+        fasdr: "fa-regular",
+        fasdl: "fa-light",
+        fasdt: "fa-thin"
+      }
+    };
+
+  const NAMESPACE_IDENTIFIER = '___FONT_AWESOME___';
+  const PRODUCTION = (() => {
+    try {
+      return "production" === 'production';
+    } catch (e$$1) {
+      return false;
+    }
+  })();
+  function familyProxy(obj) {
+    // Defaults to the classic family if family is not available
+    return new Proxy(obj, {
+      get(target, prop) {
+        return prop in target ? target[prop] : target[s];
+      }
+    });
+  }
+  const _PREFIX_TO_STYLE = _objectSpread2({}, S);
+
+  // We changed FACSSClassesToStyleId in the icons repo to be canonical and as such, "classic" family does not have any
+  // duotone styles.  But we do still need duotone in _PREFIX_TO_STYLE below, so we are manually adding
+  // {'fa-duotone': 'duotone'}
+  _PREFIX_TO_STYLE[s] = _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, {
+    'fa-duotone': 'duotone'
+  }), S[s]), St['kit']), St['kit-duotone']);
+  const PREFIX_TO_STYLE = familyProxy(_PREFIX_TO_STYLE);
+  const _STYLE_TO_PREFIX = _objectSpread2({}, xt);
+
+  // We changed FAStyleIdToShortPrefixId in the icons repo to be canonical and as such, "classic" family does not have any
+  // duotone styles.  But we do still need duotone in _STYLE_TO_PREFIX below, so we are manually adding {duotone: 'fad'}
+  _STYLE_TO_PREFIX[s] = _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, {
+    duotone: 'fad'
+  }), _STYLE_TO_PREFIX[s]), Et['kit']), Et['kit-duotone']);
+  const STYLE_TO_PREFIX = familyProxy(_STYLE_TO_PREFIX);
+  const _PREFIX_TO_LONG_STYLE = _objectSpread2({}, ga);
+  _PREFIX_TO_LONG_STYLE[s] = _objectSpread2(_objectSpread2({}, _PREFIX_TO_LONG_STYLE[s]), Wt['kit']);
+  const PREFIX_TO_LONG_STYLE = familyProxy(_PREFIX_TO_LONG_STYLE);
+  const _LONG_STYLE_TO_PREFIX = _objectSpread2({}, ua);
+  _LONG_STYLE_TO_PREFIX[s] = _objectSpread2(_objectSpread2({}, _LONG_STYLE_TO_PREFIX[s]), Ct['kit']);
+  const LONG_STYLE_TO_PREFIX = familyProxy(_LONG_STYLE_TO_PREFIX);
+  const _FONT_WEIGHT_TO_PREFIX = _objectSpread2({}, G);
+  const FONT_WEIGHT_TO_PREFIX = familyProxy(_FONT_WEIGHT_TO_PREFIX);
+
+  function bunker(fn) {
+    try {
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+      fn(...args);
+    } catch (e) {
+      if (!PRODUCTION) {
+        throw e;
+      }
+    }
+  }
+
+  const w = WINDOW || {};
+  if (!w[NAMESPACE_IDENTIFIER]) w[NAMESPACE_IDENTIFIER] = {};
+  if (!w[NAMESPACE_IDENTIFIER].styles) w[NAMESPACE_IDENTIFIER].styles = {};
+  if (!w[NAMESPACE_IDENTIFIER].hooks) w[NAMESPACE_IDENTIFIER].hooks = {};
+  if (!w[NAMESPACE_IDENTIFIER].shims) w[NAMESPACE_IDENTIFIER].shims = [];
+  var namespace = w[NAMESPACE_IDENTIFIER];
+
+  function normalizeIcons(icons) {
+    return Object.keys(icons).reduce((acc, iconName) => {
+      const icon = icons[iconName];
+      const expanded = !!icon.icon;
+      if (expanded) {
+        acc[icon.iconName] = icon.icon;
+      } else {
+        acc[iconName] = icon;
+      }
+      return acc;
+    }, {});
+  }
+  function defineIcons(prefix, icons) {
+    let params = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    const {
+      skipHooks = false
+    } = params;
+    const normalized = normalizeIcons(icons);
+    if (typeof namespace.hooks.addPack === 'function' && !skipHooks) {
+      namespace.hooks.addPack(prefix, normalizeIcons(icons));
+    } else {
+      namespace.styles[prefix] = _objectSpread2(_objectSpread2({}, namespace.styles[prefix] || {}), normalized);
+    }
+
+    /**
+     * Font Awesome 4 used the prefix of `fa` for all icons. With the introduction
+     * of new styles we needed to differentiate between them. Prefix `fa` is now an alias
+     * for `fas` so we'll ease the upgrade process for our users by automatically defining
+     * this as well.
+     */
+    if (prefix === 'fas') {
+      defineIcons('fa', icons);
+    }
+  }
+
+  var icons = {
+    
+    "address-book": [512,512,["62138","contact-book"],"f2b9","M96 0C60.7 0 32 28.7 32 64l0 384c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-384c0-35.3-28.7-64-64-64L96 0zM208 288l64 0c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16l-192 0c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zM512 80c0-8.8-7.2-16-16-16s-16 7.2-16 16l0 64c0 8.8 7.2 16 16 16s16-7.2 16-16l0-64zM496 192c-8.8 0-16 7.2-16 16l0 64c0 8.8 7.2 16 16 16s16-7.2 16-16l0-64c0-8.8-7.2-16-16-16zm16 144c0-8.8-7.2-16-16-16s-16 7.2-16 16l0 64c0 8.8 7.2 16 16 16s16-7.2 16-16l0-64z"],
+    "address-card": [576,512,["62140","contact-card","vcard"],"f2bb","M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm80 256l64 0c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16L80 384c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm256-32l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"],
+    "album-collection": [512,512,[],"f8a0","M32 24c0 13.3 10.7 24 24 24l400 0c13.3 0 24-10.7 24-24s-10.7-24-24-24L56 0C42.7 0 32 10.7 32 24zM48 160c-13.8 0-26.9 5.9-36 16.2S-1.3 200.3 .4 214l32 256c3 24 23.4 42 47.6 42l352 0c24.2 0 44.6-18 47.6-42l32-256c1.7-13.7-2.5-27.4-11.6-37.7s-22.2-16.2-36-16.2L48 160zM440 344c0 75.1-82.4 136-184 136S72 419.1 72 344s82.4-136 184-136s184 60.9 184 136zM256 376c17.7 0 32-10.7 32-24s-14.3-24-32-24s-32 10.7-32 24s14.3 24 32 24zM40 80c-13.3 0-24 10.7-24 24s10.7 24 24 24l432 0c13.3 0 24-10.7 24-24s-10.7-24-24-24L40 80z"],
+    "arrow-down": [384,512,["8595"],"f063","M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"],
+    "arrow-down-9-1": [576,512,["sort-numeric-desc","sort-numeric-down-alt"],"f886","M160 480c9 0 17.5-3.8 23.6-10.4l88-96c11.9-13 11.1-33.3-2-45.2s-33.3-11.1-45.2 2L192 365.7 192 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 301.7L95.6 330.4c-11.9-13-32.2-13.9-45.2-2s-13.9 32.2-2 45.2l88 96C142.5 476.2 151 480 160 480zM450.7 294c-8.3-6-19.1-7.7-28.8-4.4l-48 16c-16.8 5.6-25.8 23.7-20.2 40.5s23.7 25.8 40.5 20.2l5.9-2 0 51.6-16 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l48 0 48 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-16 0 0-96c0-10.3-4.9-19.9-13.3-26zM418.3 91a32 32 0 1 1 27.4 57.9A32 32 0 1 1 418.3 91zM405.1 203.8l-6.8 9.2c-10.5 14.2-7.5 34.2 6.7 44.8s34.2 7.5 44.8-6.7l48.8-65.8c14-18.9 21.5-41.7 21.5-65.2c0-48.6-39.4-88-88-88s-88 39.4-88 88c0 39.2 25.6 72.4 61.1 83.8z"],
+    "arrow-down-wide-short": [576,512,["sort-amount-asc","sort-amount-down"],"f160","M151.6 469.6C145.5 476.2 137 480 128 480s-17.5-3.8-23.6-10.4l-88-96c-11.9-13-11.1-33.3 2-45.2s33.3-11.1 45.2 2L96 365.7 96 64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 301.7 32.4-35.4c11.9-13 32.2-13.9 45.2-2s13.9 32.2 2 45.2l-88 96zM320 480c-17.7 0-32-14.3-32-32s14.3-32 32-32l32 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32 0zm0-128c-17.7 0-32-14.3-32-32s14.3-32 32-32l96 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-96 0zm0-128c-17.7 0-32-14.3-32-32s14.3-32 32-32l160 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-160 0zm0-128c-17.7 0-32-14.3-32-32s14.3-32 32-32l224 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L320 96z"],
+    "arrow-left": [448,512,["8592"],"f060","M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"],
+    "arrow-right": [448,512,["8594"],"f061","M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"],
+    "arrow-right-from-bracket": [512,512,["sign-out"],"f08b","M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"],
+    "arrow-rotate-left": [512,512,["8634","arrow-left-rotate","arrow-rotate-back","arrow-rotate-backward","undo"],"f0e2","M125.7 160l50.3 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L48 224c-17.7 0-32-14.3-32-32L16 64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 51.2L97.6 97.6c87.5-87.5 229.3-87.5 316.8 0s87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3s-163.8-62.5-226.3 0L125.7 160z"],
+    "arrow-rotate-right": [512,512,["8635","arrow-right-rotate","arrow-rotate-forward","redo"],"f01e","M386.3 160L336 160c-17.7 0-32 14.3-32 32s14.3 32 32 32l128 0c17.7 0 32-14.3 32-32l0-128c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 51.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0s-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3s163.8-62.5 226.3 0L386.3 160z"],
+    "arrow-up": [384,512,["8593"],"f062","M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2 160 448c0 17.7 14.3 32 32 32s32-14.3 32-32l0-306.7L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"],
+    "arrows-rotate-reverse": [512,512,[],"e630","M406.6 202.6c-7.7-21.8-20.2-42.3-37.8-59.8c-62.5-62.5-163.8-62.5-226.3 0L125.5 160l34.3 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L48.3 224c0 0 0 0 0 0l-.4 0c-17.7 0-32-14.3-32-32l0-112c0-17.7 14.3-32 32-32s32 14.3 32 32l0 35.2L97.4 97.6c87.5-87.5 229.3-87.5 316.8 0c24.4 24.4 42.1 53.1 52.9 83.7c5.9 16.7-2.9 34.9-19.5 40.8s-34.9-2.9-40.8-19.5zm66.1 86.6c5 1.5 9.8 4.2 13.7 8.2c4 4 6.7 8.9 8.1 14c.3 1.2 .6 2.5 .8 3.8c.3 1.7 .4 3.4 .4 5.1l0 111.6c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-35.1-17.6 17.5c0 0 0 0 0 0c-87.5 87.4-229.3 87.4-316.7 0C73 390 55.3 361.3 44.5 330.6c-5.9-16.7 2.9-34.9 19.5-40.8s34.9 2.9 40.8 19.5c7.7 21.8 20.2 42.3 37.8 59.8c62.5 62.5 163.8 62.5 226.3 0l.1-.1L386.1 352l-34.4 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l111.6 0c1.6 0 3.2 .1 4.8 .3s3.1 .5 4.6 1z"],
+    "arrows-up-down": [320,512,["arrows-v"],"f07d","M182.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L128 109.3l0 293.5L86.6 361.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 402.7l0-293.5 41.4 41.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-96-96z"],
+    "bars": [448,512,["navicon"],"f0c9","M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"],
+    "bars-staggered": [512,512,["reorder","stream"],"f550","M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM64 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L96 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"],
+    "bell": [448,512,["61602","128276"],"f0f3","M224 0c-17.7 0-32 14.3-32 32l0 19.2C119 66 64 130.6 64 208l0 18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416l384 0c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8l0-18.8c0-77.4-55-142-128-156.8L256 32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3l-64 0-64 0c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"],
+    "bell-ring": [512,512,[],"e62c","M256 0c-17.7 0-32 14.3-32 32l0 19.2C151 66 96 130.6 96 208l0 18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S51.4 416 64 416l384 0c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C433.3 319.2 416 273.9 416 226.8l0-18.8c0-77.4-55-142-128-156.8L288 32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3l-64 0-64 0c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7zM113.4 15.4c-9.1-9.6-24.3-10-33.9-.8C30.5 61.2 0 127.1 0 200c0 13.3 10.7 24 24 24s24-10.7 24-24c0-59.3 24.8-112.7 64.6-150.6c9.6-9.1 10-24.3 .8-33.9zM399.4 49.4C439.2 87.3 464 140.7 464 200c0 13.3 10.7 24 24 24s24-10.7 24-24c0-72.9-30.5-138.8-79.4-185.4c-9.6-9.1-24.8-8.8-33.9 .8s-8.8 24.8 .8 33.9z"],
+    "bells": [640,512,[],"f77f","M230.8 245.5l18.7 51.2c11.7 31.8 12.9 66.5 3.5 99.1l-1.1 3.9L21.4 315.8C10 311.7 2 301.5 .6 289.5s4.1-23.8 14.3-30.4l8.2-5.4C57.6 231 84 197.8 98.2 159l14.7-40C138 50.4 214 15.1 282.6 40.1c4.8 1.7 9.4 3.7 13.9 6c-64.1 42.2-93.3 124.2-65.7 199.5zm112-187.1c71.4-26 150.4 10.8 176.5 82.1L538 191.7c14 38.2 39.8 71 73.6 93.6l13.7 9.2c10 6.7 15.4 18.5 14 30.4s-9.5 22.1-20.8 26.2L321.1 459.4c-11.3 4.1-24 1.5-32.8-6.7s-12.3-20.7-9-32.2l4.6-15.8c11.2-39 9.7-80.7-4.3-118.9l-18.8-51.2c-26.1-71.3 10.5-150.2 81.9-176.2zM480.8 480c-21.2 0-40-10.2-51.7-25.9l116.1-42.3c.1 1.3 .1 2.6 .1 3.9c0 35.5-28.9 64.3-64.5 64.3zM94.3 376.2l117.6 43.4c-11.6 17.1-31.2 28.4-53.5 28.4c-35.6 0-64.5-28.8-64.5-64.3c0-2.5 .1-5.1 .4-7.5z"],
+    "book-open": [576,512,["128366","128214"],"f518","M249.6 471.5c10.8 3.8 22.4-4.1 22.4-15.5l0-377.4c0-4.2-1.6-8.4-5-11C247.4 52 202.4 32 144 32C93.5 32 46.3 45.3 18.1 56.1C6.8 60.5 0 71.7 0 83.8L0 454.1c0 11.9 12.8 20.2 24.1 16.5C55.6 460.1 105.5 448 144 448c33.9 0 79 14 105.6 23.5zm76.8 0C353 462 398.1 448 432 448c38.5 0 88.4 12.1 119.9 22.6c11.3 3.8 24.1-4.6 24.1-16.5l0-370.3c0-12.1-6.8-23.3-18.1-27.6C529.7 45.3 482.5 32 432 32c-58.4 0-103.4 20-123 35.6c-3.3 2.6-5 6.8-5 11L304 456c0 11.4 11.7 19.3 22.4 15.5z"],
+    "book-open-reader": [512,512,["book-reader"],"f5da","M160 96a96 96 0 1 1 192 0A96 96 0 1 1 160 96zm80 152l0 264-48.4-24.2c-20.9-10.4-43.5-17-66.8-19.3l-96-9.6C12.5 457.2 0 443.5 0 427L0 224c0-17.7 14.3-32 32-32l30.3 0c63.6 0 125.6 19.6 177.7 56zm32 264l0-264c52.1-36.4 114.1-56 177.7-56l30.3 0c17.7 0 32 14.3 32 32l0 203c0 16.4-12.5 30.2-28.8 31.8l-96 9.6c-23.2 2.3-45.9 8.9-66.8 19.3L272 512z"],
+    "bookmark": [384,512,["61591","128278"],"f02e","M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"],
+    "books": [512,512,["128218"],"f5db","M0 32C0 14.3 14.3 0 32 0L96 0c17.7 0 32 14.3 32 32l0 64L0 96 0 32zm0 96l128 0 0 256L0 384 0 128zM0 416l128 0 0 64c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32l0-64zM160 32c0-17.7 14.3-32 32-32l64 0c17.7 0 32 14.3 32 32l0 64L160 96l0-64zm0 96l128 0 0 256-128 0 0-256zm0 288l128 0 0 64c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32l0-64zm203.6-19.9L320 232.6l0-89.9 100.4-26.9 66 247.4L363.6 396.1zM412.2 85L320 109.6 320 11l36.9-9.9c16.9-4.6 34.4 5.5 38.9 22.6L412.2 85zM371.8 427l122.8-32.9 16.3 61.1c4.5 17-5.5 34.5-22.5 39.1l-61.4 16.5c-16.9 4.6-34.4-5.5-38.9-22.6L371.8 427z"],
+    "bottle-water": [320,512,[],"e4c5","M120 0l80 0c13.3 0 24 10.7 24 24l0 40L96 64l0-40c0-13.3 10.7-24 24-24zM32 167.5c0-19.5 10-37.6 26.6-47.9l15.8-9.9C88.7 100.7 105.2 96 122.1 96l75.8 0c16.9 0 33.4 4.7 47.7 13.7l15.8 9.9C278 129.9 288 148 288 167.5c0 17-7.5 32.3-19.4 42.6C280.6 221.7 288 238 288 256c0 19.1-8.4 36.3-21.7 48c13.3 11.7 21.7 28.9 21.7 48s-8.4 36.3-21.7 48c13.3 11.7 21.7 28.9 21.7 48c0 35.3-28.7 64-64 64L96 512c-35.3 0-64-28.7-64-64c0-19.1 8.4-36.3 21.7-48C40.4 388.3 32 371.1 32 352s8.4-36.3 21.7-48C40.4 292.3 32 275.1 32 256c0-18 7.4-34.3 19.4-45.9C39.5 199.7 32 184.5 32 167.5zM96 240c0 8.8 7.2 16 16 16l96 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-96 0c-8.8 0-16 7.2-16 16zm16 112c-8.8 0-16 7.2-16 16s7.2 16 16 16l96 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-96 0z"],
+    "bowl-rice": [512,512,[],"e2eb","M176 56c0-13.3 10.7-24 24-24l16 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-16 0c-13.3 0-24-10.7-24-24zm24 48l16 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-16 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zM56 176l16 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-16 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zM0 283.4C0 268.3 12.3 256 27.4 256l457.1 0c15.1 0 27.4 12.3 27.4 27.4c0 70.5-44.4 130.7-106.7 154.1L403.5 452c-2 16-15.6 28-31.8 28l-231.5 0c-16.1 0-29.8-12-31.8-28l-1.8-14.4C44.4 414.1 0 353.9 0 283.4zM224 200c0-13.3 10.7-24 24-24l16 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-16 0c-13.3 0-24-10.7-24-24zm-96 0c0-13.3 10.7-24 24-24l16 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-16 0c-13.3 0-24-10.7-24-24zm-24-96l16 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-16 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zm216 96c0-13.3 10.7-24 24-24l16 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-16 0c-13.3 0-24-10.7-24-24zm-24-96l16 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-16 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zm120 96c0-13.3 10.7-24 24-24l16 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-16 0c-13.3 0-24-10.7-24-24zm-24-96l16 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-16 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zM296 32l16 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-16 0c-13.3 0-24-10.7-24-24s10.7-24 24-24z"],
+    "box-archive": [512,512,["archive"],"f187","M32 32l448 0c17.7 0 32 14.3 32 32l0 32c0 17.7-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96L0 64C0 46.3 14.3 32 32 32zm0 128l448 0 0 256c0 35.3-28.7 64-64 64L96 480c-35.3 0-64-28.7-64-64l0-256zm128 80c0 8.8 7.2 16 16 16l160 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-160 0c-8.8 0-16 7.2-16 16z"],
+    "box-open": [640,512,[],"f49e","M58.9 42.1c3-6.1 9.6-9.6 16.3-8.7L320 64 564.8 33.4c6.7-.8 13.3 2.7 16.3 8.7l41.7 83.4c9 17.9-.6 39.6-19.8 45.1L439.6 217.3c-13.9 4-28.8-1.9-36.2-14.3L320 64 236.6 203c-7.4 12.4-22.3 18.3-36.2 14.3L37.1 170.6c-19.3-5.5-28.8-27.2-19.8-45.1L58.9 42.1zM321.1 128l54.9 91.4c14.9 24.8 44.6 36.6 72.5 28.6L576 211.6l0 167c0 22-15 41.2-36.4 46.6l-204.1 51c-10.2 2.6-20.9 2.6-31 0l-204.1-51C79 419.7 64 400.5 64 378.5l0-167L191.6 248c27.8 8 57.6-3.8 72.5-28.6L318.9 128l2.2 0z"],
+    "bread-slice": [512,512,[],"f7ec","M256 32C192 32 0 64 0 192c0 35.3 28.7 64 64 64V432c0 26.5 21.5 48 48 48H400c26.5 0 48-21.5 48-48V256c35.3 0 64-28.7 64-64C512 64 320 32 256 32z"],
+    "bread-slice-butter": [512,512,[],"e3e1","M0 192C0 64 192 32 256 32s256 32 256 160c0 35.3-28.7 64-64 64l0 176c0 26.5-21.5 48-48 48l-288 0c-26.5 0-48-21.5-48-48l0-176c-35.3 0-64-28.7-64-64zm182.6 73.4c-12.5 12.5-12.5 32.8 0 45.3l50.7 50.7c12.5 12.5 32.8 12.5 45.3 0l50.7-50.7c12.5-12.5 12.5-32.8 0-45.3l-50.7-50.7c-12.5-12.5-32.8-12.5-45.3 0l-50.7 50.7z"],
+    "building": [384,512,["61687","127970"],"f1ad","M48 0C21.5 0 0 21.5 0 48L0 464c0 26.5 21.5 48 48 48l96 0 0-80c0-26.5 21.5-48 48-48s48 21.5 48 48l0 80 96 0c26.5 0 48-21.5 48-48l0-416c0-26.5-21.5-48-48-48L48 0zM64 240c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32zm112-16l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16zm80 16c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32zM80 96l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16zm80 16c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32zM272 96l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16z"],
+    "building-columns": [512,512,["bank","institution","museum","university"],"f19c","M243.4 2.6l-224 96c-14 6-21.8 21-18.7 35.8S16.8 160 32 160l0 8c0 13.3 10.7 24 24 24l400 0c13.3 0 24-10.7 24-24l0-8c15.2 0 28.3-10.7 31.3-25.6s-4.8-29.9-18.7-35.8l-224-96c-8-3.4-17.2-3.4-25.2 0zM128 224l-64 0 0 196.3c-.6 .3-1.2 .7-1.8 1.1l-48 32c-11.7 7.8-17 22.4-12.9 35.9S17.9 512 32 512l448 0c14.1 0 26.5-9.2 30.6-22.7s-1.1-28.1-12.9-35.9l-48-32c-.6-.4-1.2-.7-1.8-1.1L448 224l-64 0 0 192-40 0 0-192-64 0 0 192-48 0 0-192-64 0 0 192-40 0 0-192zM256 64a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"],
+    "buildings": [512,512,[],"e0cc","M256 0c-35.3 0-64 28.7-64 64l0 64L64 128c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l192 0 192 0c35.3 0 64-28.7 64-64l0-256 0-128c0-35.3-28.7-64-64-64L256 0zM64 304c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32zm208 16c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0zm112-16l0-32c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16zM80 192l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16zM256 80c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32zM400 64l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16zM256 208l0-32c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16zm144 16c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0z"],
+    "bullhorn": [512,512,["128363","128226"],"f0a1","M480 32c0-12.9-7.8-24.6-19.8-29.6s-25.7-2.2-34.9 6.9L381.7 53c-48 48-113.1 75-181 75l-8.7 0-32 0-96 0c-35.3 0-64 28.7-64 64l0 96c0 35.3 28.7 64 64 64l0 128c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-128 8.7 0c67.9 0 133 27 181 75l43.6 43.6c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-147.6c18.6-8.8 32-32.5 32-60.4s-13.4-51.6-32-60.4L480 32zm-64 76.7L416 240l0 131.3C357.2 317.8 280.5 288 200.7 288l-8.7 0 0-96 8.7 0c79.8 0 156.5-29.8 215.3-83.3z"],
+    "bullseye": [512,512,[],"f140","M448 256A192 192 0 1 0 64 256a192 192 0 1 0 384 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 80a80 80 0 1 0 0-160 80 80 0 1 0 0 160zm0-224a144 144 0 1 1 0 288 144 144 0 1 1 0-288zM224 256a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"],
+    "calendar": [448,512,["128198","128197"],"f133","M96 32l0 32L48 64C21.5 64 0 85.5 0 112l0 48 448 0 0-48c0-26.5-21.5-48-48-48l-48 0 0-32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 32L160 64l0-32c0-17.7-14.3-32-32-32S96 14.3 96 32zM448 192L0 192 0 464c0 26.5 21.5 48 48 48l352 0c26.5 0 48-21.5 48-48l0-272z"],
+    "calendar-day": [448,512,[],"f783","M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zm80 64c-8.8 0-16 7.2-16 16l0 96c0 8.8 7.2 16 16 16l96 0c8.8 0 16-7.2 16-16l0-96c0-8.8-7.2-16-16-16l-96 0z"],
+    "calendar-days": [448,512,["calendar-alt"],"f073","M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zm64 80l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm128 0l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM64 400l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm112 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16z"],
+    "calendar-week": [448,512,[],"f784","M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zm80 64c-8.8 0-16 7.2-16 16l0 64c0 8.8 7.2 16 16 16l288 0c8.8 0 16-7.2 16-16l0-64c0-8.8-7.2-16-16-16L80 256z"],
+    "calendar-xmark": [448,512,["calendar-times"],"f273","M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zM305 305c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47z"],
+    "cart-shopping": [576,512,["128722","shopping-cart"],"f07a","M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"],
+    "chalkboard": [576,512,["blackboard"],"f51b","M96 32C60.7 32 32 60.7 32 96l0 288 64 0L96 96l384 0 0 288 64 0 0-288c0-35.3-28.7-64-64-64L96 32zM224 384l0 32L32 416c-17.7 0-32 14.3-32 32s14.3 32 32 32l512 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-128 0 0-32c0-17.7-14.3-32-32-32l-128 0c-17.7 0-32 14.3-32 32z"],
+    "chalkboard-user": [640,512,["chalkboard-teacher"],"f51c","M160 64c0-35.3 28.7-64 64-64L576 0c35.3 0 64 28.7 64 64l0 288c0 35.3-28.7 64-64 64l-239.2 0c-11.8-25.5-29.9-47.5-52.4-64l99.6 0 0-32c0-17.7 14.3-32 32-32l64 0c17.7 0 32 14.3 32 32l0 32 64 0 0-288L224 64l0 49.1C205.2 102.2 183.3 96 160 96l0-32zm0 64a96 96 0 1 1 0 192 96 96 0 1 1 0-192zM133.3 352l53.3 0C260.3 352 320 411.7 320 485.3c0 14.7-11.9 26.7-26.7 26.7L26.7 512C11.9 512 0 500.1 0 485.3C0 411.7 59.7 352 133.3 352z"],
+    "chart-bar": [512,512,["bar-chart"],"f080","M32 32c17.7 0 32 14.3 32 32l0 336c0 8.8 7.2 16 16 16l400 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L80 480c-44.2 0-80-35.8-80-80L0 64C0 46.3 14.3 32 32 32zm96 96c0-17.7 14.3-32 32-32l192 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-192 0c-17.7 0-32-14.3-32-32zm32 64l128 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-128 0c-17.7 0-32-14.3-32-32s14.3-32 32-32zm0 96l256 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-256 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"],
+    "chart-column": [512,512,[],"e0e3","M32 32c17.7 0 32 14.3 32 32l0 336c0 8.8 7.2 16 16 16l400 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L80 480c-44.2 0-80-35.8-80-80L0 64C0 46.3 14.3 32 32 32zM160 224c17.7 0 32 14.3 32 32l0 64c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32zm128-64l0 160c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-160c0-17.7 14.3-32 32-32s32 14.3 32 32zm64 32c17.7 0 32 14.3 32 32l0 96c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-96c0-17.7 14.3-32 32-32zM480 96l0 224c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-224c0-17.7 14.3-32 32-32s32 14.3 32 32z"],
+    "chart-gantt": [512,512,[],"e0e4","M32 32c17.7 0 32 14.3 32 32l0 336c0 8.8 7.2 16 16 16l400 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L80 480c-44.2 0-80-35.8-80-80L0 64C0 46.3 14.3 32 32 32zm96 96c0-17.7 14.3-32 32-32l96 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-96 0c-17.7 0-32-14.3-32-32zm96 64l128 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-128 0c-17.7 0-32-14.3-32-32s14.3-32 32-32zm160 96l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"],
+    "chart-kanban": [448,512,[],"e64f","M320 432c0 26.5 21.5 48 48 48l32 0c26.5 0 48-21.5 48-48l0-352c0-26.5-21.5-48-48-48l-32 0c-26.5 0-48 21.5-48 48l0 352zM160 240c0 26.5 21.5 48 48 48l32 0c26.5 0 48-21.5 48-48l0-160c0-26.5-21.5-48-48-48l-32 0c-26.5 0-48 21.5-48 48l0 160zM48 416l32 0c26.5 0 48-21.5 48-48l0-288c0-26.5-21.5-48-48-48L48 32C21.5 32 0 53.5 0 80L0 368c0 26.5 21.5 48 48 48z"],
+    "chart-line": [512,512,["line-chart"],"f201","M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64L0 400c0 44.2 35.8 80 80 80l400 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 416c-8.8 0-16-7.2-16-16L64 64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z"],
+    "chart-pie": [576,512,["pie-chart"],"f200","M304 240l0-223.4c0-9 7-16.6 16-16.6C443.7 0 544 100.3 544 224c0 9-7.6 16-16.6 16L304 240zM32 272C32 150.7 122.1 50.3 239 34.3c9.2-1.3 17 6.1 17 15.4L256 288 412.5 444.5c6.7 6.7 6.2 17.7-1.5 23.1C371.8 495.6 323.8 512 272 512C139.5 512 32 404.6 32 272zm526.4 16c9.3 0 16.6 7.8 15.4 17c-7.7 55.9-34.6 105.6-73.9 142.3c-6 5.6-15.4 5.2-21.2-.7L320 288l238.4 0z"],
+    "chart-radar": [512,512,[],"e0e7","M72.5 252c-1.4 2.5-1.4 5.5 0 8l88.3 152.9c1.4 2.5 4.1 4 6.9 4l176.6 0c2.9 0 5.5-1.5 6.9-4L439.5 260l48.7 28.1L439.5 260c1.4-2.5 1.4-5.5 0-8L351.2 99.1c-1.4-2.5-4.1-4-6.9-4l-176.6 0c-2.9 0-5.5 1.5-6.9 4L72.5 252zM17.1 292c-12.9-22.3-12.9-49.7 0-72L105.4 67.1c12.9-22.3 36.6-36 62.4-36l176.6 0c25.7 0 49.5 13.7 62.4 36L494.9 220c12.9 22.3 12.9 49.7 0 72L406.6 444.9c-12.9 22.3-36.6 36-62.4 36l-176.6 0c-25.7 0-49.5-13.7-62.4-36L17.1 292zM290.2 180.8l40.2 100.6c17.1 4.6 29.6 20.1 29.6 38.6c0 22.1-17.9 40-40 40c-15.9 0-29.7-9.3-36.1-22.7l-97.2-19.4c-7.1 6.3-16.4 10.2-26.7 10.2c-22.1 0-40-17.9-40-40s17.9-40 40-40l57.6-76.8c-1-3.6-1.6-7.3-1.6-11.2c0-22.1 17.9-40 40-40s40 17.9 40 40c0 7.6-2.1 14.7-5.8 20.8zM202 271.9l79.2 15.8-31.7-79.2L202 271.9z"],
+    "chart-simple": [448,512,[],"e473","M160 80c0-26.5 21.5-48 48-48l32 0c26.5 0 48 21.5 48 48l0 352c0 26.5-21.5 48-48 48l-32 0c-26.5 0-48-21.5-48-48l0-352zM0 272c0-26.5 21.5-48 48-48l32 0c26.5 0 48 21.5 48 48l0 160c0 26.5-21.5 48-48 48l-32 0c-26.5 0-48-21.5-48-48L0 272zM368 96l32 0c26.5 0 48 21.5 48 48l0 288c0 26.5-21.5 48-48 48l-32 0c-26.5 0-48-21.5-48-48l0-288c0-26.5 21.5-48 48-48z"],
+    "chart-simple-horizontal": [448,512,[],"e474","M400 320c26.5 0 48-21.5 48-48l0-32c0-26.5-21.5-48-48-48L48 192c-26.5 0-48 21.5-48 48l0 32c0 26.5 21.5 48 48 48l352 0zM208 480c26.5 0 48-21.5 48-48l0-32c0-26.5-21.5-48-48-48L48 352c-26.5 0-48 21.5-48 48l0 32c0 26.5 21.5 48 48 48l160 0zM384 112l0-32c0-26.5-21.5-48-48-48L48 32C21.5 32 0 53.5 0 80l0 32c0 26.5 21.5 48 48 48l288 0c26.5 0 48-21.5 48-48z"],
+    "check": [448,512,["10004","10003"],"f00c","M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"],
+    "chevron-down": [512,512,[],"f078","M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"],
+    "chevron-left": [320,512,["9001"],"f053","M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"],
+    "chevron-right": [320,512,["9002"],"f054","M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"],
+    "chevron-up": [512,512,[],"f077","M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"],
+    "circle-1": [512,512,[],"e0ee","M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM268 131.2c-7.4-4.3-16.5-4.3-24-.1l-56 32c-11.5 6.6-15.5 21.2-8.9 32.7s21.2 15.5 32.7 8.9L232 193.4 232 336l-40 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0 64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-40 0 0-184c0-8.6-4.6-16.5-12-20.8z"],
+    "circle-2": [512,512,[],"e0ef","M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM222.7 184.7l-24.2 18.4c-10.5 8-25.6 6-33.6-4.5s-6-25.6 4.5-33.6l24.2-18.4c15.8-12 35.2-18.4 55.1-18.1l3.4 .1c46.5 .7 83.8 38.6 83.8 85.1c0 23.5-9.7 46-26.9 62.1L244.7 336l83.3 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-144 0c-9.8 0-18.7-6-22.3-15.2s-1.3-19.6 5.9-26.3L276.3 240.6c7.5-7 11.7-16.8 11.7-27.1c0-20.3-16.3-36.8-36.6-37.1l-3.4-.1c-9.1-.1-18 2.8-25.3 8.3z"],
+    "circle-3": [512,512,[],"e0f0","M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM184 128l128 0c9.9 0 18.8 6.1 22.4 15.3s1.1 19.7-6.2 26.4l-50.8 46.5c41.9 4.8 74.6 40.4 74.6 83.6c0 46.5-37.7 84.2-84.2 84.2L240 384c-30.1 0-58.1-15.6-73.9-41.2l-2.6-4.2c-7-11.3-3.5-26.1 7.8-33s26.1-3.5 33 7.8l2.6 4.2c7.1 11.5 19.6 18.4 33 18.4l27.8 0c20 0 36.2-16.2 36.2-36.2c0-20.1-16.3-36.3-36.4-36.2l-51.5 .3c-9.9 .1-18.9-6-22.5-15.2s-1.2-19.8 6.1-26.5L250.3 176 184 176c-13.3 0-24-10.7-24-24s10.7-24 24-24z"],
+    "circle-4": [512,512,[],"e0f1","M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM223.6 129.2c-12.6-4.2-26.2 2.6-30.4 15.2l-48 144c-2.4 7.3-1.2 15.4 3.3 21.6s11.8 10 19.5 10l104 0 0 40c0 13.3 10.7 24 24 24s24-10.7 24-24l0-40 8 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-8 0 0-56c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 56-70.7 0 37.5-112.4c4.2-12.6-2.6-26.2-15.2-30.4z"],
+    "circle-check": [512,512,["61533","check-circle"],"f058","M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"],
+    "circle-dollar": [512,512,["dollar-circle","usd-circle"],"f2e8","M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm20.8-378.4l0 14.2c9.7 1.2 19.4 3.9 29 6.6c1.9 .5 3.7 1 5.6 1.6c11.5 3.2 18.3 15.1 15.1 26.6s-15.1 18.2-26.6 15.1c-1.6-.4-3.1-.9-4.7-1.3c-7-2-14-3.9-21.1-5.3c-13.2-2.5-28.5-1.3-40.8 4c-11 4.8-20.1 16.4-7.6 24.4c9.8 6.3 21.8 9.5 33.2 12.6c2.4 .6 4.7 1.3 7 1.9c15.6 4.4 35.5 10.1 50.4 20.3c19.4 13.3 28.5 34.9 24.2 58.1c-4.1 22.4-19.7 37.1-38.4 44.7c-7.8 3.2-16.3 5.2-25.2 6.2l0 15.2c0 11.9-9.7 21.6-21.6 21.6s-21.6-9.7-21.6-21.6l0-17.4c-14.5-3.3-28.7-7.9-42.8-12.5c-11.3-3.7-17.5-16-13.7-27.3s16-17.5 27.3-13.7c2.5 .8 5 1.7 7.5 2.5c11.3 3.8 22.9 7.7 34.5 9.6c17 2.5 30.6 1 39.5-2.6c12-4.8 17.7-19.1 5.9-27.1c-10.1-6.9-22.6-10.3-34.5-13.5c-2.3-.6-4.5-1.2-6.8-1.9c-15.1-4.3-34-9.6-48.2-18.7c-19.5-12.5-29.4-33.3-25.2-56.4c4-21.8 21-36.3 39-44.1c5.5-2.4 11.4-4.3 17.5-5.7l0-16.1c0-11.9 9.7-21.6 21.6-21.6s21.6 9.7 21.6 21.6z"],
+    "circle-dollar-to-slot": [512,512,["donate"],"f4b9","M326.7 403.7c-22.1 8-45.9 12.3-70.7 12.3s-48.7-4.4-70.7-12.3l-.8-.3c-30-11-56.8-28.7-78.6-51.4C70 314.6 48 263.9 48 208C48 93.1 141.1 0 256 0S464 93.1 464 208c0 55.9-22 106.6-57.9 144c-1 1-2 2.1-3 3.1c-21.4 21.4-47.4 38.1-76.3 48.6zM256 91.9c-11.1 0-20.1 9-20.1 20.1l0 6c-5.6 1.2-10.9 2.9-15.9 5.1c-15 6.8-27.9 19.4-31.1 37.7c-1.8 10.2-.8 20 3.4 29c4.2 8.8 10.7 15 17.3 19.5c11.6 7.9 26.9 12.5 38.6 16l2.2 .7c13.9 4.2 23.4 7.4 29.3 11.7c2.5 1.8 3.4 3.2 3.7 4c.3 .8 .9 2.6 .2 6.7c-.6 3.5-2.5 6.4-8 8.8c-6.1 2.6-16 3.9-28.8 1.9c-6-1-16.7-4.6-26.2-7.9c0 0 0 0 0 0s0 0 0 0s0 0 0 0c-2.2-.7-4.3-1.5-6.4-2.1c-10.5-3.5-21.8 2.2-25.3 12.7s2.2 21.8 12.7 25.3c1.2 .4 2.7 .9 4.4 1.5c7.9 2.7 20.3 6.9 29.8 9.1l0 6.4c0 11.1 9 20.1 20.1 20.1s20.1-9 20.1-20.1l0-5.5c5.3-1 10.5-2.5 15.4-4.6c15.7-6.7 28.4-19.7 31.6-38.7c1.8-10.4 1-20.3-3-29.4c-3.9-9-10.2-15.6-16.9-20.5c-12.2-8.8-28.3-13.7-40.4-17.4l-.8-.2c-14.2-4.3-23.8-7.3-29.9-11.4c-2.6-1.8-3.4-3-3.6-3.5c-.2-.3-.7-1.6-.1-5c.3-1.9 1.9-5.2 8.2-8.1c6.4-2.9 16.4-4.5 28.6-2.6c4.3 .7 17.9 3.3 21.7 4.3c10.7 2.8 21.6-3.5 24.5-14.2s-3.5-21.6-14.2-24.5c-4.4-1.2-14.4-3.2-21-4.4l0-6.3c0-11.1-9-20.1-20.1-20.1zM48 352l16 0c19.5 25.9 44 47.7 72.2 64L64 416l0 32 192 0 192 0 0-32-72.2 0c28.2-16.3 52.8-38.1 72.2-64l16 0c26.5 0 48 21.5 48 48l0 64c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48l0-64c0-26.5 21.5-48 48-48z"],
+    "circle-info": [512,512,["info-circle"],"f05a","M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336l24 0 0-64-24 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l48 0c13.3 0 24 10.7 24 24l0 88 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"],
+    "circle-question": [512,512,["62108","question-circle"],"f059","M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM169.8 165.3c7.9-22.3 29.1-37.3 52.8-37.3l58.3 0c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24l0-13.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1l-58.3 0c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"],
+    "circle-user": [512,512,["62142","user-circle"],"f2bd","M399 384.2C376.9 345.8 335.4 320 288 320l-64 0c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"],
+    "circle-xmark": [512,512,["61532","times-circle","xmark-circle"],"f057","M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"],
+    "city": [640,512,["127961"],"f64f","M480 48c0-26.5-21.5-48-48-48L336 0c-26.5 0-48 21.5-48 48l0 48-64 0 0-72c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 72-64 0 0-72c0-13.3-10.7-24-24-24S64 10.7 64 24l0 72L48 96C21.5 96 0 117.5 0 144l0 96L0 464c0 26.5 21.5 48 48 48l256 0 32 0 96 0 160 0c26.5 0 48-21.5 48-48l0-224c0-26.5-21.5-48-48-48l-112 0 0-144zm96 320l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16zM240 416l-32 0c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16zM128 400c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32zM560 256c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16l32 0zM256 176l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16zM112 160c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16l32 0zM256 304c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32zM112 320l-32 0c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16zm304-48l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16zM400 64c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16l32 0zm16 112l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16z"],
+    "clipboard-list": [384,512,[],"f46d","M192 0c-41.8 0-77.4 26.7-90.5 64L64 64C28.7 64 0 92.7 0 128L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64l-37.5 0C269.4 26.7 233.8 0 192 0zm0 64a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM72 272a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm104-16l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zM72 368a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm88 0c0-8.8 7.2-16 16-16l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16z"],
+    "clock": [512,512,["128339","clock-four"],"f017","M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"],
+    "clone": [512,512,[],"f24d","M288 448L64 448l0-224 64 0 0-64-64 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l224 0c35.3 0 64-28.7 64-64l0-64-64 0 0 64zm-64-96l224 0c35.3 0 64-28.7 64-64l0-224c0-35.3-28.7-64-64-64L224 0c-35.3 0-64 28.7-64 64l0 224c0 35.3 28.7 64 64 64z"],
+    "coins": [512,512,[],"f51e","M512 80c0 18-14.3 34.6-38.4 48c-29.1 16.1-72.5 27.5-122.3 30.9c-3.7-1.8-7.4-3.5-11.3-5C300.6 137.4 248.2 128 192 128c-8.3 0-16.4 .2-24.5 .6l-1.1-.6C142.3 114.6 128 98 128 80c0-44.2 86-80 192-80S512 35.8 512 80zM160.7 161.1c10.2-.7 20.7-1.1 31.3-1.1c62.2 0 117.4 12.3 152.5 31.4C369.3 204.9 384 221.7 384 240c0 4-.7 7.9-2.1 11.7c-4.6 13.2-17 25.3-35 35.5c0 0 0 0 0 0c-.1 .1-.3 .1-.4 .2c0 0 0 0 0 0s0 0 0 0c-.3 .2-.6 .3-.9 .5c-35 19.4-90.8 32-153.6 32c-59.6 0-112.9-11.3-148.2-29.1c-1.9-.9-3.7-1.9-5.5-2.9C14.3 274.6 0 258 0 240c0-34.8 53.4-64.5 128-75.4c10.5-1.5 21.4-2.7 32.7-3.5zM416 240c0-21.9-10.6-39.9-24.1-53.4c28.3-4.4 54.2-11.4 76.2-20.5c16.3-6.8 31.5-15.2 43.9-25.5l0 35.4c0 19.3-16.5 37.1-43.8 50.9c-14.6 7.4-32.4 13.7-52.4 18.5c.1-1.8 .2-3.5 .2-5.3zm-32 96c0 18-14.3 34.6-38.4 48c-1.8 1-3.6 1.9-5.5 2.9C304.9 404.7 251.6 416 192 416c-62.8 0-118.6-12.6-153.6-32C14.3 370.6 0 354 0 336l0-35.4c12.5 10.3 27.6 18.7 43.9 25.5C83.4 342.6 135.8 352 192 352s108.6-9.4 148.1-25.9c7.8-3.2 15.3-6.9 22.4-10.9c6.1-3.4 11.8-7.2 17.2-11.2c1.5-1.1 2.9-2.3 4.3-3.4l0 3.4 0 5.7 0 26.3zm32 0l0-32 0-25.9c19-4.2 36.5-9.5 52.1-16c16.3-6.8 31.5-15.2 43.9-25.5l0 35.4c0 10.5-5 21-14.9 30.9c-16.3 16.3-45 29.7-81.3 38.4c.1-1.7 .2-3.5 .2-5.3zM192 448c56.2 0 108.6-9.4 148.1-25.9c16.3-6.8 31.5-15.2 43.9-25.5l0 35.4c0 44.2-86 80-192 80S0 476.2 0 432l0-35.4c12.5 10.3 27.6 18.7 43.9 25.5C83.4 438.6 135.8 448 192 448z"],
+    "comments-dollar": [640,512,[],"f653","M416 176c0 97.2-93.1 176-208 176c-38.2 0-73.9-8.7-104.7-23.9c-7.5 4-16 7.9-25.2 11.4C59.8 346.4 37.8 352 16 352c-6.9 0-13.1-4.5-15.2-11.1s.2-13.8 5.8-17.9c0 0 0 0 0 0s0 0 0 0l.2-.2c.2-.2 .6-.4 1.1-.8c1-.8 2.5-2 4.3-3.7c3.6-3.3 8.5-8.1 13.3-14.3c5.5-7 10.7-15.4 14.2-24.7C14.7 250.3 0 214.6 0 176C0 78.8 93.1 0 208 0S416 78.8 416 176zM231.5 383C348.9 372.9 448 288.3 448 176c0-5.2-.2-10.4-.6-15.5C555.1 167.1 640 243.2 640 336c0 38.6-14.7 74.3-39.6 103.4c3.5 9.4 8.7 17.7 14.2 24.7c4.8 6.2 9.7 11 13.3 14.3c1.8 1.6 3.3 2.9 4.3 3.7c.5 .4 .9 .7 1.1 .8l.2 .2s0 0 0 0s0 0 0 0c5.6 4.1 7.9 11.3 5.8 17.9c-2.1 6.6-8.3 11.1-15.2 11.1c-21.8 0-43.8-5.6-62.1-12.5c-9.2-3.5-17.8-7.4-25.2-11.4C505.9 503.3 470.2 512 432 512c-95.6 0-176.2-54.6-200.5-129zM228 72c0-11-9-20-20-20s-20 9-20 20l0 14c-7.6 1.7-15.2 4.4-22.2 8.5c-13.9 8.3-25.9 22.8-25.8 43.9c.1 20.3 12 33.1 24.7 40.7c11 6.6 24.7 10.8 35.6 14l1.7 .5c12.6 3.8 21.8 6.8 28 10.7c5.1 3.2 5.8 5.4 5.9 8.2c.1 5-1.8 8-5.9 10.5c-5 3.1-12.9 5-21.4 4.7c-11.1-.4-21.5-3.9-35.1-8.5c-2.3-.8-4.7-1.6-7.2-2.4c-10.5-3.5-21.8 2.2-25.3 12.6s2.2 21.8 12.6 25.3c1.9 .6 4 1.3 6.1 2.1c0 0 0 0 0 0s0 0 0 0c8.3 2.9 17.9 6.2 28.2 8.4l0 14.6c0 11 9 20 20 20s20-9 20-20l0-13.8c8-1.7 16-4.5 23.2-9c14.3-8.9 25.1-24.1 24.8-45c-.3-20.3-11.7-33.4-24.6-41.6c-11.5-7.2-25.9-11.6-37.1-15l-.7-.2c-12.8-3.9-21.9-6.7-28.3-10.5c-5.2-3.1-5.3-4.9-5.3-6.7c0-3.7 1.4-6.5 6.2-9.3c5.4-3.2 13.6-5.1 21.5-5c9.6 .1 20.2 2.2 31.2 5.2c10.7 2.8 21.6-3.5 24.5-14.2s-3.5-21.6-14.2-24.5c-6.5-1.7-13.7-3.4-21.1-4.7L228 72z"],
+    "compass-drafting": [512,512,["drafting-compass"],"f568","M352 96c0 14.3-3.1 27.9-8.8 40.2L396 227.4c-23.7 25.3-54.2 44.1-88.5 53.6L256 192c0 0 0 0 0 0s0 0 0 0l-68 117.5c21.5 6.8 44.3 10.5 68.1 10.5c70.7 0 133.8-32.7 174.9-84c11.1-13.8 31.2-16 45-5s16 31.2 5 45C428.1 341.8 347 384 256 384c-35.4 0-69.4-6.4-100.7-18.1L98.7 463.7C94 471.8 87 478.4 78.6 482.6L23.2 510.3c-5 2.5-10.9 2.2-15.6-.7S0 501.5 0 496l0-55.4c0-8.4 2.2-16.7 6.5-24.1l60-103.7C53.7 301.6 41.8 289.3 31.2 276c-11.1-13.8-8.8-33.9 5-45s33.9-8.8 45 5c5.7 7.1 11.8 13.8 18.2 20.1l69.4-119.9c-5.6-12.2-8.8-25.8-8.8-40.2c0-53 43-96 96-96s96 43 96 96zm21 297.9c32.6-12.8 62.5-30.8 88.9-52.9l43.7 75.5c4.2 7.3 6.5 15.6 6.5 24.1l0 55.4c0 5.5-2.9 10.7-7.6 13.6s-10.6 3.2-15.6 .7l-55.4-27.7c-8.4-4.2-15.4-10.8-20.1-18.9L373 393.9zM256 128a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"],
+    "copy": [448,512,[],"f0c5","M208 0L332.1 0c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9L448 336c0 26.5-21.5 48-48 48l-192 0c-26.5 0-48-21.5-48-48l0-288c0-26.5 21.5-48 48-48zM48 128l80 0 0 64-64 0 0 256 192 0 0-32 64 0 0 48c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 176c0-26.5 21.5-48 48-48z"],
+    "credit-card": [576,512,["62083","128179","credit-card-alt"],"f09d","M64 32C28.7 32 0 60.7 0 96l0 32 576 0 0-32c0-35.3-28.7-64-64-64L64 32zM576 224L0 224 0 416c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-192zM112 352l64 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-64 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm112 16c0-8.8 7.2-16 16-16l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16z"],
+    "diagram-project": [576,512,["project-diagram"],"f542","M0 80C0 53.5 21.5 32 48 32l96 0c26.5 0 48 21.5 48 48l0 16 192 0 0-16c0-26.5 21.5-48 48-48l96 0c26.5 0 48 21.5 48 48l0 96c0 26.5-21.5 48-48 48l-96 0c-26.5 0-48-21.5-48-48l0-16-192 0 0 16c0 1.7-.1 3.4-.3 5L272 288l96 0c26.5 0 48 21.5 48 48l0 96c0 26.5-21.5 48-48 48l-96 0c-26.5 0-48-21.5-48-48l0-96c0-1.7 .1-3.4 .3-5L144 224l-96 0c-26.5 0-48-21.5-48-48L0 80z"],
+    "diploma": [640,512,["scroll-ribbon"],"f5ea","M302 59.7l18 20.6 18-20.6C353.4 42.1 375.6 32 399 32l1 0c44.2 0 80 35.8 80 80c0 11.4-2.4 22.2-6.7 32l70.7 0 0 32c0-32 0-32 0-32s0 0 0 0l.1 0 .2 0 .5 0c.4 0 .8 0 1.4 .1c1 .1 2.3 .1 3.8 .3c3 .3 7 .9 11.6 2.1c9.2 2.3 21.3 6.9 33.4 15.9C620.9 181.7 640 216.2 640 272c0 47.5-13.7 81.1-32 104.1c-18 22.6-38.5 32.6-49 36.6c-7.3 2.8-14 3.3-19 3.3l-.5 0c-4.7 0-9.3-.5-13.9-1.5L384 383l0 81c0 6.2-3.6 11.9-9.2 14.5s-12.3 1.8-17-2.2L320 444.8l-37.8 31.5c-4.8 4-11.4 4.8-17 2.2s-9.2-8.3-9.2-14.5l0-81L114.4 414.5c-4.6 1-9.2 1.5-13.9 1.5l-.5 0c-4.9 0-11.7-.5-19-3.3c-10.5-4-31-14-49-36.6C13.7 353.1 0 319.5 0 272c0-55.8 19.1-90.3 44.8-109.6c12.1-9.1 24.3-13.6 33.4-15.9c4.6-1.2 8.6-1.8 11.6-2.1c1.5-.2 2.8-.3 3.8-.3c.5 0 1 0 1.4-.1l.5 0 .2 0 .1 0c0 0 0 0 0 0l0 32 0-32 70.7 0c-4.3-9.8-6.7-20.6-6.7-32c0-44.2 35.8-80 80-80l1 0c23.4 0 45.6 10.1 61 27.7zM240 144l54.4 0c6.9 0 10.5-8.1 6-13.3L265.9 91.3C259.6 84.1 250.5 80 241 80l-1 0c-17.7 0-32 14.3-32 32s14.3 32 32 32zm105.6 0l46.4 0 8 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-1 0c-1.2 0-2.3 .1-3.5 .2c-8.2 .9-15.8 4.8-21.3 11.1l-34.5 39.5c-4.5 5.2-.9 13.3 6 13.3zM256 208L96.7 208c0 0 0 0-.1 0c-.5 .1-1.5 .2-2.9 .5c-2.8 .7-6.7 2.1-10.6 5.1C76.9 218.3 64 231.8 64 272c0 34.5 9.6 53.7 18.1 64.3c7.2 9 14.9 13.5 19.2 15.6L256 317.4 256 208zM384 317.4l154.8 34.4c4.3-2 12-6.6 19.2-15.6c8.4-10.6 18.1-29.8 18.1-64.3c0-40.2-12.9-53.7-19.2-58.4c-3.9-2.9-7.7-4.4-10.6-5.1c-1.4-.3-2.4-.5-2.9-.5c0 0 0 0-.1 0L384 208l0 109.4zM540.1 352c0 0 0 0 0 0s0 0 0 0s0 0 0 0zM99.9 352l0 0s0 0 0 0z"],
+    "display": [576,512,[],"e163","M64 0C28.7 0 0 28.7 0 64L0 352c0 35.3 28.7 64 64 64l176 0-10.7 32L160 448c-17.7 0-32 14.3-32 32s14.3 32 32 32l256 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-69.3 0L336 416l176 0c35.3 0 64-28.7 64-64l0-288c0-35.3-28.7-64-64-64L64 0zM512 64l0 288L64 352 64 64l448 0z"],
+    "dollar-sign": [320,512,["61781","128178","dollar","usd"],"24","M160 0c17.7 0 32 14.3 32 32l0 35.7c1.6 .2 3.1 .4 4.7 .7c.4 .1 .7 .1 1.1 .2l48 8.8c17.4 3.2 28.9 19.9 25.7 37.2s-19.9 28.9-37.2 25.7l-47.5-8.7c-31.3-4.6-58.9-1.5-78.3 6.2s-27.2 18.3-29 28.1c-2 10.7-.5 16.7 1.2 20.4c1.8 3.9 5.5 8.3 12.8 13.2c16.3 10.7 41.3 17.7 73.7 26.3l2.9 .8c28.6 7.6 63.6 16.8 89.6 33.8c14.2 9.3 27.6 21.9 35.9 39.5c8.5 17.9 10.3 37.9 6.4 59.2c-6.9 38-33.1 63.4-65.6 76.7c-13.7 5.6-28.6 9.2-44.4 11l0 33.4c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-34.9c-.4-.1-.9-.1-1.3-.2l-.2 0s0 0 0 0c-24.4-3.8-64.5-14.3-91.5-26.3c-16.1-7.2-23.4-26.1-16.2-42.2s26.1-23.4 42.2-16.2c20.9 9.3 55.3 18.5 75.2 21.6c31.9 4.7 58.2 2 76-5.3c16.9-6.9 24.6-16.9 26.8-28.9c1.9-10.6 .4-16.7-1.3-20.4c-1.9-4-5.6-8.4-13-13.3c-16.4-10.7-41.5-17.7-74-26.3l-2.8-.7s0 0 0 0C119.4 279.3 84.4 270 58.4 253c-14.2-9.3-27.5-22-35.8-39.6c-8.4-17.9-10.1-37.9-6.1-59.2C23.7 116 52.3 91.2 84.8 78.3c13.3-5.3 27.9-8.9 43.2-11L128 32c0-17.7 14.3-32 32-32z"],
+    "door-closed": [576,512,["128682"],"f52a","M96 64c0-35.3 28.7-64 64-64L416 0c35.3 0 64 28.7 64 64l0 384 64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-112 0-288 0L32 512c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0L96 64zM384 288a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"],
+    "down-to-bracket": [448,512,[],"e4e7","M378.1 198.6L249.5 341.4c-6.1 6.7-14.7 10.6-23.8 10.6l-3.5 0c-9.1 0-17.7-3.8-23.8-10.6L69.9 198.6c-3.8-4.2-5.9-9.8-5.9-15.5C64 170.4 74.4 160 87.1 160l72.9 0 0-128c0-17.7 14.3-32 32-32l64 0c17.7 0 32 14.3 32 32l0 128 72.9 0c12.8 0 23.1 10.4 23.1 23.1c0 5.7-2.1 11.2-5.9 15.5zM64 352l0 64c0 17.7 14.3 32 32 32l256 0c17.7 0 32-14.3 32-32l0-64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 64c0 53-43 96-96 96L96 512c-53 0-96-43-96-96l0-64c0-17.7 14.3-32 32-32s32 14.3 32 32z"],
+    "download": [512,512,[],"f019","M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"],
+    "earth-americas": [512,512,["127758","earth","earth-america","globe-americas"],"f57d","M57.7 193l9.4 16.4c8.3 14.5 21.9 25.2 38 29.8L163 255.7c17.2 4.9 29 20.6 29 38.5l0 39.9c0 11 6.2 21 16 25.9s16 14.9 16 25.9l0 39c0 15.6 14.9 26.9 29.9 22.6c16.1-4.6 28.6-17.5 32.7-33.8l2.8-11.2c4.2-16.9 15.2-31.4 30.3-40l8.1-4.6c15-8.5 24.2-24.5 24.2-41.7l0-8.3c0-12.7-5.1-24.9-14.1-33.9l-3.9-3.9c-9-9-21.2-14.1-33.9-14.1L257 256c-11.1 0-22.1-2.9-31.8-8.4l-34.5-19.7c-4.3-2.5-7.6-6.5-9.2-11.2c-3.2-9.6 1.1-20 10.2-24.5l5.9-3c6.6-3.3 14.3-3.9 21.3-1.5l23.2 7.7c8.2 2.7 17.2-.4 21.9-7.5c4.7-7 4.2-16.3-1.2-22.8l-13.6-16.3c-10-12-9.9-29.5 .3-41.3l15.7-18.3c8.8-10.3 10.2-25 3.5-36.7l-2.4-4.2c-3.5-.2-6.9-.3-10.4-.3C163.1 48 84.4 108.9 57.7 193zM464 256c0-36.8-9.6-71.4-26.4-101.5L412 164.8c-15.7 6.3-23.8 23.8-18.5 39.8l16.9 50.7c3.5 10.4 12 18.3 22.6 20.9l29.1 7.3c1.2-9 1.8-18.2 1.8-27.5zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"],
+    "ellipsis": [448,512,["ellipsis-h"],"f141","M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"],
+    "ellipsis-vertical": [128,512,["ellipsis-v"],"f142","M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"],
+    "envelope": [512,512,["61443","9993","128386"],"f0e0","M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"],
+    "exclamation": [128,512,["61738","10071","10069"],"21","M96 64c0-17.7-14.3-32-32-32S32 46.3 32 64l0 256c0 17.7 14.3 32 32 32s32-14.3 32-32L96 64zM64 480a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"],
+    "eye": [576,512,["128065"],"f06e","M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"],
+    "eye-slash": [640,512,[],"f070","M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c8.4-19.3 10.6-41.4 4.8-63.3c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zM373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5L373 389.9z"],
+    "file-export": [576,512,["arrow-right-from-file"],"f56e","M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 128-168 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l168 0 0 112c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zM384 336l0-48 110.1 0-39-39c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l80 80c9.4 9.4 9.4 24.6 0 33.9l-80 80c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l39-39L384 336zm0-208l-128 0L256 0 384 128z"],
+    "file-invoice": [384,512,[],"f570","M64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-288-128 0c-17.7 0-32-14.3-32-32L224 0 64 0zM256 0l0 128 128 0L256 0zM80 64l64 0c8.8 0 16 7.2 16 16s-7.2 16-16 16L80 96c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l64 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-64 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm16 96l192 0c17.7 0 32 14.3 32 32l0 64c0 17.7-14.3 32-32 32L96 352c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32zm0 32l0 64 192 0 0-64L96 256zM240 416l64 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-64 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"],
+    "file-lines": [384,512,["61686","128462","128441","file-alt","file-text"],"f15c","M64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-288-128 0c-17.7 0-32-14.3-32-32L224 0 64 0zM256 0l0 128 128 0L256 0zM112 256l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"],
+    "file-pdf": [512,512,[],"f1c1","M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 144-208 0c-35.3 0-64 28.7-64 64l0 144-48 0c-35.3 0-64-28.7-64-64L0 64zm384 64l-128 0L256 0 384 128zM176 352l32 0c30.9 0 56 25.1 56 56s-25.1 56-56 56l-16 0 0 32c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-48 0-80c0-8.8 7.2-16 16-16zm32 80c13.3 0 24-10.7 24-24s-10.7-24-24-24l-16 0 0 48 16 0zm96-80l32 0c26.5 0 48 21.5 48 48l0 64c0 26.5-21.5 48-48 48l-32 0c-8.8 0-16-7.2-16-16l0-128c0-8.8 7.2-16 16-16zm32 128c8.8 0 16-7.2 16-16l0-64c0-8.8-7.2-16-16-16l-16 0 0 96 16 0zm80-112c0-8.8 7.2-16 16-16l48 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0 0 32 32 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0 0 48c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-64 0-64z"],
+    "filter": [512,512,[],"f0b0","M3.9 54.9C10.5 40.9 24.5 32 40 32l432 0c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9 320 448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6l0-79.1L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"],
+    "folder": [512,512,["61716","128447","128193","folder-blank"],"f07b","M64 480H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H288c-10.1 0-19.6-4.7-25.6-12.8L243.2 57.6C231.1 41.5 212.1 32 192 32H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64z"],
+    "folder-plus": [512,512,[],"f65e","M512 416c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96C0 60.7 28.7 32 64 32l128 0c20.1 0 39.1 9.5 51.2 25.6l19.2 25.6c6 8.1 15.5 12.8 25.6 12.8l160 0c35.3 0 64 28.7 64 64l0 256zM232 376c0 13.3 10.7 24 24 24s24-10.7 24-24l0-64 64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0 0-64c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 64-64 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0 0 64z"],
+    "folder-tree": [576,512,[],"f802","M64 32C64 14.3 49.7 0 32 0S0 14.3 0 32l0 96L0 384c0 35.3 28.7 64 64 64l192 0 0-64L64 384l0-224 192 0 0-64L64 96l0-64zM288 192c0 17.7 14.3 32 32 32l224 0c17.7 0 32-14.3 32-32l0-128c0-17.7-14.3-32-32-32l-98.7 0c-8.5 0-16.6-3.4-22.6-9.4L409.4 9.4c-6-6-14.1-9.4-22.6-9.4L320 0c-17.7 0-32 14.3-32 32l0 160zm0 288c0 17.7 14.3 32 32 32l224 0c17.7 0 32-14.3 32-32l0-128c0-17.7-14.3-32-32-32l-98.7 0c-8.5 0-16.6-3.4-22.6-9.4l-13.3-13.3c-6-6-14.1-9.4-22.6-9.4L320 288c-17.7 0-32 14.3-32 32l0 160z"],
+    "gamepad-modern": [640,512,["63676","127918","gamepad-alt"],"e5a2","M0 369.4l0 2.8C0 431.7 48.3 480 107.8 480c49.5 0 92.6-33.7 104.6-81.7L216 384l208 0 3.6 14.3c12 48 55.1 81.7 104.6 81.7C591.7 480 640 431.7 640 372.2l0-2.8c0-6.3-.5-12.5-1.6-18.7L605.7 159.8c-8.6-50.2-40.9-93.2-90.3-105.5C469.5 42.9 403.8 32 320 32s-149.5 10.9-195.3 22.3C75.2 66.6 42.9 109.6 34.3 159.8L1.6 350.7C.5 356.9 0 363.1 0 369.4zM432 232a40 40 0 1 1 0 80 40 40 0 1 1 0-80zm24-56a40 40 0 1 1 80 0 40 40 0 1 1 -80 0zm-240-8l0 32 32 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-32 0 0 32c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-32-32 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l32 0 0-32c0-13.3 10.7-24 24-24s24 10.7 24 24z"],
+    "gavel": [512,512,["legal"],"f0e3","M318.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-120 120c-12.5 12.5-12.5 32.8 0 45.3l16 16c12.5 12.5 32.8 12.5 45.3 0l4-4L325.4 293.4l-4 4c-12.5 12.5-12.5 32.8 0 45.3l16 16c12.5 12.5 32.8 12.5 45.3 0l120-120c12.5-12.5 12.5-32.8 0-45.3l-16-16c-12.5-12.5-32.8-12.5-45.3 0l-4 4L330.6 74.6l4-4c12.5-12.5 12.5-32.8 0-45.3l-16-16zm-152 288c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l48 48c12.5 12.5 32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-1.4-1.4L272 285.3 226.7 240 168 298.7l-1.4-1.4z"],
+    "gear": [512,512,["9881","cog"],"f013","M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"],
+    "gem": [512,512,["128142"],"f3a5","M116.7 33.8c4.5-6.1 11.7-9.8 19.3-9.8l240 0c7.6 0 14.8 3.6 19.3 9.8l112 152c6.8 9.2 6.1 21.9-1.5 30.4l-232 256c-4.5 5-11 7.9-17.8 7.9s-13.2-2.9-17.8-7.9l-232-256c-7.7-8.5-8.3-21.2-1.5-30.4l112-152zm38.5 39.8c-3.3 2.5-4.2 7-2.1 10.5l57.4 95.6L63.3 192c-4.1 .3-7.3 3.8-7.3 8s3.2 7.6 7.3 8l192 16c.4 0 .9 0 1.3 0l192-16c4.1-.3 7.3-3.8 7.3-8s-3.2-7.6-7.3-8L301.5 179.8l57.4-95.6c2.1-3.5 1.2-8.1-2.1-10.5s-7.9-2-10.7 1L256 172.2 165.9 74.6c-2.8-3-7.4-3.4-10.7-1z"],
+    "graduation-cap": [640,512,["127891","mortar-board"],"f19d","M320 32c-8.1 0-16.1 1.4-23.7 4.1L15.8 137.4C6.3 140.9 0 149.9 0 160s6.3 19.1 15.8 22.6l57.9 20.9C57.3 229.3 48 259.8 48 291.9l0 28.1c0 28.4-10.8 57.7-22.3 80.8c-6.5 13-13.9 25.8-22.5 37.6C0 442.7-.9 448.3 .9 453.4s6 8.9 11.2 10.2l64 16c4.2 1.1 8.7 .3 12.4-2s6.3-6.1 7.1-10.4c8.6-42.8 4.3-81.2-2.1-108.7C90.3 344.3 86 329.8 80 316.5l0-24.6c0-30.2 10.2-58.7 27.9-81.5c12.9-15.5 29.6-28 49.2-35.7l157-61.7c8.2-3.2 17.5 .8 20.7 9s-.8 17.5-9 20.7l-157 61.7c-12.4 4.9-23.3 12.4-32.2 21.6l159.6 57.6c7.6 2.7 15.6 4.1 23.7 4.1s16.1-1.4 23.7-4.1L624.2 182.6c9.5-3.4 15.8-12.5 15.8-22.6s-6.3-19.1-15.8-22.6L343.7 36.1C336.1 33.4 328.1 32 320 32zM128 408c0 35.3 86 72 192 72s192-36.7 192-72L496.7 262.6 354.5 314c-11.1 4-22.8 6-34.5 6s-23.5-2-34.5-6L143.3 262.6 128 408z"],
+    "greater-than": [384,512,["62769"],"3e","M3.4 81.7c-7.9 15.8-1.5 35 14.3 42.9L280.5 256 17.7 387.4C1.9 395.3-4.5 414.5 3.4 430.3s27.1 22.2 42.9 14.3l320-160c10.8-5.4 17.7-16.5 17.7-28.6s-6.8-23.2-17.7-28.6l-320-160c-15.8-7.9-35-1.5-42.9 14.3z"],
+    "grid": [448,512,["grid-3"],"e195","M0 72C0 49.9 17.9 32 40 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40L0 72zM0 232c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48zM128 392l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40zM160 72c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48zM288 232l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40zM160 392c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48zM448 72l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40zM320 232c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48zM448 392l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40z"],
+    "grid-horizontal": [448,512,[],"e307","M128 168c0-22.1-17.9-40-40-40l-48 0c-22.1 0-40 17.9-40 40l0 48c0 22.1 17.9 40 40 40l48 0c22.1 0 40-17.9 40-40l0-48zm0 160c0-22.1-17.9-40-40-40l-48 0c-22.1 0-40 17.9-40 40l0 48c0 22.1 17.9 40 40 40l48 0c22.1 0 40-17.9 40-40l0-48zm32-160l0 48c0 22.1 17.9 40 40 40l48 0c22.1 0 40-17.9 40-40l0-48c0-22.1-17.9-40-40-40l-48 0c-22.1 0-40 17.9-40 40zM288 328c0-22.1-17.9-40-40-40l-48 0c-22.1 0-40 17.9-40 40l0 48c0 22.1 17.9 40 40 40l48 0c22.1 0 40-17.9 40-40l0-48zm32-160l0 48c0 22.1 17.9 40 40 40l48 0c22.1 0 40-17.9 40-40l0-48c0-22.1-17.9-40-40-40l-48 0c-22.1 0-40 17.9-40 40zM448 328c0-22.1-17.9-40-40-40l-48 0c-22.1 0-40 17.9-40 40l0 48c0 22.1 17.9 40 40 40l48 0c22.1 0 40-17.9 40-40l0-48z"],
+    "hand": [512,512,["9995","129306","hand-paper"],"f256","M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 208c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-176c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 272c0 1.5 0 3.1 .1 4.6L67.6 283c-16-15.2-41.3-14.6-56.6 1.4s-14.6 41.3 1.4 56.6L124.8 448c43.1 41.1 100.4 64 160 64l19.2 0c97.2 0 176-78.8 176-176l0-208c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-176c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 176c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-208z"],
+    "hand-holding-heart": [576,512,[],"f4be","M163.9 136.9c-29.4-29.8-29.4-78.2 0-108s77-29.8 106.4 0l17.7 18 17.7-18c29.4-29.8 77-29.8 106.4 0s29.4 78.2 0 108L310.5 240.1c-6.2 6.3-14.3 9.4-22.5 9.4s-16.3-3.1-22.5-9.4L163.9 136.9zM568.2 336.3c13.1 17.8 9.3 42.8-8.5 55.9L433.1 485.5c-23.4 17.2-51.6 26.5-80.7 26.5L192 512 32 512c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l36.8 0 44.9-36c22.7-18.2 50.9-28 80-28l78.3 0 16 0 64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0-16 0c-8.8 0-16 7.2-16 16s7.2 16 16 16l120.6 0 119.7-88.2c17.8-13.1 42.8-9.3 55.9 8.5zM193.6 384c0 0 0 0 0 0l-.9 0c.3 0 .6 0 .9 0z"],
+    "handshake": [640,512,[],"f2b5","M323.4 85.2l-96.8 78.4c-16.1 13-19.2 36.4-7 53.1c12.9 17.8 38 21.3 55.3 7.8l99.3-77.2c7-5.4 17-4.2 22.5 2.8s4.2 17-2.8 22.5l-20.9 16.2L512 316.8 512 128l-.7 0-3.9-2.5L434.8 79c-15.3-9.8-33.2-15-51.4-15c-21.8 0-43 7.5-60 21.2zm22.8 124.4l-51.7 40.2C263 274.4 217.3 268 193.7 235.6c-22.2-30.5-16.6-73.1 12.7-96.8l83.2-67.3c-11.6-4.9-24.1-7.4-36.8-7.4C234 64 215.7 69.6 200 80l-72 48 0 224 28.2 0 91.4 83.4c19.6 17.9 49.9 16.5 67.8-3.1c5.5-6.1 9.2-13.2 11.1-20.6l17 15.6c19.5 17.9 49.9 16.6 67.8-2.9c4.5-4.9 7.8-10.6 9.9-16.5c19.4 13 45.8 10.3 62.1-7.5c17.9-19.5 16.6-49.9-2.9-67.8l-134.2-123zM16 128c-8.8 0-16 7.2-16 16L0 352c0 17.7 14.3 32 32 32l32 0c17.7 0 32-14.3 32-32l0-224-80 0zM48 320a16 16 0 1 1 0 32 16 16 0 1 1 0-32zM544 128l0 224c0 17.7 14.3 32 32 32l32 0c17.7 0 32-14.3 32-32l0-208c0-8.8-7.2-16-16-16l-80 0zm32 208a16 16 0 1 1 32 0 16 16 0 1 1 -32 0z"],
+    "handshake-simple": [640,512,["129309","handshake-alt"],"f4c6","M323.4 85.2l-96.8 78.4c-16.1 13-19.2 36.4-7 53.1c12.9 17.8 38 21.3 55.3 7.8l99.3-77.2c7-5.4 17-4.2 22.5 2.8s4.2 17-2.8 22.5l-20.9 16.2L550.2 352l41.8 0c26.5 0 48-21.5 48-48l0-128c0-26.5-21.5-48-48-48l-76 0-4 0-.7 0-3.9-2.5L434.8 79c-15.3-9.8-33.2-15-51.4-15c-21.8 0-43 7.5-60 21.2zm22.8 124.4l-51.7 40.2C263 274.4 217.3 268 193.7 235.6c-22.2-30.5-16.6-73.1 12.7-96.8l83.2-67.3c-11.6-4.9-24.1-7.4-36.8-7.4C234 64 215.7 69.6 200 80l-72 48-80 0c-26.5 0-48 21.5-48 48L0 304c0 26.5 21.5 48 48 48l108.2 0 91.4 83.4c19.6 17.9 49.9 16.5 67.8-3.1c5.5-6.1 9.2-13.2 11.1-20.6l17 15.6c19.5 17.9 49.9 16.6 67.8-2.9c4.5-4.9 7.8-10.6 9.9-16.5c19.4 13 45.8 10.3 62.1-7.5c17.9-19.5 16.6-49.9-2.9-67.8l-134.2-123z"],
+    "hashtag": [448,512,["62098"],"23","M181.3 32.4c17.4 2.9 29.2 19.4 26.3 36.8L197.8 128l95.1 0 11.5-69.3c2.9-17.4 19.4-29.2 36.8-26.3s29.2 19.4 26.3 36.8L357.8 128l58.2 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-68.9 0L325.8 320l58.2 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-68.9 0-11.5 69.3c-2.9 17.4-19.4 29.2-36.8 26.3s-29.2-19.4-26.3-36.8l9.8-58.7-95.1 0-11.5 69.3c-2.9 17.4-19.4 29.2-36.8 26.3s-29.2-19.4-26.3-36.8L90.2 384 32 384c-17.7 0-32-14.3-32-32s14.3-32 32-32l68.9 0 21.3-128L64 192c-17.7 0-32-14.3-32-32s14.3-32 32-32l68.9 0 11.5-69.3c2.9-17.4 19.4-29.2 36.8-26.3zM187.1 192L165.8 320l95.1 0 21.3-128-95.1 0z"],
+    "image": [512,512,[],"f03e","M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6l96 0 32 0 208 0c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"],
+    "industry": [576,512,[],"f275","M64 32C46.3 32 32 46.3 32 64l0 240 0 48 0 80c0 26.5 21.5 48 48 48l416 0c26.5 0 48-21.5 48-48l0-128 0-151.8c0-18.2-19.4-29.7-35.4-21.1L352 215.4l0-63.2c0-18.2-19.4-29.7-35.4-21.1L160 215.4 160 64c0-17.7-14.3-32-32-32L64 32z"],
+    "info": [192,512,[],"f129","M48 80a48 48 0 1 1 96 0A48 48 0 1 1 48 80zM0 224c0-17.7 14.3-32 32-32l64 0c17.7 0 32 14.3 32 32l0 224 32 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 512c-17.7 0-32-14.3-32-32s14.3-32 32-32l32 0 0-192-32 0c-17.7 0-32-14.3-32-32z"],
+    "key": [512,512,["128273"],"f084","M336 352c97.2 0 176-78.8 176-176S433.2 0 336 0S160 78.8 160 176c0 18.7 2.9 36.8 8.3 53.7L7 391c-4.5 4.5-7 10.6-7 17l0 80c0 13.3 10.7 24 24 24l80 0c13.3 0 24-10.7 24-24l0-40 40 0c13.3 0 24-10.7 24-24l0-40 40 0c6.4 0 12.5-2.5 17-7l33.3-33.3c16.9 5.4 35 8.3 53.7 8.3zM376 96a40 40 0 1 1 0 80 40 40 0 1 1 0-80z"],
+    "key-skeleton": [448,512,["128477"],"f6f3","M304 64a80 80 0 1 1 0 160 80 80 0 1 1 0-160zm0 224c79.5 0 144-64.5 144-144S383.5 0 304 0S160 64.5 160 144c0 28.2 8.1 54.5 22.1 76.7L9.4 393.4c-12.5 12.5-12.5 32.8 0 45.3l64 64c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 416 96 397.3l41.4 41.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L141.3 352l86.1-86.1c22.2 14 48.5 22.1 76.7 22.1z"],
+    "landmark": [512,512,["127963"],"f66f","M240.1 4.2c9.8-5.6 21.9-5.6 31.8 0l171.8 98.1L448 104l0 .9 47.9 27.4c12.6 7.2 18.8 22 15.1 36s-16.4 23.8-30.9 23.8L32 192c-14.5 0-27.2-9.8-30.9-23.8s2.5-28.8 15.1-36L64 104.9l0-.9 4.4-1.6L240.1 4.2zM64 224l64 0 0 192 40 0 0-192 64 0 0 192 48 0 0-192 64 0 0 192 40 0 0-192 64 0 0 196.3c.6 .3 1.2 .7 1.8 1.1l48 32c11.7 7.8 17 22.4 12.9 35.9S494.1 512 480 512L32 512c-14.1 0-26.5-9.2-30.6-22.7s1.1-28.1 12.9-35.9l48-32c.6-.4 1.2-.7 1.8-1.1L64 224z"],
+    "language": [640,512,[],"f1ab","M0 128C0 92.7 28.7 64 64 64l192 0 48 0 16 0 256 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64l-256 0-16 0-48 0L64 448c-35.3 0-64-28.7-64-64L0 128zm320 0l0 256 256 0 0-256-256 0zM178.3 175.9c-3.2-7.2-10.4-11.9-18.3-11.9s-15.1 4.7-18.3 11.9l-64 144c-4.5 10.1 .1 21.9 10.2 26.4s21.9-.1 26.4-10.2l8.9-20.1 73.6 0 8.9 20.1c4.5 10.1 16.3 14.6 26.4 10.2s14.6-16.3 10.2-26.4l-64-144zM160 233.2L179 276l-38 0 19-42.8zM448 164c11 0 20 9 20 20l0 4 44 0 16 0c11 0 20 9 20 20s-9 20-20 20l-2 0-1.6 4.5c-8.9 24.4-22.4 46.6-39.6 65.4c.9 .6 1.8 1.1 2.7 1.6l18.9 11.3c9.5 5.7 12.5 18 6.9 27.4s-18 12.5-27.4 6.9l-18.9-11.3c-4.5-2.7-8.8-5.5-13.1-8.5c-10.6 7.5-21.9 14-34 19.4l-3.6 1.6c-10.1 4.5-21.9-.1-26.4-10.2s.1-21.9 10.2-26.4l3.6-1.6c6.4-2.9 12.6-6.1 18.5-9.8l-12.2-12.2c-7.8-7.8-7.8-20.5 0-28.3s20.5-7.8 28.3 0l14.6 14.6 .5 .5c12.4-13.1 22.5-28.3 29.8-45L448 228l-72 0c-11 0-20-9-20-20s9-20 20-20l52 0 0-4c0-11 9-20 20-20z"],
+    "less-than": [384,512,["62774"],"3c","M380.6 81.7c7.9 15.8 1.5 35-14.3 42.9L103.6 256 366.3 387.4c15.8 7.9 22.2 27.1 14.3 42.9s-27.1 22.2-42.9 14.3l-320-160C6.8 279.2 0 268.1 0 256s6.8-23.2 17.7-28.6l320-160c15.8-7.9 35-1.5 42.9 14.3z"],
+    "lightbulb": [384,512,["128161"],"f0eb","M272 384c9.6-31.9 29.5-59.1 49.2-86.2c0 0 0 0 0 0c5.2-7.1 10.4-14.2 15.4-21.4c19.8-28.5 31.4-63 31.4-100.3C368 78.8 289.2 0 192 0S16 78.8 16 176c0 37.3 11.6 71.9 31.4 100.3c5 7.2 10.2 14.3 15.4 21.4c0 0 0 0 0 0c19.8 27.1 39.7 54.4 49.2 86.2l160 0zM192 512c44.2 0 80-35.8 80-80l0-16-160 0 0 16c0 44.2 35.8 80 80 80zM112 176c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-61.9 50.1-112 112-112c8.8 0 16 7.2 16 16s-7.2 16-16 16c-44.2 0-80 35.8-80 80z"],
+    "list": [512,512,["list-squares"],"f03a","M40 48C26.7 48 16 58.7 16 72l0 48c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24l0-48c0-13.3-10.7-24-24-24L40 48zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32l288 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L192 64zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32l288 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-288 0zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32l288 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-288 0zM16 232l0 48c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24l0-48c0-13.3-10.7-24-24-24l-48 0c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24l0 48c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24l0-48c0-13.3-10.7-24-24-24l-48 0z"],
+    "list-check": [512,512,["tasks"],"f0ae","M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 113C-2.3 103.6-2.3 88.4 7 79s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM224 96c0-17.7 14.3-32 32-32l224 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-224 0c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32l224 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-224 0c-17.7 0-32-14.3-32-32zM160 416c0-17.7 14.3-32 32-32l288 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-288 0c-17.7 0-32-14.3-32-32zM48 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"],
+    "location-dot": [384,512,["map-marker-alt"],"f3c5","M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"],
+    "lock": [448,512,["128274"],"f023","M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"],
+    "lock-open": [576,512,[],"f3c1","M352 144c0-44.2 35.8-80 80-80s80 35.8 80 80l0 48c0 17.7 14.3 32 32 32s32-14.3 32-32l0-48C576 64.5 511.5 0 432 0S288 64.5 288 144l0 48L64 192c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-32 0 0-48z"],
+    "magnifying-glass": [512,512,["128269","search"],"f002","M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"],
+    "map-location-dot": [576,512,["map-marked-alt"],"f5a0","M408 120c0 54.6-73.1 151.9-105.2 192c-7.7 9.6-22 9.6-29.6 0C241.1 271.9 168 174.6 168 120C168 53.7 221.7 0 288 0s120 53.7 120 120zm8 80.4c3.5-6.9 6.7-13.8 9.6-20.6c.5-1.2 1-2.5 1.5-3.7l116-46.4C558.9 123.4 576 135 576 152l0 270.8c0 9.8-6 18.6-15.1 22.3L416 503l0-302.6zM137.6 138.3c2.4 14.1 7.2 28.3 12.8 41.5c2.9 6.8 6.1 13.7 9.6 20.6l0 251.4L32.9 502.7C17.1 509 0 497.4 0 480.4L0 209.6c0-9.8 6-18.6 15.1-22.3l122.6-49zM327.8 332c13.9-17.4 35.7-45.7 56.2-77l0 249.3L192 449.4 192 255c20.5 31.3 42.3 59.6 56.2 77c20.5 25.6 59.1 25.6 79.6 0zM288 152a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"],
+    "medal": [512,512,["127941"],"f5a2","M4.1 38.2C1.4 34.2 0 29.4 0 24.6C0 11 11 0 24.6 0L133.9 0c11.2 0 21.7 5.9 27.4 15.5l68.5 114.1c-48.2 6.1-91.3 28.6-123.4 61.9L4.1 38.2zm503.7 0L405.6 191.5c-32.1-33.3-75.2-55.8-123.4-61.9L350.7 15.5C356.5 5.9 366.9 0 378.1 0L487.4 0C501 0 512 11 512 24.6c0 4.8-1.4 9.6-4.1 13.6zM80 336a176 176 0 1 1 352 0A176 176 0 1 1 80 336zm184.4-94.9c-3.4-7-13.3-7-16.8 0l-22.4 45.4c-1.4 2.8-4 4.7-7 5.1L168 298.9c-7.7 1.1-10.7 10.5-5.2 16l36.3 35.4c2.2 2.2 3.2 5.2 2.7 8.3l-8.6 49.9c-1.3 7.6 6.7 13.5 13.6 9.9l44.8-23.6c2.7-1.4 6-1.4 8.7 0l44.8 23.6c6.9 3.6 14.9-2.2 13.6-9.9l-8.6-49.9c-.5-3 .5-6.1 2.7-8.3l36.3-35.4c5.6-5.4 2.5-14.8-5.2-16l-50.1-7.3c-3-.4-5.7-2.4-7-5.1l-22.4-45.4z"],
+    "memo": [384,512,[],"e1d8","M0 64C0 28.7 28.7 0 64 0L320 0c35.3 0 64 28.7 64 64l0 384c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zm64 80c0 8.8 7.2 16 16 16l224 0c8.8 0 16-7.2 16-16s-7.2-16-16-16L80 128c-8.8 0-16 7.2-16 16zm16 80c-8.8 0-16 7.2-16 16s7.2 16 16 16l224 0c8.8 0 16-7.2 16-16s-7.2-16-16-16L80 224zm0 96c-8.8 0-16 7.2-16 16s7.2 16 16 16l128 0c8.8 0 16-7.2 16-16s-7.2-16-16-16L80 320z"],
+    "minus": [448,512,["10134","8722","8211","subtract"],"f068","M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"],
+    "money-bill": [576,512,[],"f0d6","M64 64C28.7 64 0 92.7 0 128L0 384c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-256c0-35.3-28.7-64-64-64L64 64zm64 320l-64 0 0-64c35.3 0 64 28.7 64 64zM64 192l0-64 64 0c0 35.3-28.7 64-64 64zM448 384c0-35.3 28.7-64 64-64l0 64-64 0zm64-192c-35.3 0-64-28.7-64-64l64 0 0 64zM288 160a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"],
+    "money-bill-transfer": [640,512,[],"e528","M535 41c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l64 64c4.5 4.5 7 10.6 7 17s-2.5 12.5-7 17l-64 64c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l23-23L384 112c-13.3 0-24-10.7-24-24s10.7-24 24-24l174.1 0L535 41zM105 377l-23 23L256 400c13.3 0 24 10.7 24 24s-10.7 24-24 24L81.9 448l23 23c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L7 441c-4.5-4.5-7-10.6-7-17s2.5-12.5 7-17l64-64c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9zM96 64l241.9 0c-3.7 7.2-5.9 15.3-5.9 24c0 28.7 23.3 52 52 52l117.4 0c-4 17 .6 35.5 13.8 48.8c20.3 20.3 53.2 20.3 73.5 0L608 169.5 608 384c0 35.3-28.7 64-64 64l-241.9 0c3.7-7.2 5.9-15.3 5.9-24c0-28.7-23.3-52-52-52l-117.4 0c4-17-.6-35.5-13.8-48.8c-20.3-20.3-53.2-20.3-73.5 0L32 342.5 32 128c0-35.3 28.7-64 64-64zm64 64l-64 0 0 64c35.3 0 64-28.7 64-64zM544 320c-35.3 0-64 28.7-64 64l64 0 0-64zM320 352a96 96 0 1 0 0-192 96 96 0 1 0 0 192z"],
+    "money-check-dollar": [576,512,["money-check-alt"],"f53d","M64 64C28.7 64 0 92.7 0 128L0 384c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-256c0-35.3-28.7-64-64-64L64 64zM272 192l224 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-224 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zM256 304c0-8.8 7.2-16 16-16l224 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-224 0c-8.8 0-16-7.2-16-16zM164 152l0 13.9c7.5 1.2 14.6 2.9 21.1 4.7c10.7 2.8 17 13.8 14.2 24.5s-13.8 17-24.5 14.2c-11-2.9-21.6-5-31.2-5.2c-7.9-.1-16 1.8-21.5 5c-4.8 2.8-6.2 5.6-6.2 9.3c0 1.8 .1 3.5 5.3 6.7c6.3 3.8 15.5 6.7 28.3 10.5l.7 .2c11.2 3.4 25.6 7.7 37.1 15c12.9 8.1 24.3 21.3 24.6 41.6c.3 20.9-10.5 36.1-24.8 45c-7.2 4.5-15.2 7.3-23.2 9l0 13.8c0 11-9 20-20 20s-20-9-20-20l0-14.6c-10.3-2.2-20-5.5-28.2-8.4c0 0 0 0 0 0s0 0 0 0c-2.1-.7-4.1-1.4-6.1-2.1c-10.5-3.5-16.1-14.8-12.6-25.3s14.8-16.1 25.3-12.6c2.5 .8 4.9 1.7 7.2 2.4c13.6 4.6 24 8.1 35.1 8.5c8.6 .3 16.5-1.6 21.4-4.7c4.1-2.5 6-5.5 5.9-10.5c0-2.9-.8-5-5.9-8.2c-6.3-4-15.4-6.9-28-10.7l-1.7-.5c-10.9-3.3-24.6-7.4-35.6-14c-12.7-7.7-24.6-20.5-24.7-40.7c-.1-21.1 11.8-35.7 25.8-43.9c6.9-4.1 14.5-6.8 22.2-8.5l0-14c0-11 9-20 20-20s20 9 20 20z"],
+    "mountain-city": [640,512,[],"e52e","M336 0c-26.5 0-48 21.5-48 48l0 92.1 71.4 118.4c2.5-1.6 5.4-2.5 8.6-2.5l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-3.5 0 73.8 122.4c12.4 20.6 12.9 46.3 1.2 67.3c-.4 .8-.9 1.6-1.4 2.3L592 512c26.5 0 48-21.5 48-48l0-224c0-26.5-21.5-48-48-48l-24 0 0-72c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 72-40 0 0-144c0-26.5-21.5-48-48-48L336 0zm32 64l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16zM352 176c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32zm160 96c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32zm16 80l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32c0-8.8 7.2-16 16-16zM224 188.9L283.8 288 223 288l-48 64-24.6-41.2L224 188.9zm29.4-44.2C247.1 134.3 236 128 224 128s-23.1 6.3-29.4 16.7L5.1 458.9c-6.5 10.8-6.7 24.3-.7 35.3S22 512 34.5 512l379.1 0c12.5 0 24-6.8 30.1-17.8s5.8-24.5-.7-35.3L253.4 144.7z"],
+    "mug-hot": [512,512,["9749"],"f7b6","M88 0C74.7 0 64 10.7 64 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1C120.5 112.3 128 119.9 128 136c0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C119.5 47.7 112 40.1 112 24c0-13.3-10.7-24-24-24zM32 192c-17.7 0-32 14.3-32 32L0 416c0 53 43 96 96 96l192 0c53 0 96-43 96-96l16 0c61.9 0 112-50.1 112-112s-50.1-112-112-112l-48 0L32 192zm352 64l16 0c26.5 0 48 21.5 48 48s-21.5 48-48 48l-16 0 0-96zM224 24c0-13.3-10.7-24-24-24s-24 10.7-24 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1C232.5 112.3 240 119.9 240 136c0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C231.5 47.7 224 40.1 224 24z"],
+    "paperclip": [448,512,["128206"],"f0c6","M364.2 83.8c-24.4-24.4-64-24.4-88.4 0l-184 184c-42.1 42.1-42.1 110.3 0 152.4s110.3 42.1 152.4 0l152-152c10.9-10.9 28.7-10.9 39.6 0s10.9 28.7 0 39.6l-152 152c-64 64-167.6 64-231.6 0s-64-167.6 0-231.6l184-184c46.3-46.3 121.3-46.3 167.6 0s46.3 121.3 0 167.6l-176 176c-28.6 28.6-75 28.6-103.6 0s-28.6-75 0-103.6l144-144c10.9-10.9 28.7-10.9 39.6 0s10.9 28.7 0 39.6l-144 144c-6.7 6.7-6.7 17.7 0 24.4s17.7 6.7 24.4 0l176-176c24.4-24.4 24.4-64 0-88.4z"],
+    "pen": [512,512,["128394"],"f304","M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"],
+    "pencil": [512,512,["61504","9999","pencil-alt"],"f303","M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1 0 32c0 8.8 7.2 16 16 16l32 0zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"],
+    "people-group": [640,512,[],"e533","M72 88a56 56 0 1 1 112 0A56 56 0 1 1 72 88zM64 245.7C54 256.9 48 271.8 48 288s6 31.1 16 42.3l0-84.7zm144.4-49.3C178.7 222.7 160 261.2 160 304c0 34.3 12 65.8 32 90.5l0 21.5c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32l0-26.8C26.2 371.2 0 332.7 0 288c0-61.9 50.1-112 112-112l32 0c24 0 46.2 7.5 64.4 20.3zM448 416l0-21.5c20-24.7 32-56.2 32-90.5c0-42.8-18.7-81.3-48.4-107.7C449.8 183.5 472 176 496 176l32 0c61.9 0 112 50.1 112 112c0 44.7-26.2 83.2-64 101.2l0 26.8c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32zm8-328a56 56 0 1 1 112 0A56 56 0 1 1 456 88zM576 245.7l0 84.7c10-11.3 16-26.1 16-42.3s-6-31.1-16-42.3zM320 32a64 64 0 1 1 0 128 64 64 0 1 1 0-128zM240 304c0 16.2 6 31 16 42.3l0-84.7c-10 11.3-16 26.1-16 42.3zm144-42.3l0 84.7c10-11.3 16-26.1 16-42.3s-6-31.1-16-42.3zM448 304c0 44.7-26.2 83.2-64 101.2l0 42.8c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32l0-42.8c-37.8-18-64-56.5-64-101.2c0-61.9 50.1-112 112-112l32 0c61.9 0 112 50.1 112 112z"],
+    "person": [320,512,["129485","male"],"f183","M112 48a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm40 304l0 128c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-223.1L59.4 304.5c-9.1 15.1-28.8 20-43.9 10.9s-20-28.8-10.9-43.9l58.3-97c17.4-28.9 48.6-46.6 82.3-46.6l29.7 0c33.7 0 64.9 17.7 82.3 46.6l58.3 97c9.1 15.1 4.2 34.8-10.9 43.9s-34.8 4.2-43.9-10.9L232 256.9 232 480c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-128-16 0z"],
+    "phone": [512,512,["128379","128222"],"f095","M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"],
+    "plus": [448,512,["61543","10133","add"],"2b","M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"],
+    "plus-large": [512,512,[],"e59e","M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 192L32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l192 0 0 192c0 17.7 14.3 32 32 32s32-14.3 32-32l0-192 192 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-192 0 0-192z"],
+    "power-off": [512,512,["9211"],"f011","M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 224c0 17.7 14.3 32 32 32s32-14.3 32-32l0-224zM143.5 120.6c13.6-11.3 15.4-31.5 4.1-45.1s-31.5-15.4-45.1-4.1C49.7 115.4 16 181.8 16 256c0 132.5 107.5 240 240 240s240-107.5 240-240c0-74.2-33.8-140.6-86.6-184.6c-13.6-11.3-33.8-9.4-45.1 4.1s-9.4 33.8 4.1 45.1c38.9 32.3 63.5 81 63.5 135.4c0 97.2-78.8 176-176 176s-176-78.8-176-176c0-54.4 24.7-103.1 63.5-135.4z"],
+    "puzzle-piece": [512,512,["129513"],"f12e","M192 104.8c0-9.2-5.8-17.3-13.2-22.8C167.2 73.3 160 61.3 160 48c0-26.5 28.7-48 64-48s64 21.5 64 48c0 13.3-7.2 25.3-18.8 34c-7.4 5.5-13.2 13.6-13.2 22.8c0 12.8 10.4 23.2 23.2 23.2l56.8 0c26.5 0 48 21.5 48 48l0 56.8c0 12.8 10.4 23.2 23.2 23.2c9.2 0 17.3-5.8 22.8-13.2c8.7-11.6 20.7-18.8 34-18.8c26.5 0 48 28.7 48 64s-21.5 64-48 64c-13.3 0-25.3-7.2-34-18.8c-5.5-7.4-13.6-13.2-22.8-13.2c-12.8 0-23.2 10.4-23.2 23.2L384 464c0 26.5-21.5 48-48 48l-56.8 0c-12.8 0-23.2-10.4-23.2-23.2c0-9.2 5.8-17.3 13.2-22.8c11.6-8.7 18.8-20.7 18.8-34c0-26.5-28.7-48-64-48s-64 21.5-64 48c0 13.3 7.2 25.3 18.8 34c7.4 5.5 13.2 13.6 13.2 22.8c0 12.8-10.4 23.2-23.2 23.2L48 512c-26.5 0-48-21.5-48-48L0 343.2C0 330.4 10.4 320 23.2 320c9.2 0 17.3 5.8 22.8 13.2C54.7 344.8 66.7 352 80 352c26.5 0 48-28.7 48-64s-21.5-64-48-64c-13.3 0-25.3 7.2-34 18.8C40.5 250.2 32.4 256 23.2 256C10.4 256 0 245.6 0 232.8L0 176c0-26.5 21.5-48 48-48l120.8 0c12.8 0 23.2-10.4 23.2-23.2z"],
+    "ranking-star": [640,512,[],"e561","M353.8 54.1L330.2 6.3c-3.9-8.3-16.1-8.6-20.4 0L286.2 54.1l-52.3 7.5c-9.3 1.4-13.3 12.9-6.4 19.8l38 37-9 52.1c-1.4 9.3 8.2 16.5 16.8 12.2l46.9-24.8 46.6 24.4c8.6 4.3 18.3-2.9 16.8-12.2l-9-52.1 38-36.6c6.8-6.8 2.9-18.3-6.4-19.8l-52.3-7.5zM256 256c-17.7 0-32 14.3-32 32l0 192c0 17.7 14.3 32 32 32l128 0c17.7 0 32-14.3 32-32l0-192c0-17.7-14.3-32-32-32l-128 0zM32 320c-17.7 0-32 14.3-32 32L0 480c0 17.7 14.3 32 32 32l128 0c17.7 0 32-14.3 32-32l0-128c0-17.7-14.3-32-32-32L32 320zm416 96l0 64c0 17.7 14.3 32 32 32l128 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-128 0c-17.7 0-32 14.3-32 32z"],
+    "rectangle-history": [512,512,[],"e4a2","M512 224c0-35.3-28.7-64-64-64L64 160c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-224zM440 80L72 80c-13.3 0-24 10.7-24 24s10.7 24 24 24l368 0c13.3 0 24-10.7 24-24s-10.7-24-24-24zM392 0L120 0C106.7 0 96 10.7 96 24s10.7 24 24 24l272 0c13.3 0 24-10.7 24-24s-10.7-24-24-24z"],
+    "recycle": [512,512,["9851","9850","9842"],"f1b8","M174.7 45.1C192.2 17 223 0 256 0s63.8 17 81.3 45.1l38.6 61.7 27-15.6c8.4-4.9 18.9-4.2 26.6 1.7s11.1 15.9 8.6 25.3l-23.4 87.4c-3.4 12.8-16.6 20.4-29.4 17l-87.4-23.4c-9.4-2.5-16.3-10.4-17.6-20s3.4-19.1 11.8-23.9l28.4-16.4L283 79c-5.8-9.3-16-15-27-15s-21.2 5.7-27 15l-17.5 28c-9.2 14.8-28.6 19.5-43.6 10.5c-15.3-9.2-20.2-29.2-10.7-44.4l17.5-28zM429.5 251.9c15-9 34.4-4.3 43.6 10.5l24.4 39.1c9.4 15.1 14.4 32.4 14.6 50.2c.3 53.1-42.7 96.4-95.8 96.4L320 448l0 32c0 9.7-5.8 18.5-14.8 22.2s-19.3 1.7-26.2-5.2l-64-64c-9.4-9.4-9.4-24.6 0-33.9l64-64c6.9-6.9 17.2-8.9 26.2-5.2s14.8 12.5 14.8 22.2l0 32 96.2 0c17.6 0 31.9-14.4 31.8-32c0-5.9-1.7-11.7-4.8-16.7l-24.4-39.1c-9.5-15.2-4.7-35.2 10.7-44.4zm-364.6-31L36 204.2c-8.4-4.9-13.1-14.3-11.8-23.9s8.2-17.5 17.6-20l87.4-23.4c12.8-3.4 26 4.2 29.4 17L182 241.2c2.5 9.4-.9 19.3-8.6 25.3s-18.2 6.6-26.6 1.7l-26.5-15.3L68.8 335.3c-3.1 5-4.8 10.8-4.8 16.7c-.1 17.6 14.2 32 31.8 32l32.2 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32.2 0C42.7 448-.3 404.8 0 351.6c.1-17.8 5.1-35.1 14.6-50.2l50.3-80.5z"],
+    "right-from-bracket": [512,512,["sign-out-alt"],"f2f5","M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"],
+    "rotate": [512,512,["128260","sync-alt"],"f2f1","M142.9 142.9c-17.5 17.5-30.1 38-37.8 59.8c-5.9 16.7-24.2 25.4-40.8 19.5s-25.4-24.2-19.5-40.8C55.6 150.7 73.2 122 97.6 97.6c87.2-87.2 228.3-87.5 315.8-1L455 55c6.9-6.9 17.2-8.9 26.2-5.2s14.8 12.5 14.8 22.2l0 128c0 13.3-10.7 24-24 24l-8.4 0c0 0 0 0 0 0L344 224c-9.7 0-18.5-5.8-22.2-14.8s-1.7-19.3 5.2-26.2l41.1-41.1c-62.6-61.5-163.1-61.2-225.3 1zM16 312c0-13.3 10.7-24 24-24l7.6 0 .7 0L168 288c9.7 0 18.5 5.8 22.2 14.8s1.7 19.3-5.2 26.2l-41.1 41.1c62.6 61.5 163.1 61.2 225.3-1c17.5-17.5 30.1-38 37.8-59.8c5.9-16.7 24.2-25.4 40.8-19.5s25.4 24.2 19.5 40.8c-10.8 30.6-28.4 59.3-52.9 83.8c-87.2 87.2-228.3 87.5-315.8 1L57 457c-6.9 6.9-17.2 8.9-26.2 5.2S16 449.7 16 440l0-119.6 0-.7 0-7.6z"],
+    "rotate-right": [512,512,["redo-alt","rotate-forward"],"f2f9","M463.5 224l8.5 0c13.3 0 24-10.7 24-24l0-128c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8l119.5 0z"],
+    "sack-dollar": [512,512,["128176"],"f81d","M320 96L192 96 144.6 24.9C137.5 14.2 145.1 0 157.9 0L354.1 0c12.8 0 20.4 14.2 13.3 24.9L320 96zM192 128l128 0c3.8 2.5 8.1 5.3 13 8.4C389.7 172.7 512 250.9 512 416c0 53-43 96-96 96L96 512c-53 0-96-43-96-96C0 250.9 122.3 172.7 179 136.4c0 0 0 0 0 0s0 0 0 0c4.8-3.1 9.2-5.9 13-8.4zm84 88c0-11-9-20-20-20s-20 9-20 20l0 14c-7.6 1.7-15.2 4.4-22.2 8.5c-13.9 8.3-25.9 22.8-25.8 43.9c.1 20.3 12 33.1 24.7 40.7c11 6.6 24.7 10.8 35.6 14l1.7 .5c12.6 3.8 21.8 6.8 28 10.7c5.1 3.2 5.8 5.4 5.9 8.2c.1 5-1.8 8-5.9 10.5c-5 3.1-12.9 5-21.4 4.7c-11.1-.4-21.5-3.9-35.1-8.5c-2.3-.8-4.7-1.6-7.2-2.4c-10.5-3.5-21.8 2.2-25.3 12.6s2.2 21.8 12.6 25.3c1.9 .6 4 1.3 6.1 2.1c0 0 0 0 0 0s0 0 0 0c8.3 2.9 17.9 6.2 28.2 8.4l0 14.6c0 11 9 20 20 20s20-9 20-20l0-13.8c8-1.7 16-4.5 23.2-9c14.3-8.9 25.1-24.1 24.8-45c-.3-20.3-11.7-33.4-24.6-41.6c-11.5-7.2-25.9-11.6-37.1-15c0 0 0 0 0 0l-.7-.2c-12.8-3.9-21.9-6.7-28.3-10.5c-5.2-3.1-5.3-4.9-5.3-6.7c0-3.7 1.4-6.5 6.2-9.3c5.4-3.2 13.6-5.1 21.5-5c9.6 .1 20.2 2.2 31.2 5.2c10.7 2.8 21.6-3.5 24.5-14.2s-3.5-21.6-14.2-24.5c-6.5-1.7-13.7-3.4-21.1-4.7l0-13.9z"],
+    "scale-balanced": [640,512,["9878","balance-scale"],"f24e","M384 32l128 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L398.4 96c-5.2 25.8-22.9 47.1-46.4 57.3L352 448l160 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-192 0-192 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l160 0 0-294.7c-23.5-10.3-41.2-31.6-46.4-57.3L128 96c-17.7 0-32-14.3-32-32s14.3-32 32-32l128 0c14.6-19.4 37.8-32 64-32s49.4 12.6 64 32zm55.6 288l144.9 0L512 195.8 439.6 320zM512 416c-62.9 0-115.2-34-126-78.9c-2.6-11 1-22.3 6.7-32.1l95.2-163.2c5-8.6 14.2-13.8 24.1-13.8s19.1 5.3 24.1 13.8l95.2 163.2c5.7 9.8 9.3 21.1 6.7 32.1C627.2 382 574.9 416 512 416zM126.8 195.8L54.4 320l144.9 0L126.8 195.8zM.9 337.1c-2.6-11 1-22.3 6.7-32.1l95.2-163.2c5-8.6 14.2-13.8 24.1-13.8s19.1 5.3 24.1 13.8l95.2 163.2c5.7 9.8 9.3 21.1 6.7 32.1C242 382 189.7 416 126.8 416S11.7 382 .9 337.1z"],
+    "school": [640,512,["127979"],"f549","M337.8 5.4C327-1.8 313-1.8 302.2 5.4L166.3 96 48 96C21.5 96 0 117.5 0 144L0 464c0 26.5 21.5 48 48 48l208 0 0-96c0-35.3 28.7-64 64-64s64 28.7 64 64l0 96 208 0c26.5 0 48-21.5 48-48l0-320c0-26.5-21.5-48-48-48L473.7 96 337.8 5.4zM96 192l32 0c8.8 0 16 7.2 16 16l0 64c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-64c0-8.8 7.2-16 16-16zm400 16c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 64c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-64zM96 320l32 0c8.8 0 16 7.2 16 16l0 64c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-64c0-8.8 7.2-16 16-16zm400 16c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 64c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-64zM232 176a88 88 0 1 1 176 0 88 88 0 1 1 -176 0zm88-48c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-16 0 0-16c0-8.8-7.2-16-16-16z"],
+    "screwdriver-wrench": [512,512,["tools"],"f7d9","M78.6 5C69.1-2.4 55.6-1.5 47 7L7 47c-8.5 8.5-9.4 22-2.1 31.6l80 104c4.5 5.9 11.6 9.4 19 9.4l54.1 0 109 109c-14.7 29-10 65.4 14.3 89.6l112 112c12.5 12.5 32.8 12.5 45.3 0l64-64c12.5-12.5 12.5-32.8 0-45.3l-112-112c-24.2-24.2-60.6-29-89.6-14.3l-109-109 0-54.1c0-7.5-3.5-14.5-9.4-19L78.6 5zM19.9 396.1C7.2 408.8 0 426.1 0 444.1C0 481.6 30.4 512 67.9 512c18 0 35.3-7.2 48-19.9L233.7 374.3c-7.8-20.9-9-43.6-3.6-65.1l-61.7-61.7L19.9 396.1zM512 144c0-10.5-1.1-20.7-3.2-30.5c-2.4-11.2-16.1-14.1-24.2-6l-63.9 63.9c-3 3-7.1 4.7-11.3 4.7L352 176c-8.8 0-16-7.2-16-16l0-57.4c0-4.2 1.7-8.3 4.7-11.3l63.9-63.9c8.1-8.1 5.2-21.8-6-24.2C388.7 1.1 378.5 0 368 0C288.5 0 224 64.5 224 144l0 .8 85.3 85.3c36-9.1 75.8 .5 104 28.7L429 274.5c49-23 83-72.8 83-130.5zM56 432a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"],
+    "share": [512,512,["mail-forward"],"f064","M307 34.8c-11.5 5.1-19 16.6-19 29.2l0 64-112 0C78.8 128 0 206.8 0 304C0 417.3 81.5 467.9 100.2 478.1c2.5 1.4 5.3 1.9 8.1 1.9c10.9 0 19.7-8.9 19.7-19.7c0-7.5-4.3-14.4-9.8-19.5C108.8 431.9 96 414.4 96 384c0-53 43-96 96-96l96 0 0 64c0 12.6 7.4 24.1 19 29.2s25 3 34.4-5.4l160-144c6.7-6.1 10.6-14.7 10.6-23.8s-3.8-17.7-10.6-23.8l-160-144c-9.4-8.5-22.9-10.6-34.4-5.4z"],
+    "shop": [640,512,["store-alt"],"f54f","M36.8 192l566.3 0c20.3 0 36.8-16.5 36.8-36.8c0-7.3-2.2-14.4-6.2-20.4L558.2 21.4C549.3 8 534.4 0 518.3 0L121.7 0c-16 0-31 8-39.9 21.4L6.2 134.7c-4 6.1-6.2 13.2-6.2 20.4C0 175.5 16.5 192 36.8 192zM64 224l0 160 0 80c0 26.5 21.5 48 48 48l224 0c26.5 0 48-21.5 48-48l0-80 0-160-64 0 0 160-192 0 0-160-64 0zm448 0l0 256c0 17.7 14.3 32 32 32s32-14.3 32-32l0-256-64 0z"],
+    "signal-bars": [640,512,["signal-alt","signal-alt-4","signal-bars-strong"],"f690","M560 0c-26.5 0-48 21.5-48 48l0 416c0 26.5 21.5 48 48 48s48-21.5 48-48l0-416c0-26.5-21.5-48-48-48zM352 176l0 288c0 26.5 21.5 48 48 48s48-21.5 48-48l0-288c0-26.5-21.5-48-48-48s-48 21.5-48 48zM240 256c-26.5 0-48 21.5-48 48l0 160c0 26.5 21.5 48 48 48s48-21.5 48-48l0-160c0-26.5-21.5-48-48-48zM80 384c-26.5 0-48 21.5-48 48l0 32c0 26.5 21.5 48 48 48s48-21.5 48-48l0-32c0-26.5-21.5-48-48-48z"],
+    "signal-bars-fair": [640,512,["signal-alt-2"],"f692","M240 256c-26.5 0-48 21.5-48 48l0 160c0 26.5 21.5 48 48 48s48-21.5 48-48l0-160c0-26.5-21.5-48-48-48zM80 384c-26.5 0-48 21.5-48 48l0 32c0 26.5 21.5 48 48 48s48-21.5 48-48l0-32c0-26.5-21.5-48-48-48z"],
+    "signal-bars-good": [640,512,["signal-alt-3"],"f693","M400 128c-26.5 0-48 21.5-48 48l0 288c0 26.5 21.5 48 48 48s48-21.5 48-48l0-288c0-26.5-21.5-48-48-48zM192 304l0 160c0 26.5 21.5 48 48 48s48-21.5 48-48l0-160c0-26.5-21.5-48-48-48s-48 21.5-48 48zM32 432l0 32c0 26.5 21.5 48 48 48s48-21.5 48-48l0-32c0-26.5-21.5-48-48-48s-48 21.5-48 48z"],
+    "signal-bars-weak": [640,512,["signal-alt-1"],"f691","M32 432c0-26.5 21.5-48 48-48s48 21.5 48 48v32c0 26.5-21.5 48-48 48s-48-21.5-48-48V432z"],
+    "sliders": [512,512,["sliders-h"],"f1de","M0 416c0 17.7 14.3 32 32 32l54.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48L480 448c17.7 0 32-14.3 32-32s-14.3-32-32-32l-246.7 0c-12.3-28.3-40.5-48-73.3-48s-61 19.7-73.3 48L32 384c-17.7 0-32 14.3-32 32zm128 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM320 256a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm32-80c-32.8 0-61 19.7-73.3 48L32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l246.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48l54.7 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-54.7 0c-12.3-28.3-40.5-48-73.3-48zM192 128a32 32 0 1 1 0-64 32 32 0 1 1 0 64zm73.3-64C253 35.7 224.8 16 192 16s-61 19.7-73.3 48L32 64C14.3 64 0 78.3 0 96s14.3 32 32 32l86.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48L480 128c17.7 0 32-14.3 32-32s-14.3-32-32-32L265.3 64z"],
+    "spinner": [512,512,[],"f110","M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z"],
+    "square": [448,512,["61590","9724","9723","9632"],"f0c8","M0 96C0 60.7 28.7 32 64 32H384c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96z"],
+    "square-check": [448,512,["61510","9989","9745","check-square"],"f14a","M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zM337 209L209 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L303 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"],
+    "square-plus": [448,512,["61846","plus-square"],"f0fe","M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zM200 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"],
+    "square-poll-vertical": [448,512,["poll"],"f681","M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm64 192c17.7 0 32 14.3 32 32l0 96c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-96c0-17.7 14.3-32 32-32zm64-64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 192c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-192zM320 288c17.7 0 32 14.3 32 32l0 32c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-32c0-17.7 14.3-32 32-32z"],
+    "square-xmark": [448,512,["10062","times-square","xmark-square"],"f2d3","M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm79 143c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"],
+    "star": [576,512,["61446","11088"],"f005","M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"],
+    "star-half-stroke": [576,512,["star-half-alt"],"f5c0","M288 376.4l.1-.1 26.4 14.1 85.2 45.5-16.5-97.6-4.8-28.7 20.7-20.5 70.1-69.3-96.1-14.2-29.3-4.3-12.9-26.6L288.1 86.9l-.1 .3 0 289.2zm175.1 98.3c2 12-3 24.2-12.9 31.3s-23 8-33.8 2.3L288.1 439.8 159.8 508.3C149 514 135.9 513.1 126 506s-14.9-19.3-12.9-31.3L137.8 329 33.6 225.9c-8.6-8.5-11.7-21.2-7.9-32.7s13.7-19.9 25.7-21.7L195 150.3 259.4 18c5.4-11 16.5-18 28.8-18s23.4 7 28.8 18l64.3 132.3 143.6 21.2c12 1.8 22 10.2 25.7 21.7s.7 24.2-7.9 32.7L438.5 329l24.6 145.7z"],
+    "stopwatch": [448,512,["9201"],"f2f2","M176 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l16 0 0 34.4C92.3 113.8 16 200 16 304c0 114.9 93.1 208 208 208s208-93.1 208-208c0-41.8-12.3-80.7-33.5-113.2l24.1-24.1c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L355.7 143c-28.1-23-62.2-38.8-99.7-44.6L256 64l16 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L224 0 176 0zm72 192l0 128c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-128c0-13.3 10.7-24 24-24s24 10.7 24 24z"],
+    "store": [576,512,[],"f54e","M547.6 103.8L490.3 13.1C485.2 5 476.1 0 466.4 0L109.6 0C99.9 0 90.8 5 85.7 13.1L28.3 103.8c-29.6 46.8-3.4 111.9 51.9 119.4c4 .5 8.1 .8 12.1 .8c26.1 0 49.3-11.4 65.2-29c15.9 17.6 39.1 29 65.2 29c26.1 0 49.3-11.4 65.2-29c15.9 17.6 39.1 29 65.2 29c26.2 0 49.3-11.4 65.2-29c16 17.6 39.1 29 65.2 29c4.1 0 8.1-.3 12.1-.8c55.5-7.4 81.8-72.5 52.1-119.4zM499.7 254.9c0 0 0 0-.1 0c-5.3 .7-10.7 1.1-16.2 1.1c-12.4 0-24.3-1.9-35.4-5.3L448 384l-320 0 0-133.4c-11.2 3.5-23.2 5.4-35.6 5.4c-5.5 0-11-.4-16.3-1.1l-.1 0c-4.1-.6-8.1-1.3-12-2.3L64 384l0 64c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-64 0-131.4c-4 1-8 1.8-12.3 2.3z"],
+    "store-slash": [640,512,[],"e071","M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7l-86.8-68 0-17.1 0-131.4c-4 1-8 1.8-12.3 2.3c0 0 0 0-.1 0c-5.3 .7-10.7 1.1-16.2 1.1c-12.4 0-24.3-1.9-35.4-5.3l0 100.3L301.2 210.7c7-4.4 13.3-9.7 18.8-15.7c15.9 17.6 39.1 29 65.2 29c26.2 0 49.3-11.4 65.2-29c16 17.6 39.1 29 65.2 29c4.1 0 8.1-.3 12.1-.8c55.5-7.4 81.8-72.5 52.1-119.4L522.3 13.1C517.2 5 508.1 0 498.4 0L141.6 0c-9.7 0-18.8 5-23.9 13.1l-22.7 36L38.8 5.1zm73.4 218.1c4 .5 8.1 .8 12.1 .8c11 0 21.4-2 31-5.6L48.9 134.5c-6.1 40.6 19.5 82.8 63.3 88.7zM160 384l0-133.4c-11.2 3.5-23.2 5.4-35.6 5.4c-5.5 0-11-.4-16.3-1.1l-.1 0c-4.1-.6-8.1-1.3-12-2.3L96 384l0 64c0 35.3 28.7 64 64 64l320 0c12.9 0 24.8-3.8 34.9-10.3L365.5 384 160 384z"],
+    "suitcase": [512,512,["129523"],"f0f2","M176 56l0 40 160 0 0-40c0-4.4-3.6-8-8-8L184 48c-4.4 0-8 3.6-8 8zM128 96l0-40c0-30.9 25.1-56 56-56L328 0c30.9 0 56 25.1 56 56l0 40 0 32 0 352-256 0 0-352 0-32zM64 96l32 0 0 384-32 0c-35.3 0-64-28.7-64-64L0 160c0-35.3 28.7-64 64-64zM448 480l-32 0 0-384 32 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64z"],
+    "table-columns": [512,512,["columns"],"f0db","M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zm64 64l0 256 160 0 0-256L64 160zm384 0l-160 0 0 256 160 0 0-256z"],
+    "table-list": [512,512,["th-list"],"f00b","M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zm64 0l0 64 64 0 0-64L64 96zm384 0L192 96l0 64 256 0 0-64zM64 224l0 64 64 0 0-64-64 0zm384 0l-256 0 0 64 256 0 0-64zM64 352l0 64 64 0 0-64-64 0zm384 0l-256 0 0 64 256 0 0-64z"],
+    "tag": [448,512,["127991"],"f02b","M0 80L0 229.5c0 17 6.7 33.3 18.7 45.3l176 176c25 25 65.5 25 90.5 0L418.7 317.3c25-25 25-65.5 0-90.5l-176-176c-12-12-28.3-18.7-45.3-18.7L48 32C21.5 32 0 53.5 0 80zm112 32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"],
+    "tarp": [576,512,[],"e57b","M576 128c0-35.3-28.7-64-64-64L64 64C28.7 64 0 92.7 0 128L0 384c0 35.3 28.7 64 64 64l352 0 0-128c0-17.7 14.3-32 32-32l128 0 0-160zM448 448L576 320l-128 0 0 128zM96 128a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"],
+    "thumbs-down": [512,512,["61576","128078"],"f165","M313.4 479.1c26-5.2 42.9-30.5 37.7-56.5l-2.3-11.4c-5.3-26.7-15.1-52.1-28.8-75.2l144 0c26.5 0 48-21.5 48-48c0-18.5-10.5-34.6-25.9-42.6C497 236.6 504 223.1 504 208c0-23.4-16.8-42.9-38.9-47.1c4.4-7.3 6.9-15.8 6.9-24.9c0-21.3-13.9-39.4-33.1-45.6c.7-3.3 1.1-6.8 1.1-10.4c0-26.5-21.5-48-48-48l-97.5 0c-19 0-37.5 5.6-53.3 16.1L202.7 73.8C176 91.6 160 121.6 160 153.7l0 38.3 0 48 0 24.9c0 29.2 13.3 56.7 36 75l7.4 5.9c26.5 21.2 44.6 51 51.2 84.2l2.3 11.4c5.2 26 30.5 42.9 56.5 37.7zM32 384l64 0c17.7 0 32-14.3 32-32l0-224c0-17.7-14.3-32-32-32L32 96C14.3 96 0 110.3 0 128L0 352c0 17.7 14.3 32 32 32z"],
+    "thumbs-up": [512,512,["61575","128077"],"f164","M313.4 32.9c26 5.2 42.9 30.5 37.7 56.5l-2.3 11.4c-5.3 26.7-15.1 52.1-28.8 75.2l144 0c26.5 0 48 21.5 48 48c0 18.5-10.5 34.6-25.9 42.6C497 275.4 504 288.9 504 304c0 23.4-16.8 42.9-38.9 47.1c4.4 7.3 6.9 15.8 6.9 24.9c0 21.3-13.9 39.4-33.1 45.6c.7 3.3 1.1 6.8 1.1 10.4c0 26.5-21.5 48-48 48l-97.5 0c-19 0-37.5-5.6-53.3-16.1l-38.5-25.7C176 420.4 160 390.4 160 358.3l0-38.3 0-48 0-24.9c0-29.2 13.3-56.7 36-75l7.4-5.9c26.5-21.2 44.6-51 51.2-84.2l2.3-11.4c5.2-26 30.5-42.9 56.5-37.7zM32 192l64 0c17.7 0 32 14.3 32 32l0 224c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32L0 224c0-17.7 14.3-32 32-32z"],
+    "thumbtack": [384,512,["128392","128204","thumb-tack"],"f08d","M32 32C32 14.3 46.3 0 64 0L320 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-29.5 0 11.4 148.2c36.7 19.9 65.7 53.2 79.5 94.7l1 3c3.3 9.8 1.6 20.5-4.4 28.8s-15.7 13.3-26 13.3L32 352c-10.3 0-19.9-4.9-26-13.3s-7.7-19.1-4.4-28.8l1-3c13.8-41.5 42.8-74.8 79.5-94.7L93.5 64 64 64C46.3 64 32 49.7 32 32zM160 384l64 0 0 96c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-96z"],
+    "timer": [512,512,[],"e29e","M256 0c-17.7 0-32 14.3-32 32l0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-29.3C378.8 81.9 448 160.9 448 256c0 106-86 192-192 192S64 362 64 256c0-53.7 22-102.3 57.6-137.1c12.6-12.4 12.8-32.6 .5-45.3S89.5 60.8 76.8 73.1C29.5 119.6 0 184.4 0 256C0 397.4 114.6 512 256 512s256-114.6 256-256S397.4 0 256 0zM193 159c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l80 80c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80z"],
+    "trash-can": [448,512,["61460","trash-alt"],"f2ed","M135.2 17.7C140.6 6.8 151.7 0 163.8 0L284.2 0c12.1 0 23.2 6.8 28.6 17.7L320 32l96 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 96C14.3 96 0 81.7 0 64S14.3 32 32 32l96 0 7.2-14.3zM32 128l384 0 0 320c0 35.3-28.7 64-64 64L96 512c-35.3 0-64-28.7-64-64l0-320zm96 64c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16z"],
+    "trash-can-undo": [448,512,["trash-can-arrow-turn-left","trash-undo-alt"],"f896","M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128l0 320c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-320zM217.8 199.9c8.9 9.9 8.1 25-1.8 33.9L182.5 264l57.5 0c48.6 0 88 39.4 88 88l0 40c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-40c0-22.1-17.9-40-40-40l-57.5 0 33.5 30.2c9.9 8.9 10.7 24 1.8 33.9s-24 10.7-33.9 1.8l-80-72c-5.1-4.6-7.9-11-7.9-17.8s2.9-13.3 7.9-17.8l80-72c9.9-8.9 25-8.1 33.9 1.8z"],
+    "triangle-exclamation": [512,512,["9888","exclamation-triangle","warning"],"f071","M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480L40 480c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"],
+    "tv": [640,512,["63717","television","tv-alt"],"f26c","M64 64l0 288 512 0 0-288L64 64zM0 64C0 28.7 28.7 0 64 0L576 0c35.3 0 64 28.7 64 64l0 288c0 35.3-28.7 64-64 64L64 416c-35.3 0-64-28.7-64-64L0 64zM128 448l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-384 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"],
+    "up-right-and-down-left-from-center": [512,512,["expand-alt"],"f424","M344 0L488 0c13.3 0 24 10.7 24 24l0 144c0 9.7-5.8 18.5-14.8 22.2s-19.3 1.7-26.2-5.2l-39-39-87 87c-9.4 9.4-24.6 9.4-33.9 0l-32-32c-9.4-9.4-9.4-24.6 0-33.9l87-87L327 41c-6.9-6.9-8.9-17.2-5.2-26.2S334.3 0 344 0zM168 512L24 512c-13.3 0-24-10.7-24-24L0 344c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2l39 39 87-87c9.4-9.4 24.6-9.4 33.9 0l32 32c9.4 9.4 9.4 24.6 0 33.9l-87 87 39 39c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8z"],
+    "upload": [512,512,[],"f093","M288 109.3L288 352c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-242.7-73.4 73.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l128-128c12.5-12.5 32.8-12.5 45.3 0l128 128c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L288 109.3zM64 352l128 0c0 35.3 28.7 64 64 64s64-28.7 64-64l128 0c35.3 0 64 28.7 64 64l0 32c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64l0-32c0-35.3 28.7-64 64-64zM432 456a24 24 0 1 0 0-48 24 24 0 1 0 0 48z"],
+    "user": [448,512,["62144","128100"],"f007","M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"],
+    "user-graduate": [448,512,[],"f501","M219.3 .5c3.1-.6 6.3-.6 9.4 0l200 40C439.9 42.7 448 52.6 448 64s-8.1 21.3-19.3 23.5L352 102.9l0 57.1c0 70.7-57.3 128-128 128s-128-57.3-128-128l0-57.1L48 93.3l0 65.1 15.7 78.4c.9 4.7-.3 9.6-3.3 13.3s-7.6 5.9-12.4 5.9l-32 0c-4.8 0-9.3-2.1-12.4-5.9s-4.3-8.6-3.3-13.3L16 158.4l0-71.8C6.5 83.3 0 74.3 0 64C0 52.6 8.1 42.7 19.3 40.5l200-40zM111.9 327.7c10.5-3.4 21.8 .4 29.4 8.5l71 75.5c6.3 6.7 17 6.7 23.3 0l71-75.5c7.6-8.1 18.9-11.9 29.4-8.5C401 348.6 448 409.4 448 481.3c0 17-13.8 30.7-30.7 30.7L30.7 512C13.8 512 0 498.2 0 481.3c0-71.9 47-132.7 111.9-153.6z"],
+    "user-group": [640,512,["128101","user-friends"],"f500","M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3zM609.3 512l-137.8 0c5.4-9.4 8.6-20.3 8.6-32l0-8c0-60.7-27.1-115.2-69.8-151.8c2.4-.1 4.7-.2 7.1-.2l61.4 0C567.8 320 640 392.2 640 481.3c0 17-13.8 30.7-30.7 30.7zM432 256c-31 0-59-12.6-79.3-32.9C372.4 196.5 384 163.6 384 128c0-26.8-6.6-52.1-18.3-74.3C384.3 40.1 407.2 32 432 32c61.9 0 112 50.1 112 112s-50.1 112-112 112z"],
+    "user-group-simple": [640,512,[],"e603","M160 32a104 104 0 1 1 0 208 104 104 0 1 1 0-208zm320 0a104 104 0 1 1 0 208 104 104 0 1 1 0-208zM0 416c0-70.7 57.3-128 128-128l64 0c70.7 0 128 57.3 128 128l0 16c0 26.5-21.5 48-48 48L48 480c-26.5 0-48-21.5-48-48l0-16zm448 64c-38.3 0-72.7-16.8-96.1-43.5c.1-1.5 .1-3 .1-4.5l0-16c0-34.9-11.2-67.1-30.1-93.4c5.8-20 24.2-34.6 46.1-34.6l224 0c26.5 0 48 21.5 48 48l0 16c0 70.7-57.3 128-128 128l-64 0z"],
+    "user-plus": [640,512,[],"f234","M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3zM504 312l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"],
+    "user-tie": [448,512,[],"f508","M96 128a128 128 0 1 0 256 0A128 128 0 1 0 96 128zm94.5 200.2l18.6 31L175.8 483.1l-36-146.9c-2-8.1-9.8-13.4-17.9-11.3C51.9 342.4 0 405.8 0 481.3c0 17 13.8 30.7 30.7 30.7l131.7 0c0 0 0 0 .1 0l5.5 0 112 0 5.5 0c0 0 0 0 .1 0l131.7 0c17 0 30.7-13.8 30.7-30.7c0-75.5-51.9-138.9-121.9-156.4c-8.1-2-15.9 3.3-17.9 11.3l-36 146.9L238.9 359.2l18.6-31c6.4-10.7-1.3-24.2-13.7-24.2L224 304l-19.7 0c-12.4 0-20.1 13.6-13.7 24.2z"],
+    "user-tie-hair": [448,512,[],"e45f","M304 128c0-11.4-2.4-22.2-6.7-32L296 96c-20.5 0-38.7-9.6-50.4-24.5C231.9 95.7 205.8 112 176 112l-30.4 0c-1 5.2-1.6 10.5-1.6 16l0 16c0 44.2 35.8 80 80 80s80-35.8 80-80l0-16zM96 128C96 57.3 153.3 0 224 0s128 57.3 128 128l0 16c0 70.7-57.3 128-128 128s-128-57.3-128-128l0-16zM280 512l-112 0-5.5 0c0 0 0 0-.1 0L30.7 512C13.8 512 0 498.2 0 481.3c0-75.5 51.9-138.9 121.9-156.4c8.1-2 15.9 3.3 17.9 11.3l36 146.9 33.4-123.9-18.6-31c-6.4-10.7 1.3-24.2 13.7-24.2l19.7 0 19.7 0c12.4 0 20.1 13.6 13.7 24.2l-18.6 31 33.4 123.9 36-146.9c2-8.1 9.8-13.4 17.9-11.3c70.1 17.6 121.9 81 121.9 156.4c0 17-13.8 30.7-30.7 30.7l-131.7 0c0 0 0 0-.1 0l-5.5 0z"],
+    "users": [640,512,[],"f0c0","M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z"],
+    "utensils": [448,512,["61685","127860","cutlery"],"f2e7","M416 0C400 0 288 32 288 176l0 112c0 35.3 28.7 64 64 64l32 0 0 128c0 17.7 14.3 32 32 32s32-14.3 32-32l0-128 0-112 0-208c0-17.7-14.3-32-32-32zM64 16C64 7.8 57.9 1 49.7 .1S34.2 4.6 32.4 12.5L2.1 148.8C.7 155.1 0 161.5 0 167.9c0 45.9 35.1 83.6 80 87.7L80 480c0 17.7 14.3 32 32 32s32-14.3 32-32l0-224.4c44.9-4.1 80-41.8 80-87.7c0-6.4-.7-12.8-2.1-19.1L191.6 12.5c-1.8-8-9.3-13.3-17.4-12.4S160 7.8 160 16l0 134.2c0 5.4-4.4 9.8-9.8 9.8c-5.1 0-9.3-3.9-9.8-9L127.9 14.6C127.2 6.3 120.3 0 112 0s-15.2 6.3-15.9 14.6L83.7 151c-.5 5.1-4.7 9-9.8 9c-5.4 0-9.8-4.4-9.8-9.8L64 16zm48.3 152l-.3 0-.3 0 .3-.7 .3 .7z"],
+    "x": [384,512,["120"],"58","M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"],
+    "xmark": [384,512,["215","10060","10006","10005","128473","close","multiply","remove","times"],"f00d","M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"]
+
+  };
+  var prefixes = [null    ,'fas',
+    ,'fa-solid'
+];
+  bunker(() => {
+    for (const prefix of prefixes) {
+      if (!prefix) continue;
+      defineIcons(prefix, icons);
+    }
+  });
+
+}());
+
+(function () {
+  'use strict';
+
+  let _WINDOW = {};
+  let _DOCUMENT = {};
+  try {
+    if (typeof window !== 'undefined') _WINDOW = window;
+    if (typeof document !== 'undefined') _DOCUMENT = document;
+  } catch (e) {}
+  const {
+    userAgent = ''
+  } = _WINDOW.navigator || {};
+  const WINDOW = _WINDOW;
+  const DOCUMENT = _DOCUMENT;
+  const IS_BROWSER = !!WINDOW.document;
+  const IS_DOM = !!DOCUMENT.documentElement && !!DOCUMENT.head && typeof DOCUMENT.addEventListener === 'function' && typeof DOCUMENT.createElement === 'function';
+  const IS_IE = ~userAgent.indexOf('MSIE') || ~userAgent.indexOf('Trident/');
+
+  function _defineProperty(e, r, t) {
+    return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+      value: t,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }) : e[r] = t, e;
+  }
+  function ownKeys(e, r) {
+    var t = Object.keys(e);
+    if (Object.getOwnPropertySymbols) {
+      var o = Object.getOwnPropertySymbols(e);
+      r && (o = o.filter(function (r) {
+        return Object.getOwnPropertyDescriptor(e, r).enumerable;
+      })), t.push.apply(t, o);
+    }
+    return t;
+  }
+  function _objectSpread2(e) {
+    for (var r = 1; r < arguments.length; r++) {
+      var t = null != arguments[r] ? arguments[r] : {};
+      r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+        _defineProperty(e, r, t[r]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+        Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+      });
+    }
+    return e;
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+
+  var S = {
+      classic: {
+        fa: "solid",
+        fas: "solid",
+        "fa-solid": "solid",
+        far: "regular",
+        "fa-regular": "regular",
+        fal: "light",
+        "fa-light": "light",
+        fat: "thin",
+        "fa-thin": "thin",
+        fab: "brands",
+        "fa-brands": "brands"
+      },
+      duotone: {
+        fa: "solid",
+        fad: "solid",
+        "fa-solid": "solid",
+        "fa-duotone": "solid",
+        fadr: "regular",
+        "fa-regular": "regular",
+        fadl: "light",
+        "fa-light": "light",
+        fadt: "thin",
+        "fa-thin": "thin"
+      },
+      sharp: {
+        fa: "solid",
+        fass: "solid",
+        "fa-solid": "solid",
+        fasr: "regular",
+        "fa-regular": "regular",
+        fasl: "light",
+        "fa-light": "light",
+        fast: "thin",
+        "fa-thin": "thin"
+      },
+      "sharp-duotone": {
+        fa: "solid",
+        fasds: "solid",
+        "fa-solid": "solid",
+        fasdr: "regular",
+        "fa-regular": "regular",
+        fasdl: "light",
+        "fa-light": "light",
+        fasdt: "thin",
+        "fa-thin": "thin"
+      }
+    };
+  var s = "classic";
+  var G = {
+      classic: {
+        900: "fas",
+        400: "far",
+        normal: "far",
+        300: "fal",
+        100: "fat"
+      },
+      duotone: {
+        900: "fad",
+        400: "fadr",
+        300: "fadl",
+        100: "fadt"
+      },
+      sharp: {
+        900: "fass",
+        400: "fasr",
+        300: "fasl",
+        100: "fast"
+      },
+      "sharp-duotone": {
+        900: "fasds",
+        400: "fasdr",
+        300: "fasdl",
+        100: "fasdt"
+      }
+    };
+  var xt = {
+      classic: {
+        solid: "fas",
+        regular: "far",
+        light: "fal",
+        thin: "fat",
+        brands: "fab"
+      },
+      duotone: {
+        solid: "fad",
+        regular: "fadr",
+        light: "fadl",
+        thin: "fadt"
+      },
+      sharp: {
+        solid: "fass",
+        regular: "fasr",
+        light: "fasl",
+        thin: "fast"
+      },
+      "sharp-duotone": {
+        solid: "fasds",
+        regular: "fasdr",
+        light: "fasdl",
+        thin: "fasdt"
+      }
+    };
+  var St = {
+      kit: {
+        fak: "kit",
+        "fa-kit": "kit"
+      },
+      "kit-duotone": {
+        fakd: "kit-duotone",
+        "fa-kit-duotone": "kit-duotone"
+      }
+    };
+  var Ct = {
+    kit: {
+      "fa-kit": "fak"
+    },
+    "kit-duotone": {
+      "fa-kit-duotone": "fakd"
+    }
+  };
+  var Wt = {
+      kit: {
+        fak: "fa-kit"
+      },
+      "kit-duotone": {
+        fakd: "fa-kit-duotone"
+      }
+    };
+  var Et = {
+      kit: {
+        kit: "fak"
+      },
+      "kit-duotone": {
+        "kit-duotone": "fakd"
+      }
+    };
+
+  var ua = {
+      classic: {
+        "fa-brands": "fab",
+        "fa-duotone": "fad",
+        "fa-light": "fal",
+        "fa-regular": "far",
+        "fa-solid": "fas",
+        "fa-thin": "fat"
+      },
+      duotone: {
+        "fa-regular": "fadr",
+        "fa-light": "fadl",
+        "fa-thin": "fadt"
+      },
+      sharp: {
+        "fa-solid": "fass",
+        "fa-regular": "fasr",
+        "fa-light": "fasl",
+        "fa-thin": "fast"
+      },
+      "sharp-duotone": {
+        "fa-solid": "fasds",
+        "fa-regular": "fasdr",
+        "fa-light": "fasdl",
+        "fa-thin": "fasdt"
+      }
+    },
+    ga = {
+      classic: {
+        fab: "fa-brands",
+        fad: "fa-duotone",
+        fal: "fa-light",
+        far: "fa-regular",
+        fas: "fa-solid",
+        fat: "fa-thin"
+      },
+      duotone: {
+        fadr: "fa-regular",
+        fadl: "fa-light",
+        fadt: "fa-thin"
+      },
+      sharp: {
+        fass: "fa-solid",
+        fasr: "fa-regular",
+        fasl: "fa-light",
+        fast: "fa-thin"
+      },
+      "sharp-duotone": {
+        fasds: "fa-solid",
+        fasdr: "fa-regular",
+        fasdl: "fa-light",
+        fasdt: "fa-thin"
+      }
+    };
+
+  const NAMESPACE_IDENTIFIER = '___FONT_AWESOME___';
+  const PRODUCTION = (() => {
+    try {
+      return "production" === 'production';
+    } catch (e$$1) {
+      return false;
+    }
+  })();
+  function familyProxy(obj) {
+    // Defaults to the classic family if family is not available
+    return new Proxy(obj, {
+      get(target, prop) {
+        return prop in target ? target[prop] : target[s];
+      }
+    });
+  }
+  const _PREFIX_TO_STYLE = _objectSpread2({}, S);
+
+  // We changed FACSSClassesToStyleId in the icons repo to be canonical and as such, "classic" family does not have any
+  // duotone styles.  But we do still need duotone in _PREFIX_TO_STYLE below, so we are manually adding
+  // {'fa-duotone': 'duotone'}
+  _PREFIX_TO_STYLE[s] = _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, {
+    'fa-duotone': 'duotone'
+  }), S[s]), St['kit']), St['kit-duotone']);
+  const PREFIX_TO_STYLE = familyProxy(_PREFIX_TO_STYLE);
+  const _STYLE_TO_PREFIX = _objectSpread2({}, xt);
+
+  // We changed FAStyleIdToShortPrefixId in the icons repo to be canonical and as such, "classic" family does not have any
+  // duotone styles.  But we do still need duotone in _STYLE_TO_PREFIX below, so we are manually adding {duotone: 'fad'}
+  _STYLE_TO_PREFIX[s] = _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, {
+    duotone: 'fad'
+  }), _STYLE_TO_PREFIX[s]), Et['kit']), Et['kit-duotone']);
+  const STYLE_TO_PREFIX = familyProxy(_STYLE_TO_PREFIX);
+  const _PREFIX_TO_LONG_STYLE = _objectSpread2({}, ga);
+  _PREFIX_TO_LONG_STYLE[s] = _objectSpread2(_objectSpread2({}, _PREFIX_TO_LONG_STYLE[s]), Wt['kit']);
+  const PREFIX_TO_LONG_STYLE = familyProxy(_PREFIX_TO_LONG_STYLE);
+  const _LONG_STYLE_TO_PREFIX = _objectSpread2({}, ua);
+  _LONG_STYLE_TO_PREFIX[s] = _objectSpread2(_objectSpread2({}, _LONG_STYLE_TO_PREFIX[s]), Ct['kit']);
+  const LONG_STYLE_TO_PREFIX = familyProxy(_LONG_STYLE_TO_PREFIX);
+  const _FONT_WEIGHT_TO_PREFIX = _objectSpread2({}, G);
+  const FONT_WEIGHT_TO_PREFIX = familyProxy(_FONT_WEIGHT_TO_PREFIX);
+
+  function bunker(fn) {
+    try {
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+      fn(...args);
+    } catch (e) {
+      if (!PRODUCTION) {
+        throw e;
+      }
+    }
+  }
+
+  const w = WINDOW || {};
+  if (!w[NAMESPACE_IDENTIFIER]) w[NAMESPACE_IDENTIFIER] = {};
+  if (!w[NAMESPACE_IDENTIFIER].styles) w[NAMESPACE_IDENTIFIER].styles = {};
+  if (!w[NAMESPACE_IDENTIFIER].hooks) w[NAMESPACE_IDENTIFIER].hooks = {};
+  if (!w[NAMESPACE_IDENTIFIER].shims) w[NAMESPACE_IDENTIFIER].shims = [];
+  var namespace = w[NAMESPACE_IDENTIFIER];
+
+  function normalizeIcons(icons) {
+    return Object.keys(icons).reduce((acc, iconName) => {
+      const icon = icons[iconName];
+      const expanded = !!icon.icon;
+      if (expanded) {
+        acc[icon.iconName] = icon.icon;
+      } else {
+        acc[iconName] = icon;
+      }
+      return acc;
+    }, {});
+  }
+  function defineIcons(prefix, icons) {
+    let params = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    const {
+      skipHooks = false
+    } = params;
+    const normalized = normalizeIcons(icons);
+    if (typeof namespace.hooks.addPack === 'function' && !skipHooks) {
+      namespace.hooks.addPack(prefix, normalizeIcons(icons));
+    } else {
+      namespace.styles[prefix] = _objectSpread2(_objectSpread2({}, namespace.styles[prefix] || {}), normalized);
+    }
+
+    /**
+     * Font Awesome 4 used the prefix of `fa` for all icons. With the introduction
+     * of new styles we needed to differentiate between them. Prefix `fa` is now an alias
+     * for `fas` so we'll ease the upgrade process for our users by automatically defining
+     * this as well.
+     */
+    if (prefix === 'fas') {
+      defineIcons('fa', icons);
+    }
+  }
+
+  var icons = {
+    
+    "buildings": [512,512,[],"e0cc",["M48 200l0 240c0 13.3 10.7 24 24 24l121.3 0c-.9-5.2-1.3-10.5-1.3-16l0-272L72 176c-13.3 0-24 10.7-24 24zm48 40c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32zm0 96c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32zM272 64l0 384c0 8.8 7.2 16 16 16l160 0c8.8 0 16-7.2 16-16l0-384c0-8.8-7.2-16-16-16L288 48c-8.8 0-16 7.2-16 16zm64 48c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32zm0 96c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32zm0 96c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-32z","M448 48c8.8 0 16 7.2 16 16l0 384c0 8.8-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16l0-384c0-8.8 7.2-16 16-16l160 0zM288 0c-35.3 0-64 28.7-64 64l0 384c0 35.3 28.7 64 64 64l160 0c35.3 0 64-28.7 64-64l0-384c0-35.3-28.7-64-64-64L288 0zM192 128L72 128c-39.8 0-72 32.2-72 72L0 440c0 39.8 32.2 72 72 72l144.4 0c-11.8-13.2-20.1-29.7-23.1-48L72 464c-13.3 0-24-10.7-24-24l0-240c0-13.3 10.7-24 24-24l120 0 0-48zM112 320c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm224 16c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16l0 32zM112 224c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM336 112l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm16 144l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16z"]],
+    "folder": [512,512,["61716","128447","128193","folder-blank"],"f07b",["M48 96l0 320c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-256c0-8.8-7.2-16-16-16l-161.4 0c-10.6 0-20.8-4.2-28.3-11.7L213.1 87c-4.5-4.5-10.6-7-17-7L64 80c-8.8 0-16 7.2-16 16z","M0 96C0 60.7 28.7 32 64 32l132.1 0c19.1 0 37.4 7.6 50.9 21.1L289.9 96 448 96c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM64 80c-8.8 0-16 7.2-16 16l0 320c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-256c0-8.8-7.2-16-16-16l-161.4 0c-10.6 0-20.8-4.2-28.3-11.7L213.1 87c-4.5-4.5-10.6-7-17-7L64 80z"]],
+    "gamepad-modern": [640,512,["63676","127918","gamepad-alt"],"e5a2",["M48 369.4l0 2.8c0 33 26.8 59.8 59.8 59.8c27.4 0 51.4-18.7 58-45.3l3.6-14.3C174.8 351 194 336 216 336l208 0c22 0 41.2 15 46.6 36.4l3.6 14.3c6.7 26.6 30.6 45.3 58 45.3c33 0 59.8-26.8 59.8-59.8l0-2.8c0-3.5-.3-7.1-.9-10.6L558.4 168c-6.2-36-27.8-60.4-54.6-67.1C461.4 90.3 399.7 80 320 80s-141.5 10.3-183.7 20.9C109.4 107.6 87.8 132 81.6 168L48.9 358.8c-.6 3.5-.9 7-.9 10.6zM128 224c0-13.3 10.7-24 24-24l32 0 0-32c0-13.3 10.7-24 24-24s24 10.7 24 24l0 32 32 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-32 0 0 32c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-32-32 0c-13.3 0-24-10.7-24-24zm304 48a32 32 0 1 1 -64 0 32 32 0 1 1 64 0zm64-96a32 32 0 1 1 -64 0 32 32 0 1 1 64 0z","M216 336l208 0c22 0 41.2 15 46.6 36.4l3.6 14.3c6.7 26.6 30.6 45.3 58 45.3c33 0 59.8-26.8 59.8-59.8l0-2.8c0-3.5-.3-7.1-.9-10.6L558.4 168c-6.2-36-27.8-60.4-54.6-67.1C461.4 90.3 399.7 80 320 80s-141.5 10.3-183.7 20.9C109.4 107.6 87.8 132 81.6 168L48.9 358.8c-.6 3.5-.9 7-.9 10.6l0 2.8c0 33 26.8 59.8 59.8 59.8c27.4 0 51.4-18.7 58-45.3l3.6-14.3C174.8 351 194 336 216 336zm211.6 62.3L424 384l-208 0-3.6 14.3c-12 48-55.1 81.7-104.6 81.7C48.3 480 0 431.7 0 372.2l0-2.8c0-6.3 .5-12.5 1.6-18.7L34.3 159.8c8.6-50.2 40.9-93.2 90.3-105.5C170.5 42.9 236.2 32 320 32s149.5 10.9 195.3 22.3c49.4 12.3 81.7 55.3 90.3 105.5l32.7 190.9c1.1 6.2 1.6 12.4 1.6 18.7l0 2.8C640 431.7 591.7 480 532.2 480c-49.5 0-92.6-33.7-104.6-81.7zM232 168l0 32 32 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-32 0 0 32c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-32-32 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l32 0 0-32c0-13.3 10.7-24 24-24s24 10.7 24 24zm168 72a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm32-64a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"]],
+    "location-dot": [384,512,["map-marker-alt"],"f3c5",["M48 192c0 12.4 4.5 31.6 15.3 57.2c10.5 24.8 25.4 52.2 42.5 79.9c28.5 46.2 61.5 90.8 86.2 122.6c24.8-31.8 57.8-76.4 86.2-122.6c17.1-27.7 32-55.1 42.5-79.9C331.5 223.6 336 204.4 336 192c0-79.5-64.5-144-144-144S48 112.5 48 192zm224 0a80 80 0 1 1 -160 0 80 80 0 1 1 160 0z","M336 192c0-79.5-64.5-144-144-144S48 112.5 48 192c0 12.4 4.5 31.6 15.3 57.2c10.5 24.8 25.4 52.2 42.5 79.9c28.5 46.2 61.5 90.8 86.2 122.6c24.8-31.8 57.8-76.4 86.2-122.6c17.1-27.7 32-55.1 42.5-79.9C331.5 223.6 336 204.4 336 192zm48 0c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192C0 86 86 0 192 0S384 86 384 192zm-160 0a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm-112 0a80 80 0 1 1 160 0 80 80 0 1 1 -160 0z"]],
+    "puzzle-piece": [512,512,["129513"],"f12e",["M48 152l0 52.5c7.4-2.9 15.5-4.5 24-4.5c43.1 0 72 39.4 72 80s-28.9 80-72 80c-8.5 0-16.6-1.6-24-4.5L48 456c0 4.4 3.6 8 8 8l100.5 0c-2.9-7.4-4.5-15.5-4.5-24c0-43.1 39.4-72 80-72s80 28.9 80 72c0 8.5-1.6 16.6-4.5 24l52.5 0c4.4 0 8-3.6 8-8l0-129.3c0-17 13.8-30.7 30.7-30.7c11.1 0 20.3 5.8 25.6 13.6c5.5 8 11.4 10.4 15.6 10.4c4 0 9.5-2.1 14.7-9.1s9.3-17.9 9.3-30.9s-4-23.8-9.3-30.9s-10.7-9.1-14.7-9.1c-4.2 0-10.1 2.4-15.6 10.4c-5.3 7.8-14.6 13.6-25.6 13.6c-17 0-30.7-13.8-30.7-30.7l0-81.3c0-4.4-3.6-8-8-8l-81.3 0c-17 0-30.7-13.8-30.7-30.7c0-11.1 5.8-20.3 13.6-25.6c8-5.5 10.4-11.4 10.4-15.6c0-4-2.1-9.5-9.1-14.7S245 48 232 48s-23.8 4-30.9 9.3S192 68 192 72c0 4.2 2.4 10.1 10.4 15.6c7.8 5.3 13.6 14.6 13.6 25.6c0 17-13.8 30.7-30.7 30.7L56 144c-4.4 0-8 3.6-8 8z","M201.1 57.3C194.1 62.5 192 68 192 72c0 4.2 2.4 10.1 10.4 15.6c7.8 5.3 13.6 14.6 13.6 25.6c0 17-13.8 30.7-30.7 30.7L56 144c-4.4 0-8 3.6-8 8l0 52.5c7.4-2.9 15.5-4.5 24-4.5c43.1 0 72 39.4 72 80s-28.9 80-72 80c-8.5 0-16.6-1.6-24-4.5L48 456c0 4.4 3.6 8 8 8l100.5 0c-2.9-7.4-4.5-15.5-4.5-24c0-43.1 39.4-72 80-72s80 28.9 80 72c0 8.5-1.6 16.6-4.5 24l52.5 0c4.4 0 8-3.6 8-8l0-129.3c0-17 13.8-30.7 30.7-30.7c11.1 0 20.3 5.8 25.6 13.6c5.5 8 11.4 10.4 15.6 10.4c4 0 9.5-2.1 14.7-9.1s9.3-17.9 9.3-30.9s-4-23.8-9.3-30.9s-10.7-9.1-14.7-9.1c-4.2 0-10.1 2.4-15.6 10.4c-5.3 7.8-14.6 13.6-25.6 13.6c-17 0-30.7-13.8-30.7-30.7l0-81.3c0-4.4-3.6-8-8-8l-81.3 0c-17 0-30.7-13.8-30.7-30.7c0-11.1 5.8-20.3 13.6-25.6c8-5.5 10.4-11.4 10.4-15.6c0-4-2.1-9.5-9.1-14.7S245 48 232 48s-23.8 4-30.9 9.3zM172.3 18.9C188.5 6.8 209.6 0 232 0s43.5 6.8 59.7 18.9S320 49.5 320 72c0 8.6-1.8 16.7-4.9 24L360 96c30.9 0 56 25.1 56 56l0 44.9c7.3-3.1 15.4-4.9 24-4.9c22.5 0 41 12.2 53.1 28.3S512 257.6 512 280s-6.8 43.5-18.9 59.7S462.5 368 440 368c-8.6 0-16.7-1.8-24-4.9l0 92.9c0 30.9-25.1 56-56 56l-78.1 0c-18.7 0-33.9-15.2-33.9-33.9c0-10.1 4.5-18.5 9.9-24.2c4.2-4.3 6.1-9.2 6.1-13.9c0-9.9-10.7-24-32-24s-32 14.1-32 24c0 4.7 1.9 9.5 6.1 13.9c5.5 5.7 9.9 14.1 9.9 24.2c0 18.7-15.2 33.9-33.9 33.9L56 512c-30.9 0-56-25.1-56-56L0 329.9C0 311.2 15.2 296 33.9 296c10.1 0 18.5 4.5 24.2 9.9c4.3 4.2 9.2 6.1 13.9 6.1c9.9 0 24-10.7 24-32s-14.1-32-24-32c-4.7 0-9.5 1.9-13.9 6.1C52.4 259.5 44 264 33.9 264C15.2 264 0 248.8 0 230.1L0 152c0-30.9 25.1-56 56-56l92.9 0c-3.1-7.3-4.9-15.4-4.9-24c0-22.5 12.2-41 28.3-53.1z"]],
+    "square-poll-vertical": [448,512,["poll"],"f681",["M48 96l0 320c0 8.8 7.2 16 16 16l320 0c8.8 0 16-7.2 16-16l0-320c0-8.8-7.2-16-16-16L64 80c-8.8 0-16 7.2-16 16zm56 152c0-13.3 10.7-24 24-24s24 10.7 24 24l0 112c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-112zm96-96c0-13.3 10.7-24 24-24s24 10.7 24 24l0 208c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-208zm96 160c0-13.3 10.7-24 24-24s24 10.7 24 24l0 48c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-48z","M64 80c-8.8 0-16 7.2-16 16l0 320c0 8.8 7.2 16 16 16l320 0c8.8 0 16-7.2 16-16l0-320c0-8.8-7.2-16-16-16L64 80zM0 96C0 60.7 28.7 32 64 32l320 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM128 224c13.3 0 24 10.7 24 24l0 112c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-112c0-13.3 10.7-24 24-24zm72-72c0-13.3 10.7-24 24-24s24 10.7 24 24l0 208c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-208zM320 288c13.3 0 24 10.7 24 24l0 48c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-48c0-13.3 10.7-24 24-24z"]],
+    "tarp": [576,512,[],"e57b",["M48 128c0-8.8 7.2-16 16-16l448 0c8.8 0 16 7.2 16 16l0 160-80 0c-17.7 0-32 14.3-32 32l0 80L64 400c-8.8 0-16-7.2-16-16l0-256zm32 48a32 32 0 1 0 64 0 32 32 0 1 0 -64 0z","M48 128c0-8.8 7.2-16 16-16l448 0c8.8 0 16 7.2 16 16l0 160-80 0c-17.7 0-32 14.3-32 32l0 80L64 400c-8.8 0-16-7.2-16-16l0-256zm528 0c0-35.3-28.7-64-64-64L64 64C28.7 64 0 92.7 0 128L0 384c0 35.3 28.7 64 64 64l364.1 0c12.7 0 24.9-5.1 33.9-14.1l99.9-99.9c9-9 14.1-21.2 14.1-33.9L576 128zM112 208a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"]],
+    "thumbtack": [384,512,["128392","128204","thumb-tack"],"f08d",["M52.5 304L168 304l0-88c0-13.3 10.7-24 24-24s24 10.7 24 24l0 88 115.5 0-1.3-5.1c-7.4-29.5-25.2-54.1-49.1-70.2c-12.1-8.2-19.8-21.5-20.9-36L249.4 51.7c-.1-1.2-.1-2.5-.1-3.7L134.8 48c0 1.2 0 2.5-.1 3.7L123.8 192.6c-1.1 14.6-8.8 27.8-20.9 36C79 244.8 61.1 269.4 53.8 298.9L52.5 304z","M134.6 51.7L123.8 192.6c-1.1 14.6-8.8 27.8-20.9 36C79 244.8 61.1 269.4 53.8 298.9L52.5 304 168 304l0-88c0-13.3 10.7-24 24-24s24 10.7 24 24l0 88 115.5 0-1.3-5.1c-7.4-29.5-25.2-54.1-49.1-70.2c-12.1-8.2-19.8-21.5-20.9-36L249.4 51.7c-.1-1.2-.1-2.5-.1-3.7L134.8 48c0 1.2 0 2.5-.1 3.7zM168 352L32 352c-9.9 0-19.2-4.5-25.2-12.3S-1.4 321.8 1 312.2l6.2-25c10.3-41.3 35.4-75.7 68.7-98.3L83.1 96l3.7-48L56 48c-4.4 0-8.6-1.2-12.2-3.3C36.8 40.5 32 32.8 32 24C32 10.7 42.7 0 56 0L86.8 0 297.2 0 328 0c13.3 0 24 10.7 24 24c0 8.8-4.8 16.5-11.8 20.7c-3.6 2.1-7.7 3.3-12.2 3.3l-30.8 0 3.7 48 7.1 92.9c33.3 22.6 58.4 57.1 68.7 98.3l6.2 25c2.4 9.6 .2 19.7-5.8 27.5s-15.4 12.3-25.2 12.3l-136 0 0 136c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-136z"]],
+    "user": [448,512,["62144","128100"],"f007",["M49.3 464c8.9-63.3 63.3-112 129-112l91.4 0c65.7 0 120.1 48.7 129 112L49.3 464zM304 128a80 80 0 1 1 -160 0 80 80 0 1 1 160 0z","M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z"]],
+    "user-graduate": [448,512,[],"f501",["M49.3 464l143.8 0c-6.2-3.4-11.9-7.9-16.9-13.6l-63.6-71.5C79.3 394.8 55.1 426.4 49.3 464zM144 145.1l0 14.9c0 44.2 35.8 80 80 80s80-35.8 80-80l0-14.9c-23 4.6-46 9.2-69 13.8c-7.2 1.5-14.7 1.5-22 0c-23-4.6-46-9.2-69-13.8zM254.9 464l143.8 0c-5.8-37.6-30-69.2-63.3-85.1l-63.6 71.5c-5 5.6-10.7 10.1-16.9 13.6z","M228.7 .5c-3.1-.6-6.3-.6-9.4 0l-200 40C8.1 42.7 0 52.6 0 64C0 74.3 6.5 83.3 16 86.6l0 71.8L.3 236.9c-.9 4.7 .3 9.6 3.3 13.3s7.6 5.9 12.4 5.9l32 0c4.8 0 9.3-2.1 12.4-5.9s4.3-8.6 3.3-13.3L48 158.4l0-65.1 171.3 34.3c3.1 .6 6.3 .6 9.4 0l200-40C439.9 85.3 448 75.4 448 64s-8.1-21.3-19.3-23.5l-200-40zM49.3 464c5.8-37.6 30-69.2 63.3-85.1l63.6 71.5c5 5.6 10.7 10.1 16.9 13.6L49.3 464zm349.4 0l-143.8 0c6.2-3.4 11.9-7.9 16.9-13.6l63.6-71.5c33.3 15.8 57.5 47.4 63.3 85.1zM109.6 328.4C45.9 350 0 410.3 0 481.3c0 17 13.8 30.7 30.7 30.7l386.6 0c17 0 30.7-13.8 30.7-30.7c0-71-45.9-131.3-109.6-152.8c-10.9-3.7-22.7 .4-30.3 9L236 418.5c-6.4 7.2-17.6 7.2-23.9 0l-72.1-81.1c-7.6-8.6-19.4-12.7-30.3-9zM96 160c0 70.7 57.3 128 128 128s128-57.3 128-128l0-24.5-48 9.6 0 14.9c0 44.2-35.8 80-80 80s-80-35.8-80-80l0-14.9-48-9.6L96 160z"]],
+    "user-group": [640,512,["128101","user-friends"],"f500",["M49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM144 128a80 80 0 1 0 160 0 80 80 0 1 0 -160 0z","M224 48a80 80 0 1 1 0 160 80 80 0 1 1 0-160zm0 208A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 96l91.4 0c65.7 0 120.1 48.7 129 112L49.3 464c8.9-63.3 63.3-112 129-112zm0-48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0zm431 208c17 0 30.7-13.8 30.7-30.7C640 392.2 567.8 320 478.7 320l-61.4 0c-4.4 0-8.8 .2-13.2 .5c46.4 38.6 75.9 96.7 75.9 161.8c0 10.8-2.8 20.9-7.6 29.7l136.9 0zM432 256c61.9 0 112-50.1 112-112s-50.1-112-112-112c-24.8 0-47.7 8.1-66.3 21.7C377.4 75.9 384 101.2 384 128c0 35.6-11.6 68.5-31.3 95.1C373 243.4 401 256 432 256z"]],
+    "user-group-simple": [640,512,[],"e603",["M48 416l0 16 224 0 0-16c0-44.2-35.8-80-80-80l-64 0c-44.2 0-80 35.8-80 80zm56-280a56 56 0 1 0 112 0 56 56 0 1 0 -112 0z","M104 136a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm160 0A104 104 0 1 0 56 136a104 104 0 1 0 208 0zm216 88a96 96 0 1 0 0-192 96 96 0 1 0 0 192zM128 336l64 0c44.2 0 80 35.8 80 80l0 16L48 432l0-16c0-44.2 35.8-80 80-80zm0-48C57.3 288 0 345.3 0 416l0 16c0 26.5 21.5 48 48 48l224 0c26.5 0 48-21.5 48-48l0-16c0-70.7-57.3-128-128-128l-64 0zM448 480l64 0c70.7 0 128-57.3 128-128l0-16c0-26.5-21.5-48-48-48l-224 0c-21.8 0-40.3 14.6-46.1 34.6C340.8 348.9 352 381.1 352 416l0 16c0 1.5 0 3-.1 4.5C375.3 463.2 409.7 480 448 480z"]],
+    "user-tie": [448,512,[],"f508",["M49.3 464l113 0-43.8-87.7C82.3 391.1 55.4 424.2 49.3 464zM144 128a80 80 0 1 0 160 0 80 80 0 1 0 -160 0zM285.7 464l113 0c-6.1-39.8-33-72.9-69.2-87.7L285.7 464z","M224 208a80 80 0 1 0 0-160 80 80 0 1 0 0 160zm128-80A128 128 0 1 1 96 128a128 128 0 1 1 256 0zM209.1 359.2l-18.6-31c-6.4-10.7 1.3-24.2 13.7-24.2l19.7 0 19.7 0c12.4 0 20.1 13.6 13.7 24.2l-18.6 31 15.9 59.2 43.8-87.6c3-6 9.4-9.5 15.9-8.4C390.4 335.6 448 401.7 448 481.3c0 17-13.8 30.7-30.7 30.7L30.7 512C13.8 512 0 498.2 0 481.3c0-79.6 57.6-145.7 133.5-158.9c6.6-1.1 12.9 2.4 15.9 8.4l43.8 87.6 15.9-59.2zm-90.6 17.1C82.3 391.1 55.4 424.2 49.3 464l113 0-43.8-87.7zM285.7 464l113 0c-6.1-39.8-33-72.9-69.2-87.7L285.7 464z"]]
+
+  };
+  var prefixes = [null    ,'fadr',
+    ,'fa-regular'
+];
+  bunker(() => {
+    for (const prefix of prefixes) {
+      if (!prefix) continue;
+      defineIcons(prefix, icons);
+    }
+  });
+
+}());
+
+(function () {
+  'use strict';
+
+  let _WINDOW = {};
+  let _DOCUMENT = {};
+  try {
+    if (typeof window !== 'undefined') _WINDOW = window;
+    if (typeof document !== 'undefined') _DOCUMENT = document;
+  } catch (e) {}
+  const {
+    userAgent = ''
+  } = _WINDOW.navigator || {};
+  const WINDOW = _WINDOW;
+  const DOCUMENT = _DOCUMENT;
+  const IS_BROWSER = !!WINDOW.document;
+  const IS_DOM = !!DOCUMENT.documentElement && !!DOCUMENT.head && typeof DOCUMENT.addEventListener === 'function' && typeof DOCUMENT.createElement === 'function';
+  const IS_IE = ~userAgent.indexOf('MSIE') || ~userAgent.indexOf('Trident/');
+
+  function _defineProperty(e, r, t) {
+    return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+      value: t,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }) : e[r] = t, e;
+  }
+  function ownKeys(e, r) {
+    var t = Object.keys(e);
+    if (Object.getOwnPropertySymbols) {
+      var o = Object.getOwnPropertySymbols(e);
+      r && (o = o.filter(function (r) {
+        return Object.getOwnPropertyDescriptor(e, r).enumerable;
+      })), t.push.apply(t, o);
+    }
+    return t;
+  }
+  function _objectSpread2(e) {
+    for (var r = 1; r < arguments.length; r++) {
+      var t = null != arguments[r] ? arguments[r] : {};
+      r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+        _defineProperty(e, r, t[r]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+        Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+      });
+    }
+    return e;
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+
+  var S = {
+      classic: {
+        fa: "solid",
+        fas: "solid",
+        "fa-solid": "solid",
+        far: "regular",
+        "fa-regular": "regular",
+        fal: "light",
+        "fa-light": "light",
+        fat: "thin",
+        "fa-thin": "thin",
+        fab: "brands",
+        "fa-brands": "brands"
+      },
+      duotone: {
+        fa: "solid",
+        fad: "solid",
+        "fa-solid": "solid",
+        "fa-duotone": "solid",
+        fadr: "regular",
+        "fa-regular": "regular",
+        fadl: "light",
+        "fa-light": "light",
+        fadt: "thin",
+        "fa-thin": "thin"
+      },
+      sharp: {
+        fa: "solid",
+        fass: "solid",
+        "fa-solid": "solid",
+        fasr: "regular",
+        "fa-regular": "regular",
+        fasl: "light",
+        "fa-light": "light",
+        fast: "thin",
+        "fa-thin": "thin"
+      },
+      "sharp-duotone": {
+        fa: "solid",
+        fasds: "solid",
+        "fa-solid": "solid",
+        fasdr: "regular",
+        "fa-regular": "regular",
+        fasdl: "light",
+        "fa-light": "light",
+        fasdt: "thin",
+        "fa-thin": "thin"
+      }
+    };
+  var s = "classic";
+  var G = {
+      classic: {
+        900: "fas",
+        400: "far",
+        normal: "far",
+        300: "fal",
+        100: "fat"
+      },
+      duotone: {
+        900: "fad",
+        400: "fadr",
+        300: "fadl",
+        100: "fadt"
+      },
+      sharp: {
+        900: "fass",
+        400: "fasr",
+        300: "fasl",
+        100: "fast"
+      },
+      "sharp-duotone": {
+        900: "fasds",
+        400: "fasdr",
+        300: "fasdl",
+        100: "fasdt"
+      }
+    };
+  var xt = {
+      classic: {
+        solid: "fas",
+        regular: "far",
+        light: "fal",
+        thin: "fat",
+        brands: "fab"
+      },
+      duotone: {
+        solid: "fad",
+        regular: "fadr",
+        light: "fadl",
+        thin: "fadt"
+      },
+      sharp: {
+        solid: "fass",
+        regular: "fasr",
+        light: "fasl",
+        thin: "fast"
+      },
+      "sharp-duotone": {
+        solid: "fasds",
+        regular: "fasdr",
+        light: "fasdl",
+        thin: "fasdt"
+      }
+    };
+  var St = {
+      kit: {
+        fak: "kit",
+        "fa-kit": "kit"
+      },
+      "kit-duotone": {
+        fakd: "kit-duotone",
+        "fa-kit-duotone": "kit-duotone"
+      }
+    };
+  var Ct = {
+    kit: {
+      "fa-kit": "fak"
+    },
+    "kit-duotone": {
+      "fa-kit-duotone": "fakd"
+    }
+  };
+  var Wt = {
+      kit: {
+        fak: "fa-kit"
+      },
+      "kit-duotone": {
+        fakd: "fa-kit-duotone"
+      }
+    };
+  var Et = {
+      kit: {
+        kit: "fak"
+      },
+      "kit-duotone": {
+        "kit-duotone": "fakd"
+      }
+    };
+
+  var ua = {
+      classic: {
+        "fa-brands": "fab",
+        "fa-duotone": "fad",
+        "fa-light": "fal",
+        "fa-regular": "far",
+        "fa-solid": "fas",
+        "fa-thin": "fat"
+      },
+      duotone: {
+        "fa-regular": "fadr",
+        "fa-light": "fadl",
+        "fa-thin": "fadt"
+      },
+      sharp: {
+        "fa-solid": "fass",
+        "fa-regular": "fasr",
+        "fa-light": "fasl",
+        "fa-thin": "fast"
+      },
+      "sharp-duotone": {
+        "fa-solid": "fasds",
+        "fa-regular": "fasdr",
+        "fa-light": "fasdl",
+        "fa-thin": "fasdt"
+      }
+    },
+    ga = {
+      classic: {
+        fab: "fa-brands",
+        fad: "fa-duotone",
+        fal: "fa-light",
+        far: "fa-regular",
+        fas: "fa-solid",
+        fat: "fa-thin"
+      },
+      duotone: {
+        fadr: "fa-regular",
+        fadl: "fa-light",
+        fadt: "fa-thin"
+      },
+      sharp: {
+        fass: "fa-solid",
+        fasr: "fa-regular",
+        fasl: "fa-light",
+        fast: "fa-thin"
+      },
+      "sharp-duotone": {
+        fasds: "fa-solid",
+        fasdr: "fa-regular",
+        fasdl: "fa-light",
+        fasdt: "fa-thin"
+      }
+    };
+
+  const NAMESPACE_IDENTIFIER = '___FONT_AWESOME___';
+  const PRODUCTION = (() => {
+    try {
+      return "production" === 'production';
+    } catch (e$$1) {
+      return false;
+    }
+  })();
+  function familyProxy(obj) {
+    // Defaults to the classic family if family is not available
+    return new Proxy(obj, {
+      get(target, prop) {
+        return prop in target ? target[prop] : target[s];
+      }
+    });
+  }
+  const _PREFIX_TO_STYLE = _objectSpread2({}, S);
+
+  // We changed FACSSClassesToStyleId in the icons repo to be canonical and as such, "classic" family does not have any
+  // duotone styles.  But we do still need duotone in _PREFIX_TO_STYLE below, so we are manually adding
+  // {'fa-duotone': 'duotone'}
+  _PREFIX_TO_STYLE[s] = _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, {
+    'fa-duotone': 'duotone'
+  }), S[s]), St['kit']), St['kit-duotone']);
+  const PREFIX_TO_STYLE = familyProxy(_PREFIX_TO_STYLE);
+  const _STYLE_TO_PREFIX = _objectSpread2({}, xt);
+
+  // We changed FAStyleIdToShortPrefixId in the icons repo to be canonical and as such, "classic" family does not have any
+  // duotone styles.  But we do still need duotone in _STYLE_TO_PREFIX below, so we are manually adding {duotone: 'fad'}
+  _STYLE_TO_PREFIX[s] = _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, {
+    duotone: 'fad'
+  }), _STYLE_TO_PREFIX[s]), Et['kit']), Et['kit-duotone']);
+  const STYLE_TO_PREFIX = familyProxy(_STYLE_TO_PREFIX);
+  const _PREFIX_TO_LONG_STYLE = _objectSpread2({}, ga);
+  _PREFIX_TO_LONG_STYLE[s] = _objectSpread2(_objectSpread2({}, _PREFIX_TO_LONG_STYLE[s]), Wt['kit']);
+  const PREFIX_TO_LONG_STYLE = familyProxy(_PREFIX_TO_LONG_STYLE);
+  const _LONG_STYLE_TO_PREFIX = _objectSpread2({}, ua);
+  _LONG_STYLE_TO_PREFIX[s] = _objectSpread2(_objectSpread2({}, _LONG_STYLE_TO_PREFIX[s]), Ct['kit']);
+  const LONG_STYLE_TO_PREFIX = familyProxy(_LONG_STYLE_TO_PREFIX);
+  const _FONT_WEIGHT_TO_PREFIX = _objectSpread2({}, G);
+  const FONT_WEIGHT_TO_PREFIX = familyProxy(_FONT_WEIGHT_TO_PREFIX);
+
+  function bunker(fn) {
+    try {
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+      fn(...args);
+    } catch (e) {
+      if (!PRODUCTION) {
+        throw e;
+      }
+    }
+  }
+
+  const w = WINDOW || {};
+  if (!w[NAMESPACE_IDENTIFIER]) w[NAMESPACE_IDENTIFIER] = {};
+  if (!w[NAMESPACE_IDENTIFIER].styles) w[NAMESPACE_IDENTIFIER].styles = {};
+  if (!w[NAMESPACE_IDENTIFIER].hooks) w[NAMESPACE_IDENTIFIER].hooks = {};
+  if (!w[NAMESPACE_IDENTIFIER].shims) w[NAMESPACE_IDENTIFIER].shims = [];
+  var namespace = w[NAMESPACE_IDENTIFIER];
+
+  function normalizeIcons(icons) {
+    return Object.keys(icons).reduce((acc, iconName) => {
+      const icon = icons[iconName];
+      const expanded = !!icon.icon;
+      if (expanded) {
+        acc[icon.iconName] = icon.icon;
+      } else {
+        acc[iconName] = icon;
+      }
+      return acc;
+    }, {});
+  }
+  function defineIcons(prefix, icons) {
+    let params = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    const {
+      skipHooks = false
+    } = params;
+    const normalized = normalizeIcons(icons);
+    if (typeof namespace.hooks.addPack === 'function' && !skipHooks) {
+      namespace.hooks.addPack(prefix, normalizeIcons(icons));
+    } else {
+      namespace.styles[prefix] = _objectSpread2(_objectSpread2({}, namespace.styles[prefix] || {}), normalized);
+    }
+
+    /**
+     * Font Awesome 4 used the prefix of `fa` for all icons. With the introduction
+     * of new styles we needed to differentiate between them. Prefix `fa` is now an alias
+     * for `fas` so we'll ease the upgrade process for our users by automatically defining
+     * this as well.
+     */
+    if (prefix === 'fas') {
+      defineIcons('fa', icons);
+    }
+  }
+
+  var icons = {
+    
+    "file-invoice": [384,512,[],"f570",["M0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-288-128 0c-17.7 0-32-14.3-32-32L224 0 64 0C28.7 0 0 28.7 0 64zM64 80c0-8.8 7.2-16 16-16l64 0c8.8 0 16 7.2 16 16s-7.2 16-16 16L80 96c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16l64 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-64 0c-8.8 0-16-7.2-16-16zm0 112c0-17.7 14.3-32 32-32l192 0c17.7 0 32 14.3 32 32l0 64c0 17.7-14.3 32-32 32L96 352c-17.7 0-32-14.3-32-32l0-64zM224 432c0-8.8 7.2-16 16-16l64 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-64 0c-8.8 0-16-7.2-16-16z","M384 160L224 0l0 128c0 17.7 14.3 32 32 32l128 0zM96 224c-17.7 0-32 14.3-32 32l0 64c0 17.7 14.3 32 32 32l192 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32L96 224zm0 32l192 0 0 64L96 320l0-64zM240 416c-8.8 0-16 7.2-16 16s7.2 16 16 16l64 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-64 0z"]],
+    "file-invoice-dollar": [384,512,[],"f571",["M0 64C0 28.7 28.7 0 64 0L224 0c0 42.7 0 85.3 0 128c0 .6 0 1.1 0 1.6c0 .5 .1 1.1 .1 1.6c.1 1.1 .3 2.1 .5 3.2c.2 1 .5 2.1 .8 3.1c.2 .5 .3 1 .5 1.5s.4 1 .6 1.5c1.6 3.8 4 7.3 6.9 10.2s6.3 5.2 10.2 6.9c1.9 .8 3.9 1.4 6 1.9c1 .2 2.1 .4 3.2 .5c.5 .1 1.1 .1 1.6 .1s1.1 0 1.6 0l128 0 0 288c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zM64 80c0 8.8 7.2 16 16 16l64 0c8.8 0 16-7.2 16-16s-7.2-16-16-16L80 64c-8.8 0-16 7.2-16 16zm0 64c0 8.8 7.2 16 16 16l64 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-64 0c-8.8 0-16 7.2-16 16zm64.2 150.9c-.1 1.2-.1 2.3-.1 3.6c0 1.2 .1 2.3 .1 3.4s.2 2.2 .4 3.2c.3 2.1 .8 4.1 1.4 6c1.2 3.8 2.9 7.2 5 10.3c4.2 6.1 9.8 10.9 15.8 14.5c10.5 6.3 23.8 10.4 34.8 13.7c.5 .2 1.1 .3 1.6 .5c12.5 3.8 22.2 6.9 29 11.2c5.9 3.7 7.7 7 7.7 11.6c.1 6.6-2.7 10.8-7.8 14c-5.8 3.6-14.5 5.6-23.7 5.3c-11.8-.4-22.7-4.1-36.3-8.7c-2.3-.8-4.7-1.6-7.1-2.4c-8.4-2.8-17.4 1.7-20.2 10.1c-.3 .8-.5 1.7-.6 2.5c-.1 .4-.1 .8-.2 1.3c0 .2 0 .4-.1 1.3l.1 1.3c0 0 0 .6 .1 1.2c.1 .8 .3 1.6 .6 2.4c.5 1.6 1.2 3 2.2 4.4c1.9 2.7 4.6 4.8 8 5.9c2 .7 4.1 1.4 6.2 2.1c9.2 3.2 19.7 6.8 30.9 8.9c0 5.9 0 11.9 0 17.8c0 .6 0 1.1 .1 1.6s.1 1.1 .2 1.6c.2 1 .5 2 .9 3c.8 1.9 2 3.6 3.4 5.1c2.9 2.9 6.9 4.7 11.3 4.7c8.8 0 16-7.2 16-16l0-17.1c8.7-1.4 17.4-4.3 25.1-9.1c6.6-4.1 12.4-9.7 16.5-16.6c2-3.5 3.7-7.3 4.8-11.4c.5-2.1 1-4.2 1.2-6.5c.1-1.1 .2-2.3 .3-3.4c.1-1.1 .1-2.3 .1-3.5c-.2-18.6-10.6-30.7-22.7-38.3c-11-6.9-25-11.2-36.3-14.6l-.5-.1c-12.6-3.8-22.3-6.8-29.2-10.9c-3-1.8-4.8-3.4-5.9-5c-.5-.8-.9-1.6-1.1-2.4c-.1-.4-.2-.8-.2-1.3c0-.4-.1-.8-.1-1.2c0-.8 0-1.4 .1-2.1s.2-1.3 .4-1.8c.3-1.2 .8-2.3 1.5-3.3c1.3-2.1 3.4-3.9 6.2-5.6c6.2-3.7 15.1-5.7 23.6-5.5c10.1 .2 21 2.3 32.1 5.3c8.5 2.3 17.3-2.8 19.6-11.3s-2.8-17.3-11.3-19.6c-7.5-2-15.6-3.9-24.1-5.1c0-5.8 0-11.5 0-17.3c0-8.8-7.2-16-16-16c-4.4 0-8.4 1.8-11.3 4.7c-1.4 1.4-2.6 3.2-3.4 5.1c-.4 1-.7 2-.9 3c-.1 .5-.2 1.1-.2 1.6s-.1 1.1-.1 1.5c0 5.9 0 11.7 0 17.5c-8.3 1.5-16.7 4.3-24.1 8.7c-6.5 3.9-12.5 9.1-16.8 15.9c-2.2 3.4-3.9 7.1-5.1 11.2c-.6 2.1-1.1 4.2-1.4 6.4c-.2 1.1-.3 2.3-.4 3.4z","M384 160L224 0l0 128c0 17.7 14.3 32 32 32l128 0zM208 232c0-8.8-7.2-16-16-16s-16 7.2-16 16l0 17.3c-8.3 1.5-16.7 4.3-24.1 8.7c-13 7.7-23.9 21.1-23.8 40.5c.1 18.4 10.8 30.1 22.7 37.3c10.5 6.3 23.8 10.4 34.8 13.7c0 0 0 0 0 0l1.6 .5c12.5 3.8 22.2 6.9 29 11.2c5.9 3.7 7.7 7 7.7 11.6c.1 6.6-2.7 10.8-7.8 14c-5.8 3.6-14.5 5.6-23.7 5.3c-11.8-.4-22.7-4.1-36.3-8.7c0 0 0 0 0 0s0 0 0 0s0 0 0 0c-2.3-.8-4.7-1.6-7.1-2.4c-8.4-2.8-17.4 1.7-20.2 10.1s1.7 17.4 10.1 20.2c2 .7 4.1 1.4 6.2 2.1c0 0 0 0 0 0c9.2 3.2 19.7 6.8 30.9 8.9l0 17.8c0 8.8 7.2 16 16 16s16-7.2 16-16l0-17.1c8.7-1.4 17.4-4.3 25.1-9.1c13.3-8.3 23.2-22.2 22.9-41.6c-.2-18.5-10.6-30.6-22.7-38.2c-11-6.9-25-11.2-36.3-14.6c0 0 0 0 0 0s0 0 0 0l-.5-.1c-12.6-3.8-22.3-6.8-29.2-10.9c-6-3.6-7.2-6.4-7.3-10.1c0-5.4 2.4-9.4 8.1-12.8c6.2-3.7 15.1-5.7 23.6-5.5c10.1 .2 21 2.3 32.1 5.3c8.5 2.3 17.3-2.8 19.6-11.3s-2.8-17.3-11.3-19.6c-7.5-2-15.6-3.9-24.1-5.1l0-17.3z"]],
+    "gem": [512,512,["128142"],"f3a5",["M4.7 185.8c-6.8 9.2-6.1 21.9 1.5 30.4l232 256c4.5 5 11 7.9 17.8 7.9s13.2-2.9 17.8-7.9l232-256c4.1-4.6 6.2-10.3 6.2-16.1c0-5-1.5-10-4.7-14.2l-112-152C390.8 27.6 383.6 24 376 24L136 24c-7.6 0-14.8 3.6-19.3 9.8l-112 152zm51.5 12.7c.1-.5 .2-1 .4-1.4c.4-.9 .9-1.7 1.5-2.5c1.3-1.4 3.1-2.4 5.2-2.6c49.1-4.1 98.1-8.2 147.2-12.3L153.1 84.1c-2.1-3.5-1.2-8.1 2.1-10.5s7.9-2 10.7 1c30 32.5 60.1 65.1 90.1 97.6c30-32.5 60.1-65.1 90.1-97.6c2.8-3 7.4-3.4 10.7-1s4.2 7 2.1 10.5c-19.1 31.9-38.3 63.8-57.4 95.6c49.1 4.1 98.1 8.2 147.2 12.3c4.1 .3 7.3 3.8 7.3 8s-3.2 7.6-7.3 8c-64 5.3-128 10.7-192 16c-.2 0-.4 0-.7 0s-.4 0-.7 0c-64-5.3-128-10.7-192-16c-2.1-.2-3.9-1.1-5.2-2.6c-.7-.7-1.2-1.6-1.6-2.5c-.2-.5-.3-.9-.4-1.4c0-.2-.1-.5-.1-.7s0-.5 0-.9c0-.2 0-.4 0-.7s.1-.5 .1-.7z","M165.9 74.6c-2.8-3-7.4-3.4-10.7-1s-4.2 7-2.1 10.5l57.4 95.6L63.3 192c-4.1 .3-7.3 3.8-7.3 8s3.2 7.6 7.3 8l192 16c.4 0 .9 0 1.3 0l192-16c4.1-.3 7.3-3.8 7.3-8s-3.2-7.6-7.3-8L301.5 179.8l57.4-95.6c2.1-3.5 1.2-8.1-2.1-10.5s-7.9-2-10.7 1L256 172.2 165.9 74.6z"]],
+    "house-chimney": [576,512,["63499","home-lg"],"e3af",["M64 270.5c74.7-65.3 149.3-130.7 224-196L512.1 270.6l.4 201.3c0 22.1-17.9 40.1-40 40.1L392 512c-22.1 0-40-17.9-40-40l0-88.3c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32l0 88.3c0 22.1-17.9 40-40 40l-79.9 0c-22.1 0-40-17.9-40-40L64 270.5z","M309.1 7.9C297-2.6 279-2.6 266.9 7.9l-256 224c-13.3 11.6-14.6 31.9-3 45.2s31.9 14.6 45.2 3L288 74.5 522.9 280.1c13.3 11.6 33.5 10.3 45.2-3s10.3-33.5-3-45.2L512 185.5 512 64c0-17.7-14.3-32-32-32l-32 0c-17.7 0-32 14.3-32 32l0 37.5L309.1 7.9z"]],
+    "sack-dollar": [512,512,["128176"],"f81d",["M0 416c0 53 43 96 96 96l320 0c53 0 96-43 96-96c0-165.1-122.3-243.3-179-279.6c-4.8-3.1-9.2-5.9-13-8.4l-128 0c-3.8 2.5-8.1 5.3-13 8.4C122.3 172.7 0 250.9 0 416zM144.6 24.9L192 96l128 0 47.4-71.1C374.5 14.2 366.9 0 354.1 0L157.9 0c-12.8 0-20.4 14.2-13.3 24.9zm43.6 253.7c.1-1.3 .2-2.5 .4-3.7c.3-2.4 .9-4.8 1.5-7c1.3-4.5 3.2-8.5 5.6-12.2c4.7-7.3 11.2-13 18.2-17.1c6.9-4.1 14.5-6.8 22.2-8.5l0-14c0-11 9-20 20-20s20 9 20 20l0 13.9c7.5 1.2 14.6 2.9 21.1 4.7c10.7 2.8 17 13.8 14.2 24.5s-13.8 17-24.5 14.2c-11-2.9-21.6-5-31.2-5.2c-7.9-.1-16 1.8-21.5 5c-4.8 2.8-6.2 5.6-6.2 9.3c0 1.8 .1 3.5 5.3 6.7c6.3 3.8 15.5 6.7 28.3 10.5l.7 .2c11.2 3.4 25.6 7.7 37.1 15c12.9 8.1 24.3 21.3 24.6 41.6c0 .7 0 1.3 0 1.9s0 1.3-.1 1.9c-.1 1.3-.2 2.5-.3 3.7c-.3 2.4-.7 4.8-1.3 7c-1.2 4.5-3 8.6-5.2 12.4c-4.4 7.5-10.7 13.5-17.9 18c-7.2 4.5-15.2 7.3-23.2 9l0 13.8c0 11-9 20-20 20s-20-9-20-20l0-14.6c-10.3-2.2-20-5.5-28.3-8.4c-2.1-.7-4.1-1.4-6.1-2.1c-10.5-3.5-16.1-14.8-12.6-25.3s14.8-16.1 25.3-12.6c2.5 .8 4.9 1.7 7.2 2.4c13.6 4.6 24 8.1 35.1 8.5c8.6 .3 16.5-1.6 21.4-4.7c4.1-2.5 6-5.5 5.9-10.5c0-2.9-.8-5-5.9-8.2c-6.3-4-15.4-6.9-28-10.7l-1.7-.5c-10.9-3.3-24.6-7.4-35.6-14c-12.7-7.7-24.6-20.5-24.7-40.7c0-.7 0-1.3 0-2s.1-1.3 .1-1.9z","M192 96c-8.8 0-16 7.2-16 16s7.2 16 16 16l128 0c8.8 0 16-7.2 16-16s-7.2-16-16-16L192 96zm84 120c0-11-9-20-20-20s-20 9-20 20l0 14c-7.6 1.7-15.2 4.4-22.2 8.5c-13.9 8.3-25.9 22.8-25.8 43.9c.1 20.3 12 33.1 24.7 40.7c11 6.6 24.7 10.8 35.6 14l1.7 .5c12.6 3.8 21.8 6.8 28 10.7c5.1 3.2 5.8 5.4 5.9 8.2c.1 5-1.8 8-5.9 10.5c-5 3.1-12.9 5-21.4 4.7c-11.1-.4-21.5-3.9-35.1-8.5c0 0 0 0 0 0c-2.3-.8-4.7-1.6-7.2-2.4c-10.5-3.5-21.8 2.2-25.3 12.6s2.2 21.8 12.6 25.3c1.9 .6 4 1.3 6.1 2.1c0 0 0 0 0 0s0 0 0 0c8.3 2.9 17.9 6.2 28.2 8.4l0 14.6c0 11 9 20 20 20s20-9 20-20l0-13.8c8-1.7 16-4.5 23.2-9c14.3-8.9 25.1-24.1 24.8-45c-.3-20.3-11.7-33.4-24.6-41.6c-11.5-7.2-25.9-11.6-37.1-15l-.7-.2c-12.8-3.9-21.9-6.7-28.3-10.5c-5.2-3.1-5.3-4.9-5.3-6.7c0-3.7 1.4-6.5 6.2-9.3c5.4-3.2 13.6-5.1 21.5-5c9.6 .1 20.2 2.2 31.2 5.2c10.7 2.8 21.6-3.5 24.5-14.2s-3.5-21.6-14.2-24.5c-6.5-1.7-13.7-3.4-21.1-4.7l0-13.9z"]]
+
+  };
+  var prefixes = [null    ,'fad',
+    ,'fa-duotone'
+];
+  bunker(() => {
+    for (const prefix of prefixes) {
+      if (!prefix) continue;
+      defineIcons(prefix, icons);
+    }
+  });
+
+}());
+
+/*!
+ * Font Awesome Pro 6.7.2 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license (Commercial License)
+ * Copyright 2024 Fonticons, Inc.
+ */
+(function () {
+  'use strict';
+
+  function _defineProperty(e, r, t) {
+    return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+      value: t,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }) : e[r] = t, e;
+  }
+  function _inherits(t, e) {
+    if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");
+    t.prototype = Object.create(e && e.prototype, {
+      constructor: {
+        value: t,
+        writable: !0,
+        configurable: !0
+      }
+    }), Object.defineProperty(t, "prototype", {
+      writable: !1
+    }), e && _setPrototypeOf(t, e);
+  }
+  function ownKeys(e, r) {
+    var t = Object.keys(e);
+    if (Object.getOwnPropertySymbols) {
+      var o = Object.getOwnPropertySymbols(e);
+      r && (o = o.filter(function (r) {
+        return Object.getOwnPropertyDescriptor(e, r).enumerable;
+      })), t.push.apply(t, o);
+    }
+    return t;
+  }
+  function _objectSpread2(e) {
+    for (var r = 1; r < arguments.length; r++) {
+      var t = null != arguments[r] ? arguments[r] : {};
+      r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+        _defineProperty(e, r, t[r]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+        Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+      });
+    }
+    return e;
+  }
+  function _setPrototypeOf(t, e) {
+    return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) {
+      return t.__proto__ = e, t;
+    }, _setPrototypeOf(t, e);
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+  function _wrapRegExp() {
+    _wrapRegExp = function (e, r) {
+      return new BabelRegExp(e, void 0, r);
+    };
+    var e = RegExp.prototype,
+      r = new WeakMap();
+    function BabelRegExp(e, t, p) {
+      var o = RegExp(e, t);
+      return r.set(o, p || r.get(e)), _setPrototypeOf(o, BabelRegExp.prototype);
+    }
+    function buildGroups(e, t) {
+      var p = r.get(t);
+      return Object.keys(p).reduce(function (r, t) {
+        var o = p[t];
+        if ("number" == typeof o) r[t] = e[o];else {
+          for (var i = 0; void 0 === e[o[i]] && i + 1 < o.length;) i++;
+          r[t] = e[o[i]];
+        }
+        return r;
+      }, Object.create(null));
+    }
+    return _inherits(BabelRegExp, RegExp), BabelRegExp.prototype.exec = function (r) {
+      var t = e.exec.call(this, r);
+      if (t) {
+        t.groups = buildGroups(t, this);
+        var p = t.indices;
+        p && (p.groups = buildGroups(p, this));
+      }
+      return t;
+    }, BabelRegExp.prototype[Symbol.replace] = function (t, p) {
+      if ("string" == typeof p) {
+        var o = r.get(this);
+        return e[Symbol.replace].call(this, t, p.replace(/\$<([^>]+)>/g, function (e, r) {
+          var t = o[r];
+          return "$" + (Array.isArray(t) ? t.join("$") : t);
+        }));
+      }
+      if ("function" == typeof p) {
+        var i = this;
+        return e[Symbol.replace].call(this, t, function () {
+          var e = arguments;
+          return "object" != typeof e[e.length - 1] && (e = [].slice.call(e)).push(buildGroups(e, i)), p.apply(this, e);
+        });
+      }
+      return e[Symbol.replace].call(this, t, p);
+    }, _wrapRegExp.apply(this, arguments);
+  }
+
+  const noop = () => {};
+  let _WINDOW = {};
+  let _DOCUMENT = {};
+  let _MUTATION_OBSERVER = null;
+  let _PERFORMANCE = {
+    mark: noop,
+    measure: noop
+  };
+  try {
+    if (typeof window !== 'undefined') _WINDOW = window;
+    if (typeof document !== 'undefined') _DOCUMENT = document;
+    if (typeof MutationObserver !== 'undefined') _MUTATION_OBSERVER = MutationObserver;
+    if (typeof performance !== 'undefined') _PERFORMANCE = performance;
+  } catch (e) {}
+  const {
+    userAgent = ''
+  } = _WINDOW.navigator || {};
+  const WINDOW = _WINDOW;
+  const DOCUMENT = _DOCUMENT;
+  const MUTATION_OBSERVER = _MUTATION_OBSERVER;
+  const PERFORMANCE = _PERFORMANCE;
+  const IS_BROWSER = !!WINDOW.document;
+  const IS_DOM = !!DOCUMENT.documentElement && !!DOCUMENT.head && typeof DOCUMENT.addEventListener === 'function' && typeof DOCUMENT.createElement === 'function';
+  const IS_IE = ~userAgent.indexOf('MSIE') || ~userAgent.indexOf('Trident/');
+
+  var p = /fa(s|r|l|t|d|dr|dl|dt|b|k|kd|ss|sr|sl|st|sds|sdr|sdl|sdt)?[\-\ ]/,
+    g = /Font ?Awesome ?([56 ]*)(Solid|Regular|Light|Thin|Duotone|Brands|Free|Pro|Sharp Duotone|Sharp|Kit)?.*/i;
+  var S = {
+      classic: {
+        fa: "solid",
+        fas: "solid",
+        "fa-solid": "solid",
+        far: "regular",
+        "fa-regular": "regular",
+        fal: "light",
+        "fa-light": "light",
+        fat: "thin",
+        "fa-thin": "thin",
+        fab: "brands",
+        "fa-brands": "brands"
+      },
+      duotone: {
+        fa: "solid",
+        fad: "solid",
+        "fa-solid": "solid",
+        "fa-duotone": "solid",
+        fadr: "regular",
+        "fa-regular": "regular",
+        fadl: "light",
+        "fa-light": "light",
+        fadt: "thin",
+        "fa-thin": "thin"
+      },
+      sharp: {
+        fa: "solid",
+        fass: "solid",
+        "fa-solid": "solid",
+        fasr: "regular",
+        "fa-regular": "regular",
+        fasl: "light",
+        "fa-light": "light",
+        fast: "thin",
+        "fa-thin": "thin"
+      },
+      "sharp-duotone": {
+        fa: "solid",
+        fasds: "solid",
+        "fa-solid": "solid",
+        fasdr: "regular",
+        "fa-regular": "regular",
+        fasdl: "light",
+        "fa-light": "light",
+        fasdt: "thin",
+        "fa-thin": "thin"
+      }
+    },
+    A = {
+      GROUP: "duotone-group",
+      SWAP_OPACITY: "swap-opacity",
+      PRIMARY: "primary",
+      SECONDARY: "secondary"
+    },
+    P = ["fa-classic", "fa-duotone", "fa-sharp", "fa-sharp-duotone"];
+  var s = "classic",
+    t = "duotone",
+    r = "sharp",
+    o = "sharp-duotone",
+    L = [s, t, r, o];
+  var G = {
+      classic: {
+        900: "fas",
+        400: "far",
+        normal: "far",
+        300: "fal",
+        100: "fat"
+      },
+      duotone: {
+        900: "fad",
+        400: "fadr",
+        300: "fadl",
+        100: "fadt"
+      },
+      sharp: {
+        900: "fass",
+        400: "fasr",
+        300: "fasl",
+        100: "fast"
+      },
+      "sharp-duotone": {
+        900: "fasds",
+        400: "fasdr",
+        300: "fasdl",
+        100: "fasdt"
+      }
+    };
+  var lt = {
+      "Font Awesome 6 Free": {
+        900: "fas",
+        400: "far"
+      },
+      "Font Awesome 6 Pro": {
+        900: "fas",
+        400: "far",
+        normal: "far",
+        300: "fal",
+        100: "fat"
+      },
+      "Font Awesome 6 Brands": {
+        400: "fab",
+        normal: "fab"
+      },
+      "Font Awesome 6 Duotone": {
+        900: "fad",
+        400: "fadr",
+        normal: "fadr",
+        300: "fadl",
+        100: "fadt"
+      },
+      "Font Awesome 6 Sharp": {
+        900: "fass",
+        400: "fasr",
+        normal: "fasr",
+        300: "fasl",
+        100: "fast"
+      },
+      "Font Awesome 6 Sharp Duotone": {
+        900: "fasds",
+        400: "fasdr",
+        normal: "fasdr",
+        300: "fasdl",
+        100: "fasdt"
+      }
+    };
+  var pt = new Map([["classic", {
+      defaultShortPrefixId: "fas",
+      defaultStyleId: "solid",
+      styleIds: ["solid", "regular", "light", "thin", "brands"],
+      futureStyleIds: [],
+      defaultFontWeight: 900
+    }], ["sharp", {
+      defaultShortPrefixId: "fass",
+      defaultStyleId: "solid",
+      styleIds: ["solid", "regular", "light", "thin"],
+      futureStyleIds: [],
+      defaultFontWeight: 900
+    }], ["duotone", {
+      defaultShortPrefixId: "fad",
+      defaultStyleId: "solid",
+      styleIds: ["solid", "regular", "light", "thin"],
+      futureStyleIds: [],
+      defaultFontWeight: 900
+    }], ["sharp-duotone", {
+      defaultShortPrefixId: "fasds",
+      defaultStyleId: "solid",
+      styleIds: ["solid", "regular", "light", "thin"],
+      futureStyleIds: [],
+      defaultFontWeight: 900
+    }]]),
+    xt = {
+      classic: {
+        solid: "fas",
+        regular: "far",
+        light: "fal",
+        thin: "fat",
+        brands: "fab"
+      },
+      duotone: {
+        solid: "fad",
+        regular: "fadr",
+        light: "fadl",
+        thin: "fadt"
+      },
+      sharp: {
+        solid: "fass",
+        regular: "fasr",
+        light: "fasl",
+        thin: "fast"
+      },
+      "sharp-duotone": {
+        solid: "fasds",
+        regular: "fasdr",
+        light: "fasdl",
+        thin: "fasdt"
+      }
+    };
+  var Ft = ["fak", "fa-kit", "fakd", "fa-kit-duotone"],
+    St = {
+      kit: {
+        fak: "kit",
+        "fa-kit": "kit"
+      },
+      "kit-duotone": {
+        fakd: "kit-duotone",
+        "fa-kit-duotone": "kit-duotone"
+      }
+    },
+    At = ["kit"];
+  var Ct = {
+    kit: {
+      "fa-kit": "fak"
+    },
+    "kit-duotone": {
+      "fa-kit-duotone": "fakd"
+    }
+  };
+  var Lt = ["fak", "fakd"],
+    Wt = {
+      kit: {
+        fak: "fa-kit"
+      },
+      "kit-duotone": {
+        fakd: "fa-kit-duotone"
+      }
+    };
+  var Et = {
+      kit: {
+        kit: "fak"
+      },
+      "kit-duotone": {
+        "kit-duotone": "fakd"
+      }
+    };
+
+  var t$1 = {
+      GROUP: "duotone-group",
+      SWAP_OPACITY: "swap-opacity",
+      PRIMARY: "primary",
+      SECONDARY: "secondary"
+    },
+    r$1 = ["fa-classic", "fa-duotone", "fa-sharp", "fa-sharp-duotone"];
+  var bt$1 = ["fak", "fa-kit", "fakd", "fa-kit-duotone"];
+  var Yt = {
+      "Font Awesome Kit": {
+        400: "fak",
+        normal: "fak"
+      },
+      "Font Awesome Kit Duotone": {
+        400: "fakd",
+        normal: "fakd"
+      }
+    };
+  var ua = {
+      classic: {
+        "fa-brands": "fab",
+        "fa-duotone": "fad",
+        "fa-light": "fal",
+        "fa-regular": "far",
+        "fa-solid": "fas",
+        "fa-thin": "fat"
+      },
+      duotone: {
+        "fa-regular": "fadr",
+        "fa-light": "fadl",
+        "fa-thin": "fadt"
+      },
+      sharp: {
+        "fa-solid": "fass",
+        "fa-regular": "fasr",
+        "fa-light": "fasl",
+        "fa-thin": "fast"
+      },
+      "sharp-duotone": {
+        "fa-solid": "fasds",
+        "fa-regular": "fasdr",
+        "fa-light": "fasdl",
+        "fa-thin": "fasdt"
+      }
+    },
+    I$1 = {
+      classic: ["fas", "far", "fal", "fat", "fad"],
+      duotone: ["fadr", "fadl", "fadt"],
+      sharp: ["fass", "fasr", "fasl", "fast"],
+      "sharp-duotone": ["fasds", "fasdr", "fasdl", "fasdt"]
+    },
+    ga = {
+      classic: {
+        fab: "fa-brands",
+        fad: "fa-duotone",
+        fal: "fa-light",
+        far: "fa-regular",
+        fas: "fa-solid",
+        fat: "fa-thin"
+      },
+      duotone: {
+        fadr: "fa-regular",
+        fadl: "fa-light",
+        fadt: "fa-thin"
+      },
+      sharp: {
+        fass: "fa-solid",
+        fasr: "fa-regular",
+        fasl: "fa-light",
+        fast: "fa-thin"
+      },
+      "sharp-duotone": {
+        fasds: "fa-solid",
+        fasdr: "fa-regular",
+        fasdl: "fa-light",
+        fasdt: "fa-thin"
+      }
+    },
+    x = ["fa-solid", "fa-regular", "fa-light", "fa-thin", "fa-duotone", "fa-brands"],
+    Ia = ["fa", "fas", "far", "fal", "fat", "fad", "fadr", "fadl", "fadt", "fab", "fass", "fasr", "fasl", "fast", "fasds", "fasdr", "fasdl", "fasdt", ...r$1, ...x],
+    m$1 = ["solid", "regular", "light", "thin", "duotone", "brands"],
+    c$1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    F$1 = c$1.concat([11, 12, 13, 14, 15, 16, 17, 18, 19, 20]),
+    ma = [...Object.keys(I$1), ...m$1, "2xs", "xs", "sm", "lg", "xl", "2xl", "beat", "border", "fade", "beat-fade", "bounce", "flip-both", "flip-horizontal", "flip-vertical", "flip", "fw", "inverse", "layers-counter", "layers-text", "layers", "li", "pull-left", "pull-right", "pulse", "rotate-180", "rotate-270", "rotate-90", "rotate-by", "shake", "spin-pulse", "spin-reverse", "spin", "stack-1x", "stack-2x", "stack", "ul", t$1.GROUP, t$1.SWAP_OPACITY, t$1.PRIMARY, t$1.SECONDARY].concat(c$1.map(a => "".concat(a, "x"))).concat(F$1.map(a => "w-".concat(a)));
+  var wa = {
+      "Font Awesome 5 Free": {
+        900: "fas",
+        400: "far"
+      },
+      "Font Awesome 5 Pro": {
+        900: "fas",
+        400: "far",
+        normal: "far",
+        300: "fal"
+      },
+      "Font Awesome 5 Brands": {
+        400: "fab",
+        normal: "fab"
+      },
+      "Font Awesome 5 Duotone": {
+        900: "fad"
+      }
+    };
+
+  const NAMESPACE_IDENTIFIER = '___FONT_AWESOME___';
+  const UNITS_IN_GRID = 16;
+  const DEFAULT_CSS_PREFIX = 'fa';
+  const DEFAULT_REPLACEMENT_CLASS = 'svg-inline--fa';
+  const DATA_FA_I2SVG = 'data-fa-i2svg';
+  const DATA_FA_PSEUDO_ELEMENT = 'data-fa-pseudo-element';
+  const DATA_FA_PSEUDO_ELEMENT_PENDING = 'data-fa-pseudo-element-pending';
+  const DATA_PREFIX = 'data-prefix';
+  const DATA_ICON = 'data-icon';
+  const HTML_CLASS_I2SVG_BASE_CLASS = 'fontawesome-i2svg';
+  const MUTATION_APPROACH_ASYNC = 'async';
+  const TAGNAMES_TO_SKIP_FOR_PSEUDOELEMENTS = ['HTML', 'HEAD', 'STYLE', 'SCRIPT'];
+  const PRODUCTION = (() => {
+    try {
+      return "production" === 'production';
+    } catch (e$$1) {
+      return false;
+    }
+  })();
+  function familyProxy(obj) {
+    // Defaults to the classic family if family is not available
+    return new Proxy(obj, {
+      get(target, prop) {
+        return prop in target ? target[prop] : target[s];
+      }
+    });
+  }
+  const _PREFIX_TO_STYLE = _objectSpread2({}, S);
+
+  // We changed FACSSClassesToStyleId in the icons repo to be canonical and as such, "classic" family does not have any
+  // duotone styles.  But we do still need duotone in _PREFIX_TO_STYLE below, so we are manually adding
+  // {'fa-duotone': 'duotone'}
+  _PREFIX_TO_STYLE[s] = _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, {
+    'fa-duotone': 'duotone'
+  }), S[s]), St['kit']), St['kit-duotone']);
+  const PREFIX_TO_STYLE = familyProxy(_PREFIX_TO_STYLE);
+  const _STYLE_TO_PREFIX = _objectSpread2({}, xt);
+
+  // We changed FAStyleIdToShortPrefixId in the icons repo to be canonical and as such, "classic" family does not have any
+  // duotone styles.  But we do still need duotone in _STYLE_TO_PREFIX below, so we are manually adding {duotone: 'fad'}
+  _STYLE_TO_PREFIX[s] = _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, {
+    duotone: 'fad'
+  }), _STYLE_TO_PREFIX[s]), Et['kit']), Et['kit-duotone']);
+  const STYLE_TO_PREFIX = familyProxy(_STYLE_TO_PREFIX);
+  const _PREFIX_TO_LONG_STYLE = _objectSpread2({}, ga);
+  _PREFIX_TO_LONG_STYLE[s] = _objectSpread2(_objectSpread2({}, _PREFIX_TO_LONG_STYLE[s]), Wt['kit']);
+  const PREFIX_TO_LONG_STYLE = familyProxy(_PREFIX_TO_LONG_STYLE);
+  const _LONG_STYLE_TO_PREFIX = _objectSpread2({}, ua);
+  _LONG_STYLE_TO_PREFIX[s] = _objectSpread2(_objectSpread2({}, _LONG_STYLE_TO_PREFIX[s]), Ct['kit']);
+  const LONG_STYLE_TO_PREFIX = familyProxy(_LONG_STYLE_TO_PREFIX);
+  const ICON_SELECTION_SYNTAX_PATTERN = p; // eslint-disable-line no-useless-escape
+
+  const LAYERS_TEXT_CLASSNAME = 'fa-layers-text';
+  const FONT_FAMILY_PATTERN = g;
+  const _FONT_WEIGHT_TO_PREFIX = _objectSpread2({}, G);
+  const FONT_WEIGHT_TO_PREFIX = familyProxy(_FONT_WEIGHT_TO_PREFIX);
+  const ATTRIBUTES_WATCHED_FOR_MUTATION = ['class', 'data-prefix', 'data-icon', 'data-fa-transform', 'data-fa-mask'];
+  const DUOTONE_CLASSES = A;
+  const RESERVED_CLASSES = [...At, ...ma];
+
+  const initial = WINDOW.FontAwesomeConfig || {};
+  function getAttrConfig(attr) {
+    var element = DOCUMENT.querySelector('script[' + attr + ']');
+    if (element) {
+      return element.getAttribute(attr);
+    }
+  }
+  function coerce(val) {
+    // Getting an empty string will occur if the attribute is set on the HTML tag but without a value
+    // We'll assume that this is an indication that it should be toggled to true
+    if (val === '') return true;
+    if (val === 'false') return false;
+    if (val === 'true') return true;
+    return val;
+  }
+  if (DOCUMENT && typeof DOCUMENT.querySelector === 'function') {
+    const attrs = [['data-family-prefix', 'familyPrefix'], ['data-css-prefix', 'cssPrefix'], ['data-family-default', 'familyDefault'], ['data-style-default', 'styleDefault'], ['data-replacement-class', 'replacementClass'], ['data-auto-replace-svg', 'autoReplaceSvg'], ['data-auto-add-css', 'autoAddCss'], ['data-auto-a11y', 'autoA11y'], ['data-search-pseudo-elements', 'searchPseudoElements'], ['data-observe-mutations', 'observeMutations'], ['data-mutate-approach', 'mutateApproach'], ['data-keep-original-source', 'keepOriginalSource'], ['data-measure-performance', 'measurePerformance'], ['data-show-missing-icons', 'showMissingIcons']];
+    attrs.forEach(_ref => {
+      let [attr, key] = _ref;
+      const val = coerce(getAttrConfig(attr));
+      if (val !== undefined && val !== null) {
+        initial[key] = val;
+      }
+    });
+  }
+  const _default = {
+    styleDefault: 'solid',
+    familyDefault: s,
+    cssPrefix: DEFAULT_CSS_PREFIX,
+    replacementClass: DEFAULT_REPLACEMENT_CLASS,
+    autoReplaceSvg: true,
+    autoAddCss: true,
+    autoA11y: true,
+    searchPseudoElements: false,
+    observeMutations: true,
+    mutateApproach: 'async',
+    keepOriginalSource: true,
+    measurePerformance: false,
+    showMissingIcons: true
+  };
+
+  // familyPrefix is deprecated but we must still support it if present
+  if (initial.familyPrefix) {
+    initial.cssPrefix = initial.familyPrefix;
+  }
+  const _config = _objectSpread2(_objectSpread2({}, _default), initial);
+  if (!_config.autoReplaceSvg) _config.observeMutations = false;
+  const config = {};
+  Object.keys(_default).forEach(key => {
+    Object.defineProperty(config, key, {
+      enumerable: true,
+      set: function (val) {
+        _config[key] = val;
+        _onChangeCb.forEach(cb => cb(config));
+      },
+      get: function () {
+        return _config[key];
+      }
+    });
+  });
+
+  // familyPrefix is deprecated as of 6.2.0 and should be removed in 7.0.0
+  Object.defineProperty(config, 'familyPrefix', {
+    enumerable: true,
+    set: function (val) {
+      _config.cssPrefix = val;
+      _onChangeCb.forEach(cb => cb(config));
+    },
+    get: function () {
+      return _config.cssPrefix;
+    }
+  });
+  WINDOW.FontAwesomeConfig = config;
+  const _onChangeCb = [];
+  function onChange(cb) {
+    _onChangeCb.push(cb);
+    return () => {
+      _onChangeCb.splice(_onChangeCb.indexOf(cb), 1);
+    };
+  }
+
+  const d$2 = UNITS_IN_GRID;
+  const meaninglessTransform = {
+    size: 16,
+    x: 0,
+    y: 0,
+    rotate: 0,
+    flipX: false,
+    flipY: false
+  };
+  function bunker(fn) {
+    try {
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+      fn(...args);
+    } catch (e) {
+      if (!PRODUCTION) {
+        throw e;
+      }
+    }
+  }
+  function insertCss(css) {
+    if (!css || !IS_DOM) {
+      return;
+    }
+    const style = DOCUMENT.createElement('style');
+    style.setAttribute('type', 'text/css');
+    style.innerHTML = css;
+    const headChildren = DOCUMENT.head.childNodes;
+    let beforeChild = null;
+    for (let i = headChildren.length - 1; i > -1; i--) {
+      const child = headChildren[i];
+      const tagName = (child.tagName || '').toUpperCase();
+      if (['STYLE', 'LINK'].indexOf(tagName) > -1) {
+        beforeChild = child;
+      }
+    }
+    DOCUMENT.head.insertBefore(style, beforeChild);
+    return css;
+  }
+  const idPool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  function nextUniqueId() {
+    let size = 12;
+    let id = '';
+    while (size-- > 0) {
+      id += idPool[Math.random() * 62 | 0];
+    }
+    return id;
+  }
+  function toArray(obj) {
+    const array = [];
+    for (let i = (obj || []).length >>> 0; i--;) {
+      array[i] = obj[i];
+    }
+    return array;
+  }
+  function classArray(node) {
+    if (node.classList) {
+      return toArray(node.classList);
+    } else {
+      return (node.getAttribute('class') || '').split(' ').filter(i => i);
+    }
+  }
+  function htmlEscape(str) {
+    return "".concat(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  function joinAttributes(attributes) {
+    return Object.keys(attributes || {}).reduce((acc, attributeName) => {
+      return acc + "".concat(attributeName, "=\"").concat(htmlEscape(attributes[attributeName]), "\" ");
+    }, '').trim();
+  }
+  function joinStyles(styles) {
+    return Object.keys(styles || {}).reduce((acc, styleName) => {
+      return acc + "".concat(styleName, ": ").concat(styles[styleName].trim(), ";");
+    }, '');
+  }
+  function transformIsMeaningful(transform) {
+    return transform.size !== meaninglessTransform.size || transform.x !== meaninglessTransform.x || transform.y !== meaninglessTransform.y || transform.rotate !== meaninglessTransform.rotate || transform.flipX || transform.flipY;
+  }
+  function transformForSvg(_ref) {
+    let {
+      transform,
+      containerWidth,
+      iconWidth
+    } = _ref;
+    const outer = {
+      transform: "translate(".concat(containerWidth / 2, " 256)")
+    };
+    const innerTranslate = "translate(".concat(transform.x * 32, ", ").concat(transform.y * 32, ") ");
+    const innerScale = "scale(".concat(transform.size / 16 * (transform.flipX ? -1 : 1), ", ").concat(transform.size / 16 * (transform.flipY ? -1 : 1), ") ");
+    const innerRotate = "rotate(".concat(transform.rotate, " 0 0)");
+    const inner = {
+      transform: "".concat(innerTranslate, " ").concat(innerScale, " ").concat(innerRotate)
+    };
+    const path = {
+      transform: "translate(".concat(iconWidth / 2 * -1, " -256)")
+    };
+    return {
+      outer,
+      inner,
+      path
+    };
+  }
+  function transformForCss(_ref2) {
+    let {
+      transform,
+      width = UNITS_IN_GRID,
+      height = UNITS_IN_GRID,
+      startCentered = false
+    } = _ref2;
+    let val = '';
+    if (startCentered && IS_IE) {
+      val += "translate(".concat(transform.x / d$2 - width / 2, "em, ").concat(transform.y / d$2 - height / 2, "em) ");
+    } else if (startCentered) {
+      val += "translate(calc(-50% + ".concat(transform.x / d$2, "em), calc(-50% + ").concat(transform.y / d$2, "em)) ");
+    } else {
+      val += "translate(".concat(transform.x / d$2, "em, ").concat(transform.y / d$2, "em) ");
+    }
+    val += "scale(".concat(transform.size / d$2 * (transform.flipX ? -1 : 1), ", ").concat(transform.size / d$2 * (transform.flipY ? -1 : 1), ") ");
+    val += "rotate(".concat(transform.rotate, "deg) ");
+    return val;
+  }
+
+  var baseStyles = ":host,:root{--fa-font-solid:normal 900 1em/1 \"Font Awesome 6 Pro\";--fa-font-regular:normal 400 1em/1 \"Font Awesome 6 Pro\";--fa-font-light:normal 300 1em/1 \"Font Awesome 6 Pro\";--fa-font-thin:normal 100 1em/1 \"Font Awesome 6 Pro\";--fa-font-duotone:normal 900 1em/1 \"Font Awesome 6 Duotone\";--fa-font-duotone-regular:normal 400 1em/1 \"Font Awesome 6 Duotone\";--fa-font-duotone-light:normal 300 1em/1 \"Font Awesome 6 Duotone\";--fa-font-duotone-thin:normal 100 1em/1 \"Font Awesome 6 Duotone\";--fa-font-brands:normal 400 1em/1 \"Font Awesome 6 Brands\";--fa-font-sharp-solid:normal 900 1em/1 \"Font Awesome 6 Sharp\";--fa-font-sharp-regular:normal 400 1em/1 \"Font Awesome 6 Sharp\";--fa-font-sharp-light:normal 300 1em/1 \"Font Awesome 6 Sharp\";--fa-font-sharp-thin:normal 100 1em/1 \"Font Awesome 6 Sharp\";--fa-font-sharp-duotone-solid:normal 900 1em/1 \"Font Awesome 6 Sharp Duotone\";--fa-font-sharp-duotone-regular:normal 400 1em/1 \"Font Awesome 6 Sharp Duotone\";--fa-font-sharp-duotone-light:normal 300 1em/1 \"Font Awesome 6 Sharp Duotone\";--fa-font-sharp-duotone-thin:normal 100 1em/1 \"Font Awesome 6 Sharp Duotone\"}svg:not(:host).svg-inline--fa,svg:not(:root).svg-inline--fa{overflow:visible;box-sizing:content-box}.svg-inline--fa{display:var(--fa-display,inline-block);height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-2xs{vertical-align:.1em}.svg-inline--fa.fa-xs{vertical-align:0}.svg-inline--fa.fa-sm{vertical-align:-.0714285705em}.svg-inline--fa.fa-lg{vertical-align:-.2em}.svg-inline--fa.fa-xl{vertical-align:-.25em}.svg-inline--fa.fa-2xl{vertical-align:-.3125em}.svg-inline--fa.fa-pull-left{margin-right:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-pull-right{margin-left:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-li{width:var(--fa-li-width,2em);top:.25em}.svg-inline--fa.fa-fw{width:var(--fa-fw-width,1.25em)}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{transform-origin:center center}.fa-layers-text{left:50%;top:50%;transform:translate(-50%,-50%);transform-origin:center center}.fa-layers-counter{background-color:var(--fa-counter-background-color,#ff253a);border-radius:var(--fa-counter-border-radius,1em);box-sizing:border-box;color:var(--fa-inverse,#fff);line-height:var(--fa-counter-line-height,1);max-width:var(--fa-counter-max-width,5em);min-width:var(--fa-counter-min-width,1.5em);overflow:hidden;padding:var(--fa-counter-padding,.25em .5em);right:var(--fa-right,0);text-overflow:ellipsis;top:var(--fa-top,0);transform:scale(var(--fa-counter-scale,.25));transform-origin:top right}.fa-layers-bottom-right{bottom:var(--fa-bottom,0);right:var(--fa-right,0);top:auto;transform:scale(var(--fa-layers-scale,.25));transform-origin:bottom right}.fa-layers-bottom-left{bottom:var(--fa-bottom,0);left:var(--fa-left,0);right:auto;top:auto;transform:scale(var(--fa-layers-scale,.25));transform-origin:bottom left}.fa-layers-top-right{top:var(--fa-top,0);right:var(--fa-right,0);transform:scale(var(--fa-layers-scale,.25));transform-origin:top right}.fa-layers-top-left{left:var(--fa-left,0);right:auto;top:var(--fa-top,0);transform:scale(var(--fa-layers-scale,.25));transform-origin:top left}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-2xs{font-size:.625em;line-height:.1em;vertical-align:.225em}.fa-xs{font-size:.75em;line-height:.0833333337em;vertical-align:.125em}.fa-sm{font-size:.875em;line-height:.0714285718em;vertical-align:.0535714295em}.fa-lg{font-size:1.25em;line-height:.05em;vertical-align:-.075em}.fa-xl{font-size:1.5em;line-height:.0416666682em;vertical-align:-.125em}.fa-2xl{font-size:2em;line-height:.03125em;vertical-align:-.1875em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:var(--fa-li-margin,2.5em);padding-left:0}.fa-ul>li{position:relative}.fa-li{left:calc(-1 * var(--fa-li-width,2em));position:absolute;text-align:center;width:var(--fa-li-width,2em);line-height:inherit}.fa-border{border-color:var(--fa-border-color,#eee);border-radius:var(--fa-border-radius,.1em);border-style:var(--fa-border-style,solid);border-width:var(--fa-border-width,.08em);padding:var(--fa-border-padding,.2em .25em .15em)}.fa-pull-left{float:left;margin-right:var(--fa-pull-margin,.3em)}.fa-pull-right{float:right;margin-left:var(--fa-pull-margin,.3em)}.fa-beat{animation-name:fa-beat;animation-delay:var(--fa-animation-delay,0s);animation-direction:var(--fa-animation-direction,normal);animation-duration:var(--fa-animation-duration,1s);animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-bounce{animation-name:fa-bounce;animation-delay:var(--fa-animation-delay,0s);animation-direction:var(--fa-animation-direction,normal);animation-duration:var(--fa-animation-duration,1s);animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1))}.fa-fade{animation-name:fa-fade;animation-delay:var(--fa-animation-delay,0s);animation-direction:var(--fa-animation-direction,normal);animation-duration:var(--fa-animation-duration,1s);animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-beat-fade{animation-name:fa-beat-fade;animation-delay:var(--fa-animation-delay,0s);animation-direction:var(--fa-animation-direction,normal);animation-duration:var(--fa-animation-duration,1s);animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-flip{animation-name:fa-flip;animation-delay:var(--fa-animation-delay,0s);animation-direction:var(--fa-animation-direction,normal);animation-duration:var(--fa-animation-duration,1s);animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-shake{animation-name:fa-shake;animation-delay:var(--fa-animation-delay,0s);animation-direction:var(--fa-animation-direction,normal);animation-duration:var(--fa-animation-duration,1s);animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin{animation-name:fa-spin;animation-delay:var(--fa-animation-delay,0s);animation-direction:var(--fa-animation-direction,normal);animation-duration:var(--fa-animation-duration,2s);animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin-reverse{--fa-animation-direction:reverse}.fa-pulse,.fa-spin-pulse{animation-name:fa-spin;animation-direction:var(--fa-animation-direction,normal);animation-duration:var(--fa-animation-duration,1s);animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-timing-function:var(--fa-animation-timing,steps(8))}@media (prefers-reduced-motion:reduce){.fa-beat,.fa-beat-fade,.fa-bounce,.fa-fade,.fa-flip,.fa-pulse,.fa-shake,.fa-spin,.fa-spin-pulse{animation-delay:-1ms;animation-duration:1ms;animation-iteration-count:1;transition-delay:0s;transition-duration:0s}}@keyframes fa-beat{0%,90%{transform:scale(1)}45%{transform:scale(var(--fa-beat-scale,1.25))}}@keyframes fa-bounce{0%{transform:scale(1,1) translateY(0)}10%{transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{transform:scale(1,1) translateY(0)}100%{transform:scale(1,1) translateY(0)}}@keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);transform:scale(1)}50%{opacity:1;transform:scale(var(--fa-beat-fade-scale,1.125))}}@keyframes fa-flip{50%{transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@keyframes fa-shake{0%{transform:rotate(-15deg)}4%{transform:rotate(15deg)}24%,8%{transform:rotate(-18deg)}12%,28%{transform:rotate(18deg)}16%{transform:rotate(-22deg)}20%{transform:rotate(22deg)}32%{transform:rotate(-12deg)}36%{transform:rotate(12deg)}100%,40%{transform:rotate(0)}}@keyframes fa-spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.fa-rotate-90{transform:rotate(90deg)}.fa-rotate-180{transform:rotate(180deg)}.fa-rotate-270{transform:rotate(270deg)}.fa-flip-horizontal{transform:scale(-1,1)}.fa-flip-vertical{transform:scale(1,-1)}.fa-flip-both,.fa-flip-horizontal.fa-flip-vertical{transform:scale(-1,-1)}.fa-rotate-by{transform:rotate(var(--fa-rotate-angle,0))}.fa-stack{display:inline-block;vertical-align:middle;height:2em;position:relative;width:2.5em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0;z-index:var(--fa-stack-z-index,auto)}.svg-inline--fa.fa-stack-1x{height:1em;width:1.25em}.svg-inline--fa.fa-stack-2x{height:2em;width:2.5em}.fa-inverse{color:var(--fa-inverse,#fff)}.fa-sr-only,.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.fa-sr-only-focusable:not(:focus),.sr-only-focusable:not(:focus){position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.svg-inline--fa .fa-primary{fill:var(--fa-primary-color,currentColor);opacity:var(--fa-primary-opacity,1)}.svg-inline--fa .fa-secondary{fill:var(--fa-secondary-color,currentColor);opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-primary{opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-secondary{opacity:var(--fa-primary-opacity,1)}.svg-inline--fa mask .fa-primary,.svg-inline--fa mask .fa-secondary{fill:#000}";
+
+  function css() {
+    const dcp = DEFAULT_CSS_PREFIX;
+    const drc = DEFAULT_REPLACEMENT_CLASS;
+    const fp = config.cssPrefix;
+    const rc = config.replacementClass;
+    let s = baseStyles;
+    if (fp !== dcp || rc !== drc) {
+      const dPatt = new RegExp("\\.".concat(dcp, "\\-"), 'g');
+      const customPropPatt = new RegExp("\\--".concat(dcp, "\\-"), 'g');
+      const rPatt = new RegExp("\\.".concat(drc), 'g');
+      s = s.replace(dPatt, ".".concat(fp, "-")).replace(customPropPatt, "--".concat(fp, "-")).replace(rPatt, ".".concat(rc));
+    }
+    return s;
+  }
+  let _cssInserted = false;
+  function ensureCss() {
+    if (config.autoAddCss && !_cssInserted) {
+      insertCss(css());
+      _cssInserted = true;
+    }
+  }
+  var InjectCSS = {
+    mixout() {
+      return {
+        dom: {
+          css,
+          insertCss: ensureCss
+        }
+      };
+    },
+    hooks() {
+      return {
+        beforeDOMElementCreation() {
+          ensureCss();
+        },
+        beforeI2svg() {
+          ensureCss();
+        }
+      };
+    }
+  };
+
+  const w = WINDOW || {};
+  if (!w[NAMESPACE_IDENTIFIER]) w[NAMESPACE_IDENTIFIER] = {};
+  if (!w[NAMESPACE_IDENTIFIER].styles) w[NAMESPACE_IDENTIFIER].styles = {};
+  if (!w[NAMESPACE_IDENTIFIER].hooks) w[NAMESPACE_IDENTIFIER].hooks = {};
+  if (!w[NAMESPACE_IDENTIFIER].shims) w[NAMESPACE_IDENTIFIER].shims = [];
+  var namespace = w[NAMESPACE_IDENTIFIER];
+
+  const functions = [];
+  const listener = function () {
+    DOCUMENT.removeEventListener('DOMContentLoaded', listener);
+    loaded = 1;
+    functions.map(fn => fn());
+  };
+  let loaded = false;
+  if (IS_DOM) {
+    loaded = (DOCUMENT.documentElement.doScroll ? /^loaded|^c/ : /^loaded|^i|^c/).test(DOCUMENT.readyState);
+    if (!loaded) DOCUMENT.addEventListener('DOMContentLoaded', listener);
+  }
+  function domready (fn) {
+    if (!IS_DOM) return;
+    loaded ? setTimeout(fn, 0) : functions.push(fn);
+  }
+
+  function toHtml(abstractNodes) {
+    const {
+      tag,
+      attributes = {},
+      children = []
+    } = abstractNodes;
+    if (typeof abstractNodes === 'string') {
+      return htmlEscape(abstractNodes);
+    } else {
+      return "<".concat(tag, " ").concat(joinAttributes(attributes), ">").concat(children.map(toHtml).join(''), "</").concat(tag, ">");
+    }
+  }
+
+  function iconFromMapping(mapping, prefix, iconName) {
+    if (mapping && mapping[prefix] && mapping[prefix][iconName]) {
+      return {
+        prefix,
+        iconName,
+        icon: mapping[prefix][iconName]
+      };
+    }
+  }
+
+  /**
+   * Internal helper to bind a function known to have 4 arguments
+   * to a given context.
+   */
+  var bindInternal4 = function bindInternal4(func, thisContext) {
+    return function (a, b, c, d) {
+      return func.call(thisContext, a, b, c, d);
+    };
+  };
+
+  /**
+   * # Reduce
+   *
+   * A fast object `.reduce()` implementation.
+   *
+   * @param  {Object}   subject      The object to reduce over.
+   * @param  {Function} fn           The reducer function.
+   * @param  {mixed}    initialValue The initial value for the reducer, defaults to subject[0].
+   * @param  {Object}   thisContext  The context for the reducer.
+   * @return {mixed}                 The final result.
+   */
+  var reduce = function fastReduceObject(subject, fn, initialValue, thisContext) {
+    var keys = Object.keys(subject),
+      length = keys.length,
+      iterator = thisContext !== undefined ? bindInternal4(fn, thisContext) : fn,
+      i,
+      key,
+      result;
+    if (initialValue === undefined) {
+      i = 1;
+      result = subject[keys[0]];
+    } else {
+      i = 0;
+      result = initialValue;
+    }
+    for (; i < length; i++) {
+      key = keys[i];
+      result = iterator(result, subject[key], key, subject);
+    }
+    return result;
+  };
+
+  /**
+   * ucs2decode() and codePointAt() are both works of Mathias Bynens and licensed under MIT
+   *
+   * Copyright Mathias Bynens <https://mathiasbynens.be/>
+
+   * Permission is hereby granted, free of charge, to any person obtaining
+   * a copy of this software and associated documentation files (the
+   * "Software"), to deal in the Software without restriction, including
+   * without limitation the rights to use, copy, modify, merge, publish,
+   * distribute, sublicense, and/or sell copies of the Software, and to
+   * permit persons to whom the Software is furnished to do so, subject to
+   * the following conditions:
+
+   * The above copyright notice and this permission notice shall be
+   * included in all copies or substantial portions of the Software.
+
+   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+   * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+   * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+   * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+   * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+   * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+   * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+   */
+
+  function ucs2decode(string) {
+    const output = [];
+    let counter = 0;
+    const length = string.length;
+    while (counter < length) {
+      const value = string.charCodeAt(counter++);
+      if (value >= 0xD800 && value <= 0xDBFF && counter < length) {
+        const extra = string.charCodeAt(counter++);
+        if ((extra & 0xFC00) == 0xDC00) {
+          // eslint-disable-line eqeqeq
+          output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000);
+        } else {
+          output.push(value);
+          counter--;
+        }
+      } else {
+        output.push(value);
+      }
+    }
+    return output;
+  }
+  function toHex(unicode) {
+    const decoded = ucs2decode(unicode);
+    return decoded.length === 1 ? decoded[0].toString(16) : null;
+  }
+  function codePointAt(string, index) {
+    const size = string.length;
+    let first = string.charCodeAt(index);
+    let second;
+    if (first >= 0xD800 && first <= 0xDBFF && size > index + 1) {
+      second = string.charCodeAt(index + 1);
+      if (second >= 0xDC00 && second <= 0xDFFF) {
+        return (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
+      }
+    }
+    return first;
+  }
+
+  function normalizeIcons(icons) {
+    return Object.keys(icons).reduce((acc, iconName) => {
+      const icon = icons[iconName];
+      const expanded = !!icon.icon;
+      if (expanded) {
+        acc[icon.iconName] = icon.icon;
+      } else {
+        acc[iconName] = icon;
+      }
+      return acc;
+    }, {});
+  }
+  function defineIcons(prefix, icons) {
+    let params = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    const {
+      skipHooks = false
+    } = params;
+    const normalized = normalizeIcons(icons);
+    if (typeof namespace.hooks.addPack === 'function' && !skipHooks) {
+      namespace.hooks.addPack(prefix, normalizeIcons(icons));
+    } else {
+      namespace.styles[prefix] = _objectSpread2(_objectSpread2({}, namespace.styles[prefix] || {}), normalized);
+    }
+
+    /**
+     * Font Awesome 4 used the prefix of `fa` for all icons. With the introduction
+     * of new styles we needed to differentiate between them. Prefix `fa` is now an alias
+     * for `fas` so we'll ease the upgrade process for our users by automatically defining
+     * this as well.
+     */
+    if (prefix === 'fas') {
+      defineIcons('fa', icons);
+    }
+  }
+
+  const duotonePathRe = [/*#__PURE__*/_wrapRegExp(/path d="([^"]+)".*path d="([^"]+)"/, {
+    d1: 1,
+    d2: 2
+  }), /*#__PURE__*/_wrapRegExp(/path class="([^"]+)".*d="([^"]+)".*path class="([^"]+)".*d="([^"]+)"/, {
+    cls1: 1,
+    d1: 2,
+    cls2: 3,
+    d2: 4
+  }), /*#__PURE__*/_wrapRegExp(/path class="([^"]+)".*d="([^"]+)"/, {
+    cls1: 1,
+    d1: 2
+  })];
+
+  const {
+    styles,
+    shims
+  } = namespace;
+  const FAMILY_NAMES = Object.keys(PREFIX_TO_LONG_STYLE);
+  const PREFIXES_FOR_FAMILY = FAMILY_NAMES.reduce((acc, familyId) => {
+    acc[familyId] = Object.keys(PREFIX_TO_LONG_STYLE[familyId]);
+    return acc;
+  }, {});
+  let _defaultUsablePrefix = null;
+  let _byUnicode = {};
+  let _byLigature = {};
+  let _byOldName = {};
+  let _byOldUnicode = {};
+  let _byAlias = {};
+  function isReserved(name) {
+    return ~RESERVED_CLASSES.indexOf(name);
+  }
+  function getIconName(cssPrefix, cls) {
+    const parts = cls.split('-');
+    const prefix = parts[0];
+    const iconName = parts.slice(1).join('-');
+    if (prefix === cssPrefix && iconName !== '' && !isReserved(iconName)) {
+      return iconName;
+    } else {
+      return null;
+    }
+  }
+  const build = () => {
+    const lookup = reducer => {
+      return reduce(styles, (o$$1, style, prefix) => {
+        o$$1[prefix] = reduce(style, reducer, {});
+        return o$$1;
+      }, {});
+    };
+    _byUnicode = lookup((acc, icon, iconName) => {
+      if (icon[3]) {
+        acc[icon[3]] = iconName;
+      }
+      if (icon[2]) {
+        const aliases = icon[2].filter(a$$1 => {
+          return typeof a$$1 === 'number';
+        });
+        aliases.forEach(alias => {
+          acc[alias.toString(16)] = iconName;
+        });
+      }
+      return acc;
+    });
+    _byLigature = lookup((acc, icon, iconName) => {
+      acc[iconName] = iconName;
+      if (icon[2]) {
+        const aliases = icon[2].filter(a$$1 => {
+          return typeof a$$1 === 'string';
+        });
+        aliases.forEach(alias => {
+          acc[alias] = iconName;
+        });
+      }
+      return acc;
+    });
+    _byAlias = lookup((acc, icon, iconName) => {
+      const aliases = icon[2];
+      acc[iconName] = iconName;
+      aliases.forEach(alias => {
+        acc[alias] = iconName;
+      });
+      return acc;
+    });
+
+    // If we have a Kit, we can't determine if regular is available since we
+    // could be auto-fetching it. We'll have to assume that it is available.
+    const hasRegular = 'far' in styles || config.autoFetchSvg;
+    const shimLookups = reduce(shims, (acc, shim) => {
+      const maybeNameMaybeUnicode = shim[0];
+      let prefix = shim[1];
+      const iconName = shim[2];
+      if (prefix === 'far' && !hasRegular) {
+        prefix = 'fas';
+      }
+      if (typeof maybeNameMaybeUnicode === 'string') {
+        acc.names[maybeNameMaybeUnicode] = {
+          prefix,
+          iconName
+        };
+      }
+      if (typeof maybeNameMaybeUnicode === 'number') {
+        acc.unicodes[maybeNameMaybeUnicode.toString(16)] = {
+          prefix,
+          iconName
+        };
+      }
+      return acc;
+    }, {
+      names: {},
+      unicodes: {}
+    });
+    _byOldName = shimLookups.names;
+    _byOldUnicode = shimLookups.unicodes;
+    _defaultUsablePrefix = getCanonicalPrefix(config.styleDefault, {
+      family: config.familyDefault
+    });
+  };
+  onChange(c$$1 => {
+    _defaultUsablePrefix = getCanonicalPrefix(c$$1.styleDefault, {
+      family: config.familyDefault
+    });
+  });
+  build();
+  function byUnicode(prefix, unicode) {
+    return (_byUnicode[prefix] || {})[unicode];
+  }
+  function byLigature(prefix, ligature) {
+    return (_byLigature[prefix] || {})[ligature];
+  }
+  function byAlias(prefix, alias) {
+    return (_byAlias[prefix] || {})[alias];
+  }
+  function byOldName(name) {
+    return _byOldName[name] || {
+      prefix: null,
+      iconName: null
+    };
+  }
+  function byOldUnicode(unicode) {
+    const oldUnicode = _byOldUnicode[unicode];
+    const newUnicode = byUnicode('fas', unicode);
+    return oldUnicode || (newUnicode ? {
+      prefix: 'fas',
+      iconName: newUnicode
+    } : null) || {
+      prefix: null,
+      iconName: null
+    };
+  }
+  function getDefaultUsablePrefix() {
+    return _defaultUsablePrefix;
+  }
+  const emptyCanonicalIcon = () => {
+    return {
+      prefix: null,
+      iconName: null,
+      rest: []
+    };
+  };
+  function getFamilyId(values) {
+    let family = s;
+    const famProps = FAMILY_NAMES.reduce((acc, familyId) => {
+      acc[familyId] = "".concat(config.cssPrefix, "-").concat(familyId);
+      return acc;
+    }, {});
+    L.forEach(familyId => {
+      if (values.includes(famProps[familyId]) || values.some(v$$1 => PREFIXES_FOR_FAMILY[familyId].includes(v$$1))) {
+        family = familyId;
+      }
+    });
+    return family;
+  }
+  function getCanonicalPrefix(styleOrPrefix) {
+    let params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    const {
+      family = s
+    } = params;
+    const style = PREFIX_TO_STYLE[family][styleOrPrefix];
+
+    // handles the exception of passing in only a family of 'duotone' with no style
+    if (family === t && !styleOrPrefix) {
+      return 'fad';
+    }
+    const prefix = STYLE_TO_PREFIX[family][styleOrPrefix] || STYLE_TO_PREFIX[family][style];
+    const defined = styleOrPrefix in namespace.styles ? styleOrPrefix : null;
+    const result = prefix || defined || null;
+    return result;
+  }
+  function moveNonFaClassesToRest(classNames) {
+    let rest = [];
+    let iconName = null;
+    classNames.forEach(cls => {
+      const result = getIconName(config.cssPrefix, cls);
+      if (result) {
+        iconName = result;
+      } else if (cls) {
+        rest.push(cls);
+      }
+    });
+    return {
+      iconName,
+      rest
+    };
+  }
+  function sortedUniqueValues(arr) {
+    return arr.sort().filter((value, index, arr) => {
+      return arr.indexOf(value) === index;
+    });
+  }
+  function getCanonicalIcon(values) {
+    let params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    const {
+      skipLookups = false
+    } = params;
+    let givenPrefix = null;
+    const faCombinedClasses = Ia.concat(bt$1);
+    const faStyleOrFamilyClasses = sortedUniqueValues(values.filter(cls => faCombinedClasses.includes(cls)));
+    const nonStyleOrFamilyClasses = sortedUniqueValues(values.filter(cls => !Ia.includes(cls)));
+    const faStyles = faStyleOrFamilyClasses.filter(cls => {
+      givenPrefix = cls;
+      return !P.includes(cls);
+    });
+    const [styleFromValues = null] = faStyles;
+    const family = getFamilyId(faStyleOrFamilyClasses);
+    const canonical = _objectSpread2(_objectSpread2({}, moveNonFaClassesToRest(nonStyleOrFamilyClasses)), {}, {
+      prefix: getCanonicalPrefix(styleFromValues, {
+        family
+      })
+    });
+    return _objectSpread2(_objectSpread2(_objectSpread2({}, canonical), getDefaultCanonicalPrefix({
+      values,
+      family,
+      styles,
+      config,
+      canonical,
+      givenPrefix
+    })), applyShimAndAlias(skipLookups, givenPrefix, canonical));
+  }
+  function applyShimAndAlias(skipLookups, givenPrefix, canonical) {
+    let {
+      prefix,
+      iconName
+    } = canonical;
+    if (skipLookups || !prefix || !iconName) {
+      return {
+        prefix,
+        iconName
+      };
+    }
+    const shim = givenPrefix === 'fa' ? byOldName(iconName) : {};
+    const aliasIconName = byAlias(prefix, iconName);
+    iconName = shim.iconName || aliasIconName || iconName;
+    prefix = shim.prefix || prefix;
+    if (prefix === 'far' && !styles['far'] && styles['fas'] && !config.autoFetchSvg) {
+      // Allow a fallback from the regular style to solid if regular is not available
+      // but only if we aren't auto-fetching SVGs
+      prefix = 'fas';
+    }
+    return {
+      prefix,
+      iconName
+    };
+  }
+  const newCanonicalFamilies = L.filter(familyId => {
+    return familyId !== s || familyId !== t;
+  });
+  const newCanonicalStyles = Object.keys(ga).filter(key => key !== s).map(key => Object.keys(ga[key])).flat();
+  function getDefaultCanonicalPrefix(prefixOptions) {
+    const {
+      values,
+      family,
+      canonical,
+      givenPrefix = '',
+      styles = {},
+      config: config$$1 = {}
+    } = prefixOptions;
+    const isDuotoneFamily = family === t;
+    const valuesHasDuotone = values.includes('fa-duotone') || values.includes('fad');
+    const defaultFamilyIsDuotone = config$$1.familyDefault === 'duotone';
+    const canonicalPrefixIsDuotone = canonical.prefix === 'fad' || canonical.prefix === 'fa-duotone';
+    if (!isDuotoneFamily && (valuesHasDuotone || defaultFamilyIsDuotone || canonicalPrefixIsDuotone)) {
+      canonical.prefix = 'fad';
+    }
+    if (values.includes('fa-brands') || values.includes('fab')) {
+      canonical.prefix = 'fab';
+    }
+    if (!canonical.prefix && newCanonicalFamilies.includes(family)) {
+      const validPrefix = Object.keys(styles).find(key => newCanonicalStyles.includes(key));
+      if (validPrefix || config$$1.autoFetchSvg) {
+        const defaultPrefix = pt.get(family).defaultShortPrefixId;
+        canonical.prefix = defaultPrefix;
+        canonical.iconName = byAlias(canonical.prefix, canonical.iconName) || canonical.iconName;
+      }
+    }
+    if (canonical.prefix === 'fa' || givenPrefix === 'fa') {
+      // The fa prefix is not canonical. So if it has made it through until this point
+      // we will shift it to the correct prefix.
+      canonical.prefix = getDefaultUsablePrefix() || 'fas';
+    }
+    return canonical;
+  }
+
+  class Library {
+    constructor() {
+      this.definitions = {};
+    }
+    add() {
+      for (var _len = arguments.length, definitions = new Array(_len), _key = 0; _key < _len; _key++) {
+        definitions[_key] = arguments[_key];
+      }
+      const additions = definitions.reduce(this._pullDefinitions, {});
+      Object.keys(additions).forEach(key => {
+        this.definitions[key] = _objectSpread2(_objectSpread2({}, this.definitions[key] || {}), additions[key]);
+        defineIcons(key, additions[key]);
+
+        // TODO can we stop doing this? We can't get the icons by 'fa-solid' any longer so this probably needs to change
+        const longPrefix = PREFIX_TO_LONG_STYLE[s][key];
+        if (longPrefix) defineIcons(longPrefix, additions[key]);
+        build();
+      });
+    }
+    reset() {
+      this.definitions = {};
+    }
+    _pullDefinitions(additions, definition) {
+      const normalized = definition.prefix && definition.iconName && definition.icon ? {
+        0: definition
+      } : definition;
+      Object.keys(normalized).map(key => {
+        const {
+          prefix,
+          iconName,
+          icon
+        } = normalized[key];
+        const aliases = icon[2];
+        if (!additions[prefix]) additions[prefix] = {};
+        if (aliases.length > 0) {
+          aliases.forEach(alias => {
+            if (typeof alias === 'string') {
+              additions[prefix][alias] = icon;
+            }
+          });
+        }
+        additions[prefix][iconName] = icon;
+      });
+      return additions;
+    }
+  }
+
+  let _plugins = [];
+  let _hooks = {};
+  const providers = {};
+  const defaultProviderKeys = Object.keys(providers);
+  function registerPlugins(nextPlugins, _ref) {
+    let {
+      mixoutsTo: obj
+    } = _ref;
+    _plugins = nextPlugins;
+    _hooks = {};
+    Object.keys(providers).forEach(k => {
+      if (defaultProviderKeys.indexOf(k) === -1) {
+        delete providers[k];
+      }
+    });
+    _plugins.forEach(plugin => {
+      const mixout = plugin.mixout ? plugin.mixout() : {};
+      Object.keys(mixout).forEach(tk => {
+        if (typeof mixout[tk] === 'function') {
+          obj[tk] = mixout[tk];
+        }
+        if (typeof mixout[tk] === 'object') {
+          Object.keys(mixout[tk]).forEach(sk => {
+            if (!obj[tk]) {
+              obj[tk] = {};
+            }
+            obj[tk][sk] = mixout[tk][sk];
+          });
+        }
+      });
+      if (plugin.hooks) {
+        const hooks = plugin.hooks();
+        Object.keys(hooks).forEach(hook => {
+          if (!_hooks[hook]) {
+            _hooks[hook] = [];
+          }
+          _hooks[hook].push(hooks[hook]);
+        });
+      }
+      if (plugin.provides) {
+        plugin.provides(providers);
+      }
+    });
+    return obj;
+  }
+  function chainHooks(hook, accumulator) {
+    for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+      args[_key - 2] = arguments[_key];
+    }
+    const hookFns = _hooks[hook] || [];
+    hookFns.forEach(hookFn => {
+      accumulator = hookFn.apply(null, [accumulator, ...args]); // eslint-disable-line no-useless-call
+    });
+    return accumulator;
+  }
+  function callHooks(hook) {
+    for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+      args[_key2 - 1] = arguments[_key2];
+    }
+    const hookFns = _hooks[hook] || [];
+    hookFns.forEach(hookFn => {
+      hookFn.apply(null, args);
+    });
+    return undefined;
+  }
+  function callProvided() {
+    const hook = arguments[0];
+    const args = Array.prototype.slice.call(arguments, 1);
+    return providers[hook] ? providers[hook].apply(null, args) : undefined;
+  }
+
+  function findIconDefinition(iconLookup) {
+    if (iconLookup.prefix === 'fa') {
+      iconLookup.prefix = 'fas';
+    }
+    let {
+      iconName
+    } = iconLookup;
+    const prefix = iconLookup.prefix || getDefaultUsablePrefix();
+    if (!iconName) return;
+    iconName = byAlias(prefix, iconName) || iconName;
+    return iconFromMapping(library.definitions, prefix, iconName) || iconFromMapping(namespace.styles, prefix, iconName);
+  }
+  const library = new Library();
+  const noAuto = () => {
+    config.autoReplaceSvg = false;
+    config.observeMutations = false;
+    callHooks('noAuto');
+  };
+  const dom = {
+    i2svg: function () {
+      let params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      if (IS_DOM) {
+        callHooks('beforeI2svg', params);
+        callProvided('pseudoElements2svg', params);
+        return callProvided('i2svg', params);
+      } else {
+        return Promise.reject(new Error('Operation requires a DOM of some kind.'));
+      }
+    },
+    watch: function () {
+      let params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      const {
+        autoReplaceSvgRoot
+      } = params;
+      if (config.autoReplaceSvg === false) {
+        config.autoReplaceSvg = true;
+      }
+      config.observeMutations = true;
+      domready(() => {
+        autoReplace({
+          autoReplaceSvgRoot
+        });
+        callHooks('watch', params);
+      });
+    }
+  };
+  const parse = {
+    icon: icon => {
+      if (icon === null) {
+        return null;
+      }
+      if (typeof icon === 'object' && icon.prefix && icon.iconName) {
+        return {
+          prefix: icon.prefix,
+          iconName: byAlias(icon.prefix, icon.iconName) || icon.iconName
+        };
+      }
+      if (Array.isArray(icon) && icon.length === 2) {
+        const iconName = icon[1].indexOf('fa-') === 0 ? icon[1].slice(3) : icon[1];
+        const prefix = getCanonicalPrefix(icon[0]);
+        return {
+          prefix,
+          iconName: byAlias(prefix, iconName) || iconName
+        };
+      }
+      if (typeof icon === 'string' && (icon.indexOf("".concat(config.cssPrefix, "-")) > -1 || icon.match(ICON_SELECTION_SYNTAX_PATTERN))) {
+        const canonicalIcon = getCanonicalIcon(icon.split(' '), {
+          skipLookups: true
+        });
+        return {
+          prefix: canonicalIcon.prefix || getDefaultUsablePrefix(),
+          iconName: byAlias(canonicalIcon.prefix, canonicalIcon.iconName) || canonicalIcon.iconName
+        };
+      }
+      if (typeof icon === 'string') {
+        const prefix = getDefaultUsablePrefix();
+        return {
+          prefix,
+          iconName: byAlias(prefix, icon) || icon
+        };
+      }
+    }
+  };
+  const api = {
+    noAuto,
+    config,
+    dom,
+    parse,
+    library,
+    findIconDefinition,
+    toHtml
+  };
+  const autoReplace = function () {
+    let params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    const {
+      autoReplaceSvgRoot = DOCUMENT
+    } = params;
+    if ((Object.keys(namespace.styles).length > 0 || config.autoFetchSvg) && IS_DOM && config.autoReplaceSvg) api.dom.i2svg({
+      node: autoReplaceSvgRoot
+    });
+  };
+  function bootstrap(plugins) {
+    if (IS_BROWSER) {
+      if (!WINDOW.FontAwesome) {
+        WINDOW.FontAwesome = api;
+      }
+      domready(() => {
+        autoReplace();
+        callHooks('bootstrap');
+      });
+    }
+    namespace.hooks = _objectSpread2(_objectSpread2({}, namespace.hooks), {}, {
+      addPack: (prefix, icons) => {
+        namespace.styles[prefix] = _objectSpread2(_objectSpread2({}, namespace.styles[prefix] || {}), icons);
+        build();
+        autoReplace();
+      },
+      addPacks: packs => {
+        packs.forEach(_ref => {
+          let [prefix, icons] = _ref;
+          namespace.styles[prefix] = _objectSpread2(_objectSpread2({}, namespace.styles[prefix] || {}), icons);
+        });
+        build();
+        autoReplace();
+      },
+      addShims: shims => {
+        namespace.shims.push(...shims);
+        build();
+        autoReplace();
+      }
+    });
+  }
+
+  function domVariants(val, abstractCreator) {
+    Object.defineProperty(val, 'abstract', {
+      get: abstractCreator
+    });
+    Object.defineProperty(val, 'html', {
+      get: function () {
+        return val.abstract.map(a => toHtml(a));
+      }
+    });
+    Object.defineProperty(val, 'node', {
+      get: function () {
+        if (!IS_DOM) return;
+        const container = DOCUMENT.createElement('div');
+        container.innerHTML = val.html;
+        return container.children;
+      }
+    });
+    return val;
+  }
+
+  function asIcon (_ref) {
+    let {
+      children,
+      main,
+      mask,
+      attributes,
+      styles,
+      transform
+    } = _ref;
+    if (transformIsMeaningful(transform) && main.found && !mask.found) {
+      const {
+        width,
+        height
+      } = main;
+      const offset = {
+        x: width / height / 2,
+        y: 0.5
+      };
+      attributes['style'] = joinStyles(_objectSpread2(_objectSpread2({}, styles), {}, {
+        'transform-origin': "".concat(offset.x + transform.x / 16, "em ").concat(offset.y + transform.y / 16, "em")
+      }));
+    }
+    return [{
+      tag: 'svg',
+      attributes,
+      children
+    }];
+  }
+
+  function asSymbol (_ref) {
+    let {
+      prefix,
+      iconName,
+      children,
+      attributes,
+      symbol
+    } = _ref;
+    const id = symbol === true ? "".concat(prefix, "-").concat(config.cssPrefix, "-").concat(iconName) : symbol;
+    return [{
+      tag: 'svg',
+      attributes: {
+        style: 'display: none;'
+      },
+      children: [{
+        tag: 'symbol',
+        attributes: _objectSpread2(_objectSpread2({}, attributes), {}, {
+          id
+        }),
+        children
+      }]
+    }];
+  }
+
+  function makeInlineSvgAbstract(params) {
+    const {
+      icons: {
+        main,
+        mask
+      },
+      prefix,
+      iconName,
+      transform,
+      symbol,
+      title,
+      maskId,
+      titleId,
+      extra,
+      watchable = false
+    } = params;
+    const {
+      width,
+      height
+    } = mask.found ? mask : main;
+    const isUploadedIcon = Lt.includes(prefix);
+    const attrClass = [config.replacementClass, iconName ? "".concat(config.cssPrefix, "-").concat(iconName) : ''].filter(c$$1 => extra.classes.indexOf(c$$1) === -1).filter(c$$1 => c$$1 !== '' || !!c$$1).concat(extra.classes).join(' ');
+    let content = {
+      children: [],
+      attributes: _objectSpread2(_objectSpread2({}, extra.attributes), {}, {
+        'data-prefix': prefix,
+        'data-icon': iconName,
+        'class': attrClass,
+        'role': extra.attributes.role || 'img',
+        'xmlns': 'http://www.w3.org/2000/svg',
+        'viewBox': "0 0 ".concat(width, " ").concat(height)
+      })
+    };
+    const uploadedIconWidthStyle = isUploadedIcon && !~extra.classes.indexOf('fa-fw') ? {
+      width: "".concat(width / height * 16 * 0.0625, "em")
+    } : {};
+    if (watchable) {
+      content.attributes[DATA_FA_I2SVG] = '';
+    }
+    if (title) {
+      content.children.push({
+        tag: 'title',
+        attributes: {
+          id: content.attributes['aria-labelledby'] || "title-".concat(titleId || nextUniqueId())
+        },
+        children: [title]
+      });
+      delete content.attributes.title;
+    }
+    const args = _objectSpread2(_objectSpread2({}, content), {}, {
+      prefix,
+      iconName,
+      main,
+      mask,
+      maskId,
+      transform,
+      symbol,
+      styles: _objectSpread2(_objectSpread2({}, uploadedIconWidthStyle), extra.styles)
+    });
+    const {
+      children,
+      attributes
+    } = mask.found && main.found ? callProvided('generateAbstractMask', args) || {
+      children: [],
+      attributes: {}
+    } : callProvided('generateAbstractIcon', args) || {
+      children: [],
+      attributes: {}
+    };
+    args.children = children;
+    args.attributes = attributes;
+    if (symbol) {
+      return asSymbol(args);
+    } else {
+      return asIcon(args);
+    }
+  }
+  function makeLayersTextAbstract(params) {
+    const {
+      content,
+      width,
+      height,
+      transform,
+      title,
+      extra,
+      watchable = false
+    } = params;
+    const attributes = _objectSpread2(_objectSpread2(_objectSpread2({}, extra.attributes), title ? {
+      'title': title
+    } : {}), {}, {
+      'class': extra.classes.join(' ')
+    });
+    if (watchable) {
+      attributes[DATA_FA_I2SVG] = '';
+    }
+    const styles = _objectSpread2({}, extra.styles);
+    if (transformIsMeaningful(transform)) {
+      styles['transform'] = transformForCss({
+        transform,
+        startCentered: true,
+        width,
+        height
+      });
+      styles['-webkit-transform'] = styles['transform'];
+    }
+    const styleString = joinStyles(styles);
+    if (styleString.length > 0) {
+      attributes['style'] = styleString;
+    }
+    const val = [];
+    val.push({
+      tag: 'span',
+      attributes,
+      children: [content]
+    });
+    if (title) {
+      val.push({
+        tag: 'span',
+        attributes: {
+          class: 'sr-only'
+        },
+        children: [title]
+      });
+    }
+    return val;
+  }
+  function makeLayersCounterAbstract(params) {
+    const {
+      content,
+      title,
+      extra
+    } = params;
+    const attributes = _objectSpread2(_objectSpread2(_objectSpread2({}, extra.attributes), title ? {
+      'title': title
+    } : {}), {}, {
+      'class': extra.classes.join(' ')
+    });
+    const styleString = joinStyles(extra.styles);
+    if (styleString.length > 0) {
+      attributes['style'] = styleString;
+    }
+    const val = [];
+    val.push({
+      tag: 'span',
+      attributes,
+      children: [content]
+    });
+    if (title) {
+      val.push({
+        tag: 'span',
+        attributes: {
+          class: 'sr-only'
+        },
+        children: [title]
+      });
+    }
+    return val;
+  }
+
+  const {
+    styles: styles$1
+  } = namespace;
+  function asFoundIcon(icon) {
+    const width = icon[0];
+    const height = icon[1];
+    const [vectorData] = icon.slice(4);
+    let element = null;
+    if (Array.isArray(vectorData)) {
+      element = {
+        tag: 'g',
+        attributes: {
+          class: "".concat(config.cssPrefix, "-").concat(DUOTONE_CLASSES.GROUP)
+        },
+        children: [{
+          tag: 'path',
+          attributes: {
+            class: "".concat(config.cssPrefix, "-").concat(DUOTONE_CLASSES.SECONDARY),
+            fill: 'currentColor',
+            d: vectorData[0]
+          }
+        }, {
+          tag: 'path',
+          attributes: {
+            class: "".concat(config.cssPrefix, "-").concat(DUOTONE_CLASSES.PRIMARY),
+            fill: 'currentColor',
+            d: vectorData[1]
+          }
+        }]
+      };
+    } else {
+      element = {
+        tag: 'path',
+        attributes: {
+          fill: 'currentColor',
+          d: vectorData
+        }
+      };
+    }
+    return {
+      found: true,
+      width,
+      height,
+      icon: element
+    };
+  }
+  const missingIconResolutionMixin = {
+    found: false,
+    width: 512,
+    height: 512
+  };
+  function maybeNotifyMissing(iconName, prefix) {
+    if (!PRODUCTION && !config.showMissingIcons && iconName) {
+      console.error("Icon with name \"".concat(iconName, "\" and prefix \"").concat(prefix, "\" is missing."));
+    }
+  }
+  function findIcon(iconName, prefix) {
+    let givenPrefix = prefix;
+    if (prefix === 'fa' && config.styleDefault !== null) {
+      prefix = getDefaultUsablePrefix();
+    }
+    return new Promise((resolve, reject) => {
+      if (givenPrefix === 'fa') {
+        const shim = byOldName(iconName) || {};
+        iconName = shim.iconName || iconName;
+        prefix = shim.prefix || prefix;
+      }
+      if (iconName && prefix && styles$1[prefix] && styles$1[prefix][iconName]) {
+        const icon = styles$1[prefix][iconName];
+        return resolve(asFoundIcon(icon));
+      }
+      maybeNotifyMissing(iconName, prefix);
+      resolve(_objectSpread2(_objectSpread2({}, missingIconResolutionMixin), {}, {
+        icon: config.showMissingIcons && iconName ? callProvided('missingIconAbstract') || {} : {}
+      }));
+    });
+  }
+
+  const noop$1 = () => {};
+  const p$2 = config.measurePerformance && PERFORMANCE && PERFORMANCE.mark && PERFORMANCE.measure ? PERFORMANCE : {
+    mark: noop$1,
+    measure: noop$1
+  };
+  const preamble = "FA \"6.7.2\"";
+  const begin = name => {
+    p$2.mark("".concat(preamble, " ").concat(name, " begins"));
+    return () => end(name);
+  };
+  const end = name => {
+    p$2.mark("".concat(preamble, " ").concat(name, " ends"));
+    p$2.measure("".concat(preamble, " ").concat(name), "".concat(preamble, " ").concat(name, " begins"), "".concat(preamble, " ").concat(name, " ends"));
+  };
+  var perf = {
+    begin,
+    end
+  };
+
+  const noop$2 = () => {};
+  function isWatched(node) {
+    const i2svg = node.getAttribute ? node.getAttribute(DATA_FA_I2SVG) : null;
+    return typeof i2svg === 'string';
+  }
+  function hasPrefixAndIcon(node) {
+    const prefix = node.getAttribute ? node.getAttribute(DATA_PREFIX) : null;
+    const icon = node.getAttribute ? node.getAttribute(DATA_ICON) : null;
+    return prefix && icon;
+  }
+  function hasBeenReplaced(node) {
+    return node && node.classList && node.classList.contains && node.classList.contains(config.replacementClass);
+  }
+  function getMutator() {
+    if (config.autoReplaceSvg === true) {
+      return mutators.replace;
+    }
+    const mutator = mutators[config.autoReplaceSvg];
+    return mutator || mutators.replace;
+  }
+  function createElementNS(tag) {
+    return DOCUMENT.createElementNS('http://www.w3.org/2000/svg', tag);
+  }
+  function createElement(tag) {
+    return DOCUMENT.createElement(tag);
+  }
+  function convertSVG(abstractObj) {
+    let params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    const {
+      ceFn = abstractObj.tag === 'svg' ? createElementNS : createElement
+    } = params;
+    if (typeof abstractObj === 'string') {
+      return DOCUMENT.createTextNode(abstractObj);
+    }
+    const tag = ceFn(abstractObj.tag);
+    Object.keys(abstractObj.attributes || []).forEach(function (key) {
+      tag.setAttribute(key, abstractObj.attributes[key]);
+    });
+    const children = abstractObj.children || [];
+    children.forEach(function (child) {
+      tag.appendChild(convertSVG(child, {
+        ceFn
+      }));
+    });
+    return tag;
+  }
+  function nodeAsComment(node) {
+    let comment = " ".concat(node.outerHTML, " ");
+    return comment;
+  }
+  const mutators = {
+    replace: function (mutation) {
+      const node = mutation[0];
+      if (node.parentNode) {
+        mutation[1].forEach(abstract => {
+          node.parentNode.insertBefore(convertSVG(abstract), node);
+        });
+        if (node.getAttribute(DATA_FA_I2SVG) === null && config.keepOriginalSource) {
+          let comment = DOCUMENT.createComment(nodeAsComment(node));
+          node.parentNode.replaceChild(comment, node);
+        } else {
+          node.remove();
+        }
+      }
+    },
+    nest: function (mutation) {
+      const node = mutation[0];
+      const abstract = mutation[1];
+
+      // If we already have a replaced node we do not want to continue nesting within it.
+      // Short-circuit to the standard replacement
+      if (~classArray(node).indexOf(config.replacementClass)) {
+        return mutators.replace(mutation);
+      }
+      const forSvg = new RegExp("".concat(config.cssPrefix, "-.*"));
+      delete abstract[0].attributes.id;
+      if (abstract[0].attributes.class) {
+        const splitClasses = abstract[0].attributes.class.split(' ').reduce((acc, cls) => {
+          if (cls === config.replacementClass || cls.match(forSvg)) {
+            acc.toSvg.push(cls);
+          } else {
+            acc.toNode.push(cls);
+          }
+          return acc;
+        }, {
+          toNode: [],
+          toSvg: []
+        });
+        abstract[0].attributes.class = splitClasses.toSvg.join(' ');
+        if (splitClasses.toNode.length === 0) {
+          node.removeAttribute('class');
+        } else {
+          node.setAttribute('class', splitClasses.toNode.join(' '));
+        }
+      }
+      const newInnerHTML = abstract.map(a => toHtml(a)).join('\n');
+      node.setAttribute(DATA_FA_I2SVG, '');
+      node.innerHTML = newInnerHTML;
+    }
+  };
+  function performOperationSync(op) {
+    op();
+  }
+  function perform(mutations, callback) {
+    const callbackFunction = typeof callback === 'function' ? callback : noop$2;
+    if (mutations.length === 0) {
+      callbackFunction();
+    } else {
+      let frame = performOperationSync;
+      if (config.mutateApproach === MUTATION_APPROACH_ASYNC) {
+        frame = WINDOW.requestAnimationFrame || performOperationSync;
+      }
+      frame(() => {
+        const mutator = getMutator();
+        const mark = perf.begin('mutate');
+        mutations.map(mutator);
+        mark();
+        callbackFunction();
+      });
+    }
+  }
+  let disabled = false;
+  function disableObservation() {
+    disabled = true;
+  }
+  function enableObservation() {
+    disabled = false;
+  }
+  let mo = null;
+  function observe(options) {
+    if (!MUTATION_OBSERVER) {
+      return;
+    }
+    if (!config.observeMutations) {
+      return;
+    }
+    const {
+      treeCallback = noop$2,
+      nodeCallback = noop$2,
+      pseudoElementsCallback = noop$2,
+      observeMutationsRoot = DOCUMENT
+    } = options;
+    mo = new MUTATION_OBSERVER(objects => {
+      if (disabled) return;
+      const defaultPrefix = getDefaultUsablePrefix();
+      toArray(objects).forEach(mutationRecord => {
+        if (mutationRecord.type === 'childList' && mutationRecord.addedNodes.length > 0 && !isWatched(mutationRecord.addedNodes[0])) {
+          if (config.searchPseudoElements) {
+            pseudoElementsCallback(mutationRecord.target);
+          }
+          treeCallback(mutationRecord.target);
+        }
+        if (mutationRecord.type === 'attributes' && mutationRecord.target.parentNode && config.searchPseudoElements) {
+          pseudoElementsCallback(mutationRecord.target.parentNode);
+        }
+        if (mutationRecord.type === 'attributes' && isWatched(mutationRecord.target) && ~ATTRIBUTES_WATCHED_FOR_MUTATION.indexOf(mutationRecord.attributeName)) {
+          if (mutationRecord.attributeName === 'class' && hasPrefixAndIcon(mutationRecord.target)) {
+            const {
+              prefix,
+              iconName
+            } = getCanonicalIcon(classArray(mutationRecord.target));
+            mutationRecord.target.setAttribute(DATA_PREFIX, prefix || defaultPrefix);
+            if (iconName) mutationRecord.target.setAttribute(DATA_ICON, iconName);
+          } else if (hasBeenReplaced(mutationRecord.target)) {
+            nodeCallback(mutationRecord.target);
+          }
+        }
+      });
+    });
+    if (!IS_DOM) return;
+    mo.observe(observeMutationsRoot, {
+      childList: true,
+      attributes: true,
+      characterData: true,
+      subtree: true
+    });
+  }
+  function disconnect() {
+    if (!mo) return;
+    mo.disconnect();
+  }
+
+  function styleParser (node) {
+    const style = node.getAttribute('style');
+    let val = [];
+    if (style) {
+      val = style.split(';').reduce((acc, style) => {
+        const styles = style.split(':');
+        const prop = styles[0];
+        const value = styles.slice(1);
+        if (prop && value.length > 0) {
+          acc[prop] = value.join(':').trim();
+        }
+        return acc;
+      }, {});
+    }
+    return val;
+  }
+
+  function classParser (node) {
+    const existingPrefix = node.getAttribute('data-prefix');
+    const existingIconName = node.getAttribute('data-icon');
+    const innerText = node.innerText !== undefined ? node.innerText.trim() : '';
+    let val = getCanonicalIcon(classArray(node));
+    if (!val.prefix) {
+      val.prefix = getDefaultUsablePrefix();
+    }
+    if (existingPrefix && existingIconName) {
+      val.prefix = existingPrefix;
+      val.iconName = existingIconName;
+    }
+    if (val.iconName && val.prefix) {
+      return val;
+    }
+    if (val.prefix && innerText.length > 0) {
+      val.iconName = byLigature(val.prefix, node.innerText) || byUnicode(val.prefix, toHex(node.innerText));
+    }
+    if (!val.iconName && config.autoFetchSvg && node.firstChild && node.firstChild.nodeType === Node.TEXT_NODE) {
+      val.iconName = node.firstChild.data;
+    }
+    return val;
+  }
+
+  function attributesParser (node) {
+    const extraAttributes = toArray(node.attributes).reduce((acc, attr) => {
+      if (acc.name !== 'class' && acc.name !== 'style') {
+        acc[attr.name] = attr.value;
+      }
+      return acc;
+    }, {});
+    const title = node.getAttribute('title');
+    const titleId = node.getAttribute('data-fa-title-id');
+    if (config.autoA11y) {
+      if (title) {
+        extraAttributes['aria-labelledby'] = "".concat(config.replacementClass, "-title-").concat(titleId || nextUniqueId());
+      } else {
+        extraAttributes['aria-hidden'] = 'true';
+        extraAttributes['focusable'] = 'false';
+      }
+    }
+    return extraAttributes;
+  }
+
+  function blankMeta() {
+    return {
+      iconName: null,
+      title: null,
+      titleId: null,
+      prefix: null,
+      transform: meaninglessTransform,
+      symbol: false,
+      mask: {
+        iconName: null,
+        prefix: null,
+        rest: []
+      },
+      maskId: null,
+      extra: {
+        classes: [],
+        styles: {},
+        attributes: {}
+      }
+    };
+  }
+  function parseMeta(node) {
+    let parser = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+      styleParser: true
+    };
+    const {
+      iconName,
+      prefix,
+      rest: extraClasses
+    } = classParser(node);
+    const extraAttributes = attributesParser(node);
+    const pluginMeta = chainHooks('parseNodeAttributes', {}, node);
+    let extraStyles = parser.styleParser ? styleParser(node) : [];
+    return _objectSpread2({
+      iconName,
+      title: node.getAttribute('title'),
+      titleId: node.getAttribute('data-fa-title-id'),
+      prefix,
+      transform: meaninglessTransform,
+      mask: {
+        iconName: null,
+        prefix: null,
+        rest: []
+      },
+      maskId: null,
+      symbol: false,
+      extra: {
+        classes: extraClasses,
+        styles: extraStyles,
+        attributes: extraAttributes
+      }
+    }, pluginMeta);
+  }
+
+  const {
+    styles: styles$2
+  } = namespace;
+  function generateMutation(node) {
+    const nodeMeta = config.autoReplaceSvg === 'nest' ? parseMeta(node, {
+      styleParser: false
+    }) : parseMeta(node);
+    if (~nodeMeta.extra.classes.indexOf(LAYERS_TEXT_CLASSNAME)) {
+      return callProvided('generateLayersText', node, nodeMeta);
+    } else {
+      return callProvided('generateSvgReplacementMutation', node, nodeMeta);
+    }
+  }
+  function getKnownPrefixes() {
+    return [...Ft, ...Ia];
+  }
+  function onTree(root) {
+    let callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    if (!IS_DOM) return Promise.resolve();
+    const htmlClassList = DOCUMENT.documentElement.classList;
+    const hclAdd = suffix => htmlClassList.add("".concat(HTML_CLASS_I2SVG_BASE_CLASS, "-").concat(suffix));
+    const hclRemove = suffix => htmlClassList.remove("".concat(HTML_CLASS_I2SVG_BASE_CLASS, "-").concat(suffix));
+    const prefixes = config.autoFetchSvg ? getKnownPrefixes() : P.concat(Object.keys(styles$2));
+    if (!prefixes.includes('fa')) {
+      prefixes.push('fa');
+    }
+    const prefixesDomQuery = [".".concat(LAYERS_TEXT_CLASSNAME, ":not([").concat(DATA_FA_I2SVG, "])")].concat(prefixes.map(p$$1 => ".".concat(p$$1, ":not([").concat(DATA_FA_I2SVG, "])"))).join(', ');
+    if (prefixesDomQuery.length === 0) {
+      return Promise.resolve();
+    }
+    let candidates = [];
+    try {
+      candidates = toArray(root.querySelectorAll(prefixesDomQuery));
+    } catch (e$$1) {
+      // noop
+    }
+    if (candidates.length > 0) {
+      hclAdd('pending');
+      hclRemove('complete');
+    } else {
+      return Promise.resolve();
+    }
+    const mark = perf.begin('onTree');
+    const mutations = candidates.reduce((acc, node) => {
+      try {
+        const mutation = generateMutation(node);
+        if (mutation) {
+          acc.push(mutation);
+        }
+      } catch (e$$1) {
+        if (!PRODUCTION) {
+          if (e$$1.name === 'MissingIcon') {
+            console.error(e$$1);
+          }
+        }
+      }
+      return acc;
+    }, []);
+    return new Promise((resolve, reject) => {
+      Promise.all(mutations).then(resolvedMutations => {
+        perform(resolvedMutations, () => {
+          hclAdd('active');
+          hclAdd('complete');
+          hclRemove('pending');
+          if (typeof callback === 'function') callback();
+          mark();
+          resolve();
+        });
+      }).catch(e$$1 => {
+        mark();
+        reject(e$$1);
+      });
+    });
+  }
+  function onNode(node) {
+    let callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    generateMutation(node).then(mutation => {
+      if (mutation) {
+        perform([mutation], callback);
+      }
+    });
+  }
+  function resolveIcons(next) {
+    return function (maybeIconDefinition) {
+      let params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      const iconDefinition = (maybeIconDefinition || {}).icon ? maybeIconDefinition : findIconDefinition(maybeIconDefinition || {});
+      let {
+        mask
+      } = params;
+      if (mask) {
+        mask = (mask || {}).icon ? mask : findIconDefinition(mask || {});
+      }
+      return next(iconDefinition, _objectSpread2(_objectSpread2({}, params), {}, {
+        mask
+      }));
+    };
+  }
+  const render = function (iconDefinition) {
+    let params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    const {
+      transform = meaninglessTransform,
+      symbol = false,
+      mask = null,
+      maskId = null,
+      title = null,
+      titleId = null,
+      classes = [],
+      attributes = {},
+      styles = {}
+    } = params;
+    if (!iconDefinition) return;
+    const {
+      prefix,
+      iconName,
+      icon
+    } = iconDefinition;
+    return domVariants(_objectSpread2({
+      type: 'icon'
+    }, iconDefinition), () => {
+      callHooks('beforeDOMElementCreation', {
+        iconDefinition,
+        params
+      });
+      if (config.autoA11y) {
+        if (title) {
+          attributes['aria-labelledby'] = "".concat(config.replacementClass, "-title-").concat(titleId || nextUniqueId());
+        } else {
+          attributes['aria-hidden'] = 'true';
+          attributes['focusable'] = 'false';
+        }
+      }
+      return makeInlineSvgAbstract({
+        icons: {
+          main: asFoundIcon(icon),
+          mask: mask ? asFoundIcon(mask.icon) : {
+            found: false,
+            width: null,
+            height: null,
+            icon: {}
+          }
+        },
+        prefix,
+        iconName,
+        transform: _objectSpread2(_objectSpread2({}, meaninglessTransform), transform),
+        symbol,
+        title,
+        maskId,
+        titleId,
+        extra: {
+          attributes,
+          styles,
+          classes
+        }
+      });
+    });
+  };
+  var ReplaceElements = {
+    mixout() {
+      return {
+        icon: resolveIcons(render)
+      };
+    },
+    hooks() {
+      return {
+        mutationObserverCallbacks(accumulator) {
+          accumulator.treeCallback = onTree;
+          accumulator.nodeCallback = onNode;
+          return accumulator;
+        }
+      };
+    },
+    provides(providers$$1) {
+      providers$$1.i2svg = function (params) {
+        const {
+          node = DOCUMENT,
+          callback = () => {}
+        } = params;
+        return onTree(node, callback);
+      };
+      providers$$1.generateSvgReplacementMutation = function (node, nodeMeta) {
+        const {
+          iconName,
+          title,
+          titleId,
+          prefix,
+          transform,
+          symbol,
+          mask,
+          maskId,
+          extra
+        } = nodeMeta;
+        return new Promise((resolve, reject) => {
+          Promise.all([findIcon(iconName, prefix), mask.iconName ? findIcon(mask.iconName, mask.prefix) : Promise.resolve({
+            found: false,
+            width: 512,
+            height: 512,
+            icon: {}
+          })]).then(_ref => {
+            let [main, mask] = _ref;
+            resolve([node, makeInlineSvgAbstract({
+              icons: {
+                main,
+                mask
+              },
+              prefix,
+              iconName,
+              transform,
+              symbol,
+              maskId,
+              title,
+              titleId,
+              extra,
+              watchable: true
+            })]);
+          }).catch(reject);
+        });
+      };
+      providers$$1.generateAbstractIcon = function (_ref2) {
+        let {
+          children,
+          attributes,
+          main,
+          transform,
+          styles
+        } = _ref2;
+        const styleString = joinStyles(styles);
+        if (styleString.length > 0) {
+          attributes['style'] = styleString;
+        }
+        let nextChild;
+        if (transformIsMeaningful(transform)) {
+          nextChild = callProvided('generateAbstractTransformGrouping', {
+            main,
+            transform,
+            containerWidth: main.width,
+            iconWidth: main.width
+          });
+        }
+        children.push(nextChild || main.icon);
+        return {
+          children,
+          attributes
+        };
+      };
+    }
+  };
+
+  var Layers = {
+    mixout() {
+      return {
+        layer(assembler) {
+          let params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+          const {
+            classes = []
+          } = params;
+          return domVariants({
+            type: 'layer'
+          }, () => {
+            callHooks('beforeDOMElementCreation', {
+              assembler,
+              params
+            });
+            let children = [];
+            assembler(args => {
+              Array.isArray(args) ? args.map(a => {
+                children = children.concat(a.abstract);
+              }) : children = children.concat(args.abstract);
+            });
+            return [{
+              tag: 'span',
+              attributes: {
+                class: ["".concat(config.cssPrefix, "-layers"), ...classes].join(' ')
+              },
+              children
+            }];
+          });
+        }
+      };
+    }
+  };
+
+  var LayersCounter = {
+    mixout() {
+      return {
+        counter(content) {
+          let params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+          const {
+            title = null,
+            classes = [],
+            attributes = {},
+            styles = {}
+          } = params;
+          return domVariants({
+            type: 'counter',
+            content
+          }, () => {
+            callHooks('beforeDOMElementCreation', {
+              content,
+              params
+            });
+            return makeLayersCounterAbstract({
+              content: content.toString(),
+              title,
+              extra: {
+                attributes,
+                styles,
+                classes: ["".concat(config.cssPrefix, "-layers-counter"), ...classes]
+              }
+            });
+          });
+        }
+      };
+    }
+  };
+
+  var LayersText = {
+    mixout() {
+      return {
+        text(content) {
+          let params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+          const {
+            transform = meaninglessTransform,
+            title = null,
+            classes = [],
+            attributes = {},
+            styles = {}
+          } = params;
+          return domVariants({
+            type: 'text',
+            content
+          }, () => {
+            callHooks('beforeDOMElementCreation', {
+              content,
+              params
+            });
+            return makeLayersTextAbstract({
+              content,
+              transform: _objectSpread2(_objectSpread2({}, meaninglessTransform), transform),
+              title,
+              extra: {
+                attributes,
+                styles,
+                classes: ["".concat(config.cssPrefix, "-layers-text"), ...classes]
+              }
+            });
+          });
+        }
+      };
+    },
+    provides(providers$$1) {
+      providers$$1.generateLayersText = function (node, nodeMeta) {
+        const {
+          title,
+          transform,
+          extra
+        } = nodeMeta;
+        let width = null;
+        let height = null;
+        if (IS_IE) {
+          const computedFontSize = parseInt(getComputedStyle(node).fontSize, 10);
+          const boundingClientRect = node.getBoundingClientRect();
+          width = boundingClientRect.width / computedFontSize;
+          height = boundingClientRect.height / computedFontSize;
+        }
+        if (config.autoA11y && !title) {
+          extra.attributes['aria-hidden'] = 'true';
+        }
+        return Promise.resolve([node, makeLayersTextAbstract({
+          content: node.innerHTML,
+          width,
+          height,
+          transform,
+          title,
+          extra,
+          watchable: true
+        })]);
+      };
+    }
+  };
+
+  const CLEAN_CONTENT_PATTERN = new RegExp('\u{22}', 'ug');
+  const SECONDARY_UNICODE_RANGE = [1105920, 1112319];
+  const _FONT_FAMILY_WEIGHT_TO_PREFIX = _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, {
+    FontAwesome: {
+      normal: 'fas',
+      400: 'fas'
+    }
+  }), lt), wa), Yt);
+  const FONT_FAMILY_WEIGHT_TO_PREFIX = Object.keys(_FONT_FAMILY_WEIGHT_TO_PREFIX).reduce((acc, key) => {
+    acc[key.toLowerCase()] = _FONT_FAMILY_WEIGHT_TO_PREFIX[key];
+    return acc;
+  }, {});
+  const FONT_FAMILY_WEIGHT_FALLBACK = Object.keys(FONT_FAMILY_WEIGHT_TO_PREFIX).reduce((acc, fontFamily) => {
+    const weights = FONT_FAMILY_WEIGHT_TO_PREFIX[fontFamily];
+    acc[fontFamily] = weights[900] || [...Object.entries(weights)][0][1];
+    return acc;
+  }, {});
+  function hexValueFromContent(content) {
+    const cleaned = content.replace(CLEAN_CONTENT_PATTERN, '');
+    const codePoint = codePointAt(cleaned, 0);
+    const isPrependTen = codePoint >= SECONDARY_UNICODE_RANGE[0] && codePoint <= SECONDARY_UNICODE_RANGE[1];
+    const isDoubled = cleaned.length === 2 ? cleaned[0] === cleaned[1] : false;
+    return {
+      value: isDoubled ? toHex(cleaned[0]) : toHex(cleaned),
+      isSecondary: isPrependTen || isDoubled
+    };
+  }
+  function getPrefix(fontFamily, fontWeight) {
+    const fontFamilySanitized = fontFamily.replace(/^['"]|['"]$/g, '').toLowerCase();
+    const fontWeightInteger = parseInt(fontWeight);
+    const fontWeightSanitized = isNaN(fontWeightInteger) ? 'normal' : fontWeightInteger;
+    return (FONT_FAMILY_WEIGHT_TO_PREFIX[fontFamilySanitized] || {})[fontWeightSanitized] || FONT_FAMILY_WEIGHT_FALLBACK[fontFamilySanitized];
+  }
+  function replaceForPosition(node, position) {
+    const pendingAttribute = "".concat(DATA_FA_PSEUDO_ELEMENT_PENDING).concat(position.replace(':', '-'));
+    return new Promise((resolve, reject) => {
+      if (node.getAttribute(pendingAttribute) !== null) {
+        // This node is already being processed
+        return resolve();
+      }
+      const children = toArray(node.children);
+      const alreadyProcessedPseudoElement = children.filter(c$$1 => c$$1.getAttribute(DATA_FA_PSEUDO_ELEMENT) === position)[0];
+      const styles = WINDOW.getComputedStyle(node, position);
+      const fontFamily = styles.getPropertyValue('font-family');
+      const fontFamilyMatch = fontFamily.match(FONT_FAMILY_PATTERN);
+      const fontWeight = styles.getPropertyValue('font-weight');
+      const content = styles.getPropertyValue('content');
+      if (alreadyProcessedPseudoElement && !fontFamilyMatch) {
+        // If we've already processed it but the current computed style does not result in a font-family,
+        // that probably means that a class name that was previously present to make the icon has been
+        // removed. So we now should delete the icon.
+        node.removeChild(alreadyProcessedPseudoElement);
+        return resolve();
+      } else if (fontFamilyMatch && content !== 'none' && content !== '') {
+        const content = styles.getPropertyValue('content');
+        let prefix = getPrefix(fontFamily, fontWeight);
+        const {
+          value: hexValue,
+          isSecondary
+        } = hexValueFromContent(content);
+        const isV4 = fontFamilyMatch[0].startsWith('FontAwesome');
+        let iconName = byUnicode(prefix, hexValue);
+        let iconIdentifier = iconName;
+        if (isV4) {
+          const iconName4 = byOldUnicode(hexValue);
+          if (iconName4.iconName && iconName4.prefix) {
+            iconName = iconName4.iconName;
+            prefix = iconName4.prefix;
+          }
+        }
+
+        // Only convert the pseudo element in this ::before/::after position into an icon if we haven't
+        // already done so with the same prefix and iconName
+        if (iconName && !isSecondary && (!alreadyProcessedPseudoElement || alreadyProcessedPseudoElement.getAttribute(DATA_PREFIX) !== prefix || alreadyProcessedPseudoElement.getAttribute(DATA_ICON) !== iconIdentifier)) {
+          node.setAttribute(pendingAttribute, iconIdentifier);
+          if (alreadyProcessedPseudoElement) {
+            // Delete the old one, since we're replacing it with a new one
+            node.removeChild(alreadyProcessedPseudoElement);
+          }
+          const meta = blankMeta();
+          const {
+            extra
+          } = meta;
+          extra.attributes[DATA_FA_PSEUDO_ELEMENT] = position;
+          findIcon(iconName, prefix).then(main => {
+            const abstract = makeInlineSvgAbstract(_objectSpread2(_objectSpread2({}, meta), {}, {
+              icons: {
+                main,
+                mask: emptyCanonicalIcon()
+              },
+              prefix,
+              iconName: iconIdentifier,
+              extra,
+              watchable: true
+            }));
+            const element = DOCUMENT.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            if (position === '::before') {
+              node.insertBefore(element, node.firstChild);
+            } else {
+              node.appendChild(element);
+            }
+            element.outerHTML = abstract.map(a$$1 => toHtml(a$$1)).join('\n');
+            node.removeAttribute(pendingAttribute);
+            resolve();
+          }).catch(reject);
+        } else {
+          resolve();
+        }
+      } else {
+        resolve();
+      }
+    });
+  }
+  function replace(node) {
+    return Promise.all([replaceForPosition(node, '::before'), replaceForPosition(node, '::after')]);
+  }
+  function processable(node) {
+    return node.parentNode !== document.head && !~TAGNAMES_TO_SKIP_FOR_PSEUDOELEMENTS.indexOf(node.tagName.toUpperCase()) && !node.getAttribute(DATA_FA_PSEUDO_ELEMENT) && (!node.parentNode || node.parentNode.tagName !== 'svg');
+  }
+  function searchPseudoElements(root) {
+    if (!IS_DOM) return;
+    return new Promise((resolve, reject) => {
+      const operations = toArray(root.querySelectorAll('*')).filter(processable).map(replace);
+      const end = perf.begin('searchPseudoElements');
+      disableObservation();
+      Promise.all(operations).then(() => {
+        end();
+        enableObservation();
+        resolve();
+      }).catch(() => {
+        end();
+        enableObservation();
+        reject();
+      });
+    });
+  }
+  var PseudoElements = {
+    hooks() {
+      return {
+        mutationObserverCallbacks(accumulator) {
+          accumulator.pseudoElementsCallback = searchPseudoElements;
+          return accumulator;
+        }
+      };
+    },
+    provides(providers) {
+      providers.pseudoElements2svg = function (params) {
+        const {
+          node = DOCUMENT
+        } = params;
+        if (config.searchPseudoElements) {
+          searchPseudoElements(node);
+        }
+      };
+    }
+  };
+
+  let _unwatched = false;
+  var MutationObserver$1 = {
+    mixout() {
+      return {
+        dom: {
+          unwatch() {
+            disableObservation();
+            _unwatched = true;
+          }
+        }
+      };
+    },
+    hooks() {
+      return {
+        bootstrap() {
+          observe(chainHooks('mutationObserverCallbacks', {}));
+        },
+        noAuto() {
+          disconnect();
+        },
+        watch(params) {
+          const {
+            observeMutationsRoot
+          } = params;
+          if (_unwatched) {
+            enableObservation();
+          } else {
+            observe(chainHooks('mutationObserverCallbacks', {
+              observeMutationsRoot
+            }));
+          }
+        }
+      };
+    }
+  };
+
+  const parseTransformString = transformString => {
+    let transform = {
+      size: 16,
+      x: 0,
+      y: 0,
+      flipX: false,
+      flipY: false,
+      rotate: 0
+    };
+    return transformString.toLowerCase().split(' ').reduce((acc, n) => {
+      const parts = n.toLowerCase().split('-');
+      const first = parts[0];
+      let rest = parts.slice(1).join('-');
+      if (first && rest === 'h') {
+        acc.flipX = true;
+        return acc;
+      }
+      if (first && rest === 'v') {
+        acc.flipY = true;
+        return acc;
+      }
+      rest = parseFloat(rest);
+      if (isNaN(rest)) {
+        return acc;
+      }
+      switch (first) {
+        case 'grow':
+          acc.size = acc.size + rest;
+          break;
+        case 'shrink':
+          acc.size = acc.size - rest;
+          break;
+        case 'left':
+          acc.x = acc.x - rest;
+          break;
+        case 'right':
+          acc.x = acc.x + rest;
+          break;
+        case 'up':
+          acc.y = acc.y - rest;
+          break;
+        case 'down':
+          acc.y = acc.y + rest;
+          break;
+        case 'rotate':
+          acc.rotate = acc.rotate + rest;
+          break;
+      }
+      return acc;
+    }, transform);
+  };
+  var PowerTransforms = {
+    mixout() {
+      return {
+        parse: {
+          transform: transformString => {
+            return parseTransformString(transformString);
+          }
+        }
+      };
+    },
+    hooks() {
+      return {
+        parseNodeAttributes(accumulator, node) {
+          const transformString = node.getAttribute('data-fa-transform');
+          if (transformString) {
+            accumulator.transform = parseTransformString(transformString);
+          }
+          return accumulator;
+        }
+      };
+    },
+    provides(providers) {
+      providers.generateAbstractTransformGrouping = function (_ref) {
+        let {
+          main,
+          transform,
+          containerWidth,
+          iconWidth
+        } = _ref;
+        const outer = {
+          transform: "translate(".concat(containerWidth / 2, " 256)")
+        };
+        const innerTranslate = "translate(".concat(transform.x * 32, ", ").concat(transform.y * 32, ") ");
+        const innerScale = "scale(".concat(transform.size / 16 * (transform.flipX ? -1 : 1), ", ").concat(transform.size / 16 * (transform.flipY ? -1 : 1), ") ");
+        const innerRotate = "rotate(".concat(transform.rotate, " 0 0)");
+        const inner = {
+          transform: "".concat(innerTranslate, " ").concat(innerScale, " ").concat(innerRotate)
+        };
+        const path = {
+          transform: "translate(".concat(iconWidth / 2 * -1, " -256)")
+        };
+        const operations = {
+          outer,
+          inner,
+          path
+        };
+        return {
+          tag: 'g',
+          attributes: _objectSpread2({}, operations.outer),
+          children: [{
+            tag: 'g',
+            attributes: _objectSpread2({}, operations.inner),
+            children: [{
+              tag: main.icon.tag,
+              children: main.icon.children,
+              attributes: _objectSpread2(_objectSpread2({}, main.icon.attributes), operations.path)
+            }]
+          }]
+        };
+      };
+    }
+  };
+
+  const ALL_SPACE = {
+    x: 0,
+    y: 0,
+    width: '100%',
+    height: '100%'
+  };
+  function fillBlack(abstract) {
+    let force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+    if (abstract.attributes && (abstract.attributes.fill || force)) {
+      abstract.attributes.fill = 'black';
+    }
+    return abstract;
+  }
+  function deGroup(abstract) {
+    if (abstract.tag === 'g') {
+      return abstract.children;
+    } else {
+      return [abstract];
+    }
+  }
+  var Masks = {
+    hooks() {
+      return {
+        parseNodeAttributes(accumulator, node) {
+          const maskData = node.getAttribute('data-fa-mask');
+          const mask = !maskData ? emptyCanonicalIcon() : getCanonicalIcon(maskData.split(' ').map(i => i.trim()));
+          if (!mask.prefix) {
+            mask.prefix = getDefaultUsablePrefix();
+          }
+          accumulator.mask = mask;
+          accumulator.maskId = node.getAttribute('data-fa-mask-id');
+          return accumulator;
+        }
+      };
+    },
+    provides(providers) {
+      providers.generateAbstractMask = function (_ref) {
+        let {
+          children,
+          attributes,
+          main,
+          mask,
+          maskId: explicitMaskId,
+          transform
+        } = _ref;
+        const {
+          width: mainWidth,
+          icon: mainPath
+        } = main;
+        const {
+          width: maskWidth,
+          icon: maskPath
+        } = mask;
+        const trans = transformForSvg({
+          transform,
+          containerWidth: maskWidth,
+          iconWidth: mainWidth
+        });
+        const maskRect = {
+          tag: 'rect',
+          attributes: _objectSpread2(_objectSpread2({}, ALL_SPACE), {}, {
+            fill: 'white'
+          })
+        };
+        const maskInnerGroupChildrenMixin = mainPath.children ? {
+          children: mainPath.children.map(fillBlack)
+        } : {};
+        const maskInnerGroup = {
+          tag: 'g',
+          attributes: _objectSpread2({}, trans.inner),
+          children: [fillBlack(_objectSpread2({
+            tag: mainPath.tag,
+            attributes: _objectSpread2(_objectSpread2({}, mainPath.attributes), trans.path)
+          }, maskInnerGroupChildrenMixin))]
+        };
+        const maskOuterGroup = {
+          tag: 'g',
+          attributes: _objectSpread2({}, trans.outer),
+          children: [maskInnerGroup]
+        };
+        const maskId = "mask-".concat(explicitMaskId || nextUniqueId());
+        const clipId = "clip-".concat(explicitMaskId || nextUniqueId());
+        const maskTag = {
+          tag: 'mask',
+          attributes: _objectSpread2(_objectSpread2({}, ALL_SPACE), {}, {
+            id: maskId,
+            maskUnits: 'userSpaceOnUse',
+            maskContentUnits: 'userSpaceOnUse'
+          }),
+          children: [maskRect, maskOuterGroup]
+        };
+        const defs = {
+          tag: 'defs',
+          children: [{
+            tag: 'clipPath',
+            attributes: {
+              id: clipId
+            },
+            children: deGroup(maskPath)
+          }, maskTag]
+        };
+        children.push(defs, {
+          tag: 'rect',
+          attributes: _objectSpread2({
+            fill: 'currentColor',
+            'clip-path': "url(#".concat(clipId, ")"),
+            mask: "url(#".concat(maskId, ")")
+          }, ALL_SPACE)
+        });
+        return {
+          children,
+          attributes
+        };
+      };
+    }
+  };
+
+  var MissingIconIndicator = {
+    provides(providers) {
+      let reduceMotion = false;
+      if (WINDOW.matchMedia) {
+        reduceMotion = WINDOW.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      }
+      providers.missingIconAbstract = function () {
+        const gChildren = [];
+        const FILL = {
+          fill: 'currentColor'
+        };
+        const ANIMATION_BASE = {
+          attributeType: 'XML',
+          repeatCount: 'indefinite',
+          dur: '2s'
+        };
+
+        // Ring
+        gChildren.push({
+          tag: 'path',
+          attributes: _objectSpread2(_objectSpread2({}, FILL), {}, {
+            d: 'M156.5,447.7l-12.6,29.5c-18.7-9.5-35.9-21.2-51.5-34.9l22.7-22.7C127.6,430.5,141.5,440,156.5,447.7z M40.6,272H8.5 c1.4,21.2,5.4,41.7,11.7,61.1L50,321.2C45.1,305.5,41.8,289,40.6,272z M40.6,240c1.4-18.8,5.2-37,11.1-54.1l-29.5-12.6 C14.7,194.3,10,216.7,8.5,240H40.6z M64.3,156.5c7.8-14.9,17.2-28.8,28.1-41.5L69.7,92.3c-13.7,15.6-25.5,32.8-34.9,51.5 L64.3,156.5z M397,419.6c-13.9,12-29.4,22.3-46.1,30.4l11.9,29.8c20.7-9.9,39.8-22.6,56.9-37.6L397,419.6z M115,92.4 c13.9-12,29.4-22.3,46.1-30.4l-11.9-29.8c-20.7,9.9-39.8,22.6-56.8,37.6L115,92.4z M447.7,355.5c-7.8,14.9-17.2,28.8-28.1,41.5 l22.7,22.7c13.7-15.6,25.5-32.9,34.9-51.5L447.7,355.5z M471.4,272c-1.4,18.8-5.2,37-11.1,54.1l29.5,12.6 c7.5-21.1,12.2-43.5,13.6-66.8H471.4z M321.2,462c-15.7,5-32.2,8.2-49.2,9.4v32.1c21.2-1.4,41.7-5.4,61.1-11.7L321.2,462z M240,471.4c-18.8-1.4-37-5.2-54.1-11.1l-12.6,29.5c21.1,7.5,43.5,12.2,66.8,13.6V471.4z M462,190.8c5,15.7,8.2,32.2,9.4,49.2h32.1 c-1.4-21.2-5.4-41.7-11.7-61.1L462,190.8z M92.4,397c-12-13.9-22.3-29.4-30.4-46.1l-29.8,11.9c9.9,20.7,22.6,39.8,37.6,56.9 L92.4,397z M272,40.6c18.8,1.4,36.9,5.2,54.1,11.1l12.6-29.5C317.7,14.7,295.3,10,272,8.5V40.6z M190.8,50 c15.7-5,32.2-8.2,49.2-9.4V8.5c-21.2,1.4-41.7,5.4-61.1,11.7L190.8,50z M442.3,92.3L419.6,115c12,13.9,22.3,29.4,30.5,46.1 l29.8-11.9C470,128.5,457.3,109.4,442.3,92.3z M397,92.4l22.7-22.7c-15.6-13.7-32.8-25.5-51.5-34.9l-12.6,29.5 C370.4,72.1,384.4,81.5,397,92.4z'
+          })
+        });
+        const OPACITY_ANIMATE = _objectSpread2(_objectSpread2({}, ANIMATION_BASE), {}, {
+          attributeName: 'opacity'
+        });
+        const dot = {
+          tag: 'circle',
+          attributes: _objectSpread2(_objectSpread2({}, FILL), {}, {
+            cx: '256',
+            cy: '364',
+            r: '28'
+          }),
+          children: []
+        };
+        if (!reduceMotion) {
+          dot.children.push({
+            tag: 'animate',
+            attributes: _objectSpread2(_objectSpread2({}, ANIMATION_BASE), {}, {
+              attributeName: 'r',
+              values: '28;14;28;28;14;28;'
+            })
+          }, {
+            tag: 'animate',
+            attributes: _objectSpread2(_objectSpread2({}, OPACITY_ANIMATE), {}, {
+              values: '1;0;1;1;0;1;'
+            })
+          });
+        }
+        gChildren.push(dot);
+        gChildren.push({
+          tag: 'path',
+          attributes: _objectSpread2(_objectSpread2({}, FILL), {}, {
+            opacity: '1',
+            d: 'M263.7,312h-16c-6.6,0-12-5.4-12-12c0-71,77.4-63.9,77.4-107.8c0-20-17.8-40.2-57.4-40.2c-29.1,0-44.3,9.6-59.2,28.7 c-3.9,5-11.1,6-16.2,2.4l-13.1-9.2c-5.6-3.9-6.9-11.8-2.6-17.2c21.2-27.2,46.4-44.7,91.2-44.7c52.3,0,97.4,29.8,97.4,80.2 c0,67.6-77.4,63.5-77.4,107.8C275.7,306.6,270.3,312,263.7,312z'
+          }),
+          children: reduceMotion ? [] : [{
+            tag: 'animate',
+            attributes: _objectSpread2(_objectSpread2({}, OPACITY_ANIMATE), {}, {
+              values: '1;0;0;0;0;1;'
+            })
+          }]
+        });
+        if (!reduceMotion) {
+          // Exclamation
+          gChildren.push({
+            tag: 'path',
+            attributes: _objectSpread2(_objectSpread2({}, FILL), {}, {
+              opacity: '0',
+              d: 'M232.5,134.5l7,168c0.3,6.4,5.6,11.5,12,11.5h9c6.4,0,11.7-5.1,12-11.5l7-168c0.3-6.8-5.2-12.5-12-12.5h-23 C237.7,122,232.2,127.7,232.5,134.5z'
+            }),
+            children: [{
+              tag: 'animate',
+              attributes: _objectSpread2(_objectSpread2({}, OPACITY_ANIMATE), {}, {
+                values: '0;0;1;1;0;0;'
+              })
+            }]
+          });
+        }
+        return {
+          tag: 'g',
+          attributes: {
+            'class': 'missing'
+          },
+          children: gChildren
+        };
+      };
+    }
+  };
+
+  var SvgSymbols = {
+    hooks() {
+      return {
+        parseNodeAttributes(accumulator, node) {
+          const symbolData = node.getAttribute('data-fa-symbol');
+          const symbol = symbolData === null ? false : symbolData === '' ? true : symbolData;
+          accumulator['symbol'] = symbol;
+          return accumulator;
+        }
+      };
+    }
+  };
+
+  var plugins = [InjectCSS, ReplaceElements, Layers, LayersCounter, LayersText, PseudoElements, MutationObserver$1, PowerTransforms, Masks, MissingIconIndicator, SvgSymbols];
+
+  registerPlugins(plugins, {
+    mixoutsTo: api
+  });
+  bunker(bootstrap);
+
+}());

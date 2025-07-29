@@ -1,0 +1,681 @@
+---
+film-video:
+  icons:
+    - album-collection
+    - file-video
+    - tv
+  label: Film + Video
+hands:
+  icons:
+    - hand
+    - hand-holding-heart
+    - handshake
+    - handshake-simple
+    - thumbs-down
+    - thumbs-up
+  label: Hands
+communication:
+  icons:
+    - address-book
+    - address-card
+    - bullhorn
+    - envelope
+    - language
+    - phone
+  label: Communication
+buildings:
+  icons:
+    - building
+    - building-columns
+    - buildings
+    - city
+    - house
+    - house-chimney
+    - industry
+    - landmark
+    - mountain-city
+    - school
+    - shop
+    - store
+  label: Buildings
+transportation:
+  icons:
+    - cart-shopping
+  label: Transportation
+punctuation-symbols:
+  icons:
+    - check
+    - circle-question
+    - exclamation
+    - greater-than
+    - hashtag
+    - less-than
+    - minus
+    - plus
+  label: Punctuation + Symbols
+alphabet:
+  icons:
+    - address-card
+    - circle-x
+    - x
+  label: Alphabet
+numbers:
+  icons:
+    - circle-1
+    - circle-2
+    - circle-3
+    - circle-4
+  label: Numbers
+time:
+  icons:
+    - bell
+    - calendar
+    - calendar-clock
+    - calendar-day
+    - calendar-days
+    - calendar-week
+    - calendar-xmark
+    - clock
+    - clock-three
+    - stopwatch
+    - timer
+  label: Time
+construction:
+  icons:
+    - compass-drafting
+    - pencil
+    - screwdriver-wrench
+    - tarp
+  label: Construction
+arrows:
+  icons:
+    - arrow-down
+    - arrow-down-9-1
+    - arrow-down-wide-short
+    - arrow-left
+    - arrow-right
+    - arrow-right-from-bracket
+    - arrow-right-to-bracket
+    - arrow-rotate-left
+    - arrow-rotate-right
+    - arrow-up
+    - arrows-rotate-reverse
+    - arrows-up-down
+    - chevron-down
+    - chevron-left
+    - chevron-right
+    - chevron-up
+    - down-to-bracket
+    - download
+    - recycle
+    - right-from-bracket
+    - rotate
+    - rotate-right
+    - share
+    - up-right-and-down-left-from-center
+    - upload
+  label: Arrows
+music-audio:
+  icons:
+    - album-collection
+    - bells
+    - sliders
+  label: Music + Audio
+editing:
+  icons:
+    - arrows-rotate-reverse
+    - bars
+    - chart-simple
+    - check
+    - circle-check
+    - ellipsis
+    - ellipsis-vertical
+    - eye-slash
+    - gear
+    - grid
+    - grid-2
+    - grid-horizontal
+    - minus
+    - pen
+    - pen-to-square
+    - pencil
+    - plus
+    - plus-large
+    - rotate
+    - sliders
+    - square-check
+    - trash
+    - trash-can
+    - trash-can-undo
+    - xmark
+  label: Editing
+logistics:
+  icons:
+    - chart-kanban
+    - chart-simple
+    - chart-simple-horizontal
+    - clipboard-list
+  label: Logistics
+medical-health:
+  icons:
+    - eye
+    - heart
+    - plus
+    - square-plus
+  label: Medical + Health
+money:
+  icons:
+    - chart-line
+    - chart-pie
+    - circle-dollar
+    - circle-dollar-to-slot
+    - coins
+    - comments-dollar
+    - credit-card
+    - dollar-sign
+    - file-invoice
+    - file-invoice-dollar
+    - landmark
+    - money-bill
+    - money-bill-transfer
+    - money-check-dollar
+    - sack-dollar
+    - scale-balanced
+  label: Money
+spinners:
+  icons:
+    - arrow-rotate-left
+    - arrow-rotate-right
+    - arrows-rotate-reverse
+    - gear
+    - rotate
+    - rotate-right
+    - spinner
+  label: Spinners
+moving:
+  icons:
+    - box-archive
+    - box-open
+    - house-chimney
+    - suitcase
+  label: Moving
+security:
+  icons:
+    - door-closed
+    - eye
+    - eye-slash
+    - key
+    - key-skeleton
+    - lock
+    - lock-open
+  label: Security
+accessibility:
+  icons:
+    - address-card
+    - circle-info
+    - circle-question
+    - eye
+  label: Accessibility
+business:
+  icons:
+    - address-book
+    - address-card
+    - bars-staggered
+    - box-archive
+    - building
+    - bullhorn
+    - bullseye
+    - calendar
+    - calendar-days
+    - chart-kanban
+    - chart-line
+    - chart-pie
+    - chart-simple
+    - chart-simple-horizontal
+    - city
+    - copy
+    - envelope
+    - file
+    - file-lines
+    - folder
+    - folder-open
+    - folder-plus
+    - folder-tree
+    - folders
+    - globe
+    - industry
+    - landmark
+    - list-check
+    - paperclip
+    - pen
+    - pen-to-square
+    - pencil
+    - phone
+    - scale-balanced
+    - square-poll-vertical
+    - table-columns
+    - tag
+    - thumbtack
+    - user-tie-hair
+  label: Business
+sports-fitness:
+  icons:
+    - award-simple
+    - heart
+    - medal
+    - ranking-star
+  label: Sports + Fitness
+mathematics:
+  icons:
+    - circle-xmark
+    - greater-than
+    - less-than
+    - minus
+    - plus
+    - square-xmark
+    - xmark
+  label: Mathematics
+clothing-fashion:
+  icons:
+    - graduation-cap
+    - user-tie
+  label: Clothing + Fashion
+text-formatting:
+  icons:
+    - check
+    - circle-check
+    - list
+    - list-check
+    - square-check
+    - table-columns
+    - table-list
+  label: Text Formatting
+shopping:
+  icons:
+    - bell
+    - bookmark
+    - bullhorn
+    - cart-shopping
+    - credit-card
+    - gem
+    - handshake
+    - heart
+    - key
+    - money-check-dollar
+    - shop
+    - star
+    - store
+    - store-slash
+    - tag
+    - thumbs-down
+    - thumbs-up
+    - trophy
+  label: Shopping
+toggle:
+  icons:
+    - bullseye
+    - circle-check
+    - circle-dot
+    - signal-bars
+    - signal-bars-fair
+    - signal-bars-good
+    - signal-bars-weak
+    - star
+    - star-half-stroke
+  label: Toggle
+media-playback:
+  icons:
+    - arrow-rotate-left
+    - arrow-rotate-right
+    - arrows-rotate-reverse
+    - hand
+    - rotate
+    - rotate-right
+    - sliders
+    - up-right-and-down-left-from-center
+  label: Media Playback
+holidays:
+  icons:
+    - bells
+    - heart
+    - mug-hot
+  label: Holidays
+childhood:
+  icons:
+    - gamepad-modern
+    - puzzle-piece
+    - school
+  label: Childhood
+photos-images:
+  icons:
+    - chalkboard
+    - clone
+    - eye
+    - eye-slash
+    - image
+    - rectangle-history
+    - sliders
+  label: Photos + Images
+design:
+  icons:
+    - clone
+    - compass-drafting
+    - copy
+    - eye
+    - eye-slash
+    - grid
+    - grid-2
+    - pen
+    - pen-to-square
+    - pencil
+  label: Design
+connectivity:
+  icons:
+    - globe
+    - signal-bars
+    - signal-bars-fair
+    - signal-bars-good
+    - signal-bars-weak
+  label: Connectivity
+gaming:
+  icons:
+    - gamepad-modern
+    - heart
+    - puzzle-piece
+  label: Gaming
+social:
+  icons:
+    - bell
+    - circle-user
+    - envelope
+    - hashtag
+    - heart
+    - image
+    - location-dot
+    - share
+    - share-nodes
+    - square-poll-vertical
+    - star
+    - thumbs-down
+    - thumbs-up
+    - thumbtack
+    - user
+    - user-group
+    - user-group-simple
+    - user-plus
+    - users
+  label: Social
+education:
+  icons:
+    - award
+    - bell
+    - bell-ring
+    - book-open
+    - book-open-reader
+    - books
+    - chalkboard
+    - chalkboard-user
+    - diploma
+    - graduation-cap
+    - school
+    - user-graduate
+  label: Education
+devices-hardware:
+  icons:
+    - display
+    - download
+    - gamepad-modern
+    - power-off
+    - tv
+    - upload
+  label: Devices + Hardware
+files:
+  icons:
+    - box-archive
+    - clone
+    - copy
+    - file
+    - file-excel
+    - file-export
+    - file-lines
+    - file-pdf
+    - file-pen
+    - file-video
+    - file-word
+    - folder
+    - folder-open
+    - folders
+    - memo
+  label: Files
+food-beverage:
+  icons:
+    - bottle-water
+    - bowl-rice
+    - bread-slice
+    - bread-slice-butter
+    - mug-hot
+  label: Food + Beverage
+users-people:
+  icons:
+    - address-book
+    - address-card
+    - chalkboard-user
+    - circle-user
+    - people-group
+    - person
+    - user
+    - user-check
+    - user-graduate
+    - user-group
+    - user-group-simple
+    - user-plus
+    - user-tie
+    - user-tie-hair
+    - users
+  label: Users + People
+nature:
+  icons:
+    - mountain-city
+  label: Nature
+coding:
+  icons:
+    - bars
+    - bars-staggered
+    - box-archive
+    - diagram-project
+    - file
+    - file-lines
+    - filter
+    - folder
+    - folder-open
+    - gear
+  label: Coding
+astronomy:
+  icons:
+    - globe
+  label: Astronomy
+marketing:
+  icons:
+    - bullhorn
+    - bullseye
+    - chart-simple
+    - chart-simple-horizontal
+    - comments-dollar
+    - lightbulb
+    - people-group
+    - ranking-star
+    - square-poll-vertical
+  label: Marketing
+maps:
+  icons:
+    - bell
+    - bookmark
+    - building
+    - building-columns
+    - cart-shopping
+    - circle-dollar
+    - circle-info
+    - dollar-sign
+    - eye
+    - eye-slash
+    - gavel
+    - globe
+    - graduation-cap
+    - heart
+    - house
+    - image
+    - industry
+    - info
+    - key
+    - landmark
+    - lightbulb
+    - location-dot
+    - magnifying-glass
+    - money-bill
+    - person
+    - phone
+    - plus
+    - recycle
+    - scale-balanced
+    - square-plus
+    - suitcase
+    - tag
+    - thumbtack
+    - trophy
+    - utensils
+  label: Maps
+political:
+  icons:
+    - award
+    - bullhorn
+    - circle-dollar-to-slot
+    - handshake
+    - scale-balanced
+  label: Political
+charts-diagrams:
+  icons:
+    - chart-bar
+    - chart-column
+    - chart-gantt
+    - chart-kanban
+    - chart-line
+    - chart-pie
+    - chart-radar
+    - chart-simple
+    - chart-simple-horizontal
+    - diagram-project
+    - square-poll-vertical
+  label: Charts + Diagrams
+charity:
+  icons:
+    - circle-dollar
+    - circle-dollar-to-slot
+    - dollar-sign
+    - globe
+    - hand-holding-heart
+    - handshake
+    - handshake-simple
+    - heart
+  label: Charity
+halloween:
+  icons:
+    - key-skeleton
+  label: Halloween
+shapes:
+  icons:
+    - bookmark
+    - calendar
+    - file
+    - folder
+    - heart
+    - square
+    - star
+  label: Shapes
+travel-hotel:
+  icons:
+    - door-closed
+    - earth-americas
+    - key
+    - map-location-dot
+    - mountain-city
+    - suitcase
+    - tv
+    - utensils
+  label: Travel + Hotel
+alert:
+  icons:
+    - bell
+    - bell-ring
+    - bells
+    - exclamation
+    - triangle-exclamation
+  label: Alert
+writing:
+  icons:
+    - bookmark
+    - box-archive
+    - envelope
+    - file
+    - file-lines
+    - folder
+    - folder-open
+    - memo
+    - paperclip
+    - pen
+    - pen-to-square
+    - pencil
+    - thumbtack
+  label: Writing
+energy:
+  icons:
+    - industry
+    - lightbulb
+    - power-off
+  label: Energy
+science:
+  icons:
+    - filter
+    - key-skeleton
+  label: Science
+household:
+  icons:
+    - bell
+    - bell-ring
+    - books
+    - door-closed
+    - lightbulb
+    - tv
+    - utensils
+  label: Household
+camping:
+  icons:
+    - bottle-water
+    - map-location-dot
+    - tarp
+  label: Camping
+humanitarian:
+  icons:
+    - bottle-water
+    - bowl-rice
+    - building
+    - building-columns
+    - display
+    - envelope
+    - file
+    - file-pdf
+    - file-pen
+    - handshake-simple
+    - house-chimney
+    - landmark
+    - money-bill-transfer
+    - mountain-city
+    - people-group
+    - person
+    - ranking-star
+    - sack-dollar
+    - scale-balanced
+    - school
+    - shop
+    - tarp
+    - trash-can
+  label: Humanitarian

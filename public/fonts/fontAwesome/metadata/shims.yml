@@ -1,0 +1,151 @@
+---
+mail-forward:
+  name: share
+photo:
+  name: image
+  prefix: far
+bank:
+  name: building-columns
+picture-o:
+  name: image
+  prefix: far
+bar-chart:
+  name: chart-column
+bar-chart-o:
+  name: chart-column
+calendar:
+  name: calendar-days
+television:
+  name: tv
+credit-card-alt:
+  name: credit-card
+institution:
+  name: building-columns
+thumbs-o-down:
+  name: thumbs-down
+  prefix: far
+expand:
+  name: up-right-and-down-left-from-center
+thumbs-o-up:
+  name: thumbs-up
+  prefix: far
+pie-chart:
+  name: chart-pie
+files-o:
+  name: copy
+  prefix: far
+pencil-square-o:
+  name: pen-to-square
+  prefix: far
+star-half-full:
+  name: star-half-stroke
+  prefix: far
+reorder:
+  name: bars
+plus-square-o:
+  name: square-plus
+  prefix: far
+rotate-right:
+  name: arrow-rotate-right
+edit:
+  name: pen-to-square
+  prefix: far
+file-text:
+  name: file-lines
+home:
+  name: house
+dot-circle-o:
+  name: circle-dot
+  prefix: far
+hand-stop-o:
+  name: hand
+  prefix: far
+close:
+  name: xmark
+gear:
+  name: gear
+map-marker:
+  name: location-dot
+trash-o:
+  name: trash-can
+  prefix: far
+star-half-empty:
+  name: star-half-stroke
+  prefix: far
+trash:
+  name: trash-can
+sign-out:
+  name: right-from-bracket
+check-square-o:
+  name: square-check
+  prefix: far
+sort-amount-desc:
+  name: arrow-down-wide-short
+diamond:
+  name: gem
+  prefix: far
+line-chart:
+  name: chart-line
+question-circle-o:
+  name: circle-question
+  prefix: far
+file-text-o:
+  name: file-lines
+  prefix: far
+calendar-times-o:
+  name: calendar-xmark
+  prefix: far
+vcard-o:
+  name: address-card
+  prefix: far
+hand-paper-o:
+  name: hand
+  prefix: far
+dollar:
+  name: dollar-sign
+mortar-board:
+  name: graduation-cap
+rotate-left:
+  name: arrow-rotate-left
+image:
+  name: image
+  prefix: far
+warning:
+  name: triangle-exclamation
+legal:
+  name: gavel
+times-circle-o:
+  name: circle-xmark
+  prefix: far
+star-half-o:
+  name: star-half-stroke
+  prefix: far
+repeat:
+  name: arrow-rotate-right
+thumb-tack:
+  name: thumbtack
+globe:
+  name: earth-americas
+group:
+  name: users
+user-circle-o:
+  name: circle-user
+  prefix: far
+vcard:
+  name: address-card
+check-circle-o:
+  name: circle-check
+  prefix: far
+remove:
+  name: xmark
+usd:
+  name: dollar-sign
+cutlery:
+  name: utensils
+navicon:
+  name: bars
+file-movie-o:
+  name: file-video
+  prefix: far
+sort-numeric-desc:
+  name: arrow-down-9-1

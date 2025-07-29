@@ -1,0 +1,21 @@
+<?php
+return [
+  'nom' => 'Nom',
+  'prenom' => 'Prénom',
+  'matricule' => 'Matricule',
+  'mail' => 'Mail',
+  'phone' => 'Téléphone',
+  'entreprises' => 'Entreprises',
+  'quartier' => 'Quartier',
+  'ville' => 'Ville',
+  'codePostal' => 'Code postal',
+  'modifierApprenant' => 'Modifier un apprenant',
+  'changerProfil' => 'Changer de profil',
+  'save' => 'Sauvegarder les modifications',
+  'annuler' => 'Annuler',
+  'required' => 'Ce champ est obligatoire',
+  'experiences' => 'Expériences',
+  'competences' => 'Compétences',
+  'langue' => 'Langue',
+  'aproposFormateur' => "A propos du formateur",
+];

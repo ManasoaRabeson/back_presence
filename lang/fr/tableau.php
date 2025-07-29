@@ -1,0 +1,38 @@
+<?php
+return [
+  "titreDetailEtp" => "Détails de l'entreprise",
+  "titreListeRef" => "Liste des référents",
+  "titreListeAgence" => "Liste de vos agences",
+  "titreListeCompteBanque" => "Liste de vos comptes bancaires",
+  "titreListeCompteMobileMoney" => "Liste de vos comptes mobile money",
+
+  "itemNif" => "NIF",
+  "itemStat" => "STAT",
+  "itemRcs" => "RCS",
+  "itemSiege" => "Siège",
+  "itemTel" => "Téléphone",
+  "itemMail" => "Mail",
+  "itemSiteWeb" => "Site Web",
+  "itemMatricule" => "Matricule",
+  "itemCodePostal" => "Code postal",
+  "itemVille" => "Ville",
+  "itemTitulaire" => "Titulaire",
+  "itemBanque" => "Banque",
+  "itemQuartier" => "Quartier",
+  "itemNumCompte" => "Numéro de compte",
+  "itemOperateur" => "Opérateur",
+  "itemMotDePasse" => "Mot de passe",
+
+  "titleDrawerEditMotDePasse" => "Modifier le mot de passe du référent",
+  "titleDrawerEditCfp" => "Modifier le profil du centre de formation",
+  "titledrawerInfo" => "Informations de base",
+  "titledrawerNouveauRef" => "Ajouter un nouveau référent",
+  "titleListSubContractor" => "Liste de vos sous-traitants",
+  "itemDrawerRaisonSocial" => "Raison sociale",
+  "itemDrawerSlogan" => "Slogan",
+  "buttonChangerProfil" => "Changer de profil",
+
+  "vousAvez" => "Vous avez",
+  "admin" => "administrateur",
+  "admins" => "administrateurs",
+];

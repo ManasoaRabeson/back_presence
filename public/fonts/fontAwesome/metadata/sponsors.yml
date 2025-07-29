@@ -1,0 +1,100 @@
+---
+administrator-technology:
+  icons:
+    - bars-staggered
+  label: Administrator Technology
+  url: https://administrator.de
+clicdata:
+  icons:
+    - chart-column
+    - chart-gantt
+    - chart-line
+    - chart-radar
+  label: ClicData
+  url: https://www.clicdata.com
+getaroom:
+  icons:
+    - map-location-dot
+  label: getaroom
+  url: https://www.getaroom.com
+harvard-medical-school:
+  icons:
+    - heart
+    - plus
+  label: Harvard Medical School
+  url: https://hms.harvard.edu
+hire-a-helper:
+  icons:
+    - box-archive
+    - box-open
+    - suitcase
+  label: HireAHelper
+  url: https://www.hireahelper.com
+icis:
+  icons:
+    - user-group-simple
+  label: ICIS
+  url: https://www.icis.com/
+nompse:
+  icons:
+    - chalkboard
+    - chalkboard-user
+  label: Nomp.se
+  url: https://nomp.se
+rocket-chat:
+  icons:
+    - phone
+  label: Rocket.Chat
+  url: https://rocket.chat
+rodney-oliver:
+  icons:
+    - folder-plus
+  label: Rodney Oliver
+  url:
+shp:
+  icons:
+    - school
+  label: SHP
+  url: http://shp.com
+silicon-barn-inc:
+  icons:
+    - diagram-project
+  label: Silicon Barn Inc
+  url: https://siliconbarn.com
+stay-linked:
+  icons:
+    - clipboard-list
+  label: StayLinked
+  url: https://www.staylinked.com
+supple:
+  icons:
+    - bullhorn
+    - bullseye
+    - comments-dollar
+    - square-poll-vertical
+  label: Supple
+  url: https://supple.com.au
+the-us-sunnah-foundation:
+  icons:
+    - circle-dollar
+    - circle-dollar-to-slot
+    - dollar-sign
+    - globe
+    - hand-holding-heart
+    - handshake
+    - handshake-simple
+  label: The us-Sunnah Foundation
+  url: https://www.ussunnah.org
+un-ocha:
+  icons:
+    - bottle-water
+    - bowl-rice
+    - building-columns
+    - chart-simple
+    - money-bill-transfer
+    - mountain-city
+    - people-group
+    - ranking-star
+    - tarp
+  label: United Nations OCHA
+  url: https://www.unocha.org
