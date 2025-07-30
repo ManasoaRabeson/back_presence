@@ -25,7 +25,6 @@ Route::middleware(['auth:sanctum', 'isEmployeCfp'])->group(function () {
     Route::prefix('cfp/projets')->group(function () {
         Route::get('/list', [ProjetController::class, 'getProjectList'])->name('cfp.projets.list');
         Route::get('/{status}', [ProjetController::class, 'index']);
-
         // Presences
         Route::get('/{idProjet}/getDataPresence', [ProjetController::class, 'getDataPresence']);
     });

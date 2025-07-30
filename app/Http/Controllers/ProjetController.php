@@ -34,53 +34,178 @@ class ProjetController extends Controller
     }
 
 
+    // private function getStatus($status)
+    // {
+    //     $projects = $this->project->indexStatus(Customer::idCustomer(), $status);
+    //     // $dossier = DB::table('dossiers')
+    //     //     ->select('dossiers.idDossier', 'nomDossier', 'projets.idProjet')
+    //     //     ->join('projets', 'dossiers.idDossier', 'projets.idDossier')
+    //     //     ->get();
+    //     $projets = [];
+
+    //     foreach ($projects as $project) {
+    //         // Stocker les résultats dans des variables
+
+    //         $idProjet = $project->idProjet;
+    //         $idCfpInter = $project->idCfp_inter;
+    //         $apprs = $this->getApprListProjet($idProjet);
+    //         $etpName = $this->getEtpProjectInter($idProjet, $idCfpInter);
+    //         $sessionHour = $this->getSessionHour($idProjet);
+    //         $formateurs = $this->getFormProject($idProjet);
+
+    //         // $idEtp = isset($project->idEtp) ? $project->idEtp : null;
+    //         //$ville = $project->ville;
+
+    //         // Obtenir les données nécessaires
+    //         //$nomDossier = $this->getNomDossier($idProjet, $dossier);
+    //         // $nombreDocument = $this->getNombreDocument($idProjet);
+    //         // $sessionCount = $this->getSessionProject($idProjet);
+
+    //         //$apprenantCount = $this->getApprenantProject($idProjet, $project->idCfp_inter);
+    //         //$totalPrice = $this->getProjectTotalPrice($idProjet);
+
+    //         //$note = $this->getNote($idProjet);
+    //         // $partCount = $this->getParticulierProject($idProjet, $idCfpInter);
+
+    //         //$restaurations = $this->getRestauration($idProjet);
+    //         // $checkEmg = $this->checkEmg($idProjet);
+    //         // $checkEval = $this->checkEval($idProjet);
+    //         // $avgBefore = $this->averageEvalApprenant($idProjet)->avg_avant;
+    //         // $avgAfter = $this->averageEvalApprenant($idProjet)->avg_apres;
+
+    //         //$isPaid = $this->projectIsPaid($idProjet);
+    //         // Calculer le pricing une seule fois
+    //         // $pricing = isset($project->idSubContractor) && $project->idSubContractor == Customer::idCustomer()
+    //         //     ? $project->total_ht_sub_contractor
+    //         //     : $project->total_ht;
+    //         // Ajouter les informations dans le tableau
+    //         $projets[] = [
+
+    //             'formateurs' => $formateurs,
+    //             'totalSessionHour' => $sessionHour,
+    //             'idProjet' => $idProjet,
+    //             'idCfp_inter' => $idCfpInter,
+    //             'dateDebut' => $project->dateDebut,
+    //             'dateFin' => $project->dateFin,
+    //             'module_name' => $project->module_name,
+    //             'etp_name' => $etpName,
+    //             'project_status' => $project->project_status,
+    //             'project_type' => $project->project_type,
+    //             'modalite' => $project->modalite,
+    //             'project_description' => $project->project_description,
+    //             'headDate' => $project->headDate,
+    //             'module_image' => $project->module_image,
+    //             'etp_logo' => $project->etp_logo,
+    //             'etp_initial_name' => $project->etp_initial_name,
+    //             'idModule' => $project->idModule,
+    //             'apprs' => $apprs,
+    //             //'project_reference' => $project->project_reference,
+    //             //'dossier' => $nomDossier,
+    //             // 'nbDocument' => $nombreDocument,
+    //             // 'seanceCount' => $sessionCount,
+    //             //'apprCount' => $apprenantCount,
+    //             //'projectTotalPrice' => $totalPrice,
+    //             //'general_note' => $note,
+    //             // 'partCount' => $partCount,
+    //             // 'idEtp' => $idEtp,
+    //             // 'paiement' => $project->paiement,
+    //             //'sub_name' => $project->sub_name,
+    //             //'idSubContractor' => $project->idSubContractor,
+    //             //'idCfp' => $project->idCfp,
+    //             //'cfp_name' => $project->cfp_name,
+    //             // 'idUser' => Customer::idCustomer(),
+    //             // 'isPaid' => $isPaid,
+    //             //'ville' => $ville,
+    //             // 'salle_name' => $project->salle_name,
+    //             // 'salle_quartier' => $project->salle_quartier,
+    //             // 'salle_code_postal' => $project->salle_code_postal,
+    //             'li_name' => $project->li_name,
+    //             //'etp_name_in_situ' => $project->etp_name,
+    //             // 'total_ht' => $this->utilService->formatPrice($pricing),
+    //             // 'total_ttc' => $project->total_ttc,
+    //             // 'restaurations' => $restaurations,
+    //             //'project_inter_privacy' => $project->project_inter_privacy,
+    //             //'checkEmg' => $checkEmg,
+    //             //'checkEval' => $checkEval,
+    //             //'avg_before' => $avgBefore,
+    //             //'avg_after' => $avgAfter,
+    //         ];
+    //     }
+
+    //     return $projets;
+    // }
+
+    // private function getStatus($status)
+    // {
+    //     $projects = $this->project->indexStatus(Customer::idCustomer(), $status);
+    //     $projets = [];
+    //     $lieux = [];
+
+    //     foreach ($projects as $project) {
+    //         $idProjet = $project->idProjet;
+    //         $idCfpInter = $project->idCfp_inter;
+
+    //         $apprs = $this->getApprListProjet($idProjet);
+    //         $etpName = $this->getEtpProjectInter($idProjet, $idCfpInter);
+    //         $sessionHour = $this->getSessionHour($idProjet);
+    //         $formateurs = $this->getFormProject($idProjet);
+
+    //         // Ajoute le lieu uniquement s'il n'est pas déjà dans la liste
+    //         if (!in_array($project->li_name, $lieux)) {
+    //             $lieux[] = $project->li_name;
+    //         }
+
+    //         $projets[] = [
+    //             'formateurs' => $formateurs,
+    //             'totalSessionHour' => $sessionHour,
+    //             'idProjet' => $idProjet,
+    //             'idCfp_inter' => $idCfpInter,
+    //             'dateDebut' => $project->dateDebut,
+    //             'dateFin' => $project->dateFin,
+    //             'module_name' => $project->module_name,
+    //             'etp_name' => $etpName,
+    //             'project_status' => $project->project_status,
+    //             'project_type' => $project->project_type,
+    //             'modalite' => $project->modalite,
+    //             'project_description' => $project->project_description,
+    //             'headDate' => $project->headDate,
+    //             'module_image' => $project->module_image,
+    //             'etp_logo' => $project->etp_logo,
+    //             'etp_initial_name' => $project->etp_initial_name,
+    //             'idModule' => $project->idModule,
+    //             'apprs' => $apprs,
+    //             'li_name' => $project->li_name, // le lieu du projet
+    //         ];
+    //     }
+
+    //     // Si tu veux retourner la liste des lieux sans doublons aussi :
+    //     return [
+    //         'projets' => $projets,
+    //         'lieux' => $lieux
+    //     ];
+    // }
     private function getStatus($status)
     {
         $projects = $this->project->indexStatus(Customer::idCustomer(), $status);
-        // $dossier = DB::table('dossiers')
-        //     ->select('dossiers.idDossier', 'nomDossier', 'projets.idProjet')
-        //     ->join('projets', 'dossiers.idDossier', 'projets.idDossier')
-        //     ->get();
         $projets = [];
+        $lieux = [];
+        $type_projets = DB::table('type_projets')->get();
 
         foreach ($projects as $project) {
-            // Stocker les résultats dans des variables
-
             $idProjet = $project->idProjet;
             $idCfpInter = $project->idCfp_inter;
+
             $apprs = $this->getApprListProjet($idProjet);
             $etpName = $this->getEtpProjectInter($idProjet, $idCfpInter);
             $sessionHour = $this->getSessionHour($idProjet);
             $formateurs = $this->getFormProject($idProjet);
 
-            // $idEtp = isset($project->idEtp) ? $project->idEtp : null;
-            //$ville = $project->ville;
+            // Ajout du lieu sans doublon
+            if (!in_array($project->li_name, $lieux)) {
+                $lieux[] = $project->li_name;
+            }
 
-            // Obtenir les données nécessaires
-            //$nomDossier = $this->getNomDossier($idProjet, $dossier);
-            // $nombreDocument = $this->getNombreDocument($idProjet);
-            // $sessionCount = $this->getSessionProject($idProjet);
-
-            //$apprenantCount = $this->getApprenantProject($idProjet, $project->idCfp_inter);
-            //$totalPrice = $this->getProjectTotalPrice($idProjet);
-
-            //$note = $this->getNote($idProjet);
-            // $partCount = $this->getParticulierProject($idProjet, $idCfpInter);
-
-            //$restaurations = $this->getRestauration($idProjet);
-            // $checkEmg = $this->checkEmg($idProjet);
-            // $checkEval = $this->checkEval($idProjet);
-            // $avgBefore = $this->averageEvalApprenant($idProjet)->avg_avant;
-            // $avgAfter = $this->averageEvalApprenant($idProjet)->avg_apres;
-
-            //$isPaid = $this->projectIsPaid($idProjet);
-            // Calculer le pricing une seule fois
-            // $pricing = isset($project->idSubContractor) && $project->idSubContractor == Customer::idCustomer()
-            //     ? $project->total_ht_sub_contractor
-            //     : $project->total_ht;
-            // Ajouter les informations dans le tableau
             $projets[] = [
-
                 'formateurs' => $formateurs,
                 'totalSessionHour' => $sessionHour,
                 'idProjet' => $idProjet,
@@ -99,41 +224,19 @@ class ProjetController extends Controller
                 'etp_initial_name' => $project->etp_initial_name,
                 'idModule' => $project->idModule,
                 'apprs' => $apprs,
-                //'project_reference' => $project->project_reference,
-                //'dossier' => $nomDossier,
-                // 'nbDocument' => $nombreDocument,
-                // 'seanceCount' => $sessionCount,
-                //'apprCount' => $apprenantCount,
-                //'projectTotalPrice' => $totalPrice,
-                //'general_note' => $note,
-                // 'partCount' => $partCount,
-                // 'idEtp' => $idEtp,
-                // 'paiement' => $project->paiement,
-                //'sub_name' => $project->sub_name,
-                //'idSubContractor' => $project->idSubContractor,
-                //'idCfp' => $project->idCfp,
-                //'cfp_name' => $project->cfp_name,
-                // 'idUser' => Customer::idCustomer(),
-                // 'isPaid' => $isPaid,
-                //'ville' => $ville,
-                // 'salle_name' => $project->salle_name,
-                // 'salle_quartier' => $project->salle_quartier,
-                // 'salle_code_postal' => $project->salle_code_postal,
-                // 'li_name' => $project->li_name,
-                //'etp_name_in_situ' => $project->etp_name,
-                // 'total_ht' => $this->utilService->formatPrice($pricing),
-                // 'total_ttc' => $project->total_ttc,
-                // 'restaurations' => $restaurations,
-                //'project_inter_privacy' => $project->project_inter_privacy,
-                //'checkEmg' => $checkEmg,
-                //'checkEval' => $checkEval,
-                //'avg_before' => $avgBefore,
-                //'avg_after' => $avgAfter,
+                'li_name' => $project->li_name,
             ];
         }
 
-        return $projets;
+        // Ajouter les lieux sans doublons à la fin du tableau
+
+        return [
+            'type_projets' => $type_projets,
+            'projets' => $projets,
+            'lieux' => $lieux
+        ];
     }
+
 
     public function getProjectList()
     {
@@ -155,6 +258,30 @@ class ProjetController extends Controller
         ]);
     }
 
+    // public function index($status)
+    // {
+    //     switch ($status) {
+    //         case 'Cloturé':
+    //             $projets = $this->getStatus("Cloturé");
+    //             break;
+    //         case 'En cours':
+    //             $projets = $this->getStatus("En cours");
+    //             break;
+    //         case 'Terminé':
+    //             $projets =  $this->getStatus("Terminé");
+    //             break;
+    //         default:
+    //             $projets = [];
+    //             break;
+    //     }
+
+
+
+    //     return response()->json([
+    //         'status' => 200,
+    //         'projets' => $projets
+    //     ]);
+    // }
     public function index($status)
     {
         switch ($status) {
@@ -165,30 +292,25 @@ class ProjetController extends Controller
                 $projets = $this->getStatus("En cours");
                 break;
             case 'Terminé':
-                $projets =  $this->getStatus("Terminé");
+                $projets = $this->getStatus("Terminé");
                 break;
             default:
                 $projets = [];
                 break;
         }
 
-        // $projetEnCours = $this->countStatus(Customer::idCustomer(), "En cours");
-        // $projetTermines = $this->countStatus(Customer::idCustomer(), "Terminé");
-        // $projetClotures = $this->countStatus(Customer::idCustomer(), "Cloturé");
-        // $projetEnCours = $this->getStatus("En cours");
-        // $projetTermines = $this->getStatus("Terminé");
-        // $projetClotures = $this->getStatus("Cloturé");
+
 
         return response()->json([
             'status' => 200,
-            // 'projet_counts' => [
-            //     'en_cours' => $projetEnCours,
-            //     'termines' => $projetTermines,
-            //     'clotures' => $projetClotures,
-            // ],
-            'projets' => $projets
+            'projets' => $projets['projets'],
+            'filtre' => [
+                'type_projets' => $projets['type_projets'],
+                'lieux' => $projets['lieux'],
+            ]
         ]);
     }
+
     public function getCountProject()
     {
         $projetEnCours = $this->project->countByStatus(Customer::idCustomer(), "En cours");
