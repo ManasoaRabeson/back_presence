@@ -27,6 +27,7 @@ Route::middleware(['auth:sanctum', 'isEmployeCfp'])->group(function () {
         Route::get('/{status}', [ProjetController::class, 'index']);
         // Presences
         Route::get('/{idProjet}/getDataPresence', [ProjetController::class, 'getDataPresence']);
+        Route::get('/filtre/{select}', [ProjetController::class, 'getFiltre']);
     });
 
     // Apprenant_project

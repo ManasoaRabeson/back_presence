@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Customer;
 use App\Models\Projet;
 use App\Services\ParticulierService;
@@ -12,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Carbon\Carbon;
 use Google\Service\Monitoring\Custom;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -135,11 +135,16 @@ class ProjetController extends Controller
     //     return $projets;
     // }
 
+
     // private function getStatus($status)
     // {
     //     $projects = $this->project->indexStatus(Customer::idCustomer(), $status);
     //     $projets = [];
     //     $lieux = [];
+    //     $entreprises = [];
+
+
+    //     $type_projets = DB::table('type_projets')->get();
 
     //     foreach ($projects as $project) {
     //         $idProjet = $project->idProjet;
@@ -150,9 +155,17 @@ class ProjetController extends Controller
     //         $sessionHour = $this->getSessionHour($idProjet);
     //         $formateurs = $this->getFormProject($idProjet);
 
-    //         // Ajoute le lieu uniquement s'il n'est pas déjà dans la liste
+    //         // Ajout du lieu sans doublon
     //         if (!in_array($project->li_name, $lieux)) {
     //             $lieux[] = $project->li_name;
+    //         }
+
+    //         // Ajout des entreprises sans doublon
+    //         foreach ($etpName as $etp) {
+    //             $exists = collect($entreprises)->contains('idEtp', $etp->idEtp);
+    //             if (!$exists) {
+    //                 $entreprises[] = $etp;
+    //             }
     //         }
 
     //         $projets[] = [
@@ -174,22 +187,125 @@ class ProjetController extends Controller
     //             'etp_initial_name' => $project->etp_initial_name,
     //             'idModule' => $project->idModule,
     //             'apprs' => $apprs,
-    //             'li_name' => $project->li_name, // le lieu du projet
+    //             'li_name' => $project->li_name,
     //         ];
     //     }
 
-    //     // Si tu veux retourner la liste des lieux sans doublons aussi :
     //     return [
+    //         'type_projets' => $type_projets,
     //         'projets' => $projets,
-    //         'lieux' => $lieux
+    //         'lieux' => $lieux,
+    //         'entreprises' => $entreprises,
     //     ];
     // }
-    private function getStatus($status)
+
+
+
+    // private function getStatus($status)
+    // {
+    //     $projects = $this->project->index(Customer::idCustomer(), $status);
+
+    //     $projets = [];
+    //     $lieux = [];
+    //     $entreprises = [];
+    //     $modules = [];
+    //     $formateursUniques = [];
+    //     $mois = [];
+
+    //     $type_projets = DB::table('type_projets')->get();
+
+    //     foreach ($projects as $project) {
+    //         $idProjet = $project->idProjet;
+    //         $idCfpInter = $project->idCfp_inter;
+
+    //         $apprs = $this->getApprListProjet($idProjet);
+    //         $etpName = $this->getEtpProjectInter($idProjet, $idCfpInter);
+    //         $sessionHour = $this->getSessionHour($idProjet);
+    //         $formateurs = $this->getFormProject($idProjet);
+
+    //         // Ajouter lieu sans doublon
+    //         if (!in_array($project->li_name, $lieux)) {
+    //             $lieux[] = $project->li_name;
+    //         }
+
+    //         // Ajouter entreprises sans doublon
+    //         foreach ($etpName as $etp) {
+    //             $exists = collect($entreprises)->contains('idEtp', $etp->idEtp);
+    //             if (!$exists) {
+    //                 $entreprises[] = $etp;
+    //             }
+    //         }
+
+    //         // Ajouter modules sans doublon
+    //         $existsModule = collect($modules)->contains('idModule', $project->idModule);
+    //         if (!$existsModule) {
+    //             $modules[] = [
+    //                 'idModule' => $project->idModule,
+    //                 'module_name' => $project->module_name,
+    //                 'module_image' => $project->module_image,
+    //             ];
+    //         }
+
+    //         // Ajouter formateurs sans doublon
+    //         foreach ($formateurs as $form) {
+    //             $existsForm = collect($formateursUniques)->contains('idFormateur', $form->idFormateur);
+    //             if (!$existsForm) {
+    //                 $formateursUniques[] = $form;
+    //             }
+    //         }
+
+    //         // Ajouter mois (basé sur dateDebut) sans doublon
+    //         $date = Carbon::parse($project->dateDebut);
+    //         $monthKey = $date->format('Y-m');    // ex: "2024-08"
+    //         $monthLabel = $date->format('F Y');  // ex: "August 2024"
+
+    //         $existsMonth = collect($mois)->contains('id', $monthKey);
+    //         if (!$existsMonth) {
+    //             $mois[] = [
+    //                 'id' => $monthKey,
+    //                 'label' => $monthLabel,
+    //             ];
+    //         }
+
+    //         // Ajouter projet
+    //         $projets[] = [
+    //             'formateurs' => $formateurs,
+    //             'totalSessionHour' => $sessionHour,
+    //             'idProjet' => $idProjet,
+    //             'idCfp_inter' => $idCfpInter,
+    //             'dateDebut' => $project->dateDebut,
+    //             'dateFin' => $project->dateFin,
+    //             'module_name' => $project->module_name,
+    //             'etp_name' => $etpName,
+    //             'project_status' => $project->project_status,
+    //             'project_type' => $project->project_type,
+    //             'modalite' => $project->modalite,
+    //             'project_description' => $project->project_description,
+    //             'headDate' => $project->headDate,
+    //             'module_image' => $project->module_image,
+    //             'etp_logo' => $project->etp_logo,
+    //             'etp_initial_name' => $project->etp_initial_name,
+    //             'idModule' => $project->idModule,
+    //             'apprs' => $apprs,
+    //             'li_name' => $project->li_name,
+    //         ];
+    //     }
+
+    //     return [
+    //         'type_projets' => $type_projets,
+    //         'projets' => $projets,
+    //         'lieux' => $lieux,
+    //         'entreprises' => $entreprises,
+    //         'modules' => $modules,
+    //         'formateurs' => $formateursUniques,
+    //         'mois' => $mois,
+    //     ];
+    // }
+    private function getStatus(string $status, array $filters = []): array
     {
-        $projects = $this->project->indexStatus(Customer::idCustomer(), $status);
+        $projects = $this->project->index(Customer::idCustomer(), $status, $filters);
+
         $projets = [];
-        $lieux = [];
-        $type_projets = DB::table('type_projets')->get();
 
         foreach ($projects as $project) {
             $idProjet = $project->idProjet;
@@ -200,11 +316,26 @@ class ProjetController extends Controller
             $sessionHour = $this->getSessionHour($idProjet);
             $formateurs = $this->getFormProject($idProjet);
 
-            // Ajout du lieu sans doublon
-            if (!in_array($project->li_name, $lieux)) {
-                $lieux[] = $project->li_name;
-            }
+            // ---- FILTRE FORMATEUR ----
+            if (!empty($filters['Formateur'])) {
+                $idsFilter = array_map('intval', $filters['Formateur']); // IDs du filtre
+                $match = false;
 
+                foreach ($formateurs as $f) {
+                    $idFormateur = (int)($f->idFormateur ?? $f['idFormateur'] ?? 0);
+                    if (in_array($idFormateur, $idsFilter)) {
+                        $match = true;
+                        break; // Dès qu'un formateur correspond → on garde le projet
+                    }
+                }
+
+                if (!$match) {
+                    continue; // Aucun formateur du projet n'est dans le filtre
+                }
+            }
+            // -------------------------
+
+            // Ajout du projet transformé
             $projets[] = [
                 'formateurs' => $formateurs,
                 'totalSessionHour' => $sessionHour,
@@ -228,14 +359,74 @@ class ProjetController extends Controller
             ];
         }
 
-        // Ajouter les lieux sans doublons à la fin du tableau
+        return [
+            'projets' => $projets,
+            'pagination' => method_exists($projects, 'links') ? $projects->toArray() : null,
+        ];
+    }
+
+
+    private function getFilterByStatus(string $status): array
+    {
+
+        $projet = $this->project->indexFilter(Customer::idCustomer(), $status);
+
+        // Collections pour gérer les doublons automatiquement
+        $lieux = collect();
+        $entreprises = collect();
+        $modules = collect();
+        $formateursUniques = collect();
+        $mois = collect();
+
+
+        $type_projets = DB::table('type_projets')->get();
+
+
+        foreach ($projet as $pj) {
+            $idProjet = $pj->idProjet;
+            $idCfpInter = $pj->idCfp_inter;
+            $etpName = $this->getEtpProjectInter($idProjet, $idCfpInter);
+            $formateurs = $this->getFormProject($idProjet);
+            // Lieux uniques
+            $lieux->push($pj->li_name);
+
+            // Entreprises uniques
+            foreach ($etpName as $etp) {
+                $entreprises->push((object)[
+                    'idEtp' => $etp->idEtp,
+                    'etp_name' => $etp->etp_name
+                ]);
+            }
+
+            // Modules uniques
+            $modules->push([
+                'idModule' => $pj->idModule,
+                'module_name' => $pj->module_name,
+                'module_image' => $pj->module_image,
+            ]);
+
+            // Formateurs uniques
+            foreach ($formateurs as $form) {
+                $formateursUniques->push($form);
+            }
+
+            // Mois uniques basés sur dateDebut
+            $date = Carbon::parse($pj->dateDebut);
+            $monthKey = $date->format('Y-m');
+            $monthLabel = $date->format('F Y');
+            $mois->push(['id' => $monthKey, 'label' => $monthLabel]);
+        }
 
         return [
             'type_projets' => $type_projets,
-            'projets' => $projets,
-            'lieux' => $lieux
+            'lieux' => $lieux->unique()->values()->all(),
+            'entreprises' => $entreprises->unique('idEtp')->values()->all(),
+            'modules' => $modules->unique('idModule')->values()->all(),
+            'formateurs' => $formateursUniques->unique('idFormateur')->values()->all(),
+            'mois' => $mois->unique('id')->values()->all(),
         ];
     }
+
 
 
     public function getProjectList()
@@ -282,34 +473,111 @@ class ProjetController extends Controller
     //         'projets' => $projets
     //     ]);
     // }
-    public function index($status)
+    // public function index($status)
+    // {
+    //     switch ($status) {
+    //         case 'Cloturé':
+    //             $projets = $this->getStatus("Cloturé");
+    //             break;
+    //         case 'En cours':
+    //             $projets = $this->getStatus("En cours");
+    //             break;
+    //         case 'Terminé':
+    //             $projets = $this->getStatus("Terminé");
+    //             break;
+    //         default:
+    //             $projets = [
+    //                 'projets' => [],
+    //                 'type_projets' => [],
+    //                 'lieux' => [],
+    //                 'entreprises' => [],
+    //                 'modules' => [],
+    //                 'formateurs' => [],
+    //                 'mois' => [],
+    //             ];
+    //             break;
+    //     }
+
+    //     return response()->json([
+    //         'status' => 200,
+    //         'projets' => $projets['projets'],
+    //         'filtre' => [
+    //             'type_projets' => $projets['type_projets'],
+    //             'lieux' => $projets['lieux'],
+    //             'entreprises' => $projets['entreprises'],
+    //             'modules' => $projets['modules'],
+    //             'formateurs' => $projets['formateurs'],
+    //             'mois' => $projets['mois'],
+    //         ]
+    //     ]);
+    // }
+    public function index(string $status, Request $request)
     {
-        switch ($status) {
-            case 'Cloturé':
-                $projets = $this->getStatus("Cloturé");
-                break;
-            case 'En cours':
-                $projets = $this->getStatus("En cours");
-                break;
-            case 'Terminé':
-                $projets = $this->getStatus("Terminé");
-                break;
-            default:
-                $projets = [];
-                break;
+        $validStatuses = ['Cloturé', 'En cours', 'Terminé'];
+
+        // Phase 1 : Validation du status
+        if (!in_array($status, $validStatuses)) {
+            return response()->json([
+                'status' => 200,
+                'projets' => [],
+                'filtre' => [
+                    'type_projets' => [],
+                    'lieux' => [],
+                    'entreprises' => [],
+                    'modules' => [],
+                    'formateurs' => [],
+                    'mois' => [],
+                ],
+            ]);
         }
 
+        // Phase 2 : Récupération et transformation des projets avec filtres
+        $filters = $request->all(); // récupère tous les filtres envoyés en query/body
+        $projets = $this->getStatus($status, $filters);
 
-
+        // Phase 3 : Réponse JSON
         return response()->json([
             'status' => 200,
             'projets' => $projets['projets'],
+            'pagination' => $projets['pagination'],
+        ]);
+    }
+
+    public function getFiltre(string $status)
+    {
+        $validStatuses = ['Cloturé', 'En cours', 'Terminé'];
+
+        if (!in_array($status, $validStatuses)) {
+            // Retourne structure vide si status invalide
+            return response()->json([
+                'status' => 200,
+                'filtre' => [
+                    'type_projets' => [],
+                    'lieux' => [],
+                    'entreprises' => [],
+                    'modules' => [],
+                    'formateurs' => [],
+                    'mois' => [],
+                ],
+            ]);
+        }
+
+        $projets = $this->getFilterByStatus($status);
+
+        return response()->json([
+            'status' => 200,
             'filtre' => [
                 'type_projets' => $projets['type_projets'],
                 'lieux' => $projets['lieux'],
-            ]
+                'entreprises' => $projets['entreprises'],
+                'modules' => $projets['modules'],
+                'formateurs' => $projets['formateurs'],
+                'mois' => $projets['mois'],
+            ],
         ]);
     }
+
+
 
     public function getCountProject()
     {
