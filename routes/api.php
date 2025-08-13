@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\ApprenantController;
 use App\Http\Controllers\EmargementController;
+use App\Http\Controllers\LauncherController;
 use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\ShowDrawerController;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,7 @@ Route::post('login', [LoginController::class, 'login']);
 Route::post('/auth/check-email', [AccountController::class, 'checkEmail']);
 Route::post('/auth/check-entity-name', [AccountController::class, 'checkCustomerName']);
 Route::post('/register/customer', [AccountController::class, 'store']);
+Route::get('/applauncher', [LauncherController::class, 'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('logout', [LoginController::class, 'logout']);
@@ -21,12 +23,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // -------------CFP
 Route::middleware(['auth:sanctum', 'isEmployeCfp'])->group(function () {
-    Route::get('/countProject', [ProjetController::class, 'getCountProject']);
+    Route::get('project/count', [ProjetController::class, 'getCountProject']);
     Route::prefix('cfp/projets')->group(function () {
-        Route::get('/list', [ProjetController::class, 'getProjectList'])->name('cfp.projets.list');
+        // Route::get('/list', [ProjetController::class, 'getProjectList'])->name('cfp.projets.list');
         Route::get('/{status}', [ProjetController::class, 'index']);
         // Presences
-        Route::get('/{idProjet}/getDataPresence', [ProjetController::class, 'getDataPresence']);
+        Route::get('/{idProjet}/data/presence', [ProjetController::class, 'getDataPresence']);
         Route::get('/filtre/{select}', [ProjetController::class, 'getFiltre']);
     });
 

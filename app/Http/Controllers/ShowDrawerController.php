@@ -206,74 +206,89 @@ class ShowDrawerController extends Controller
             ->where('employes.idCustomer', $request->idEtp)
             ->whereIn('role_users.role_id', [3, 6, 8, 9])
             ->get();
-
-        $customerId = Customer::idCustomer();
-
-        $etp_id = $request->idEtp;
-
-        $etp_is_grouped = DB::table('etp_groupeds')->where('idEntreprise', $etp_id)->exists();
-
-        if ($etp_is_grouped) {
-            $id_projet_learner = DB::table('detail_apprenants AS da')
-                ->join('employes AS emp', 'da.idEmploye', 'emp.idEmploye')
-                ->join('customers AS cst', 'emp.idCustomer', 'cst.idCustomer')
-                ->join('projets as p', 'p.idProjet', '=', 'da.idProjet')
-                ->where('emp.idCustomer', $etp_id)
-                ->whereNot('p.project_is_closed', 1)
-                ->whereNot('p.project_is_cancelled', 1)
-                ->whereNot('p.project_is_repported', 1)
-                ->groupBy('da.idProjet')
-                ->pluck('da.idProjet');
-
-            $id_projet_etp = DB::table('v_union_projets')
-                ->where(function ($query) use ($etp_id) {
-                    $query->where('idEtp', $etp_id)
-                        ->orWhere('idEtp_inter', $etp_id);
-                })
-                ->where(function ($subQuery) use ($customerId) {
-                    $subQuery->where('idCfp_intra', $customerId)
-                        ->orWhere('idCfp_inter', $customerId);
-                })
-                ->pluck('idProjet');
-
-            $projectId = array_unique(array_merge($id_projet_etp->toArray(), $id_projet_learner->toArray()));
-
-            $projects_in_preparation = $this->getUnionProjects('En préparation', $projectId, $etp_id);
-
-            $projects_finished = $this->getUnionProjects('Terminé', $projectId, $etp_id);
-
-            $projects_in_progress = $this->getUnionProjects('En cours', $projectId, $etp_id);
-
-            $projects_future = $this->getUnionProjects('Planifié', $projectId, $etp_id);
-
-            $projects_fenced = $this->getUnionProjects('Clôturé', $projectId, $etp_id);
-        } else {
-            $projectIds = $this->getIdProjectWithSubContract($etp_id);
-            $projects_in_preparation = $this->getUnionProjectEtp('En préparation', $projectIds);
-
-            $projects_finished = $this->getUnionProjectEtp('Terminé', $projectIds);
-
-            $projects_in_progress = $this->getUnionProjectEtp('En cours', $projectIds);
-
-            $projects_future = $this->getUnionProjectEtp('Planifié', $projectIds);
-
-            $projects_fenced = $this->getUnionProjectEtp('Clôturé', $projectIds);
-        }
-
         $customer = DB::table('customers')
             ->select('customers.*')
             ->where('idCustomer', $request->idEtp)
             ->first();
 
-        return response()->json([
-            'customer' => $customer,
-            'referents' => $referents,
-            'projects_finished' => $projects_finished,
-            'projects_in_progress' => $projects_in_progress,
-            'projects_future' => $projects_future,
-            'projects_fenced' => $projects_fenced,
-            'projects_in_preparation' => $projects_in_preparation
-        ]);
+        $userId = Auth::id();
+        $roleId = DB::table('role_users')
+            ->where('user_id', $userId)
+            ->value('role_id');
+
+        // Sélection de la source de projets selon le rôle
+        if ($roleId == 3) {
+            //CFP
+
+            $customerId = Customer::idCustomer();
+
+            $etp_id = $request->idEtp;
+
+            $etp_is_grouped = DB::table('etp_groupeds')->where('idEntreprise', $etp_id)->exists();
+
+            if ($etp_is_grouped) {
+                $id_projet_learner = DB::table('detail_apprenants AS da')
+                    ->join('employes AS emp', 'da.idEmploye', 'emp.idEmploye')
+                    ->join('customers AS cst', 'emp.idCustomer', 'cst.idCustomer')
+                    ->join('projets as p', 'p.idProjet', '=', 'da.idProjet')
+                    ->where('emp.idCustomer', $etp_id)
+                    ->whereNot('p.project_is_closed', 1)
+                    ->whereNot('p.project_is_cancelled', 1)
+                    ->whereNot('p.project_is_repported', 1)
+                    ->groupBy('da.idProjet')
+                    ->pluck('da.idProjet');
+
+                $id_projet_etp = DB::table('v_union_projets')
+                    ->where(function ($query) use ($etp_id) {
+                        $query->where('idEtp', $etp_id)
+                            ->orWhere('idEtp_inter', $etp_id);
+                    })
+                    ->where(function ($subQuery) use ($customerId) {
+                        $subQuery->where('idCfp_intra', $customerId)
+                            ->orWhere('idCfp_inter', $customerId);
+                    })
+                    ->pluck('idProjet');
+
+                $projectId = array_unique(array_merge($id_projet_etp->toArray(), $id_projet_learner->toArray()));
+
+                $projects_in_preparation = $this->getUnionProjects('En préparation', $projectId, $etp_id);
+
+                $projects_finished = $this->getUnionProjects('Terminé', $projectId, $etp_id);
+
+                $projects_in_progress = $this->getUnionProjects('En cours', $projectId, $etp_id);
+
+                $projects_future = $this->getUnionProjects('Planifié', $projectId, $etp_id);
+
+                $projects_fenced = $this->getUnionProjects('Clôturé', $projectId, $etp_id);
+            } else {
+                $projectIds = $this->getIdProjectWithSubContract($etp_id);
+                $projects_in_preparation = $this->getUnionProjectEtp('En préparation', $projectIds);
+
+                $projects_finished = $this->getUnionProjectEtp('Terminé', $projectIds);
+
+                $projects_in_progress = $this->getUnionProjectEtp('En cours', $projectIds);
+
+                $projects_future = $this->getUnionProjectEtp('Planifié', $projectIds);
+
+                $projects_fenced = $this->getUnionProjectEtp('Clôturé', $projectIds);
+            }
+            return response()->json([
+                'customer' => $customer,
+                'referents' => $referents,
+                'projects_finished' => $projects_finished,
+                'projects_in_progress' => $projects_in_progress,
+                'projects_future' => $projects_future,
+                'projects_fenced' => $projects_fenced,
+                'projects_in_preparation' => $projects_in_preparation
+            ]);
+        } else {
+            // Formateur
+
+            return response()->json([
+                'customer' => $customer,
+                'referents' => $referents
+            ]);
+        }
     }
 
     private function getUnionProjectEtp($status, $projectId)

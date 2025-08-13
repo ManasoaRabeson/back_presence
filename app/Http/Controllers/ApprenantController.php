@@ -229,54 +229,69 @@ class ApprenantController extends Controller
             ->get();
 
 
-        $getEmargement = DB::table('emargements')
-            ->select('idProjet', 'idSeance', 'isPresent')
-            ->where('idProjet', $idProjet)
-            ->groupBy('idSeance')
-            ->get();
+        // $getEmargement = DB::table('emargements')
+        //     ->select('idProjet', 'idSeance', 'isPresent')
+        //     ->where('idProjet', $idProjet)
+        //     ->groupBy('idSeance')
+        //     ->get();
 
-        $present = DB::table('emargements')
-            ->select('idProjet', 'idSeance', 'isPresent')
-            ->where('idProjet', $idProjet)
-            ->where('isPresent', 3)
-            ->get();
+        // $present = DB::table('emargements')
+        //     ->select('idProjet', 'idSeance', 'isPresent')
+        //     ->where('idProjet', $idProjet)
+        //     ->where('isPresent', 3)
+        //     ->get();
 
-        $partiel = DB::table('emargements')
-            ->select('idProjet', 'idSeance', 'isPresent')
-            ->where('idProjet', $idProjet)
-            ->where('isPresent', 2)
-            ->get();
+        // $partiel = DB::table('emargements')
+        //     ->select('idProjet', 'idSeance', 'isPresent')
+        //     ->where('idProjet', $idProjet)
+        //     ->where('isPresent', 2)
+        //     ->get();
 
-        $absent = DB::table('emargements')
-            ->select('idProjet', 'idSeance', 'isPresent')
-            ->where('idProjet', $idProjet)
-            ->where('isPresent', 1)
-            ->get();
+        // $absent = DB::table('emargements')
+        //     ->select('idProjet', 'idSeance', 'isPresent')
+        //     ->where('idProjet', $idProjet)
+        //     ->where('isPresent', 1)
+        //     ->get();
 
-        $nonDefini = DB::table('emargements')
-            ->select('idProjet', 'idSeance', 'isPresent')
-            ->where('idProjet', $idProjet)
-            ->where('isPresent', 0)
-            ->get();
+        // $nonDefini = DB::table('emargements')
+        //     ->select('idProjet', 'idSeance', 'isPresent')
+        //     ->where('idProjet', $idProjet)
+        //     ->where('isPresent', 0)
+        //     ->get();
 
         $countAppr = count($getAppr);
 
-        $countPresent = count($present);
-        $countPartiel = count($partiel);
-        $countAbsent = count($absent) + count($nonDefini);
+        // $countPresent = count($present);
+        // $countPartiel = count($partiel);
+        // $countAbsent = count($absent) + count($nonDefini);
 
-        $countEmargement = count($getEmargement);
-        $divide = $countAppr * $countEmargement;
+        // $countEmargement = count($getEmargement);
+        // $divide = $countAppr * $countEmargement;
 
-        if ($divide > 0) {
-            $percentPresent = number_format(($countPresent / $divide) * 100, 1, ',', ' ');
-            $percentPartiel = number_format(($countPartiel / $divide) * 100, 1, ',', ' ');
-            $percentAbsent = number_format(($countAbsent / $divide) * 100, 1, ',', ' ');
-        } else {
-            $percentPresent = 0;
-            $percentPartiel = 0;
-            $percentAbsent = 0;
-        }
+        // if ($divide > 0) {
+        //     $percentPresent = number_format(($countPresent / $divide) * 100, 1, ',', ' ');
+        //     $percentPartiel = number_format(($countPartiel / $divide) * 100, 1, ',', ' ');
+        //     $percentAbsent = number_format(($countAbsent / $divide) * 100, 1, ',', ' ');
+        // } else {
+        //     $percentPresent = 0;
+        //     $percentPartiel = 0;
+        //     $percentAbsent = 0;
+        // }
+        $statuts = DB::table('emargements')
+            ->where('idProjet', $idProjet)
+            ->whereIn('isPresent', [0, 1, 2, 3])
+            ->select('isPresent', DB::raw('COUNT(*) as count'))
+            ->groupBy('isPresent')
+            ->pluck('count', 'isPresent');
+
+        $countPresent = $statuts[3] ?? 0;
+        $countPartiel = $statuts[2] ?? 0;
+        $countAbsent = ($statuts[1] ?? 0) + ($statuts[0] ?? 0);
+
+        $somme = $countAppr * $getSeance->count();
+        $percentPresent =   $somme > 0 ? number_format(($countPresent * 100) / $somme, 1, ',', ' ') : 0;
+        $percentPartiel =  $somme > 0 ? number_format(($countPartiel * 100) / $somme, 1, ',', ' ') : 0;;
+        $percentAbsent = $somme > 0 ? number_format(($countAbsent * 100) / $somme, 1, ',', ' ') : 0;;
 
         $getIdAppr = DB::table('v_emargement_appr_inter')
             ->select('idProjet', 'idEmploye', 'idSeance', 'name', 'firstName', 'photo')

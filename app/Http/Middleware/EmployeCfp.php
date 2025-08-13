@@ -24,10 +24,10 @@ class EmployeCfp
             ->where('hasRole', 1)
             ->get();
 
-        foreach($req as $r){
-            if($r->role_id == 8 || $r->role_id == 3){
+        foreach ($req as $r) {
+            if ($r->role_id == 5 || $r->role_id == 3 || $r->role_id == 4) {
                 return $next($request);
-            }else{
+            } else {
                 abort(403);
             }
         }

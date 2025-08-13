@@ -4,12 +4,40 @@ namespace App\Interfaces;
 
 interface ProjectRepository
 {
-    // Dans ProjectRepository.php
-    public function index($idCustomer, $status = null, array $filters = []): mixed;
+    /**
+     * Liste paginée des projets avec filtres
+     */
+    public function index(int|array|null $idFormateur, int $idCustomer, ?string $status = null, array $filters = []): mixed;
 
-    // public function indexStatus($idCustomer, $status): array;
-    public function store($idCustomer, $reference = null, $title, $description = null, $isProjectReserved, $idModalite, $idModule, $idTypeProjet, $idSalle, $dateDebut = null, $dateFin = null): void;
-    public function show($idCustomer, $idProjet): mixed;
-    public function headDate($idCustomer): mixed;
-    public function getProject($idCustomer): mixed;
+    /**
+     * Créer un nouveau projet
+     */
+    public function store(
+        int $idCustomer,
+        ?string $reference,
+        string $title,
+        ?string $description,
+        bool $isProjectReserved,
+        int $idModalite,
+        int $idModule,
+        int $idTypeProjet,
+        int $idSalle,
+        ?string $dateDebut,
+        ?string $dateFin
+    ): void;
+
+    /**
+     * Récupère un projet spécifique
+     */
+    public function show(int $idCustomer, int $idProjet): mixed;
+
+    /**
+     * Récupère les dates d'entête pour les statistiques
+     */
+    public function headDate(int $idCustomer): mixed;
+
+    /**
+     * Récupère la liste brute des projets (ex: pour des sélecteurs)
+     */
+    public function getProject(int $idCustomer): mixed;
 }
